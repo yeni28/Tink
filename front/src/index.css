@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "KCC-Chassam";
+  src: url("/front/src/assets/font/KCC-Chassam.ttf");
+}

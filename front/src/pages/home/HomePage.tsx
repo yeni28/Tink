@@ -31,6 +31,11 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <h1 className="text-pink">Hello World</h1>
+      <div className="bg-pink">왜 안돼</div>
+      <h2 className="text-red font-cha text-supertitle">
+        이것도 적용이 잘될까요?
+      </h2>
     </div>
   )
 }
