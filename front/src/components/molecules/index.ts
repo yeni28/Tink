@@ -1,3 +1,6 @@
-import CardSm from './CardSm'
+import CardMd from '@/components/molecules/CardMd'
+import CardSm from '@/components/molecules/CardSm'
 
-export const molecules = { CardSm }
+const molecules = { CardSm, CardMd }
+
+export default molecules
