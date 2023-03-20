@@ -1,7 +1,5 @@
 import { useState } from 'react'
 
-import viteLogo from '@/../public/vite.svg'
-
 import reactLogo from '@/assets/react.svg'
 
 import '@/styles/HomePage.css'
@@ -12,14 +10,11 @@ function App() {
   return (
     <div className="App">
       <div>
-        <a href="https://vitejs.dev" rel="noreferrer" target="_blank">
-          <img alt="Vite logo" className="logo" src={viteLogo} />
-        </a>
         <a href="https://reactjs.org" rel="noreferrer" target="_blank">
           <img alt="React logo" className="logo react" src={reactLogo} />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1 className="bg-pink">Vite + React</h1>
       <div className="card">
         <button type="button" onClick={() => setCount((count) => count + 1)}>
           count is {count}
