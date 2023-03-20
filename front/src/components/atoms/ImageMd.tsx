@@ -1,0 +1,20 @@
+import React from 'react'
+
+interface imageProps {
+  src: string
+  alt?: string
+}
+
+function ImageMd({ src, alt }: imageProps): JSX.Element {
+  return (
+    <div>
+      <img
+        alt={alt}
+        className="object-cover rounded-3xl w-[356px] h-[218px]"
+        src={src}
+      />
+    </div>
+  )
+}
+
+export default ImageMd

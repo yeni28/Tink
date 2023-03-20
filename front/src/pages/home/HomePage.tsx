@@ -1,38 +1,13 @@
-import { useState } from 'react'
+import atoms from '@/components/atoms'
+import mocules from '@/components/mocules'
 
-import reactLogo from '@/assets/react.svg'
-
-import '@/styles/HomePage.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+function HomePage() {
   return (
-    <div className="App">
-      <div>
-        <a href="https://reactjs.org" rel="noreferrer" target="_blank">
-          <img alt="React logo" className="logo react" src={reactLogo} />
-        </a>
-      </div>
-      <h1 className="bg-pink">Vite + React</h1>
-      <div className="card">
-        <button type="button" onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <h1 className="text-pink">Hello World</h1>
-      <div className="bg-pink">왜 안돼</div>
-      <h2 className="text-red font-cha text-supertitle">
-        이것도 적용이 잘될까요?
-      </h2>
+    <div className="HomePage">
+      <atoms.ImageMd src="https://cdn.yarn.com/media/W1siZiIsIjIwMjIvMDkvMjIvMTIvNTEvMjEvNDU0OWE5YzAtZGY2Ni00OGU3LTk0MjEtYmM3NzJlZGJmMzYxL2ZpbGUuanBnIl1d/The%20Fibre%20Co%20%26Make%20Super%20Bulky.jpg?sha=0df30f20f78acb2f" />
+      <mocules.CardMd />
     </div>
   )
 }
 
-export default App
+export default HomePage
