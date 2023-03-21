@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import atoms from '@/components/atoms'
 
-interface cardProps {
+interface CardProps {
   author: string
   isFollow: boolean
   titleImgUrl: string
@@ -18,7 +18,7 @@ function CardMd({
   title,
   views,
   likes,
-}: cardProps) {
+}: CardProps) {
   const [follow, setFollow] = useState(isFollow)
   return (
     <div className="w-[22.25rem]">
@@ -26,16 +26,15 @@ function CardMd({
         <p className="text-headline mr-3">{author}</p>
         <div className="flex items-center">
           <div
-            className={
-              'w-[6px] h-[6px] rounded-lg mr-1 ' +
-              (follow ? 'bg-line' : 'bg-red')
-            }
+            className={`w-[6px] h-[6px] rounded-lg mr-1 ${
+              follow ? 'bg-line' : 'bg-red'
+            })`}
           />
           <button
             type="button"
-            className={
-              'text-headline-bold ' + (follow ? 'text-line' : 'text-red')
-            }
+            className={`text-headline-bold ${
+              follow ? 'text-line' : 'text-red'
+            }`}
             onClick={() => setFollow(!follow)}
           >
             {follow ? '팔로잉' : '팔로우'}
