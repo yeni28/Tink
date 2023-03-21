@@ -1,11 +1,5 @@
 spring:
-    jpa:
-        show-sql: true # true 설정시 JPA 쿼리문 확인 가능
-        hibernate:
-            ddl-auto: create # DDL(create, alter, drop) 정의시 DB의 고유 기능을 사용할 수 있다.
-        properties:
-            hibernate:
-                format_sql: true # JPA의 구현체인 Hibernate가 동작하면서 발생한 SQL의 가독성을 높여준다.
+    profiles: local
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://localhost:3306?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
