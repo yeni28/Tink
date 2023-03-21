@@ -1,15 +1,16 @@
 import React from 'react'
 
-function ImageLg({ src, alt }: imgProps) {
+interface ImageLgProps {
+  src: string
+  alt?: string
+}
+
+function ImageLg({ src, alt }: ImageLgProps) {
   return (
     <div>
-      <img
-        alt={alt}
-        height="375px"
-        src={src}
-        style={{ borderRadius: '20px' }}
-        width="334px"
-      />
+      <div className="h-[23.45rem] w-[20.88rem] rounded-[1.25rem] overflow-hidden">
+        <img alt={alt} className="w-full h-full" src={src} />
+      </div>
     </div>
   )
 }

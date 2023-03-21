@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ImageMd({ src, alt }: imgProps): JSX.Element {
+function ImageMd({ src, alt }: imageProps): JSX.Element {
   return (
     <div>
       <img

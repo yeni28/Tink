@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ImageSm({ src, alt = 'image small' }: imgProps) {
+function ImageSm({ src, alt = 'image small' }: imageProps) {
   return (
     <img
       alt={alt}

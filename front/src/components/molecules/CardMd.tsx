@@ -28,17 +28,17 @@ function CardMd({
           <div
             className={
               'w-[6px] h-[6px] rounded-lg mr-1 ' +
-              (follow ? 'bg-red' : 'bg-line')
+              (follow ? 'bg-line' : 'bg-red')
             }
           />
           <button
             type="button"
             className={
-              'text-headline-bold ' + (follow ? 'text-red' : 'text-line')
+              'text-headline-bold ' + (follow ? 'text-line' : 'text-red')
             }
             onClick={() => setFollow(!follow)}
           >
-            팔로우
+            {follow ? '팔로잉' : '팔로우'}
           </button>
         </div>
       </div>

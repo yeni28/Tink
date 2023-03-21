@@ -3,9 +3,16 @@ declare module '*.css' {
   export default styleObject
 }
 
-interface imgProps {
+interface imageProps {
   src: string
   alt?: string
   width?: number
   height?: number
+}
+
+interface buttonProps {
+  bgColor: string
+  textColor: string
+  innerValue: string
+  onClick: () => void
 }
