@@ -16,3 +16,11 @@ interface buttonProps {
   innerValue: string
   onClick: () => void
 }
+
+interface communityProps {
+  title: string
+  body: string
+  username: string
+  view: number
+  comment: number
+}
