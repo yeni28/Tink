@@ -60,6 +60,7 @@ function HomePage() {
         textColor="white"
         onClick={() => console.log('test')}
       />
+      <molecules.CardText />
     </div>
   )
 }

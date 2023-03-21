@@ -19,9 +19,9 @@ interface ButtonProps {
 }
 
 interface CommunityProps {
-  title: string
-  body: string
-  username: string
-  view: number
-  comment: number
+  title?: string
+  body?: string
+  username?: string
+  view?: number
+  comment?: number
 }
