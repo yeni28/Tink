@@ -1,4 +1,5 @@
 import BodyCommunity from '@/components/atoms/BodyCommunity'
+import ButtonSquareRound from '@/components/atoms/ButtonSquareRound'
 import CommentCountCommunity from '@/components/atoms/CommentCountCommunity'
 import ImageLg from '@/components/atoms/ImageLg'
 import ImageMd from '@/components/atoms/ImageMd'
@@ -16,6 +17,7 @@ const atoms = {
   CommentCountCommunity,
   UsernameCommunity,
   ViewCommunity,
+  ButtonSquareRound,
 }
 
 export default atoms

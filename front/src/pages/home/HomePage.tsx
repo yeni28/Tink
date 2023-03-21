@@ -25,6 +25,41 @@ function HomePage() {
         titleImgUrl="https://www.sisain.co.kr/news/photo/202110/45791_82634_4851.jpg"
         views={162}
       />
+      <atoms.ButtonSquareRound
+        bgColor="red"
+        btnType="squareSm"
+        innerValue="+ 팔로우"
+        textColor="white"
+        onClick={() => console.log('test')}
+      />
+      <atoms.ButtonSquareRound
+        bgColor="red"
+        btnType="squareMd1"
+        innerValue="팔로우"
+        textColor="white"
+        onClick={() => console.log('test')}
+      />
+      <atoms.ButtonSquareRound
+        bgColor="black"
+        btnType="squareMd2"
+        innerValue="난이도 평가"
+        textColor="white"
+        onClick={() => console.log('test')}
+      />
+      <atoms.ButtonSquareRound
+        bgColor="black"
+        btnType="roundSm"
+        innerValue="색추천"
+        textColor="white"
+        onClick={() => console.log('test')}
+      />
+      <atoms.ButtonSquareRound
+        bgColor="red"
+        btnType="roundLg"
+        innerValue="신청하러 가기"
+        textColor="white"
+        onClick={() => console.log('test')}
+      />
     </div>
   )
 }
