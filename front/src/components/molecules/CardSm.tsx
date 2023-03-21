@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { ReactComponent as Heart } from '@/assets/svg/heart.svg'
 import { ReactComponent as HeartFill } from '@/assets/svg/heart_fill.svg'
@@ -12,6 +12,7 @@ interface cardProps {
 }
 
 function CardSm({ isLiked, title, userImgUrl, userName }: cardProps) {
+  const [showLike, setShowLike] = useState(isLiked)
   return (
     <div className="w-[14.25rem] h-[15rem]">
       <div className="relative">
@@ -19,10 +20,16 @@ function CardSm({ isLiked, title, userImgUrl, userName }: cardProps) {
           alt={'random'}
           src={'https://source.unsplash.com/random'}
         />
-        {isLiked ? (
-          <HeartFill className="absolute bottom-[4px] right-[8px]" />
+        {showLike ? (
+          <HeartFill
+            className="absolute bottom-[4px] right-[8px]"
+            onClick={() => setShowLike(!showLike)}
+          />
         ) : (
-          <Heart className="absolute bottom-[4px] right-[8px]" />
+          <Heart
+            className="absolute bottom-[4px] right-[8px]"
+            onClick={() => setShowLike(!showLike)}
+          />
         )}
       </div>
       <div className="mt-[8px] flex-col gap-[8px]">
