@@ -1,7 +1,15 @@
 spring:
-    profiles:
+    config:
+        activate:
+            on-profile: dev
+
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://j8c201.p.ssafy.io:3306?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
         username: root #임시
         password: ssafy
+
+app:
+    auth:
+        oauth2:
+            authorizedRedirectUri: http://j8c201.p.ssafy.io:8080/

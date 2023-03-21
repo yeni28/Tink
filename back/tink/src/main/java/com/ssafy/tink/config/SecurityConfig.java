@@ -1,5 +1,6 @@
 package com.ssafy.tink.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.jaas.memory.InMemoryConfiguration;
@@ -11,10 +12,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.ssafy.tink.config.oAuth.CustomAuthorizationRequestRepository;
+import com.ssafy.tink.config.oAuth.CustomOAuth2UserService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig{
 
+	@Autowired
+	private CustomAuthorizationRequestRepository authorizationRequestRepository;
+	@Autowired
+	private CustomOAuth2UserService userService;
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
@@ -28,10 +36,21 @@ public class SecurityConfig{
 			.antMatchers("/").permitAll()
 			.antMatchers("/v2/api-docs/**","/webjars/**","/swagger-ui.html",
 				"/configuration/**","/swagger-resources/**").permitAll()
-			.antMatchers("/OAuth2.**").permitAll()
+			.antMatchers("/OAuth2/**").permitAll()
 			.anyRequest().authenticated();
 
-		http.oauth2Login();
+		http.oauth2Login()
+			.authorizationEndpoint()
+				.baseUri("/OAuth2/authorization")
+				.authorizationRequestRepository(authorizationRequestRepository)
+
+			.and()
+			.redirectionEndpoint()
+				.baseUri("/*/OAuth2/code/**")
+
+			.and()
+			.userInfoEndpoint()
+				.userService(userService);
 
 		return http.build();
 	}

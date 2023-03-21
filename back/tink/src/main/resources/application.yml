@@ -11,3 +11,6 @@ spring:
                 format_sql: true # JPA의 구현체인 Hibernate가 동작하면서 발생한 SQL의 가독성을 높여준다.
     profiles:
         active: local
+        group:
+            "local": "local,key"
+            "dev": "dev,key"
