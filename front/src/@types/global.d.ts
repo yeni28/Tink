@@ -3,7 +3,7 @@ declare module '*.css' {
   export default styleObject
 }
 
-interface imgProps {
+interface imageProps {
   src: string
   alt?: string
   width?: number
