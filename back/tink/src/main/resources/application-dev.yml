@@ -12,4 +12,4 @@ spring:
 app:
     auth:
         oauth2:
-            authorizedRedirectUri: http://j8c201.p.ssafy.io:8080/
+            authorizedRedirectUri: http://j8c201.p.ssafy.io:8080/oauth2/redirect
