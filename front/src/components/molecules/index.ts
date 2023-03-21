@@ -1,5 +1,5 @@
-import CardMd from '@/components/molecules/CardMd'
-import CardSm from '@/components/molecules/CardSm'
+import CardMd from '@/components/molecules/card/CardMd'
+import CardSm from '@/components/molecules/card/CardSm'
 
 const molecules = { CardSm, CardMd }
 
