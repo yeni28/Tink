@@ -9,3 +9,10 @@ interface imageProps {
   width?: number
   height?: number
 }
+
+interface buttonProps {
+  bgColor: string
+  textColor: string
+  innerValue: string
+  onClick: () => void
+}
