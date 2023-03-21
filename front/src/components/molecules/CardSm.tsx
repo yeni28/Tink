@@ -4,14 +4,14 @@ import { ReactComponent as Heart } from '@/assets/svg/heart.svg'
 import { ReactComponent as HeartFill } from '@/assets/svg/heart_fill.svg'
 import atoms from '@/components/atoms'
 
-interface cardProps {
+interface CardProps {
   isLiked: boolean
   title: string
   userImgUrl: string
   userName: string
 }
 
-function CardSm({ isLiked, title, userImgUrl, userName }: cardProps) {
+function CardSm({ isLiked, title, userImgUrl, userName }: CardProps) {
   const [showLike, setShowLike] = useState(isLiked)
   return (
     <div className="w-[14.25rem] h-[15rem]">
