@@ -28,7 +28,10 @@ public class SecurityConfig{
 			.antMatchers("/").permitAll()
 			.antMatchers("/v2/api-docs/**","/webjars/**","/swagger-ui.html",
 				"/configuration/**","/swagger-resources/**").permitAll()
+			.antMatchers("/OAuth2.**").permitAll()
 			.anyRequest().authenticated();
+
+		http.oauth2Login();
 
 		return http.build();
 	}
