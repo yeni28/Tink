@@ -18,7 +18,7 @@ interface ButtonProps {
   onClick: () => void
 }
 
-interface communityProps {
+interface CommunityProps {
   title: string
   body: string
   username: string
