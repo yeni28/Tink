@@ -1,0 +1,18 @@
+.navBack{
+  @apply
+  h-[6.25rem] 
+  flex justify-between items-center
+  pr-[11.25rem]
+}
+
+.menuList{
+  @apply
+  flex list-none gap-[3.125rem]
+}
+
+.menuItem{
+  @apply
+  font-pop
+  text-title3-bold
+  inline-block
+}

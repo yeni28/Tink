@@ -20,17 +20,13 @@ function CardSm({ isLiked, title, userImgUrl, userName }: CardProps) {
           alt={'random'}
           src={'https://source.unsplash.com/random'}
         />
-        {showLike ? (
-          <HeartFill
-            className="absolute bottom-[4px] right-[8px]"
-            onClick={() => setShowLike(!showLike)}
-          />
-        ) : (
-          <Heart
-            className="absolute bottom-[4px] right-[8px]"
-            onClick={() => setShowLike(!showLike)}
-          />
-        )}
+        <button
+          className="absolute bottom-[4px] right-[8px]"
+          type="button"
+          onClick={() => setShowLike(!showLike)}
+        >
+          {showLike ? <HeartFill /> : <Heart />}
+        </button>
       </div>
       <div className="mt-[8px] flex-col gap-[8px]">
         <div className="truncate text-body ">{title}</div>
