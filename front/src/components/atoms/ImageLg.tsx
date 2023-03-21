@@ -1,11 +1,6 @@
 import React from 'react'
 
-interface ImageLgProps {
-  src: string
-  alt?: string
-}
-
-function ImageLg({ src, alt }: ImageLgProps) {
+function ImageLg({ src, alt }: imgProps) {
   return (
     <div>
       <img
