@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ReactComponent as Heart } from '@/assets/svg/heart.svg'
 import { ReactComponent as HeartFill } from '@/assets/svg/heart_fill.svg'
-import { atoms } from '@/components/atoms'
+import atoms from '@/components/atoms'
 
 interface cardProps {
   isLiked: boolean
