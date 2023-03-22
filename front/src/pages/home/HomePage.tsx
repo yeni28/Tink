@@ -67,6 +67,9 @@ function HomePage() {
         onClick={() => console.log('ButtonTag')}
       />
       <molecules.CardText />
+      <molecules.Comment />
+
+      <div>안녕</div>
     </div>
   )
 }
