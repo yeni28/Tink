@@ -11,7 +11,6 @@ interface ImageProps {
 }
 
 interface ButtonProps {
-  btnType: 'squareSm' | 'squareMd1' | 'squareMd2' | 'roundSm' | 'roundLg'
   bgColor: 'red' | 'black'
   textColor: 'white' | 'black'
   innerValue: string

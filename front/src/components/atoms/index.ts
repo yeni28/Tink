@@ -1,4 +1,10 @@
-import ButtonSquareRound from '@/components/atoms/button/ButtonSquareRound'
+import ButtonDoodle from '@/components/atoms/button/ButtonDoodle'
+import ButtonRoundLg from '@/components/atoms/button/ButtonRoundLg'
+import ButtonRoundSm from '@/components/atoms/button/ButtonRoundSm'
+import ButtonSquareMd1 from '@/components/atoms/button/ButtonSquareMd1'
+import ButtonSquareMd2 from '@/components/atoms/button/ButtonSquareMd2'
+import ButtonSquareSm from '@/components/atoms/button/ButtonSquareSm'
+import ButtonTag from '@/components/atoms/button/ButtonTag'
 import BodyCommunity from '@/components/atoms/community/BodyCommunity'
 import CommentCountCommunity from '@/components/atoms/community/CommentCountCommunity'
 import TitleCommunity from '@/components/atoms/community/TitleCommunity'
@@ -9,15 +15,21 @@ import ImageMd from '@/components/atoms/image/ImageMd'
 import ImageSm from '@/components/atoms/image/ImageSm'
 
 const atoms = {
-  ImageSm,
-  ImageMd,
-  ImageLg,
-  TitleCommunity,
+  ButtonDoodle,
+  ButtonRoundSm,
+  ButtonRoundLg,
+  ButtonSquareMd1,
+  ButtonSquareMd2,
+  ButtonSquareSm,
+  ButtonTag,
   BodyCommunity,
   CommentCountCommunity,
+  TitleCommunity,
   UsernameCommunity,
   ViewCommunity,
-  ButtonSquareRound,
+  ImageLg,
+  ImageMd,
+  ImageSm,
 }
 
 export default atoms
