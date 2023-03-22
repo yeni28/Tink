@@ -8,10 +8,10 @@ interface TitleProps {
 function TitleBlock({ title, subtitle }: TitleProps) {
   return (
     <div
-      className="mt-36 mb-16 flex flex-col
+      className="mt-[2.63rem] mb-16 flex flex-col
      items-center"
     >
-      <p className="my-5 font-pop text-supertitle-bold">{title}</p>
+      <p className="mb-5 font-pop text-supertitle-bold">{title}</p>
       <p className="text-title3">{subtitle}</p>
     </div>
   )
