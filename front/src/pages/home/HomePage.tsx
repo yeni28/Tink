@@ -66,6 +66,7 @@ function HomePage() {
         textColor="white"
         onClick={() => console.log('ButtonTag')}
       />
+      <molecules.CardText />
     </div>
   )
 }
