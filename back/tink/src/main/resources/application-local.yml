@@ -5,11 +5,14 @@ spring:
 
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+        url: jdbc:mysql://localhost:3306/tink?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
         username: root #임시
         password: ssafy
+
+server:
+    port: 9999
 
 app:
     auth:
         oauth2:
-            authorizedRedirectUri: http://localhost:8080/oauth2/redirect
+            authorizedRedirectUri: http://localhost:9999/oauth2/redirect

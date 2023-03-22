@@ -16,7 +16,9 @@ import com.ssafy.tink.test.Sample;
 import com.ssafy.tink.test.SampleRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
@@ -38,6 +40,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 			 throw new OAuth2ProcessException(" 이메일을 찾을 수 없습니다. ");
 		}
 		// 회원가입이 되어 있는지 DB확인
+		log.info("회원가입이 되어 있는지 DB확인");
 		Optional<Sample> sampleObj = sampleRepository.findByEmail(oAuth2UserInfo.getEmail());
 		Sample sample = null;
 		// 회원가입이 되어 있으면 해당 유저정보를 사용

@@ -14,15 +14,22 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.ssafy.tink.config.oAuth.CustomAuthorizationRequestRepository;
 import com.ssafy.tink.config.oAuth.CustomOAuth2UserService;
+import com.ssafy.tink.config.oAuth.OAuth2AuthenticationFailureHandler;
+import com.ssafy.tink.config.oAuth.OAuth2AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig{
 
 	@Autowired
-	private CustomAuthorizationRequestRepository authorizationRequestRepository;
+	private CustomAuthorizationRequestRepository cookieAuthorizationRequestRepository;
 	@Autowired
 	private CustomOAuth2UserService userService;
+	@Autowired
+	private OAuth2AuthenticationSuccessHandler authenticationSuccessHandler;
+	@Autowired
+	private OAuth2AuthenticationFailureHandler authenticationFailureHandler;
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
@@ -36,21 +43,25 @@ public class SecurityConfig{
 			.antMatchers("/").permitAll()
 			.antMatchers("/v2/api-docs/**","/webjars/**","/swagger-ui.html",
 				"/configuration/**","/swagger-resources/**").permitAll()
-			.antMatchers("/OAuth2/**").permitAll()
+			.antMatchers("/oauth2/**").permitAll()
 			.anyRequest().authenticated();
 
 		http.oauth2Login()
 			.authorizationEndpoint()
-				.baseUri("/OAuth2/authorization")
-				.authorizationRequestRepository(authorizationRequestRepository)
+				.baseUri("/oauth2/authorization")
+				.authorizationRequestRepository(cookieAuthorizationRequestRepository)
 
 			.and()
 			.redirectionEndpoint()
-				.baseUri("/*/OAuth2/code/**")
+				.baseUri("/*/oauth2/code/**")
 
 			.and()
 			.userInfoEndpoint()
-				.userService(userService);
+				.userService(userService)
+
+			.and()
+			.successHandler(authenticationSuccessHandler)
+			.failureHandler(authenticationFailureHandler);
 
 		return http.build();
 	}
