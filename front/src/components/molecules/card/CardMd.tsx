@@ -9,6 +9,7 @@ interface CardProps {
   title: string
   views: number
   likes: number
+  onClick: () => void
 }
 
 function CardMd({
@@ -18,6 +19,7 @@ function CardMd({
   title,
   views,
   likes,
+  onClick,
 }: CardProps) {
   const [follow, setFollow] = useState(isFollow)
   return (
@@ -28,7 +30,7 @@ function CardMd({
           <div
             className={`w-[6px] h-[6px] rounded-lg mr-1 ${
               follow ? 'bg-line' : 'bg-red'
-            })`}
+            }`}
           />
           <button
             type="button"
@@ -41,7 +43,9 @@ function CardMd({
           </button>
         </div>
       </div>
-      <atoms.ImageMd src={titleImgUrl} />
+      <div className="cursor-pointer" onClick={onClick}>
+        <atoms.ImageMd src={titleImgUrl} />
+      </div>
       <p className="my-2 text-title2-bold flex justify-center">{title}</p>
       <div className="flex justify-center items-center">
         <span className="text-footnote text-grey mr-1">조회수</span>

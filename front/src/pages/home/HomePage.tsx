@@ -1,9 +1,14 @@
 import atoms from '@/components/atoms'
 import molecules from '@/components/molecules'
+import organisms from '@/components/organisms'
 
 function HomePage() {
   return (
     <div className="HomePage">
+      <organisms.TitleBlock
+        subtitle="키워드를 선택하면 맞춤 도안을 추천해드려요!"
+        title="Recommend"
+      />
       <atoms.ImageMd src="https://images.unsplash.com/photo-1679214523091-a9f9697ed10c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" />
       <atoms.ImageLg
         alt="imageLg"
@@ -24,42 +29,49 @@ function HomePage() {
         title="중요한건 귀여운 고양이"
         titleImgUrl="https://www.sisain.co.kr/news/photo/202110/45791_82634_4851.jpg"
         views={162}
+        onClick={() => console.log('CardMd')}
       />
-      <atoms.ButtonSquareRound
+      <atoms.ButtonSquareSm
         bgColor="red"
-        btnType="squareSm"
         innerValue="+ 팔로우"
         textColor="white"
-        onClick={() => console.log('test')}
+        onClick={() => console.log('ButtonSquareSm')}
       />
-      <atoms.ButtonSquareRound
+      <atoms.ButtonSquareMd1
         bgColor="red"
-        btnType="squareMd1"
         innerValue="팔로우"
         textColor="white"
-        onClick={() => console.log('test')}
+        onClick={() => console.log('ButtonSquareMd1')}
       />
-      <atoms.ButtonSquareRound
+      <atoms.ButtonSquareMd2
         bgColor="black"
-        btnType="squareMd2"
         innerValue="난이도 평가"
         textColor="white"
-        onClick={() => console.log('test')}
+        onClick={() => console.log('ButtonSquareMd2')}
       />
-      <atoms.ButtonSquareRound
+      <atoms.ButtonRoundSm
         bgColor="black"
-        btnType="roundSm"
         innerValue="색추천"
         textColor="white"
-        onClick={() => console.log('test')}
+        onClick={() => console.log('ButtonRoundSm')}
       />
-      <atoms.ButtonSquareRound
+      <atoms.ButtonRoundLg
         bgColor="red"
-        btnType="roundLg"
         innerValue="신청하러 가기"
         textColor="white"
-        onClick={() => console.log('test')}
+        onClick={() => console.log('ButtonRoundLg')}
       />
+      <atoms.ButtonDoodle
+        innerValue="다음"
+        onClick={() => console.log('ButtonDoodle')}
+      />
+      <atoms.ButtonTag
+        bgColor="red"
+        innerValue="상의"
+        textColor="white"
+        onClick={() => console.log('ButtonTag')}
+      />
+      <molecules.CardText />
     </div>
   )
 }

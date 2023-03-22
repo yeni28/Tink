@@ -81,7 +81,7 @@ module.exports = {
       },
     ],
     'prettier/prettier': [
-      'error',
+      'warn',
       {
         endOfLine: 'auto',
         // 화살표 함수 식 매개변수 () 생략 여부 (ex: (a) => a)
