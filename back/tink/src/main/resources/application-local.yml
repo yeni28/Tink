@@ -8,6 +8,10 @@ spring:
         url: jdbc:mysql://localhost:3306/tink?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
         username: root #임시
         password: ssafy
+    servlet:
+        multipart:
+            max-file-size: 128MB
+            max-request-size: 256MB
 
 server:
     port: 9999
@@ -16,3 +20,5 @@ app:
     auth:
         oauth2:
             authorizedRedirectUri: http://localhost:9999/oauth2/redirect
+    upload:
+        folder: /Users/junyoungpark/Downloads

@@ -18,6 +18,7 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 **/templates/
+**/test/java/com/ssafy/tink/file/
 
 ### IntelliJ IDEA ###
 .idea

@@ -44,6 +44,7 @@ public class SecurityConfig{
 			.antMatchers("/v2/api-docs/**","/webjars/**","/swagger-ui.html",
 				"/configuration/**","/swagger-resources/**").permitAll()
 			.antMatchers("/oauth2/**").permitAll()
+			.antMatchers("/file/**").hasRole("ROLE_USER")
 			.anyRequest().authenticated();
 
 		http.oauth2Login()
