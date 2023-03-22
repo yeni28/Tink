@@ -24,3 +24,14 @@ interface CommunityProps {
   view?: number
   comment?: number
 }
+
+interface CommentArray {
+  index: ID
+  value: string
+  username: string
+  createtime: string
+}
+
+interface CommentProps {
+  CommentArray: CommentArray[]
+}

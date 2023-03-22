@@ -1,8 +1,37 @@
+import { useState } from 'react'
+
 import atoms from '@/components/atoms'
 import molecules from '@/components/molecules'
 import organisms from '@/components/organisms'
 
+interface comment {
+  value: string
+}
+
+interface Icomments {
+  idx: number
+  value: string
+  isDelete: boolean
+  username: string
+  userImage: string
+}
+
+interface commentList {
+  comments: Icomments[]
+}
+
 function HomePage() {
+  const [comment, setComment] = useState<comment>({ value: '' })
+  const [comments, setComments] = useState<Icomments>({
+    idx: 0,
+    value: '',
+    isDelete: false,
+    username: '',
+    userImage: '',
+  })
+  const [commentList, setCommentList] = useState<commentList>({
+    comments: [comments],
+  })
   return (
     <div className="HomePage">
       <organisms.TitleBlock
@@ -71,10 +100,8 @@ function HomePage() {
         textColor="white"
         onClick={() => console.log('ButtonTag')}
       />
-      <molecules.CardText />
+      <molecules.CardText onClick={() => console.log('디테일로 이동')} />
       <molecules.Comment />
-
-      <div>안녕</div>
     </div>
   )
 }
