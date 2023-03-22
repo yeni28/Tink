@@ -1,5 +1,6 @@
 .navBack{
   transition: top 0.6s;
+  
   @apply
   w-full
   h-[6.25rem] 
@@ -11,10 +12,20 @@
   
 }
 
+.menuWrapper{
+
+}
+.smallMenuList{
+@apply
+flex
+flex-col 
+h-full
+}
 
 .menuList{
   @apply
   flex list-none gap-[3.125rem]
+
   
 }
 
