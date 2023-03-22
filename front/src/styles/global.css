@@ -10,3 +10,7 @@
   -webkit-text-size-adjust: 100%;
 }
 
+body{
+  @apply
+  bg-beige
+}
