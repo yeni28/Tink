@@ -47,18 +47,20 @@ public class SecurityConfig{
 			.anyRequest().authenticated();
 
 		http.oauth2Login()
+			// 인증된 정보를 가져오는 부분
 			.authorizationEndpoint()
-				.baseUri("/oauth2/authorization")
+				.baseUri("/oauth2/authorization")	// OAuth2 기본URI
 				.authorizationRequestRepository(cookieAuthorizationRequestRepository)
-
+			// 특정 OAuth2 token을 받아오는 부분
 			.and()
 			.redirectionEndpoint()
 				.baseUri("/*/oauth2/code/**")
-
+			// OAuth2 server에서 받은 사용자 정보를 가지고 구현한 Service를 실행 ( 인증된 Authentication 객체 생성 )
 			.and()
 			.userInfoEndpoint()
 				.userService(userService)
-
+			// 성공했을 때 인증된 Authentication 객체를 가지고 토큰을 생성
+			// 실패했을 때 핸들링 로직수행
 			.and()
 			.successHandler(authenticationSuccessHandler)
 			.failureHandler(authenticationFailureHandler);
@@ -67,12 +69,19 @@ public class SecurityConfig{
 	}
 
 	public InMemoryUserDetailsManager userDetailsManager() {
-		UserDetails user = User.withDefaultPasswordEncoder()
+		UserDetails admin = User.withDefaultPasswordEncoder()
 			.username("admin")
+			.password("ssafy")
+			.roles("ADMIN")
+			.build();
+
+		UserDetails user = User.withDefaultPasswordEncoder()
+			.username("tink")
 			.password("ssafy")
 			.roles("USER")
 			.build();
-		return new InMemoryUserDetailsManager(user);
+
+		return new InMemoryUserDetailsManager(admin, user);
 	}
 
 }
