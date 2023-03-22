@@ -45,11 +45,19 @@ function Navbar() {
         {/* Menu, Link 영역 */}
 
         {/* responsive web을 위한 Hamburger button */}
-        <div className="md:hidden block" onClick={onClickHandler}>
+        <div
+          className="xl:hidden block cursor-pointer"
+          onClick={onClickHandler}
+        >
           <GiHamburgerMenu />
         </div>
 
-        <div className="md:block hidden">
+        {/* xl */}
+        <div
+          className={`${
+            clickHamburger ? 'block' : 'hidden '
+          } navStyle.menuList`}
+        >
           <ul className={navStyle.menuList}>
             {/* <ul
             className={`navStyle.menuList ${
@@ -57,29 +65,19 @@ function Navbar() {
             } `}
           > */}
             <NavLink to="/recommend">
-              <li className={navStyle.menuItem} onClick={onClickHandler}>
-                Recommend
-              </li>
+              <li className={navStyle.menuItem}>Recommend</li>
             </NavLink>
             <NavLink to="/tutorial">
-              <li className={navStyle.menuItem} onClick={onClickHandler}>
-                Tutorial
-              </li>
+              <li className={navStyle.menuItem}>Tutorial</li>
             </NavLink>
             <NavLink to="/community">
-              <li className={navStyle.menuItem} onClick={onClickHandler}>
-                Community
-              </li>
+              <li className={navStyle.menuItem}>Community</li>
             </NavLink>
             <NavLink to="/campaign">
-              <li className={navStyle.menuItem} onClick={onClickHandler}>
-                Campaign
-              </li>
+              <li className={navStyle.menuItem}>Campaign</li>
             </NavLink>
             <NavLink to="/mypage">
-              <li className={navStyle.menuItem} onClick={onClickHandler}>
-                My Page
-              </li>
+              <li className={navStyle.menuItem}>My Page</li>
             </NavLink>
           </ul>
           {/* 추후 알림 창이 여기 들어가면 될 것 같습니다. */}

@@ -4,7 +4,7 @@
   @apply
   w-full
   h-[6.25rem] 
-  flex justify-between items-center
+  flex justify-between items-center flex-wrap
   pr-[11.25rem]
   fixed
   z-50
@@ -12,20 +12,12 @@
   
 }
 
-.menuWrapper{
 
-}
-.smallMenuList{
-@apply
-flex
-flex-col 
-h-full
-}
 
 .menuList{
   @apply
-  flex list-none gap-[3.125rem]
-
+  xl:flex xl:justify-between xl:list-none xl:gap-[3.125rem]
+  flex h-full
   
 }
 
@@ -33,5 +25,6 @@ h-full
   @apply
   font-pop
   text-title3-bold
-  inline-block
+  xl:inline-block
+  block
 }
