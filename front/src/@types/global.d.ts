@@ -10,6 +10,12 @@ interface ImageProps {
   height?: number
 }
 
+interface ImageLg extends ImageProps {
+  mainValue?: string
+  subValue?: string
+  onClick: () => void
+}
+
 interface ButtonProps {
   bgColor: 'red' | 'black'
   textColor: 'white' | 'black'

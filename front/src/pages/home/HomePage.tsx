@@ -12,7 +12,10 @@ function HomePage() {
       <atoms.ImageMd src="https://images.unsplash.com/photo-1679214523091-a9f9697ed10c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" />
       <atoms.ImageLg
         alt="imageLg"
+        mainValue="도안"
         src="https://images.unsplash.com/photo-1679214523091-a9f9697ed10c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
+        subValue="(기본적인 뜨개 방법을 알고 있다)"
+        onClick={() => console.log('카드 눌러봄')}
       />
       <molecules.CardSm
         isLiked={false}
@@ -72,6 +75,29 @@ function HomePage() {
         onClick={() => console.log('ButtonTag')}
       />
       <molecules.CardText />
+      <organisms.ariThreeCard
+        first={{
+          alt: 'imageLg',
+          mainValue: '도안',
+          src: 'https://images.unsplash.com/photo-1677274207822-e726bbba46e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY3OTQ3MDE3Mg&ixlib=rb-4.0.3&q=80&w=1080',
+          subValue: '(기본적인 뜨개 방법을 알고 있다)',
+          onClick: () => console.log('카드를 눌러봤다'),
+        }}
+        second={{
+          alt: 'imageLg',
+          mainValue: '도안',
+          src: 'https://images.unsplash.com/photo-1677796503531-8bc3388d987e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY3OTQ3MDE1NA&ixlib=rb-4.0.3&q=80&w=1080',
+          subValue: '(기본적인 뜨개 방법을 알고 있다)',
+          onClick: () => console.log('카드를 눌러봤다'),
+        }}
+        third={{
+          alt: 'imageLg',
+          mainValue: '도안',
+          src: 'https://source.unsplash.com/random',
+          subValue: '(기본적인 뜨개 방법을 알고 있다)',
+          onClick: () => console.log('카드를 눌러봤다'),
+        }}
+      />
     </div>
   )
 }
