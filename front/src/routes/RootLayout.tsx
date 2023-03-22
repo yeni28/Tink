@@ -8,7 +8,6 @@ export default function RootLayout() {
   return (
     <>
       <organisms.NewNavbar />
-      {/* <organisms.Navbar /> */}
       <Detail>
         <Outlet />
       </Detail>

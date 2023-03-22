@@ -1,6 +1,6 @@
-/* .menuItem {
-  @apply whitespace-nowrap;
-} */
+.menuItem {
+  @apply whitespace-nowrap block;
+}
 
 /* .menuIcons {
   display: none;
