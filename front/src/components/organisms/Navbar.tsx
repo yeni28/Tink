@@ -1,39 +1,40 @@
-import React, { useState, useEffect } from 'react'
-import { GiHamburgerMenu } from 'react-icons/gi'
-import { NavLink } from 'react-router-dom'
-
-import { ReactComponent as yarn } from '@/assets/svg/yarn.svg'
-import navStyle from '@/styles/navbar.module.css'
+import React, { useState, useEffect } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { GrClose } from "react-icons/gr";
+import { NavLink } from "react-router-dom";
+import { MenuData } from "@/components/organisms/NavbarMenuData";
+import { ReactComponent as yarn } from "@/assets/svg/yarn.svg";
+import navStyle from "@/styles/navbar.module.css";
 
 function Navbar() {
-  const [prevScrollPos, setPrevScrollPos] = useState(0)
-  const [visible, setVisible] = useState(true)
-  const [clickHamburger, setClickHamburder] = useState(false)
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const [openNavbar, setopenNavbar] = useState(false);
   const onClickHandler = () => {
-    setClickHamburder(!clickHamburger)
-  }
+    setopenNavbar(!openNavbar);
+  };
 
   // new useEffect:
   useEffect(() => {
     const handleScroll = () => {
       // find current scroll position
-      const currentScrollPos = window.pageYOffset
+      const currentScrollPos = window.pageYOffset;
       setVisible(
         prevScrollPos > currentScrollPos ||
           prevScrollPos - currentScrollPos > 70 ||
           currentScrollPos < 10
-      )
-      setPrevScrollPos(currentScrollPos)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [prevScrollPos, visible])
+      );
+      setPrevScrollPos(currentScrollPos);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos, visible]);
 
   return (
     <header>
       <nav
         className={navStyle.navBack}
-        style={{ top: visible ? '0' : '-6.25rem' }}
+        style={{ top: visible ? "0" : "-6.25rem" }}
       >
         {/* Logo 영역 */}
         <div>
@@ -54,38 +55,23 @@ function Navbar() {
 
         {/* xl */}
         <div
-          className={`${
-            clickHamburger ? 'block' : 'hidden '
-          } navStyle.menuList`}
+          className={`${openNavbar ? "block" : "hidden "} navStyle.menuList`}
         >
           <ul className={navStyle.menuList}>
-            {/* <ul
-            className={`navStyle.menuList ${
-              'max-md' && clickHamburger ? navStyle.smallMenuList : 'hidden'
-            } `}
-          > */}
-            <NavLink to="/recommend">
-              <li className={navStyle.menuItem}>Recommend</li>
-            </NavLink>
-            <NavLink to="/tutorial">
-              <li className={navStyle.menuItem}>Tutorial</li>
-            </NavLink>
-            <NavLink to="/community">
-              <li className={navStyle.menuItem}>Community</li>
-            </NavLink>
-            <NavLink to="/campaign">
-              <li className={navStyle.menuItem}>Campaign</li>
-            </NavLink>
-            <NavLink to="/mypage">
-              <li className={navStyle.menuItem}>My Page</li>
-            </NavLink>
+            {MenuData.map((item, index: number) => {
+              return (
+                <NavLink to={item.url} key={index}>
+                  <li className={navStyle.menuItem}>{item.title}</li>
+                </NavLink>
+              );
+            })}
           </ul>
           {/* 추후 알림 창이 여기 들어가면 될 것 같습니다. */}
         </div>
         {/* point용 실타래가 들어가는 곳 */}
       </nav>
     </header>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

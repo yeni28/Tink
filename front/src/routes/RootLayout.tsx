@@ -1,16 +1,17 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet } from "react-router-dom";
 
-import organisms from '@/components/organisms'
+import organisms from "@/components/organisms";
 
-import Detail from '@/routes/detail/Detail'
+import Detail from "@/routes/detail/Detail";
 
 export default function RootLayout() {
   return (
     <>
-      <organisms.Navbar />
+      <organisms.NewNavbar />
+      {/* <organisms.Navbar /> */}
       <Detail>
         <Outlet />
       </Detail>
     </>
-  )
+  );
 }
