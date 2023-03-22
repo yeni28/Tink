@@ -3,7 +3,7 @@ interface Props {
 }
 
 function Detail(props: Props): JSX.Element {
-  return <div id="detail" {...props} />
+  return <div id="detail" {...props} className="pt-[6.25rem] px-[24rem]" />
 }
 
 export default Detail
