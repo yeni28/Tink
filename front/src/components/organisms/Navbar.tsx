@@ -1,28 +1,40 @@
 import React, { useState, useEffect } from 'react'
+
 import { GiHamburgerMenu } from 'react-icons/gi'
-import { NavLink } from 'react-router-dom'
+import { GrClose } from 'react-icons/gr'
+import { NavLink, useLocation } from 'react-router-dom'
 
-import { ReactComponent as yarn } from '@/assets/svg/yarn.svg'
-import navStyle from '@/styles/navbar.module.css'
+import { MenuData } from '@/components/organisms/NavbarMenuData'
 
-function Navbar() {
-  const [prevScrollPos, setPrevScrollPos] = useState(0)
-  const [visible, setVisible] = useState(true)
-  const [clickHamburger, setClickHamburder] = useState(false)
+function NewNavbar() {
+  // 작은 화면에서 menu 열고 닫는 부분
+  const [openMenu, setOpenMenu] = useState(false)
   const onClickHandler = () => {
-    setClickHamburder(!clickHamburger)
+    setOpenMenu(!openMenu)
   }
 
-  // new useEffect:
+  // router가 변하면 navbar도 닫히게 설정하는 부분
+  const location = useLocation()
+  useEffect(() => {
+    setOpenMenu(false)
+  }, [location])
+
+  // 스크롤 위치에 따라서 navbar 보이게 설정하는 부분
+  const [prevScrollPos, setPrevScrollPos] = useState(0)
+  const [visible, setVisible] = useState(true)
   useEffect(() => {
     const handleScroll = () => {
-      // find current scroll position
       const currentScrollPos = window.pageYOffset
       setVisible(
         prevScrollPos > currentScrollPos ||
-          prevScrollPos - currentScrollPos > 70 ||
+          prevScrollPos - currentScrollPos > 100 ||
           currentScrollPos < 10
       )
+      // 메뉴가 열린상태로 스크롤 내리면 메뉴바 닫히게 설정
+      if (openMenu && prevScrollPos < currentScrollPos) {
+        setOpenMenu(false)
+      }
+
       setPrevScrollPos(currentScrollPos)
     }
     window.addEventListener('scroll', handleScroll)
@@ -30,64 +42,38 @@ function Navbar() {
   }, [prevScrollPos, visible])
 
   return (
-    <header>
-      <nav
-        className={navStyle.navBack}
-        style={{ top: visible ? '0' : '-6.25rem' }}
+    <nav
+      style={{ top: visible ? '0' : '-6.25rem', transition: 'top 0.6s' }}
+      className="flex justify-between items-center h-[6.25rem] bg-beige px-8 w-full fixed
+      z-50 font-pop text-title3-bold"
+    >
+      {/* Logo가 담기는 영역 */}
+      <div className="text-red cursor-pointer justify-self-start">
+        <NavLink to="/">
+          <div className="">Tink</div>
+        </NavLink>
+      </div>
+      {/* 햄버거 모양 아이콘 */}
+      <div className="ml:block hidden" onClick={onClickHandler}>
+        {openMenu ? <GrClose /> : <GiHamburgerMenu />}
+      </div>
+
+      <ul
+        className={
+          (openMenu ? '' : 'ml:hidden ') +
+          ' ml:bg-beige ml:absolute ml:top-0 ml:left-1/2 ml:pt-24 ml:flex ml:flex-col ml:justify-start grid grid-cols-5 gap-5 list-none items-center text-center justify-end'
+        }
       >
-        {/* Logo 영역 */}
-        <div>
-          <NavLink to="/" onClick={onClickHandler}>
-            <div className="w-[200px] h-full bg-grey">Logo</div>
-          </NavLink>
-        </div>
-
-        {/* Menu, Link 영역 */}
-
-        {/* responsive web을 위한 Hamburger button */}
-        <div className="md:hidden block" onClick={onClickHandler}>
-          <GiHamburgerMenu />
-        </div>
-
-        <div className="md:block hidden">
-          <ul className={navStyle.menuList}>
-            {/* <ul
-            className={`navStyle.menuList ${
-              'max-md' && clickHamburger ? navStyle.smallMenuList : 'hidden'
-            } `}
-          > */}
-            <NavLink to="/recommend">
-              <li className={navStyle.menuItem} onClick={onClickHandler}>
-                Recommend
-              </li>
+        {MenuData.map((item, index: number) => {
+          return (
+            <NavLink key={index} to={item.url}>
+              <li className="whitespace-nowrap ">{item.title}</li>
             </NavLink>
-            <NavLink to="/tutorial">
-              <li className={navStyle.menuItem} onClick={onClickHandler}>
-                Tutorial
-              </li>
-            </NavLink>
-            <NavLink to="/community">
-              <li className={navStyle.menuItem} onClick={onClickHandler}>
-                Community
-              </li>
-            </NavLink>
-            <NavLink to="/campaign">
-              <li className={navStyle.menuItem} onClick={onClickHandler}>
-                Campaign
-              </li>
-            </NavLink>
-            <NavLink to="/mypage">
-              <li className={navStyle.menuItem} onClick={onClickHandler}>
-                My Page
-              </li>
-            </NavLink>
-          </ul>
-          {/* 추후 알림 창이 여기 들어가면 될 것 같습니다. */}
-        </div>
-        {/* point용 실타래가 들어가는 곳 */}
-      </nav>
-    </header>
+          )
+        })}
+      </ul>
+    </nav>
   )
 }
 
-export default Navbar
+export default NewNavbar
