@@ -21,4 +21,4 @@ app:
         oauth2:
             authorizedRedirectUri: http://localhost:9999/oauth2/redirect
     upload:
-        folder: /Users/junyoungpark/Downloads
+        folder: C:\S08P22C201\tink\image

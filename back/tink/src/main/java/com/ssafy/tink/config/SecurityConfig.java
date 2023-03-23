@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.ssafy.tink.config.jwt.JwtAccessDeniedHandler;
+import com.ssafy.tink.config.jwt.JwtAuthenticationEntryPoint;
 import com.ssafy.tink.config.oAuth.CustomAuthorizationRequestRepository;
 import com.ssafy.tink.config.oAuth.CustomOAuth2UserService;
 import com.ssafy.tink.config.oAuth.OAuth2AuthenticationFailureHandler;
@@ -29,6 +31,10 @@ public class SecurityConfig{
 	private OAuth2AuthenticationSuccessHandler authenticationSuccessHandler;
 	@Autowired
 	private OAuth2AuthenticationFailureHandler authenticationFailureHandler;
+	@Autowired
+	private JwtAccessDeniedHandler jwtAccessDeniedHandler;
+	@Autowired
+	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -44,7 +50,7 @@ public class SecurityConfig{
 			.antMatchers("/v2/api-docs/**","/webjars/**","/swagger-ui.html",
 				"/configuration/**","/swagger-resources/**").permitAll()
 			.antMatchers("/oauth2/**").permitAll()
-			.antMatchers("/file/**").hasRole("ROLE_USER")
+			.antMatchers("/file/**").hasRole("USER")
 			.anyRequest().authenticated();
 
 		http.oauth2Login()
@@ -65,6 +71,11 @@ public class SecurityConfig{
 			.and()
 			.successHandler(authenticationSuccessHandler)
 			.failureHandler(authenticationFailureHandler);
+
+		// 예외처리 처리하는 부분
+		// http.exceptionHandling()
+		// 	.accessDeniedHandler(jwtAccessDeniedHandler)
+		// 	.authenticationEntryPoint(jwtAuthenticationEntryPoint);
 
 		return http.build();
 	}

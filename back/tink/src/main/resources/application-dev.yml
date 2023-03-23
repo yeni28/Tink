@@ -21,4 +21,4 @@ app:
         oauth2:
             authorizedRedirectUri: http://j8c201.p.ssafy.io:9999/oauth2/redirect
     upload:
-        folder: /Users/junyoungpark/Downloads
+        folder: {리눅스 경로}
