@@ -9,6 +9,7 @@ function HomePage() {
         subtitle="키워드를 선택하면 맞춤 도안을 추천해드려요!"
         title="Recommend"
       />
+      <molecules.RecommendToggle />
       <atoms.ImageMd src="https://images.unsplash.com/photo-1679214523091-a9f9697ed10c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" />
       <atoms.ImageLg
         alt="imageLg"
