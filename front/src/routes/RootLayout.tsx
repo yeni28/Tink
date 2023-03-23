@@ -9,6 +9,7 @@ export default function RootLayout() {
     <>
       <organisms.Navbar />
       <Detail>
+        <organisms.Header />
         <Outlet />
       </Detail>
     </>

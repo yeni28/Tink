@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { GrClose } from 'react-icons/gr'
 import { NavLink, useLocation } from 'react-router-dom'
 
-import { MenuData } from '@/components/organisms/NavbarMenuData'
+import { MenuData } from '@/components/organisms/navbar/NavbarMenuData'
 
 function NewNavbar() {
   // 작은 화면에서 menu 열고 닫는 부분
