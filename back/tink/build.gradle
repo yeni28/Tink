@@ -44,10 +44,13 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'mysql:mysql-connector-java:8.0.31'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    testImplementation 'junit:junit:4.13.1'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
     // swagger lib
     implementation 'io.springfox:springfox-swagger2:2.9.2'
     implementation 'io.springfox:springfox-swagger-ui:2.9.2'
@@ -60,6 +63,11 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
     // typeleap lib
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // thumbnail lib
+    implementation 'net.coobird:thumbnailator:0.4.19'
+    implementation 'commons-fileupload:commons-fileupload:1.4'
+    implementation 'commons-io:commons-io:2.6'
+
 }
 
 tasks.named('test') {
