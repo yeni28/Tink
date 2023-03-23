@@ -10,8 +10,8 @@ export interface CommentProps {
 }
 
 function HomePage() {
-  const [comments, setComments] = useState([])
-  const commentID = useState(0)
+  const [comments, setComments] = useState<string>()
+  // const commentID = useState(0)
 
   const [comment, setComment] = useState<CommentProps['comment']>({
     id: 0,
@@ -20,17 +20,17 @@ function HomePage() {
   })
   const [isDelete, settIsDelete] = useState<CommentProps['isDelete']>(false)
   // 댓글 작성 함수
-  const onCreate = () => {
-    const create_date = new Date().getTime()
-    const newComment = {
-      user,
-      content,
-      create_date,
-      id: commentID,
-    }
-    commentID.current += 1
-    setComments([newComment, ...comments])
-  }
+  // const onCreate = () => {
+  //   const create_date = new Date().getTime()
+  //   const newComment = {
+  //     user,
+  //     content,
+  //     create_date,
+  //     id: commentID,
+  //   }
+  //   commentID.current += 1
+  //   setComments([newComment, ...comments])
+  // }
 
   return (
     <div className="HomePage">
@@ -101,7 +101,7 @@ function HomePage() {
         onClick={() => console.log('ButtonTag')}
       />
       <molecules.CardText onClick={() => console.log('디테일로 이동')} />
-      <molecules.Comment {...comment} {...isDelete} />
+      <molecules.Comment setComments={setComments} />
 
       <h1>댓글 리스트</h1>
       <ul>
