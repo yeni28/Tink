@@ -25,13 +25,10 @@ interface CommunityProps {
   comment?: number
 }
 
-interface CommentArray {
-  index: ID
+interface CommentProps {
+  id: number
   value: string
   username: string
-  createtime: string
-}
-
-interface CommentProps {
-  CommentArray: CommentArray[]
+  create_time: string
+  userImage: string
 }

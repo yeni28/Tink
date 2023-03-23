@@ -4,34 +4,17 @@ import atoms from '@/components/atoms'
 import molecules from '@/components/molecules'
 import organisms from '@/components/organisms'
 
-export interface CommentProps {
-  comment: { id: number; content: string; create_date: string }
-  isDelete: boolean
-}
-
 function HomePage() {
-  const [comments, setComments] = useState<string>()
-  // const commentID = useState(0)
-
-  const [comment, setComment] = useState<CommentProps['comment']>({
-    id: 0,
-    content: '',
-    create_date: '',
-  })
-  const [isDelete, settIsDelete] = useState<CommentProps['isDelete']>(false)
-  // 댓글 작성 함수
-  // const onCreate = () => {
-  //   const create_date = new Date().getTime()
-  //   const newComment = {
-  //     user,
-  //     content,
-  //     create_date,
-  //     id: commentID,
-  //   }
-  //   commentID.current += 1
-  //   setComments([newComment, ...comments])
-  // }
-
+  // 댓글 Props
+  const [comments, setComments] = useState<CommentProps[]>([])
+  // 댓글 삭제
+  const deleteComment = (id: number) => {
+    setComments(
+      comments.filter((comment) => {
+        return comment.id !== id
+      })
+    )
+  }
   return (
     <div className="HomePage">
       <organisms.TitleBlock
@@ -101,15 +84,14 @@ function HomePage() {
         onClick={() => console.log('ButtonTag')}
       />
       <molecules.CardText onClick={() => console.log('디테일로 이동')} />
-      <molecules.Comment setComments={setComments} />
-
-      <h1>댓글 리스트</h1>
-      <ul>
-        {comments &&
-          comments.map((comment) => (
-            <molecules.CommentList key={comment.id} comment={comment} />
-          ))}
-      </ul>
+      <molecules.Comment
+        comments={comments}
+        setComments={(comment) => setComments(comment)}
+      />
+      <molecules.CommentList
+        comments={comments}
+        deleteComment={deleteComment}
+      />
     </div>
   )
 }

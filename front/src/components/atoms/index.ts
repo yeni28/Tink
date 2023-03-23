@@ -14,7 +14,6 @@ import ImageLg from '@/components/atoms/image/ImageLg'
 import ImageMd from '@/components/atoms/image/ImageMd'
 import ImageSm from '@/components/atoms/image/ImageSm'
 import ImageUser from '@/components/atoms/image/ImageUser'
-import InputComment from '@/components/atoms/InputComment'
 
 const atoms = {
   ButtonDoodle,
@@ -33,7 +32,6 @@ const atoms = {
   ImageMd,
   ImageSm,
   ImageUser,
-  InputComment,
 }
 
 export default atoms
