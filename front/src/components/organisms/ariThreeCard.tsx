@@ -10,7 +10,7 @@ interface ariThreeCardProps {
 
 function ariThreeCard({ first, second, third }: ariThreeCardProps) {
   return (
-    <div className="flex justify-evenly">
+    <div className="flex justify-between">
       <atoms.ImageLg
         alt={first?.alt}
         mainValue={first.mainValue}
