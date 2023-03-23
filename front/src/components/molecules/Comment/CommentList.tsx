@@ -1,7 +1,16 @@
 import React from 'react'
 
-function CommentList() {
-  return <div>CommentList</div>
+interface CommentProps {
+  id: number
+  value: string
+}
+
+const CommentList = (comment: CommentProps) => {
+  return (
+    <li>
+      <div>{comment.value}</div>
+    </li>
+  )
 }
 
 export default CommentList

@@ -1,37 +1,37 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 import atoms from '@/components/atoms'
 import molecules from '@/components/molecules'
 import organisms from '@/components/organisms'
 
-interface comment {
-  value: string
-}
-
-interface Icomments {
-  idx: number
-  value: string
+export interface CommentProps {
+  comment: { id: number; content: string; create_date: string }
   isDelete: boolean
-  username: string
-  userImage: string
-}
-
-interface commentList {
-  comments: Icomments[]
 }
 
 function HomePage() {
-  const [comment, setComment] = useState<comment>({ value: '' })
-  const [comments, setComments] = useState<Icomments>({
-    idx: 0,
-    value: '',
-    isDelete: false,
-    username: '',
-    userImage: '',
+  const [comments, setComments] = useState([])
+  const commentID = useState(0)
+
+  const [comment, setComment] = useState<CommentProps['comment']>({
+    id: 0,
+    content: '',
+    create_date: '',
   })
-  const [commentList, setCommentList] = useState<commentList>({
-    comments: [comments],
-  })
+  const [isDelete, settIsDelete] = useState<CommentProps['isDelete']>(false)
+  // 댓글 작성 함수
+  const onCreate = () => {
+    const create_date = new Date().getTime()
+    const newComment = {
+      user,
+      content,
+      create_date,
+      id: commentID,
+    }
+    commentID.current += 1
+    setComments([newComment, ...comments])
+  }
+
   return (
     <div className="HomePage">
       <organisms.TitleBlock
@@ -101,7 +101,15 @@ function HomePage() {
         onClick={() => console.log('ButtonTag')}
       />
       <molecules.CardText onClick={() => console.log('디테일로 이동')} />
-      <molecules.Comment />
+      <molecules.Comment {...comment} {...isDelete} />
+
+      <h1>댓글 리스트</h1>
+      <ul>
+        {comments &&
+          comments.map((comment) => (
+            <molecules.CommentList key={comment.id} comment={comment} />
+          ))}
+      </ul>
     </div>
   )
 }
