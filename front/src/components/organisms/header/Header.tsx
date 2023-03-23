@@ -22,7 +22,8 @@ export default function Header() {
 
   const showHeader = () => {
     let result = true
-    if (location.pathname === ('/' || '/tutorial')) result = false
+    if (location.pathname === '/' || location.pathname === '/tutorial')
+      result = false
     return result
   }
 
