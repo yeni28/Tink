@@ -1,22 +1,22 @@
 export const MenuData = [
   {
-    title: "Recommend",
-    url: "/recommend",
+    title: 'Recommend',
+    url: '/recommend',
   },
   {
-    title: "Tutorial",
-    url: "/tutorial",
+    title: 'Tutorial',
+    url: '/tutorial',
   },
   {
-    title: "Community",
-    url: "/community",
+    title: 'Community',
+    url: '/community',
   },
   {
-    title: "Campaign",
-    url: "/campaign",
+    title: 'Campaign',
+    url: '/campaign',
   },
   {
-    title: "My Page",
-    url: "/mypage",
+    title: 'My Page',
+    url: '/mypage',
   },
-];
+]
