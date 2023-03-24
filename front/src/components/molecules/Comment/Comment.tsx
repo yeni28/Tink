@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction } from 'react'
+import React, { useState, Dispatch, SetStateAction, KeyboardEvent } from 'react'
 
 import atoms from '@/components/atoms'
 
@@ -17,7 +17,12 @@ function Comment({ comments, setComments }: Props) {
 
   const [newcomment, setNewComment] = useState('')
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewComment(event.target.value)
+    const inputValue = event.target.value.trim()
+    if (inputValue === '') {
+      return
+    } else {
+      setNewComment(event.target.value)
+    }
   }
   // 시간
   const [createtime, setCreatetime] = useState<number>()
@@ -54,12 +59,22 @@ function Comment({ comments, setComments }: Props) {
       userImage: userImgUrl,
       create_time: create_time,
     }
-    setComments([...comments, newComment])
-    setNewComment('')
+    if (newComment.value === '') {
+      alert('댓글을 입력해 주세요!')
+    } else {
+      setComments([...comments, newComment])
+      setNewComment('')
+    }
+  }
+  // 엔터키로 전송
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      submitComment()
+    }
   }
 
   return (
-    <div className="flex items-center">
+    <div className=" flex items-center">
       <atoms.ImageUser
         alt={'user'}
         src={'https://source.unsplash.com/random'}
@@ -76,17 +91,13 @@ function Comment({ comments, setComments }: Props) {
             type="text"
             value={newcomment}
             onChange={onChange}
+            // 엔터키로 입력 가능
+            onKeyPress={handleKeyPress}
           />
           <button
             className="w-[9rem] ml-[2rem]"
             type="button"
             onClick={() => submitComment()}
-            onKeyUp={(e) => {
-              console.log('되나?')
-              if (e.key === 'Enter') {
-                submitComment()
-              }
-            }}
           >
             <span className="text-red text-title3-bold "> 입력 </span>
           </button>

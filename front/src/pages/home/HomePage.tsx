@@ -86,7 +86,6 @@ function HomePage() {
         textColor="white"
         onClick={() => console.log('ButtonTag')}
       />
-      <molecules.CardText />
       <organisms.ariThreeCard
         first={{
           alt: 'imageLg',
