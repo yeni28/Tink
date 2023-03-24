@@ -1,7 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    screens: {
+      ml: { max: '720px' },
+      ...defaultTheme.screens,
+    },
     extend: {
       colors: {
         mint: '#CBECE4',

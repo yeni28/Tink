@@ -1,6 +1,7 @@
-import Navbar from '@/components/organisms/Navbar'
-import TitleBlock from '@/components/organisms/TitleBlock'
+import ariThreeCard from '@/components/organisms/ariThreeCard'
+import Header from '@/components/organisms/header/Header'
+import Navbar from '@/components/organisms/navbar/Navbar'
 
-const organisms = { Navbar, TitleBlock }
+const organisms = { ariThreeCard, Navbar, Header }
 
 export default organisms

@@ -18,7 +18,7 @@ const routers = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: '/community',
+        path: '/community/review',
         element: <CommunityMainPage />,
       },
       {
