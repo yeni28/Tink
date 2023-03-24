@@ -2,10 +2,10 @@ import React from 'react'
 
 import atoms from '@/components/atoms'
 
-function CardText({ onClick }: { onClick?: () => void }) {
+function CardText({ onClick }: { onClick: () => void }) {
   return (
     <div
-      className=" w-[35.38rem] h-[14.5rem] p-[1.87rem] rounded-[1.55rem]"
+      className=" w-[35.38rem] h-[14.5rem] p-[1.87rem] rounded-[1.55rem] bg-white"
       onClick={onClick}
     >
       <div>

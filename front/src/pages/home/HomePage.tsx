@@ -1,8 +1,20 @@
+import { useState, useRef } from 'react'
+
 import atoms from '@/components/atoms'
 import molecules from '@/components/molecules'
 import organisms from '@/components/organisms'
 
 function HomePage() {
+  // 댓글 Props
+  const [comments, setComments] = useState<CommentProps[]>([])
+  // 댓글 삭제
+  const deleteComment = (id: number) => {
+    setComments(
+      comments.filter((comment) => {
+        return comment.id !== id
+      })
+    )
+  }
   return (
     <div className="HomePage">
       {/* <organisms.TitleBlock
@@ -74,7 +86,6 @@ function HomePage() {
         textColor="white"
         onClick={() => console.log('ButtonTag')}
       />
-      <molecules.CardText />
       <organisms.ariThreeCard
         first={{
           alt: 'imageLg',
@@ -97,6 +108,15 @@ function HomePage() {
           subValue: '(기본적인 뜨개 방법을 알고 있다)',
           onClick: () => console.log('카드를 눌러봤다'),
         }}
+      />
+      <molecules.CardText onClick={() => console.log('디테일로 이동')} />
+      <molecules.CommentInput
+        comments={comments}
+        setComments={(comment) => setComments(comment)}
+      />
+      <molecules.CommentList
+        comments={comments}
+        deleteComment={deleteComment}
       />
     </div>
   )

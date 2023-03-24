@@ -30,3 +30,11 @@ interface CommunityProps {
   view?: number
   comment?: number
 }
+
+interface CommentProps {
+  id: number
+  value: string
+  username: string
+  create_time: string
+  userImage: string
+}
