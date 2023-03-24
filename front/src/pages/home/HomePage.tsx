@@ -110,7 +110,7 @@ function HomePage() {
         }}
       />
       <molecules.CardText onClick={() => console.log('디테일로 이동')} />
-      <molecules.Comment
+      <molecules.CommentInput
         comments={comments}
         setComments={(comment) => setComments(comment)}
       />
