@@ -1,24 +1,24 @@
 import React from 'react'
 
-import ColorRecommendationPage from '@/pages/recommend/ColorRecommendationPage'
-import PatternRecommendationPage from '@/pages/recommend/PatternRecommendationPage'
-import RecommendMainPage from '@/pages/recommend/RecommendMainPage'
-import SelectRecommendPage from '@/pages/recommend/SelectRecommendPage'
-import YarnRecommendationPage from '@/pages/recommend/YarnRecommendationPage'
+import MainRecommend from '@/pages/recommend/main'
+import SelectRecommend from '@/pages/recommend/select'
+import ColorRecommend from '@/pages/recommend/select/color'
+import PatternRecommend from '@/pages/recommend/select/pattern'
+import YarnRecommend from '@/pages/recommend/select/yarn'
 
 const Recommend = [
   {
     path: '/recommend',
-    element: <RecommendMainPage />,
+    element: <MainRecommend />,
   },
   {
     path: '/recommend/select',
-    element: <SelectRecommendPage />,
+    element: <SelectRecommend />,
     children: [
       // { index: true, element: <SelectRecommendPage /> },
-      { path: 'pattern', element: <PatternRecommendationPage /> },
-      { path: 'color', element: <ColorRecommendationPage /> },
-      { path: 'yarn', element: <YarnRecommendationPage /> },
+      { path: 'pattern', element: <PatternRecommend /> },
+      { path: 'color', element: <ColorRecommend /> },
+      { path: 'yarn', element: <YarnRecommend /> },
     ],
   },
 ]

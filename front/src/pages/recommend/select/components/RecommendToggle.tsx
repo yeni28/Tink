@@ -5,7 +5,7 @@ import atoms from '@/components/atoms'
 
 function RecommendToggle() {
   const [isSelecteds, setIsSelecteds] = useState({
-    isPatternSelected: true,
+    isPatternSelected: false,
     isYarnSelected: false,
     isColorSelected: false,
   })

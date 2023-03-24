@@ -7,7 +7,7 @@ import { Recommend } from './route'
 import CampaignMainPage from '@/pages/campaign/CampaignMainPage'
 import CommunityMainPage from '@/pages/community/CommunityMainPage'
 import HomePage from '@/pages/home/HomePage'
-import MyPageMainPage from '@/pages/mypage/MyPageMainPage'
+import MyPageMainPage from '@/pages/mypage'
 import TutorialMainPage from '@/pages/tutorial/TutorialMainPage'
 
 const routers = createBrowserRouter([
