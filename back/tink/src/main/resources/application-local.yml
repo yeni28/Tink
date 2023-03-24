@@ -4,7 +4,7 @@ spring:
             on-profile: local
     mvc:
         pathmatch:
-            matching-strategy: ant_path_matcher
+            matching-strategy: ant_path_matcher     # swagger 2.6.x부터 pathmatch가 변경되어 ' ant_path_matcher'를 주입
     jpa:
         show-sql: true # true 설정시 JPA 쿼리문 확인 가능
         hibernate:
@@ -14,22 +14,22 @@ spring:
                 format_sql: true # JPA의 구현체인 Hibernate가 동작하면서 발생한 SQL의 가독성을 높여준다.
         open-in-view: false
     datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
+        driver-class-name: com.mysql.cj.jdbc.Driver             # DB driver를 설정
         url: jdbc:mysql://localhost:3306/tink?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
-        username: root #임시
-        password: ssafy
+        username: root  # 유저ID
+        password: ssafy # 유저PW
 
 server:
-    port: 8081
+    port: 8081              # 서비스 포트지정
     servlet:
-        context-path: /
+        context-path: /     # contextPaht를 지정하면 기본 uri가 지정된다.
 
 app:
     auth:
         oauth2:
-            authorizedRedirectUri: http://localhost:9999/oauth2/redirect
+            authorizedRedirectUri: http://localhost:9999/oauth2/redirect     # Token을 받을 Url를 지정
     upload:
-        folder: C:\S08P22C201\tink\image
+        folder: C:\S08P22C201\tink\image      # 파일이 저장될 경로 설정
 
 logging:
     level:

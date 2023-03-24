@@ -3,7 +3,9 @@ package com.ssafy.tink.config.oAuth;
 import java.util.Map;
 
 public class OAuth2GoogleUserInfo extends OAuth2UserInfo{
-
+	/*
+	* GOOGLE 회원 정보를 저장할 클래스
+	* */
 	public OAuth2GoogleUserInfo(Map<String, Object> attributes) {
 		super(attributes);
 	}

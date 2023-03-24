@@ -53,7 +53,7 @@ public class SecurityConfig {
 			.httpBasic().disable()		//
 			.sessionManagement()		// session 설정관리
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
+		// 특정 API에 접근하는 권한을 확인하거나 permitAll을 설정하는 구간
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/oauth2/**").permitAll()
@@ -81,21 +81,24 @@ public class SecurityConfig {
 
 		// 예외처리 처리하는 부분
 		http.exceptionHandling()
+			// 접근이 거부된 예외처리 로직 실행
 			.accessDeniedHandler(jwtAccessDeniedHandler)
+			// 인증 예외처리 로직 실행
 			.authenticationEntryPoint(jwtAuthenticationEntryPoint);
 
+		// 토큰을 확인하는 필터 추가
 		http.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
-
 		return http.build();
 	}
 
 	public InMemoryUserDetailsManager userDetailsManager() {
+		// 관리자 인메모리 회원
 		UserDetails admin = User.withDefaultPasswordEncoder()
 			.username("admin")
 			.password("ssafy")
 			.roles("ADMIN")
 			.build();
-
+		// 일반 회원 인메모리 유저
 		UserDetails user = User.withDefaultPasswordEncoder()
 			.username("tink")
 			.password("ssafy")
@@ -107,7 +110,9 @@ public class SecurityConfig {
 
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
+		// 특정 uri를 무시 설정하는 구간
 		return (web) -> web.ignoring()
+			// swagger 관련 uri 무시하도록 처리
 			.antMatchers(
 				"/v2/api-docs",
 				"/swagger-ui.html",
@@ -116,6 +121,7 @@ public class SecurityConfig {
 				"/swagger-resources/**",
 				"/configuration/ui",
 				"/configuration/security")
+			// favicon.io 무시하도록 처리
 			.antMatchers("favicon.io");
 	}
 

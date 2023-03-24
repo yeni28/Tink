@@ -36,11 +36,11 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 		return new Docket(DocumentationType.SWAGGER_2)
 			.useDefaultResponseMessages(false)
 			.securityContexts(Arrays.asList(customSecurityContext()))
-			.securitySchemes(Arrays.asList(apiKey()))
-			.select()
-			.apis(RequestHandlerSelectors.
-					basePackage("com.ssafy.tink"))
-				.paths(PathSelectors.any())
+			.securitySchemes(Arrays.asList(apiKey()))	// security Authentication 설정
+			.select()									// 문서화 API 탐색
+			.apis(RequestHandlerSelectors.				// 문서화 API경로 지정
+					basePackage("com.ssafy.tink"))		// 기본 패키지 지정
+				.paths(PathSelectors.any())				// 문서화 API 조건 지정
 			.build()
 			.apiInfo(apiInfo());
 	}
@@ -73,6 +73,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 	}
 
 	private ApiInfo apiInfo() {
+		// api문서 타이틀, 설명, 버젼, 등등 설정
 		return new ApiInfoBuilder()
 			.title(SERVICE_TITLE)
 			.description(SERVICE_DESCRIPTION)

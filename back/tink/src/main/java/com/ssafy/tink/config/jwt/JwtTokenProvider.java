@@ -87,18 +87,18 @@ public class JwtTokenProvider {
 
 	// 토큰에서 인가정보 얻어오는 함수
 	public Authentication getAuthentication(String token) {
-
+		// 토큰에 저장된 정보를 가져온다.
 		Claims claims = parseClaims(token);
-
+		// Token에 저장된 subject(회원ID)를 가져오기
 		String userid = claims.getSubject();
-
+		// Token에 저장된 권한을 Collection 형식으로 가져온다.
 		Collection<? extends GrantedAuthority> authorities =
 			Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
 				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());
-
+		// 가져온 정보를 가지고 Principal 객체로 만들기
 		OAuth2UserDetail principal = new OAuth2UserDetail(Long.valueOf(userid), "", authorities);
-
+		// principal 객체를 가지고 Authentication 객체를 생성
 		return new UsernamePasswordAuthenticationToken(principal, "", authorities);
 	}
 
@@ -120,6 +120,7 @@ public class JwtTokenProvider {
 	// Access Token 만료시 갱신때 사용할 정보를 얻기 위해 Claim 리턴
 	private Claims parseClaims(String accessToken) {
 		try {
+			// 토큰에 저장된 정보 가져오기 ( 토큰 제작할 때 사용된 SECRET_KEY를 이용해야함 )
 			return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(accessToken).getBody();
 		} catch (ExpiredJwtException e) {
 			return e.getClaims();

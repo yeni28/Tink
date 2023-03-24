@@ -32,15 +32,17 @@ public class FileUtil {
 	public static BufferedImage createThumbnail(MultipartFile file) {
 
 		try {
+			// file에 데이터를 입력받는다.
 			InputStream in = file.getInputStream();
+			// 입력된 바이너리 데이터를 이미지버퍼에 저장
 			BufferedImage origin = ImageIO.read(in);
-
+			// 버퍼 데이터를 이용해서 썸네일 이지지 생성 ( corbird 라이브러리 사용 )
 			BufferedImage thumbImage = Thumbnails.of(origin)
 				.size(THUMB_WEIGHT, THUMB_HEIGHT)
 				.outputQuality(1.0f)
 				.outputFormat("png")
 				.asBufferedImage();
-
+			// 썸네일 반환
 			return thumbImage;
 		} catch(IOException e) {
 			log.debug(e.getMessage());
@@ -87,27 +89,32 @@ public class FileUtil {
 	}
 
 	public static void saveImg(BufferedImage img, String path, String filename) throws IOException{
-
+		// 저장할 파일 경로 설정
 		File fw = new File(path + File.separator + filename);
-		// 디렉토리 생성
+		// 디렉토리 확인 및 생성
 		String message = makeDir(path);
 		log.debug(message);
-
+		// 버퍼에 이지미를 지정된 확장자 형식에 맞는 이미지로 생성
 		ImageIO.write(img, "png", fw);
 	}
 
 	public static String createPath(String path) {
+		// 날짜를 기준으로 폴더를 생성
 		Date date = new Date();
 		SimpleDateFormat simple = new SimpleDateFormat("yyyyMMdd");
 		String today = simple.format(date);
+		// 밀리초를 사용해서 폴더로 지정
 		String milisecond = String.valueOf(date.getTime());
-		String common = path + File.separator + today + File.separator + milisecond;
-		return common;
+		// 날자와 밀리초를 이용해서 폴더 경로를 추가
+		String root = path + File.separator + today + File.separator + milisecond;
+		return root;
 	}
 
 	private static String makeDir(String folder) {
+		// 폴더를 가져온다.
 		File fileDir = new File(folder);
 		if( !fileDir.isDirectory() ) {
+			// mkdirs()는 폴더가 없으면 생성해준다.!!
 			return fileDir.mkdirs() ? "directory is make" : "directory don't make";
 		}
 		return "it is not Directory";
