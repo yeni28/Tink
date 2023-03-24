@@ -20,7 +20,7 @@ interface ButtonProps {
   bgColor: 'red' | 'black'
   textColor: 'white' | 'black'
   innerValue: string
-  onClick: () => void
+  onClick?: () => void
 }
 
 interface CommunityProps {
