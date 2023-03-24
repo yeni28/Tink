@@ -1,7 +1,7 @@
 import React from 'react'
 
-function YarnSelectRecommend() {
-  return <div>YarnSelectRecommend</div>
+function PatternSelectRecommend() {
+  return <div>PatternSelectRecommend</div>
 }
 
-export default YarnSelectRecommend
+export default PatternSelectRecommend

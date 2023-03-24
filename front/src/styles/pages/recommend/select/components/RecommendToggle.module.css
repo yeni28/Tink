@@ -1,0 +1,7 @@
+.selected {
+  @apply w-[7.31rem] h-[2.94rem] bg-black text-white rounded-[3.13rem]
+}
+
+.unSelected {
+  @apply flex justify-center items-center w-[7.31rem] h-[2.94rem]
+}
