@@ -18,7 +18,7 @@ public class SampleController {
 	@Autowired
 	private FileService fileService;
 
-	@GetMapping("/oauth2/redirect")
+	@GetMapping("/redirect")
 	public String redirect() {
 
 		System.out.println("리다이렉션 통과 중!!");

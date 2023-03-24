@@ -6,22 +6,29 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.jaas.memory.InMemoryConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.ssafy.tink.config.jwt.JwtAccessDeniedHandler;
 import com.ssafy.tink.config.jwt.JwtAuthenticationEntryPoint;
+import com.ssafy.tink.config.jwt.JwtAuthenticationFilter;
+import com.ssafy.tink.config.jwt.JwtTokenProvider;
 import com.ssafy.tink.config.oAuth.CustomAuthorizationRequestRepository;
 import com.ssafy.tink.config.oAuth.CustomOAuth2UserService;
 import com.ssafy.tink.config.oAuth.OAuth2AuthenticationFailureHandler;
 import com.ssafy.tink.config.oAuth.OAuth2AuthenticationSuccessHandler;
 
+import lombok.RequiredArgsConstructor;
+
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
+@RequiredArgsConstructor
+public class SecurityConfig {
 
 	@Autowired
 	private CustomAuthorizationRequestRepository cookieAuthorizationRequestRepository;
@@ -35,6 +42,8 @@ public class SecurityConfig{
 	private JwtAccessDeniedHandler jwtAccessDeniedHandler;
 	@Autowired
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+	@Autowired
+	private JwtTokenProvider jwtTokenProvider;
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -47,8 +56,6 @@ public class SecurityConfig{
 
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
-			.antMatchers("/v2/api-docs/**","/webjars/**","/swagger-ui.html",
-				"/configuration/**","/swagger-resources/**").permitAll()
 			.antMatchers("/oauth2/**").permitAll()
 			.antMatchers("/file/**").hasRole("USER")
 			.anyRequest().authenticated();
@@ -73,9 +80,11 @@ public class SecurityConfig{
 			.failureHandler(authenticationFailureHandler);
 
 		// 예외처리 처리하는 부분
-		// http.exceptionHandling()
-		// 	.accessDeniedHandler(jwtAccessDeniedHandler)
-		// 	.authenticationEntryPoint(jwtAuthenticationEntryPoint);
+		http.exceptionHandling()
+			.accessDeniedHandler(jwtAccessDeniedHandler)
+			.authenticationEntryPoint(jwtAuthenticationEntryPoint);
+
+		http.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
 	}
@@ -94,6 +103,20 @@ public class SecurityConfig{
 			.build();
 
 		return new InMemoryUserDetailsManager(admin, user);
+	}
+
+	@Bean
+	public WebSecurityCustomizer webSecurityCustomizer() {
+		return (web) -> web.ignoring()
+			.antMatchers(
+				"/v2/api-docs",
+				"/swagger-ui.html",
+				"/swagger/**",
+				"/webjars/**",
+				"/swagger-resources/**",
+				"/configuration/ui",
+				"/configuration/security")
+			.antMatchers("favicon.io");
 	}
 
 }
