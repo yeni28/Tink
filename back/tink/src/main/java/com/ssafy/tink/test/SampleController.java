@@ -28,7 +28,7 @@ public class SampleController {
 
 	@PostMapping("/file/upload")
 	public FileSample fileUpload(@RequestPart(name = "file")MultipartFile file) throws Exception{
-		FileSample sample = fileService.upload(file);
+		FileSample sample = fileService.singleFileupload(file);
 		return sample;
 	}
 }
