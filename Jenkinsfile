@@ -3,7 +3,6 @@ pipeline {
     
     environment {
         repository = "goals11/repo"
-        //DOCKERHUB_CREDENTIALS = credentials('docker-key') // jenkins에 등록해 놓은 docker hub credentials 이름
         springImg = ""
         nginxImg = ""
         mysqlImg = ""
