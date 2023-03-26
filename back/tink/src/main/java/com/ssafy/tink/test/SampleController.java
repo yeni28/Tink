@@ -18,7 +18,7 @@ public class SampleController {
 	@Autowired
 	private FileService fileService;
 
-	@GetMapping("/oauth2/redirect")
+	@GetMapping("/redirect")
 	public String redirect() {
 
 		System.out.println("리다이렉션 통과 중!!");
@@ -28,7 +28,7 @@ public class SampleController {
 
 	@PostMapping("/file/upload")
 	public FileSample fileUpload(@RequestPart(name = "file")MultipartFile file) throws Exception{
-		FileSample sample = fileService.upload(file);
+		FileSample sample = fileService.singleFileupload(file);
 		return sample;
 	}
 }
