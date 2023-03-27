@@ -9,7 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import com.ssafy.tink.test.Sample;
+import com.ssafy.tink.db.entity.Member;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -34,19 +34,19 @@ public class OAuth2UserDetail implements UserDetails, OAuth2User {
 		this.authorities 	= 	authorities;
 	}
 
-	public static OAuth2UserDetail create(Sample sample) {
+	public static OAuth2UserDetail create(Member member) {
 		// 소셜로 로그인한 사용자는 기본적으로 USER 권한으로 셋팅함
 		Collection<? extends GrantedAuthority> authorities =
 			Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
 		// 유저의 아이디와 이메일을 저장한다.
 		return new OAuth2UserDetail(
-			sample.getId(),
-			sample.getEmail(),
+			member.getMemberId(),
+			member.getEmail(),
 			authorities
 		);
 	}
-	public static OAuth2UserDetail create(Sample sample, Map<String, Object> attributes) {
-		OAuth2UserDetail userDetails = OAuth2UserDetail.create(sample);
+	public static OAuth2UserDetail create(Member member, Map<String, Object> attributes) {
+		OAuth2UserDetail userDetails = OAuth2UserDetail.create(member);
 		userDetails.setAttirbutes(attributes);
 		return userDetails;
 	}

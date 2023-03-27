@@ -4,23 +4,49 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.TableGenerator;
 
+import com.ssafy.tink.config.msg.AuthProvider;
+import com.ssafy.tink.config.msg.MemberRole;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@TableGenerator(
+	name = "MEMBER_SQL_GENERATOR",
+	table = "MEMBER_SEQ",
+	pkColumnName = "MEMBER_SEQ",
+	initialValue = 1,
+	allocationSize = 1
+)
 public class Member extends BaseEntity {
 
 	@Id
+	@GeneratedValue(
+		strategy = GenerationType.TABLE,
+		generator = "MEMBER_SEQ"
+	)
 	@Column(name = "member_id")
-	private int memberId;
+	private Long memberId;
 
 	private String email;
 
@@ -28,7 +54,11 @@ public class Member extends BaseEntity {
 
 	private String nickname;
 
-	private String role;
+	@Enumerated(EnumType.STRING)
+	private MemberRole role;
+
+	@Enumerated(EnumType.STRING)
+	private AuthProvider authProvider;
 
 	private boolean status;
 
@@ -44,7 +74,7 @@ public class Member extends BaseEntity {
 	@OneToMany(mappedBy = "member")
 	private List<Board> boards = new ArrayList<>();
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "image_id", referencedColumnName = "thumbnail_id")
 	private Thumbnail thumbnail;
 
@@ -56,7 +86,7 @@ public class Member extends BaseEntity {
 		notifications.add(notification);
 	}
 
-	public void setMemberId(int memberId) {
+	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
 	}
 
@@ -72,7 +102,7 @@ public class Member extends BaseEntity {
 		this.nickname = nickname;
 	}
 
-	public void setRole(String role) {
+	public void setRole(MemberRole role) {
 		this.role = role;
 	}
 
