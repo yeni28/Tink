@@ -12,7 +12,7 @@ COPY --from=build-stage /var/jenkins_home/workspace/tink-pipeline/front/build /u
 
 RUN rm /etc/nginx/conf.d/default.conf
 
-COPY --from=build-stage /var/jenkins_home/workspace/tink-pipeline/front/nginx.conf /etc/nginx/conf.d
+COPY --from=build-stage /var/jenkins_home/workspace/tink-pipeline/front/nginx.conf /etc/nginx/conf.d/
 
 # 포트 오픈
 EXPOSE 80
