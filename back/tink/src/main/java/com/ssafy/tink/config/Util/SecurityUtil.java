@@ -1,13 +1,10 @@
 package com.ssafy.tink.config.Util;
 
-import java.security.Principal;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.ssafy.tink.config.jwt.JwtTokenProvider;
 import com.ssafy.tink.config.oAuth.OAuth2UserDetail;
 
 import lombok.extern.slf4j.Slf4j;
