@@ -24,7 +24,10 @@ const Recommend = [
   },
   {
     path: '/recommend/first',
-    children: [{ index: true, element: <FirstRecommend /> }],
+    children: [
+      { index: true, element: <FirstRecommend /> },
+      { path: 'favorite', element: <FirstRecommend /> },
+    ],
   },
 ]
 
