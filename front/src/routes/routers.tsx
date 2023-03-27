@@ -8,7 +8,7 @@ import CampaignMainPage from '@/pages/campaign/CampaignMainPage'
 import CommunityMainPage from '@/pages/community/CommunityMainPage'
 import HomePage from '@/pages/home/HomePage'
 import MyPageMainPage from '@/pages/mypage'
-import TutorialMainPage from '@/pages/tutorial/TutorialMainPage'
+import MainTutorial from '@/pages/tutorial'
 
 const routers = createBrowserRouter([
   {
@@ -25,7 +25,7 @@ const routers = createBrowserRouter([
       },
       {
         path: '/tutorial',
-        element: <TutorialMainPage />,
+        element: <MainTutorial />,
       },
       {
         path: '/campaign',
