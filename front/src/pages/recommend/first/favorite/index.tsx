@@ -12,7 +12,7 @@ function FavoriteFirstRecommend() {
 
       <img
         alt="linebox"
-        className="absolute bottom-6 right-0"
+        className="absolute bottom-7 right-1"
         src={patternLineBox}
         width="103%"
       />
@@ -26,7 +26,7 @@ function FavoriteFirstRecommend() {
           <button
             type="button"
             className={
-              'flex justify-center gap-1 items-center rounded-[3.13rem] text-title3 px-[0.88rem] py-[0.31rem] bg-red text-white'
+              'flex justify-center gap-1 items-center rounded-[3.13rem] text-title3 px-[1.625rem] py-[0.625rem] bg-red text-white'
             }
             onClick={() => console.log('refresh')}
           >
