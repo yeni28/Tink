@@ -26,8 +26,8 @@ function CardSm({ isLiked, title, userImgUrl, userName, src }: CardProps) {
           {showLike ? <HeartFill /> : <Heart />}
         </button>
       </div>
-      <div className="mt-[8px] flex-col gap-[8px]">
-        <div className="truncate text-body ">{title}</div>
+      <div className="mt-[8px] flex-col gap-[12x]">
+        <div className="truncate text-body text-center">{title}</div>
         <div className="flex gap-[6px] justify-center">
           <img
             alt="userImage"
