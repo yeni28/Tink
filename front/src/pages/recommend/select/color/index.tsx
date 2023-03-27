@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import FileBox from '@/assets/drawings/FileLineBox.png'
 import FileCat from '@/assets/drawings/파일냥이.png'
+import atoms from '@/components/atoms'
 
 function ColorSelectRecommend() {
   const [imgPreview, setImgPreview] = useState<any>()
@@ -14,13 +15,12 @@ function ColorSelectRecommend() {
   useEffect(() => {
     if (image && image.length > 0) {
       const file = image[0]
-      console.log(file)
       setImgPreview(URL.createObjectURL(file))
     }
   }, [image])
 
   return (
-    <div className="flex justify-center items-center pt-16">
+    <div className="flex justify-center items-center pt-16 relative">
       <div className="relative flex justify-center">
         <img alt="border" src={FileBox} width="50%" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -31,22 +31,33 @@ function ColorSelectRecommend() {
             type="file"
             onChange={onChangeFile}
           />
-          <label htmlFor="picture">
+          <label className="flex flex-col items-center" htmlFor="picture">
             {(imgPreview && (
               <img
                 alt="preview"
-                className="object-cover object-cover w-full cursor-pointer"
+                className="object-cover w-10/12 cursor-pointer"
                 src={imgPreview}
               />
             )) || (
-              <img
-                alt="preview"
-                className="object-cover cursor-pointer w-[196px] h-[209px]"
-                src={FileCat}
-              />
+              <>
+                <img
+                  alt="preview"
+                  className="object-cover cursor-pointer w-[196px] h-[209px] mb-5"
+                  src={FileCat}
+                />
+                <p className="font-cha text-title2">파일을 올려주라냥</p>
+              </>
             )}
           </label>
         </div>
+      </div>
+      <div className="absolute right-5 bottom-0">
+        <atoms.ButtonDoodle
+          innerValue="다음"
+          onClick={() => {
+            image ? console.log('asdf') : console.log('fdsa')
+          }}
+        />
       </div>
     </div>
   )
