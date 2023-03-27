@@ -39,13 +39,16 @@ public class Pattern extends BaseEntity {
 	@Column(name = "download_url")
 	private String downloadUrl;
 
-	private Float guage;
+	private Float gauge;
 
-	@Column(name = "guage_divisor")
-	private String guageDivisor;
+	@Column(name = "gauge_divisor")
+	private Float gaugeDivisor;
 
-	@Column(name = "guage_pattern")
-	private String guagePattern;
+	@Column(name = "gauge_pattern")
+	private String gaugePattern;
+
+	@Column(name = "row_gauge")
+	private Float rowGauge;
 
 	private int yardage;
 
@@ -102,67 +105,4 @@ public class Pattern extends BaseEntity {
 	@OneToMany(mappedBy = "pattern")
 	private List<Pack> packs = new ArrayList<>();
 
-	public void setPatternId(int patternId) {
-		this.patternId = patternId;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setDifficultySum(int difficultySum) {
-		this.difficultySum = difficultySum;
-	}
-
-	public void setDifficultyCnt(int difficultyCnt) {
-		this.difficultyCnt = difficultyCnt;
-	}
-
-	public void setDownloadUrl(String downloadUrl) {
-		this.downloadUrl = downloadUrl;
-	}
-
-	public void setGuage(Float guage) {
-		this.guage = guage;
-	}
-
-	public void setGuageDivisor(String guageDivisor) {
-		this.guageDivisor = guageDivisor;
-	}
-
-	public void setGuagePattern(String guagePattern) {
-		this.guagePattern = guagePattern;
-	}
-
-	public void setYardage(int yardage) {
-		this.yardage = yardage;
-	}
-
-	public void setYardageMax(int yardageMax) {
-		this.yardageMax = yardageMax;
-	}
-
-	public void setSizesAvailable(String sizesAvailable) {
-		this.sizesAvailable = sizesAvailable;
-	}
-
-	public void setNotesHtml(String notesHtml) {
-		this.notesHtml = notesHtml;
-	}
-
-	public void setYarnWeightDescription(String yarnWeightDescription) {
-		this.yarnWeightDescription = yarnWeightDescription;
-	}
-
-	public void setYardageDescription(String yardageDescription) {
-		this.yardageDescription = yardageDescription;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
 }

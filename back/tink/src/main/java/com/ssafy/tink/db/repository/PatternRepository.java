@@ -1,11 +1,11 @@
 package com.ssafy.tink.db.repository;
 
-import com.ssafy.tink.db.entity.Pattern;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+import com.ssafy.tink.db.entity.Pattern;
 
-public interface PatternRepository {
-    public Pattern searchDetail(int patternId);
+public interface PatternRepository extends JpaRepository<Pattern, Integer> {
+
+	Pattern findByPatternId(int patternId);
 
 }
