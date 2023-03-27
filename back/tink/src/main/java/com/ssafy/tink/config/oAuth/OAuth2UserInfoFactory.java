@@ -2,8 +2,6 @@ package com.ssafy.tink.config.oAuth;
 
 import java.util.Map;
 
-import org.springframework.security.core.Authentication;
-
 import com.ssafy.tink.config.msg.AuthProvider;
 
 public class OAuth2UserInfoFactory {

@@ -1,20 +1,21 @@
-FROM node:latest as builder
-WORKDIR /app
-COPY ./package.json ./
+
+FROM node:16.19.0 as build-stage
+WORKDIR /var/jenkins_home/workspace/tink-pipeline/front/
+COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
 
+#nginx 이미지를 사용합니다. 뒤에 tag가 없으면 latest 를 사용.
+FROM nginx as production-stage
 
-# nginx 이미지를 받는다. 실행 이미지
-FROM nginx:latest
-# nginx의 기본 설정을 삭제하고 앱에서 설정한 파일을 복사
-RUN rm -rf /etc/nginx/conf.d
-COPY conf /etc/nginx
+COPY --from=build-stage /var/jenkins_home/workspace/tink-pipeline/front/build /usr/share/nginx/html
 
-# 위에서 생성한 앱의 빌드산출물을 nginx의 샘플 앱이 사용하던 폴더로 이동
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+RUN rm /etc/nginx/conf.d/default.conf
 
-# 80포트 오픈하고 nginx 실행
+COPY --from=build-stage /var/jenkins_home/workspace/tink-pipeline/front/nginx.conf /etc/nginx/conf.d/
+
+# 포트 오픈
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
+ 
