@@ -1,38 +1,67 @@
 import { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 
-import atoms from '@/components/atoms'
+import style from '@/styles/pages/recommend/select/components/RecommendToggle.module.css'
 
 function RecommendToggle() {
   const [isSelecteds, setIsSelecteds] = useState({
-    isPatternSelected: false,
-    isYarnSelected: false,
-    isColorSelected: false,
+    pattern: false,
+    yarn: false,
+    color: false,
   })
+
+  const toggles = [
+    { key: 'pattern', isSelected: isSelecteds.pattern, name: '패턴 추천' },
+    { key: 'yarn', isSelected: isSelecteds.yarn, name: '실 추천' },
+    { key: 'color', isSelected: isSelecteds.color, name: '색 조합 추천' },
+  ]
+
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.pathname === '/recommend/select/pattern') {
+      setIsSelecteds({
+        pattern: true,
+        yarn: false,
+        color: false,
+      })
+    } else if (location.pathname === '/recommend/select/yarn') {
+      setIsSelecteds({
+        pattern: false,
+        yarn: true,
+        color: false,
+      })
+    } else if (location.pathname === '/recommend/select/color') {
+      setIsSelecteds({
+        pattern: false,
+        yarn: false,
+        color: true,
+      })
+    }
+  }, [location.pathname])
 
   return (
     <div className="flex justify-center gap-44">
-      <div className="cursor-pointer justify-self-start inline-block">
-        <NavLink to="/recommend/select/pattern">
-          {isSelecteds.isPatternSelected ? (
-            <button className="w-[7.31rem] h-[2.94rem]" type="button">
-              패턴 추천
-            </button>
-          ) : (
-            <div className="w-[7.31rem] h-[2.94rem]">패턴 추천</div>
-          )}
-        </NavLink>
-      </div>
-      <div className="cursor-pointer justify-self-start inline-block">
-        <NavLink to="/recommend/select/yarn">
-          <div className="w-[7.31rem] h-[2.94rem]">실 추천</div>
-        </NavLink>
-      </div>
-      <div className="cursor-pointer justify-self-start inline-block">
-        <NavLink to="/recommend/select/color">
-          <div className="w-[7.31rem] h-[2.94rem]">색 조합 추천</div>
-        </NavLink>
-      </div>
+      {toggles.map((toggle, idx) => {
+        return (
+          <div key={`${toggle.key}-${idx}`} className="cursor-pointer">
+            <NavLink to={`/recommend/select/${toggle.key}`}>
+              {toggle.isSelected ? (
+                <button
+                  className="w-[7.31rem] h-[2.94rem] bg-black text-white rounded-[3.13rem]"
+                  type="button"
+                >
+                  {toggle.name}
+                </button>
+              ) : (
+                <div className="flex justify-center items-center w-[7.31rem] h-[2.94rem]">
+                  {toggle.name}
+                </div>
+              )}
+            </NavLink>
+          </div>
+        )
+      })}
     </div>
   )
 }

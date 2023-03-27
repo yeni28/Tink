@@ -15,7 +15,6 @@ const Recommend = [
     path: '/recommend/select',
     element: <SelectRecommend />,
     children: [
-      // { index: true, element: <SelectRecommendPage /> },
       { path: 'pattern', element: <PatternRecommend /> },
       { path: 'color', element: <ColorRecommend /> },
       { path: 'yarn', element: <YarnRecommend /> },
