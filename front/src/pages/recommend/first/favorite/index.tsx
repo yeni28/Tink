@@ -7,18 +7,21 @@ import organisms from '@/components/organisms'
 
 function FavoriteFirstRecommend() {
   return (
-    <div className="relative flex justify-center">
-      {/* 패턴 영역 */}
+    <div className="relative flex justify-center ">
+      {/* line box 이미지 영역 */}
+
       <img
         alt="linebox"
-        className="absolute"
+        className="absolute bottom-6 right-0"
         src={patternLineBox}
-        width="105%"
+        width="103%"
       />
-      <div className="bg-white px-4 pt-7">
+
+      {/* 패턴영역 */}
+      <div className="bg-white px-4 pt-5  mb-16">
         <organisms.Patterns />
         {/* 하단 영역 */}
-        <div className="mt-[4.65rem] flex justify-center pb-12 mb-16">
+        <div className="mt-[4.65rem] flex justify-center pb-12">
           {/* 버튼 */}
           <button
             type="button"
