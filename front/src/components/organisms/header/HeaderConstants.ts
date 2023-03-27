@@ -27,6 +27,7 @@ const HEARDER_SUBTITLE = {
     USER_PATTERN: 'Brad 님이 찾고있던 도안, 여기 있네요!',
     USER_COLOR: 'Brad 님이 찾고있던 색조합, 여기 있네요!',
     FIRST: '마스터 샐리이신가요?',
+    PICK: '다섯 개 이상을 선택해주세요',
   },
   PATTERN: {
     DESIGNER_NAME: 'by Espace Tricot',

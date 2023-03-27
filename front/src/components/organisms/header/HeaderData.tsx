@@ -17,6 +17,11 @@ const HEADER_DATA = [
     subtitle: HEARDER_SUBTITLE.RECOMMEND.FIRST,
   },
   {
+    route: '/recommend/first/favorite',
+    title: HEADER_TITLE.PICK_LIKE_PATTERN,
+    subtitle: HEARDER_SUBTITLE.RECOMMEND.PICK,
+  },
+  {
     route: '/recommend/select/pattern',
     title: HEADER_TITLE.RECOMMEND,
     subtitle: HEARDER_SUBTITLE.RECOMMEND.PATTERN,

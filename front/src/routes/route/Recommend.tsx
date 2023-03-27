@@ -1,6 +1,7 @@
 import React from 'react'
 
 import FirstRecommend from '@/pages/recommend/first'
+import FavoriteFirstRecommend from '@/pages/recommend/first/favorite'
 import MainRecommend from '@/pages/recommend/main'
 import SelectRecommend from '@/pages/recommend/select'
 import ColorRecommend from '@/pages/recommend/select/color'
@@ -25,7 +26,7 @@ const Recommend = [
     path: '/recommend/first',
     children: [
       { index: true, element: <FirstRecommend /> },
-      { path: 'favorite', element: <FirstRecommend /> },
+      { path: 'favorite', element: <FavoriteFirstRecommend /> },
     ],
   },
 ]
