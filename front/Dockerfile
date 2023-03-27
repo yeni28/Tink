@@ -10,6 +10,7 @@ FROM nginx as production-stage
 
 COPY --from=build-stage /var/jenkins_home/workspace/tink-pipeline/front/build /usr/share/nginx/html
 
+#파일 삭제
 RUN rm /etc/nginx/conf.d/default.conf
 
 COPY --from=build-stage /var/jenkins_home/workspace/tink-pipeline/front/nginx.conf /etc/nginx/conf.d/
