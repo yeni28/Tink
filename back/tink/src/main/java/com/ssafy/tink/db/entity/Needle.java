@@ -4,10 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import lombok.Getter;
 
 @Entity
 @Getter
+@DynamicInsert
+@DynamicUpdate
 public class Needle {
 
 	@Id
