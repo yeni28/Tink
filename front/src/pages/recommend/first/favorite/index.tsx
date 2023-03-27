@@ -3,13 +3,20 @@ import React from 'react'
 import { MdOutlineRefresh } from 'react-icons/md'
 
 import patternLineBox from '@/assets/drawings/patternLineBox.png'
+import atoms from '@/components/atoms'
+
 import organisms from '@/components/organisms'
 
 function FavoriteFirstRecommend() {
   return (
     <div className="relative flex justify-center ">
+      <div className="absolute -right-36">
+        <atoms.ButtonDoodle
+          innerValue="다음"
+          onClick={() => console.log('다음으로')}
+        />
+      </div>
       {/* line box 이미지 영역 */}
-
       <img
         alt="linebox"
         className="absolute bottom-7 right-1"
