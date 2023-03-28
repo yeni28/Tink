@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import FileBox from '@/assets/drawings/FileLineBox.png'
 import FileCat from '@/assets/drawings/파일냥이.png'
 import atoms from '@/components/atoms'
 
 function ColorSelectRecommend() {
-  const [imgPreview, setImgPreview] = useState<any>()
   const [image, setImage] = useState<any>()
+  const [imgPreview, setImgPreview] = useState<any>()
+  const navigate = useNavigate()
 
   const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImage(e.target.files)
@@ -45,7 +47,7 @@ function ColorSelectRecommend() {
                   className="object-cover cursor-pointer w-[196px] h-[209px] mb-5"
                   src={FileCat}
                 />
-                <p className="font-cha text-title2">파일을 올려주라냥</p>
+                <p className="font-cha text-title2">사진을 올려주라냥</p>
               </>
             )}
           </label>
@@ -55,7 +57,11 @@ function ColorSelectRecommend() {
         <atoms.ButtonDoodle
           innerValue="다음"
           onClick={() => {
-            image ? console.log('asdf') : console.log('fdsa')
+            image
+              ? navigate('/recommend/select/color/result', {
+                  state: { propImage: image },
+                })
+              : alert('사진을 올려주세요!')
           }}
         />
       </div>
