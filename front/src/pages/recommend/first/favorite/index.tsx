@@ -19,7 +19,7 @@ function FavoriteFirstRecommend() {
       {/* line box 이미지 영역 */}
       <img
         alt="linebox"
-        className="absolute bottom-7 right-1"
+        className="absolute -top-11 right-5"
         src={patternLineBox}
         width="103%"
       />
@@ -28,7 +28,7 @@ function FavoriteFirstRecommend() {
       <div className="bg-white px-4 pt-5  mb-16">
         <organisms.Patterns />
         {/* 하단 영역 */}
-        <div className="mt-[4.65rem] flex justify-center pb-12">
+        <div className="mt-[2rem] flex justify-center pb-12">
           {/* 버튼 */}
           <button
             type="button"

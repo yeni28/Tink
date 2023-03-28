@@ -6,7 +6,7 @@ import molecules from '@/components/molecules'
 
 function Patterns() {
   return (
-    <div className="grid grid-cols-4 gap-x-12 gap-y-10 justify-items-center">
+    <div className="grid grid-cols-4 gap-x-10 gap-y-10 justify-items-center">
       {pattern_dummy.map((item) => {
         return (
           <molecules.CardSm

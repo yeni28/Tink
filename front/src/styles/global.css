@@ -16,7 +16,3 @@
 body {
   @apply bg-beige;
 }
-
-img {
-  max-width: 200%;
-}
