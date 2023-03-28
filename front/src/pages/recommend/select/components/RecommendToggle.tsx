@@ -19,19 +19,19 @@ function RecommendToggle() {
   const location = useLocation()
 
   useEffect(() => {
-    if (location.pathname === '/recommend/select/pattern') {
+    if (location.pathname.includes('/recommend/select/pattern')) {
       setIsSelecteds({
         pattern: true,
         yarn: false,
         color: false,
       })
-    } else if (location.pathname === '/recommend/select/yarn') {
+    } else if (location.pathname.includes('/recommend/select/yarn')) {
       setIsSelecteds({
         pattern: false,
         yarn: true,
         color: false,
       })
-    } else if (location.pathname === '/recommend/select/color') {
+    } else if (location.pathname.includes('/recommend/select/color')) {
       setIsSelecteds({
         pattern: false,
         yarn: false,

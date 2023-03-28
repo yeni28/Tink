@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ssafy.tink.config.Util.FileUtil;
 import com.ssafy.tink.config.ect.BadRequestException;
 
+
 @Service
 public class FileService {
 

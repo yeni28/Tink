@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function ImageLg({ src, alt, mainValue, subValue, onClick }: ImageLg) {
+function ImageLg({ src, alt, mainValue, subValue, onClick, bgColor }: ImageLg) {
   const [isHovering, setIsHovering] = useState(false)
 
   const handleMouseOver = () => {
@@ -13,12 +13,18 @@ function ImageLg({ src, alt, mainValue, subValue, onClick }: ImageLg) {
 
   return (
     <div
-      className="h-[23.44rem] w-[20.88rem] rounded-[1.25rem] overflow-hidden relative bg-white cursor-pointer"
+      className={`${
+        bgColor ? `${bgColor}` : 'bg-white'
+      } h-[23.44rem] w-[20.88rem] rounded-[1.25rem] overflow-hidden relative cursor-pointer`}
       onClick={onClick}
       onMouseOut={handleMouseOut}
       onMouseOver={handleMouseOver}
     >
-      <img alt={alt} src={src} />
+      <img
+        alt={alt}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        src={src}
+      />
       {isHovering && (
         <div>
           <div className="w-96 h-96 bg-white opacity-70 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />

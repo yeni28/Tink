@@ -11,9 +11,11 @@ interface ImageProps {
 }
 
 interface ImageLg extends ImageProps {
+  src: string
   mainValue?: string
   subValue?: string
   onClick: () => void
+  bgColor?: string
 }
 
 interface ButtonProps {
