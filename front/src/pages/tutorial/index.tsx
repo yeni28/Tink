@@ -1,7 +1,13 @@
 import React from 'react'
 
-function Main() {
-  return <div>Main</div>
+import ThumbnailCards from './components/ThumbnailCards'
+
+function Tutorial() {
+  return (
+    <div>
+      <ThumbnailCards />
+    </div>
+  )
 }
 
-export default Main
+export default Tutorial
