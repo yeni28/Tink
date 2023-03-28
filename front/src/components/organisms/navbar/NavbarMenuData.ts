@@ -9,7 +9,7 @@ export const MenuData = [
   },
   {
     title: 'Community',
-    url: '/community/review',
+    url: '/community/review/list',
   },
   {
     title: 'Campaign',
