@@ -41,7 +41,7 @@ function RecommendToggle() {
   }, [location.pathname])
 
   return (
-    <div className="flex justify-center gap-44">
+    <div className="flex r gap-44">
       {toggles.map((toggle, idx) => {
         return (
           <div key={`${toggle.key}-${idx}`} className="cursor-pointer">
@@ -54,7 +54,7 @@ function RecommendToggle() {
                   {toggle.name}
                 </button>
               ) : (
-                <div className="flex justify-center items-center w-[7.31rem] h-[2.94rem]">
+                <div className="flex items-center w-[7.31rem] h-[2.94rem]">
                   {toggle.name}
                 </div>
               )}
