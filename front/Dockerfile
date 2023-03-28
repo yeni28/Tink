@@ -5,7 +5,8 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-#nginx 이미지를 사용합니다. 뒤에 tag가 없으면 latest 를 사용.
+
+#nginx 이미지를 사용합니다.
 FROM nginx:stable-alpine as production-stage
 
 COPY --from=build-stage /var/jenkins_home/workspace/tink-pipeline/front/dist /usr/share/nginx/html
