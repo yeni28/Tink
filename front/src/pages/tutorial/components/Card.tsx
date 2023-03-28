@@ -8,8 +8,6 @@ interface cardProps {
 }
 
 function Card({ title, thumbnail, video, onClick }: cardProps) {
-  const [isHovering, setIsHovering] = useState(false)
-
   const handleMouseOver = (e: React.MouseEvent<HTMLVideoElement>) => {
     e.currentTarget.play()
   }

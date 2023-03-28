@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Card from './Card'
 
@@ -8,21 +8,25 @@ const moveToCaston = () => {
   console.log('hello')
 }
 
-function ThumbnailCards() {
+function ThumbnailCards(setExplain: any) {
+  const [isHovering, setIsHovering] = useState(false)
+
   return (
-    <div className="flex justify-between mt-20">
+    <div className="flex justify-between ">
       <Card
         thumbnail={THUMBNAIL_URL.caston}
         title={'코잡기'}
         video={VIDEO_URL.caston_video}
         onClick={moveToCaston}
       />
+
       <Card
         thumbnail={THUMBNAIL_URL.knit}
         title={'겉뜨기'}
         video={VIDEO_URL.knit_video}
         onClick={moveToCaston}
       />
+
       <Card
         thumbnail={THUMBNAIL_URL.purl}
         title={'안뜨기'}
