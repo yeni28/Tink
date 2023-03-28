@@ -10,7 +10,7 @@ const moveToCaston = () => {
 
 function ThumbnailCards() {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between mt-20">
       <Card
         thumbnail={THUMBNAIL_URL.caston}
         title={'코잡기'}
