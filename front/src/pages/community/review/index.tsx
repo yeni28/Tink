@@ -1,7 +1,11 @@
 import React from 'react'
-
+import { Outlet } from 'react-router-dom'
 function ReviewCommunity() {
-  return <div>ReviewCommunity</div>
+  return (
+    <div>
+      <Outlet />
+    </div>
+  )
 }
 
 export default ReviewCommunity
