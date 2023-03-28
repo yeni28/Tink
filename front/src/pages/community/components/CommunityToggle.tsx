@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 import { NavLink, useLocation } from 'react-router-dom'
 
+import DrawingLine from '@/assets/drawings/drawingline.png'
+
 function CommunityToggle() {
   const [isSelecteds, setIsSelecteds] = useState({
     review: false,
@@ -40,27 +42,32 @@ function CommunityToggle() {
   }, [location.pathname])
 
   return (
-    <div className="flex gap-44">
-      {toggles.map((toggle, idx) => {
-        return (
-          <div key={`${toggle.key}-${idx}`} className="cursor-pointer">
-            <NavLink to={`/community/${toggle.key}/list`}>
-              {toggle.isSelected ? (
-                <button
-                  className="w-[7.31rem] h-[2.94rem]  text-red"
-                  type="button"
-                >
-                  {toggle.name}
-                </button>
-              ) : (
-                <div className="flex items-center w-[7.31rem] h-[2.94rem]">
-                  {toggle.name}
-                </div>
-              )}
-            </NavLink>
-          </div>
-        )
-      })}
+    <div>
+      <div className="flex">
+        {toggles.map((toggle, idx) => {
+          return (
+            <div key={`${toggle.key}-${idx}`} className="cursor-pointer">
+              <NavLink to={`/community/${toggle.key}/list`}>
+                {toggle.isSelected ? (
+                  <button
+                    className=" mr-10 text-title3-bold text-red"
+                    type="button"
+                  >
+                    {toggle.name}
+                  </button>
+                ) : (
+                  <div className="mr-10   text-title3-bold items-center ">
+                    {toggle.name}
+                  </div>
+                )}
+              </NavLink>
+            </div>
+          )
+        })}
+      </div>
+      <div>
+        <img alt="line" src={DrawingLine} />
+      </div>
     </div>
   )
 }
