@@ -56,6 +56,7 @@ public class SecurityConfig {
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/oauth2/**").permitAll()
+			.antMatchers("/member/**").hasRole("USER")
 			.antMatchers("/file/**").hasRole("USER")
 			.anyRequest().authenticated();
 
