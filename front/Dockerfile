@@ -9,6 +9,7 @@ RUN npm run build
 #nginx 이미지를 사용합니다.
 FROM nginx:stable-alpine as production-stage
 
+#빌드했던 파일들을 nginx의 서비스 폴더로 복사함
 COPY --from=build-stage /var/jenkins_home/workspace/tink-pipeline/front/dist /usr/share/nginx/html
 
 #파일 삭제
