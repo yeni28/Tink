@@ -32,7 +32,7 @@ const HEADER_DATA = [
     subtitle: HEARDER_SUBTITLE.RECOMMEND.USER_PATTERN,
   },
   {
-    route: '/recommend/color/result',
+    route: '/recommend/select/color/result',
     title: HEADER_TITLE.RECOMMEND,
     subtitle: HEARDER_SUBTITLE.RECOMMEND.USER_COLOR,
   },
