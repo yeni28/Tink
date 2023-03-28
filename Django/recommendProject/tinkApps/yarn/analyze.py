@@ -39,8 +39,8 @@ def getColumn(patternList):
     splitYarnDescrption = []
    
     for d in patternList:
+        #yarn_weight_description을 숫자 단위로 치환
         wpi = ''
-        yarn_description = ''
         splitYarnDescrption = d[6]
 
         # 너무 작은 실들은 wpi를 0으로 사용함
@@ -53,33 +53,28 @@ def getColumn(patternList):
                 if char.isdigit():
                     checkNum = True
                     wpi = wpi + char
-                
+            
             if checkNum == False:
-                print(splitYarnDescrption)
-                if(splitYarnDescrption.find('Fingering')):
+                if 'Fingering' in splitYarnDescrption:
                     wpi = '14'
-                elif(splitYarnDescrption.find('Sport')):
+                elif 'Sport' in splitYarnDescrption:
                     wpi = '12'
-                elif(splitYarnDescrption.find('DK')):
+                elif 'DK' in splitYarnDescrption:
                     wpi = '11'
-                elif(splitYarnDescrption.find('Worsted')):
+                elif 'Worsted' in splitYarnDescrption:
                     wpi = '9'
-                elif(splitYarnDescrption.find('Aran')):
+                elif 'Aran' in splitYarnDescrption:
                     wpi = '8'
-                elif(splitYarnDescrption.find('Bulky')):
+                elif 'Bulky' in splitYarnDescrption:
                     wpi = '7'
-                elif(splitYarnDescrption.find('Super Bulky')):
+                elif 'Super Bulky' in splitYarnDescrption:
                     wpi = '5'
-                elif(splitYarnDescrption.find('Jumbo')):
+                elif 'Jumbo'  in splitYarnDescrption:
                     wpi = '2'
 
-        print(splitYarnDescrption)
-        print(wpi)
+        
             
-            # 만약 숫자가 없는 경우 단위 이름 추출해서 숫자로 치환
-            
-            #wpi = splitYarnDescrption.split(splitYarnDescrption.find("(")+1:splitYarnDescrption.find(")"))
-            
+        wpi = int(wpi)
 
         patternData.append(
              [
@@ -88,7 +83,6 @@ def getColumn(patternList):
                 d[3],
                 d[4],
                 d[5],
-                yarn_description,
                 wpi
              ]
         )  
@@ -97,12 +91,12 @@ def getColumn(patternList):
     return patternData   
 
 def recommend(patterns, row):
-    item_df = pd.DataFrame(patterns, index=row, columns=["gauge", "gauge_divisor", "row_gauge", "yardage", "yardage_max" ,"yarn_weight_description", "wpi"])
+    item_df = pd.DataFrame(patterns, index=row, columns=["gauge", "gauge_divisor", "row_gauge", "yardage", "yardage_max" , "wpi"])
     item_df = item_df.fillna(0) # 결측치 0으로 세팅
     
     # 사용자 데이터(임시로 지정함)
     usr_item = pd.DataFrame({
-         "gauge":[22], "gauge_divisor":[3], "row_gauge":[24], "yardage":[1000], "yardage_max":[1400], "yarn_weight_description":["Fingering"], "wpi":[14]
+         "gauge":[22], "gauge_divisor":[3], "row_gauge":[24], "yardage":[1000], "yardage_max":[1400], "wpi":[7]
     })
 
     cosine_similarities = cosine_similarity(item_df, usr_item)
@@ -114,9 +108,10 @@ def recommend(patterns, row):
     # 결과 출력
     print(result)
 
-    # 각 데이터 확인
-    # for index, row in result.iterrows():
-    #     print("Data with index {}: {}".format(index, row['data']))
+    recommendPatternId = []
+    # 유사도의 도안 id를 저장
+    for index, row in result.iterrows():
+        recommendPatternId.append([row['data']])
 
     # # 각 행 벡터와 사용자 입력 벡터 간의 코사인 유사도 계산
     # cosine_similarities = np.dot(item_df.to_numpy(), usr_item.to_numpy().T) / (np.linalg.norm(item_df, axis=1) * np.linalg.norm(usr_item))
