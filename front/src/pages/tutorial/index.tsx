@@ -9,12 +9,10 @@ import bubble2 from '@/assets/drawings/bubble 2.png'
 import mufflerCat from '@/assets/drawings/빨간목도리뜨개냥이.png'
 
 function Tutorial() {
-  const [explain, setExplain] = useState()
-
   return (
     <div>
       <div className="mt-20">
-        <ThumbnailCards setExplain={setExplain} />
+        <ThumbnailCards />
       </div>
 
       <div className="flex relative mt-8">
@@ -34,7 +32,7 @@ function Tutorial() {
       </div>
 
       {/* 설명문 */}
-      <div>
+      {/* <div>
         {explain === 'caston' ? (
           <CastonExplain />
         ) : explain === 'knit' ? (
@@ -44,7 +42,7 @@ function Tutorial() {
         ) : (
           ''
         )}
-      </div>
+      </div> */}
     </div>
   )
 }
