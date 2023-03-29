@@ -71,7 +71,7 @@ public class Board extends BaseEntity {
 	private Material material;
 
 	@ManyToOne
-	@JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id", nullable = false)
+	@JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id")
 	private Pattern pattern;
 
 	/*
