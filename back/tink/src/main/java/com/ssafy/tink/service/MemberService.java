@@ -1,5 +1,6 @@
 package com.ssafy.tink.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.querydsl.core.Tuple;
 import com.ssafy.tink.config.Util.SecurityUtil;
 import com.ssafy.tink.config.ect.BadRequestException;
 import com.ssafy.tink.db.entity.Follow;
@@ -15,6 +17,7 @@ import com.ssafy.tink.db.entity.Member;
 import com.ssafy.tink.db.repository.MemberRepository;
 import com.ssafy.tink.dto.BaseResponse;
 import com.ssafy.tink.dto.MemberInfoDto;
+import com.ssafy.tink.dto.dsl.MemberInfoDsl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -68,4 +71,10 @@ public class MemberService {
 
 		return Optional.ofNullable(memberInfo);
 	}
+
+	@Transactional
+	public Optional<List<Member>> getMemberInfoByQueryDsl() {
+		return Optional.ofNullable(memberRepository.findMember());
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.ssafy.tink.controller;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -34,8 +35,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
 
-	@GetMapping("/mypage")
+	@GetMapping("/mypage/info")
 	@ApiOperation(value = "마이페이지(자신) 프로필 정보 조회하는 API")
 	public BaseResponse<Object> getProfileByMember() {
 		log.info("마이페이지 조회 시작하기");
@@ -56,7 +58,7 @@ public class MemberController {
 			.build();
 	}
 
-	@GetMapping("/mypage/all")
+	@GetMapping("/mypage")
 	@ApiOperation(value = "마이페이지(자신) 도안,소모임,자랑글,질문글 조회하는 API")
 	public BaseResponse<Object> getBoardAndPatternByMember() {
 
@@ -119,5 +121,15 @@ public class MemberController {
 		return null;
 	}
 
+	@GetMapping("/Test")
+	public BaseResponse<Object> TestQueryDslMebmer() {
+		log.debug("QueryDsl Test 시작합니다.");
+		Optional<List<Member>> result = memberService.getMemberInfoByQueryDsl();
+		return BaseResponse.builder()
+			.result(result)
+			.resultCode(HttpStatus.OK.value())
+			.resultMsg("QueryDsl 연결 성공")
+			.build();
+	}
 }
 
