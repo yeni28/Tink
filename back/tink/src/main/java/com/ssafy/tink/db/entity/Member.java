@@ -18,6 +18,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.TableGenerator;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
 import com.ssafy.tink.config.msg.AuthProvider;
 import com.ssafy.tink.config.msg.MemberRole;
 
@@ -38,6 +41,7 @@ import lombok.NoArgsConstructor;
 	initialValue = 1,
 	allocationSize = 1
 )
+@DynamicInsert
 public class Member extends BaseEntity {
 
 	@Id
@@ -48,18 +52,24 @@ public class Member extends BaseEntity {
 	@Column(name = "member_id")
 	private Long memberId;
 
+	@Column(length = 100)
 	private String email;
 
 	private Date birth;
 
+	@Column(length = 50)
 	private String nickname;
 
 	@Enumerated(EnumType.STRING)
+	@Column(length = 10)
 	private MemberRole role;
 
 	@Enumerated(EnumType.STRING)
+	@Column(length = 20)
 	private AuthProvider authProvider;
 
+	@Column(columnDefinition = "TINYINT", length = 2)
+	@ColumnDefault("1")
 	private boolean status;
 
 	@OneToMany(mappedBy = "member")
@@ -75,7 +85,7 @@ public class Member extends BaseEntity {
 	private List<Board> boards = new ArrayList<>();
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "image_id", referencedColumnName = "thumbnail_id")
+	@JoinColumn(name = "image_id", referencedColumnName = "thumbnail_id", nullable = false)
 	private Thumbnail thumbnail;
 
 	/*

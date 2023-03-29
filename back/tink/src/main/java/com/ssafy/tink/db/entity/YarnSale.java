@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 
 @Entity
@@ -22,16 +23,22 @@ public class YarnSale {
 
 	private int price;
 
+	@NotNull
+	@Column(length = 45)
 	private String gram;
 
 	private String len;
 
+	@Column(length = 100)
 	private String needle;
 
+	@Column(length = 45)
 	private String ingredient;
 
+	@Column(length = 45)
 	private String origin;
 
+	@Column(length = 45)
 	private String company;
 
 }
