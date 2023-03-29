@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run dev -- --open",
     "dev": "vite --host --port=3000",
-    "build": "GENERATE_SOURCEMAP=false tsc && vite build",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint src --ext .tsx,.ts,.jsx,.js",
     "lint:fix": "npm run lint -- --fix",
