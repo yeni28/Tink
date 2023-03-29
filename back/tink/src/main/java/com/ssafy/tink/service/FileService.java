@@ -10,13 +10,14 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
+import com.ssafy.tink.db.entity.Thumbnail;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.tink.config.Util.FileUtil;
 import com.ssafy.tink.config.ect.BadRequestException;
-import com.ssafy.tink.db.entity.Thumbnail;
+
 
 @Service
 public class FileService {
