@@ -1,12 +1,16 @@
 import React from 'react'
 
+import { useNavigate } from 'react-router-dom'
+
 import molecules from '@/components/molecules'
 
-interface Props extends CardMdProps {
+interface Props extends Omit<CardMdProps, 'onClick'> {
   id: number
 }
 
-function reviewGrid({ items }: { items: Props[] }) {
+function ReviewGrid({ items }: { items: Props[] }) {
+  const navigate = useNavigate()
+
   return (
     <div className="grid grid-cols-3 gap-x-8 gap-y-10 justify-items-center">
       {items.map((item) => {
@@ -19,7 +23,7 @@ function reviewGrid({ items }: { items: Props[] }) {
             title={item.title}
             titleImgUrl={item.titleImgUrl}
             views={item.views}
-            onClick={item.onClick}
+            onClick={() => navigate(`/community/review/detail/${item.id}`)}
           />
         )
       })}
@@ -27,4 +31,4 @@ function reviewGrid({ items }: { items: Props[] }) {
   )
 }
 
-export default reviewGrid
+export default ReviewGrid
