@@ -1,18 +1,23 @@
 import React from 'react'
 
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 import { HEADER_DATA } from '@/components/organisms/header/HeaderData'
 
 export default function Header() {
   const location = useLocation()
   const navigate = useNavigate()
+  const params = useParams()
 
   const setPageTitle = () => {
     let pageTitle
     let pageSubtitle
+
     HEADER_DATA.forEach((el) => {
-      if (el.route === location.pathname) {
+      if (
+        location.pathname === `${el.route}${params.id}` ||
+        location.pathname === el.route
+      ) {
         pageTitle = el.title
         pageSubtitle = el.subtitle
       }
@@ -21,9 +26,17 @@ export default function Header() {
   }
 
   const showHeader = () => {
-    let result = true
-    if (location.pathname === '/' || location.pathname === '/tutorial')
-      result = false
+    let result = false
+
+    for (const data of HEADER_DATA) {
+      if (
+        location.pathname === `${data.route}${params.id}` ||
+        location.pathname === data.route
+      ) {
+        result = true
+        break
+      }
+    }
     return result
   }
 
