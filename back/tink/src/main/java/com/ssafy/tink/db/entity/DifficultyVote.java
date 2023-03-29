@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 
 @Entity
@@ -26,6 +27,7 @@ public class DifficultyVote {
 	@JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id")
 	private Pattern pattern;
 
+	@NotNull
 	private int score;
 
 }

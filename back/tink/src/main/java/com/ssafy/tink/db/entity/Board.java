@@ -13,8 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.sun.istack.NotNull;
 
 import lombok.Getter;
 
@@ -26,32 +29,39 @@ public class Board extends BaseEntity {
 
 	@Id
 	@Column(name = "board_id")
+	@NotNull
 	private int boardId;
 
+	@NotNull
+	@Column(length = 50)
 	private String title;
 
+	@NotNull
+	@Column(length = 10000)
 	private String content;
 
+	@ColumnDefault("0")
 	private int liked;
 
+	@ColumnDefault("0")
 	private int hit;
 
 	@OneToMany(mappedBy = "board")
 	private List<Comment> comments = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id")
+	@JoinColumn(name = "member_id", nullable = false)
 	private Member member;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "board_category_id")
+	@JoinColumn(name = "board_category_id", nullable = false)
 	private BoardCategory boardCategory;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinTable(
 		name = "jarang_img",
-		joinColumns = @JoinColumn(name = "board_id", referencedColumnName = "board_id"),
-		inverseJoinColumns = @JoinColumn(name = "thumbnail_id", referencedColumnName = "thumbnail_id")
+		joinColumns = @JoinColumn(name = "board_id", referencedColumnName = "board_id", nullable = false),
+		inverseJoinColumns = @JoinColumn(name = "thumbnail_id", referencedColumnName = "thumbnail_id", nullable = false)
 	)
 	private Thumbnail thumbnail;
 

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 
 @Entity
@@ -17,5 +18,6 @@ public class ContentImage {
 	private int contentImageId;
 
 	@Column(name = "image_path")
+	@NotNull
 	private String imagePath;
 }
