@@ -20,7 +20,7 @@ spring:
         password: ssafytink
 
 server:
-    port: 8080
+    port: 8080 # 서비스 포트
     servlet:
         context-path: /tink
 app:
@@ -28,7 +28,7 @@ app:
         oauth2:
             authorizedRedirectUri: http://j8c201.p.ssafy.io:9999/oauth2/redirect
     upload:
-        folder: /home/ubuntu/upload
+        folder: /home/ubuntu/upload # 리눅스 경로
 
 logging:
     level:
