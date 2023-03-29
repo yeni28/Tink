@@ -1,9 +1,14 @@
 package com.ssafy.tink.db.dsl;
 
-import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
+import java.util.List;
 
-import com.ssafy.tink.db.entity.Board;
+import com.querydsl.core.Tuple;
+import com.ssafy.tink.db.entity.Member;
+import com.ssafy.tink.dto.dsl.BoardAndPatternDsl;
+import com.ssafy.tink.dto.dsl.MemberInfoDsl;
 
 public interface MemberQueryDslRepository {
 
+	List<BoardAndPatternDsl> findBoardAndPatternList(long memberId);
+	List<MemberInfoDsl> findMember();
 }

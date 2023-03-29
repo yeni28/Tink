@@ -15,7 +15,7 @@ public class QueryDslConfig {
 	private EntityManager entityManager;
 
 	@Bean
-	public JPAQueryFactory jpaQueryFactory() {
+	public JPAQueryFactory JPAQuery() {
 		return new JPAQueryFactory(entityManager);
 	}
 
