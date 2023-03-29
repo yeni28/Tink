@@ -26,7 +26,7 @@ server:
 app:
     auth:
         oauth2:
-            authorizedRedirectUri: http://j8c201.p.ssafy.io:9999/oauth2/redirect
+            authorizedRedirectUri: http://j8c201.p.ssafy.io/login
     upload:
         folder: /home/ubuntu/upload # 리눅스 경로
 

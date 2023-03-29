@@ -18,20 +18,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-// @TableGenerator(
-// 	name = "THUMBNAIL_SQL_GENERATOR",
-// 	table = "THUMBNAIL_SEQ",
-// 	pkColumnName = "THUMBNAIL_SEQ",
-// 	initialValue = 1,
-// 	allocationSize = 1
-// )
 public class Thumbnail {
 
 	@Id
-	// @GeneratedValue(
-	// 	strategy = GenerationType.TABLE,
-	// 	generator = "THUMBNAIL_SEQ"
-	// )
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "thumbnail_id")
 	private int thumbnailId;
