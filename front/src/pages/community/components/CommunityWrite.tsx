@@ -2,31 +2,20 @@ import React, { useMemo, useState } from 'react'
 import ReactQuill from 'react-quill'
 
 import 'react-quill/dist/quill.snow.css'
-import '@/styles/quill.css'
 import StraitLine from '@/assets/drawings/straitline.png'
 function CommunityWrite() {
-  const [commentCount, setCommentCount] = useState<string>('')
+  const [textCount, settextCount] = useState<string>('')
+
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value.trim()
 
-    setCommentCount(event.target.value)
+    settextCount(event.target.value)
   }
 
   const modules = useMemo(
     () => ({
       toolbar: {
-        container: [
-          ['bold'],
-          [{ header: [1, 2, 3, 4, false] }],
-          [
-            { list: 'ordered' },
-            { list: 'bullet' },
-            { indent: '-1' },
-            { indent: '+1' },
-            { align: [] },
-          ],
-          ['image'],
-        ],
+        container: [['bold'], ['image']],
         handlers: {
           // image: imageHandler,
         },
@@ -46,7 +35,7 @@ function CommunityWrite() {
           onChange={onChange}
         />
         <span className="text-body-bold text-stone-300">
-          {commentCount.replace(/<br\s*\/?>/gm, '\n').length} / 25
+          {textCount.replace(/<br\s*\/?>/gm, '\n').length} / 25
         </span>
       </div>
       <img alt="line" className="mb-2" src={StraitLine} />

@@ -17,11 +17,20 @@ body {
   @apply bg-beige;
 }
 
-.app .ql-container {
+.ql-container {
   box-sizing: border-box;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 40px;
-  height: 100%;
+  border: none !important;
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-size: 1.1rem;
+  height: 45rem;
   margin: 0px;
   position: relative;
+}
+
+.ql-toolbar {
+  border-bottom: none;
+  border: none !important;
 }
