@@ -20,7 +20,7 @@ spring:
         password: ssafytink
 
 server:
-    port: 8082
+    port: 8080
     servlet:
         context-path: /tink
 app:
