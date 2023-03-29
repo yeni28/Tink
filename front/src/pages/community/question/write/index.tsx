@@ -3,7 +3,7 @@ import React from 'react'
 import Write from '../../components/CommunityWrite'
 
 import DrawingLine from '@/assets/drawings/drawingline.png'
-import InputBox from '@/assets/drawings/inputlineBox.png'
+import InputBox from '@/assets/drawings/inputlinebox.png'
 import StraitLine from '@/assets/drawings/straitline.png'
 import atoms from '@/components/atoms'
 
