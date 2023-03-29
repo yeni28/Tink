@@ -3,12 +3,14 @@ package com.ssafy.tink.db.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
-import com.sun.istack.NotNull;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import lombok.Getter;
 
 @Entity
 @Getter
+@DynamicInsert
+@DynamicUpdate
 public class Needle {
 
 	@Id

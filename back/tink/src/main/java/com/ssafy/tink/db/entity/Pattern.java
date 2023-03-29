@@ -52,7 +52,8 @@ public class Pattern extends BaseEntity {
 	private Float gauge;
 
 	@Column(name = "gauge_divisor")
-	private String gaugeDivisor;
+	private Float gaugeDivisor;
+
 
 	@Column(name = "gauge_pattern")
 	private String gaugePattern;
