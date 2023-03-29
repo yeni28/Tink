@@ -73,15 +73,18 @@ public class Member extends BaseEntity {
 	private boolean status;
 
 	@OneToMany(mappedBy = "member")
+	@Builder.Default
 	private List<Follow> follows = new ArrayList<>();
 
 	@OneToMany(mappedBy = "member")
+	@Builder.Default
 	private List<Notification> notifications = new ArrayList<>();
 
 	@OneToMany(mappedBy = "member")
 	private List<Pattern> patterns;
 
 	@OneToMany(mappedBy = "member")
+	@Builder.Default
 	private List<Board> boards = new ArrayList<>();
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
