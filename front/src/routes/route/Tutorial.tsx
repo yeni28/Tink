@@ -8,7 +8,6 @@ import PurlTutorial from '@/pages/tutorial/purl'
 const Tutorial = [
   {
     path: '/tutorial',
-    // element: <MainTutorial />,
     children: [
       { index: true, element: <MainTutorial /> },
       { path: 'caston', element: <CastonTutorial /> },

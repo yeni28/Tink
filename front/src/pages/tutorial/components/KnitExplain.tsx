@@ -15,7 +15,7 @@ function KnitExplain() {
         일반적인 기호에서는{' '}
         <span className="text-pop text-title2-bold text-red">‘ㅣ’</span>와 같이{' '}
         <span className="text-pop text-title2-bold text-red">
-          세로선으로 나타나거나 빈칸으로 표현한다냥
+          세로선으로 나타나거나 빈칸으로 표현한다
         </span>
         냥!
       </p>

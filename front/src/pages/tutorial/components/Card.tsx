@@ -1,19 +1,30 @@
 import React, { useState } from 'react'
 
 interface cardProps {
+  category: string
   title: string
   thumbnail: string
   video: string
   onClick: () => void
+  getExplain: (category: string) => void
 }
 
-function Card({ title, thumbnail, video, onClick }: cardProps) {
+function Card({
+  category,
+  title,
+  thumbnail,
+  video,
+  onClick,
+  getExplain,
+}: cardProps) {
   const handleMouseOver = (e: React.MouseEvent<HTMLVideoElement>) => {
     e.currentTarget.play()
+    getExplain(category)
   }
 
   const handleMouseOut = (e: React.MouseEvent<HTMLVideoElement>) => {
     e.currentTarget.pause()
+    getExplain('')
   }
   return (
     <div
