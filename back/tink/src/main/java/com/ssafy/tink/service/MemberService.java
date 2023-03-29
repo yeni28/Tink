@@ -42,7 +42,13 @@ public class MemberService {
 
 	@Transactional
 	public Optional<MemberInfoDto> getProfileByAuthentication() {
-		return createInfoByMember(getMemberIdByAuthorization());
+		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
+		Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
+		log.debug("회원 프로필 정보 조회결과 : " + member.toString());
+		if( !member.isPresent() ) {
+			return Optional.empty();
+		}
+		return createInfoByMember(member.get());
 	}
 
 	private Optional<MemberInfoDto> createInfoByMember(Member member) {

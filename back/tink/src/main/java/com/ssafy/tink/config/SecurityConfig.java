@@ -47,7 +47,6 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
-
 		http.csrf().disable()			// csrf 해제
 			.formLogin().disable()		// form으로 로그인하는 방식 해제
 			.httpBasic().disable()		//

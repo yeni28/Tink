@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.tink.db.dsl.MemberQueryDslRepository;
@@ -22,8 +23,7 @@ import com.ssafy.tink.dto.MemberInfoDto;
 import com.ssafy.tink.dto.PatternLikeDto;
 import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
 import com.ssafy.tink.service.MemberServiceImpl;
-import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
-import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
+
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/members")
 @RequiredArgsConstructor
 public class MemberController {
-	private final MemberQueryDslRepository memberRepository;
+
 	@Autowired
 	private MemberServiceImpl memberService;
 	
