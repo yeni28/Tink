@@ -18,7 +18,7 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberQue
 	@EntityGraph(attributePaths = {"follows","thumbnail"})
 	Optional<Member> findById(Long memberId);
 
-	@EntityGraph(attributePaths = {"boards","patterns"})
-	Optional<Member> findTop5ById(Long memberId);
+	// @EntityGraph(attributePaths = {"boards","patterns"})
+	// Optional<Member> findTop5ById(Long memberId);
 
 }
