@@ -1,4 +1,7 @@
-package com.ssafy.tink.dto.dsl;
+package com.ssafy.tink.dto.dsl.members;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.querydsl.core.annotations.QueryProjection;
 
@@ -16,9 +19,18 @@ import lombok.Setter;
 public class PatternInfoDsl {
 
 	private int patternId;
+	private String name;
+	@Builder.Default
+	private List<PatternThumbInfoDsl> patternThumbnails = new ArrayList<>();
 
 	@QueryProjection
-	public PatternInfoDsl(int patternId) {
+	public PatternInfoDsl(
+		int patternId,
+		String name,
+		List<PatternThumbInfoDsl> patternThumbnails
+		) {
 		this.patternId = patternId;
+		this.name = name;
+		this.patternThumbnails = patternThumbnails;
 	}
 }

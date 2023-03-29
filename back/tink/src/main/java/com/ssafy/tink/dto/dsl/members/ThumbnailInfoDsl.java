@@ -1,6 +1,7 @@
-package com.ssafy.tink.dto.dsl;
+package com.ssafy.tink.dto.dsl.members;
 
 import com.querydsl.core.annotations.QueryProjection;
+import com.querydsl.core.types.dsl.NumberPath;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -16,9 +17,13 @@ import lombok.Setter;
 public class ThumbnailInfoDsl {
 
 	private int thumbnailId;
+	private String mainImg;
+	private String thumbImg;
 
 	@QueryProjection
-	public ThumbnailInfoDsl(Number thumbnailId) {
+	public ThumbnailInfoDsl(int thumbnailId, String mainImg, String thumbImg) {
 		this.thumbnailId = thumbnailId;
+		this.mainImg = mainImg;
+		this.thumbImg = thumbImg;
 	}
 }

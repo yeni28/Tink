@@ -43,9 +43,7 @@ public class Board extends BaseEntity {
 	@JoinColumn(name = "member_id")
 	private Member member;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "board_category_id")
-	private BoardCategory boardCategory;
+	private String boardCategory;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinTable(

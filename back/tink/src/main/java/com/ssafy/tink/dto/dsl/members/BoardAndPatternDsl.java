@@ -1,30 +1,34 @@
-package com.ssafy.tink.dto.dsl;
+package com.ssafy.tink.dto.dsl.members;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.querydsl.core.annotations.QueryProjection;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED) @Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class BoardAndPatternDsl {
 
 	private long memberId;
 	@Builder.Default
-	private List<BoardInfoDsl> board = new ArrayList<>();
+	private Set<BoardInfoDsl> board = new HashSet<>();
 	@Builder.Default
-	private List<PatternInfoDsl> pattern = new ArrayList<>();
+	private Set<PatternInfoDsl> pattern = new HashSet<>();
 
 	@QueryProjection
-	public BoardAndPatternDsl(long memberId, List<BoardInfoDsl> board, List<PatternInfoDsl> pattern) {
+	public BoardAndPatternDsl(
+		long memberId,
+		Set<BoardInfoDsl> board,
+		Set<PatternInfoDsl> pattern) {
 		this.memberId = memberId;
 		this.board = board;
 		this.pattern = pattern;
