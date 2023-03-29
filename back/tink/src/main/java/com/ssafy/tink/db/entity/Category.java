@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.ColumnDefault;
+
+import com.sun.istack.NotNull;
 import lombok.Getter;
 
 @Entity
@@ -21,12 +24,16 @@ public class Category {
 	private int categoryId;
 
 	@Column(name = "category_name")
+	@NotNull
 	private String categoryName;
 
+	@NotNull
+	@ColumnDefault("0")
 	private int depth;
 
 	@ManyToOne
-	@JoinColumn(name = "parent_id", referencedColumnName = "category_id")
+	@NotNull
+	@JoinColumn(name = "parent_id", referencedColumnName = "category_id", nullable = false)
 	private Category parent;
 
 	@OneToMany(mappedBy = "category")

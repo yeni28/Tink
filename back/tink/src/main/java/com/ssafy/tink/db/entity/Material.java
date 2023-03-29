@@ -11,6 +11,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 
 @Entity
@@ -35,7 +36,7 @@ public class Material {
 	private String time;
 
 	@OneToOne
-	@JoinColumn(name = "board_id", referencedColumnName = "board_id")
+	@JoinColumn(name = "board_id", referencedColumnName = "board_id", nullable = false)
 	private Board board;
 
 	@OneToMany
