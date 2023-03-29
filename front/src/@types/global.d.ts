@@ -40,3 +40,13 @@ interface CommentProps {
   create_time: string
   userImage: string
 }
+
+interface CardMdProps {
+  author: string
+  isFollow: boolean
+  titleImgUrl: string
+  title: string
+  views: number
+  likes: number
+  onClick: () => void
+}

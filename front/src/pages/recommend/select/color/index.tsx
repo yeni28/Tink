@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import FileBox from '@/assets/drawings/FileLineBox.png'
+import FileBox from '@/assets/drawings/fileLineBox.png'
 import FileCat from '@/assets/drawings/파일냥이.png'
 import atoms from '@/components/atoms'
 
