@@ -2,16 +2,6 @@ import React, { useState } from 'react'
 
 import atoms from '@/components/atoms'
 
-interface CardProps {
-  author: string
-  isFollow: boolean
-  titleImgUrl: string
-  title: string
-  views: number
-  likes: number
-  onClick: () => void
-}
-
 function CardMd({
   author,
   isFollow,
@@ -20,7 +10,7 @@ function CardMd({
   views,
   likes,
   onClick,
-}: CardProps) {
+}: CardMdProps) {
   const [follow, setFollow] = useState(isFollow)
   return (
     <div className="w-[22.25rem]">
