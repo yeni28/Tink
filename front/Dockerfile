@@ -1,3 +1,4 @@
+# node 이미지 사용
 FROM node:16.19.0 as build-stage
 WORKDIR /var/jenkins_home/workspace/tink-pipeline/front
 COPY package*.json ./
@@ -15,6 +16,7 @@ COPY --from=build-stage /var/jenkins_home/workspace/tink-pipeline/front/dist /us
 #파일 삭제
 RUN rm /etc/nginx/conf.d/default.conf
 
+# 파일 복사
 COPY --from=build-stage /var/jenkins_home/workspace/tink-pipeline/front/nginx.conf /etc/nginx/conf.d/default.conf
 
 # 포트 오픈
