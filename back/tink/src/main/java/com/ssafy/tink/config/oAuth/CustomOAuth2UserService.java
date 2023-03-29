@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.tink.config.Util.FileUtil;
 import com.ssafy.tink.config.ect.OAuth2ProcessException;
@@ -77,6 +78,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		return OAuth2UserDetail.create(member, user.getAttributes());
 	}
 
+	@Transactional
 	public Member createUser( OAuth2UserInfo userInfo, AuthProvider authProvider) {
 
 		Member member = Member.builder()

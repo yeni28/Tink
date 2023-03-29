@@ -1,4 +1,4 @@
-package com.ssafy.tink.dto.dsl;
+package com.ssafy.tink.dto.dsl.members;
 
 import java.util.ArrayList;
 import java.util.List;

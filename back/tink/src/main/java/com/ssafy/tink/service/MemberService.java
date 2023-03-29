@@ -15,7 +15,7 @@ import com.ssafy.tink.db.entity.Member;
 import com.ssafy.tink.db.repository.MemberRepository;
 import com.ssafy.tink.dto.MemberInfoDto;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
-import com.ssafy.tink.dto.dsl.MemberInfoDsl;
+import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -89,5 +89,4 @@ public class MemberService {
 		}
 		return member.get();
 	}
-
 }

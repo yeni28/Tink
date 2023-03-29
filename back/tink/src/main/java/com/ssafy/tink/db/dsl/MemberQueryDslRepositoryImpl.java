@@ -2,7 +2,6 @@ package com.ssafy.tink.db.dsl;
 
 import static com.querydsl.core.group.GroupBy.*;
 import static com.ssafy.tink.db.entity.QBoard.*;
-import static com.ssafy.tink.db.entity.QMaterial.*;
 import static com.ssafy.tink.db.entity.QMember.*;
 import static com.ssafy.tink.db.entity.QPattern.*;
 import static com.ssafy.tink.db.entity.QPatternThumbnail.*;
@@ -12,31 +11,29 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.ExpressionUtils;
-import com.querydsl.core.types.Projections;
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.tink.db.entity.Member;
-import com.ssafy.tink.db.entity.QMember;
-import com.ssafy.tink.db.entity.QPatternThumbnail;
+import com.ssafy.tink.db.entity.Thumbnail;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
-import com.ssafy.tink.dto.dsl.MemberInfoDsl;
-import com.ssafy.tink.dto.dsl.QMemberInfoDsl;
-import com.ssafy.tink.dto.dsl.members.BoardInfoDsl;
-import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
+import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QBoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.QBoardInfoDsl;
-import com.ssafy.tink.dto.dsl.members.QCommunityBoardInfoDsl;
+import com.ssafy.tink.dto.dsl.members.QMemberInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QPatternInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QPatternThumbInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QThumbnailInfoDsl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository{
@@ -48,6 +45,8 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository{
 
 	@Autowired
 	private final JPAQueryFactory jpaQueryFactory;
+	@Autowired
+	private final EntityManager entityManager;
 
 	@Override
 	public List<BoardAndPatternDsl> findBoardAndPatternListById(long memberId) {
@@ -102,4 +101,5 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository{
 			.map(result::get)
 			.collect(Collectors.toList());
 	}
+
 }
