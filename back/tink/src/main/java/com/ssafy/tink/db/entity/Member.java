@@ -31,20 +31,21 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableGenerator(
-	name = "MEMBER_SQL_GENERATOR",
-	table = "MEMBER_SEQ",
-	pkColumnName = "MEMBER_SEQ",
-	initialValue = 1,
-	allocationSize = 1
-)
+// @TableGenerator(
+// 	name = "MEMBER_SQL_GENERATOR",
+// 	table = "MEMBER_SEQ",
+// 	pkColumnName = "MEMBER_SEQ",
+// 	initialValue = 1,
+// 	allocationSize = 1
+// )
 public class Member extends BaseEntity {
 
 	@Id
-	@GeneratedValue(
-		strategy = GenerationType.TABLE,
-		generator = "MEMBER_SEQ"
-	)
+	// @GeneratedValue(
+	// 	strategy = GenerationType.TABLE,
+	// 	generator = "MEMBER_SEQ"
+	// )
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "member_id")
 	private Long memberId;
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.tink.dto.BaseResponse;
 import com.ssafy.tink.dto.MemberInfoDto;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
-import com.ssafy.tink.dto.dsl.MemberInfoDsl;
+import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
 import com.ssafy.tink.service.MemberService;
 
 import io.swagger.annotations.ApiOperation;
