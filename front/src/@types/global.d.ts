@@ -17,3 +17,29 @@ interface Alarm {
     readStatus: 0 | 1 // (0:안읽음,   1: 읽음)
   }[]
 }
+
+type boardCategory = 'review' | 'question' | 'group'
+
+interface ReviewDetail {
+  isLike: boolean
+  boardId: number
+  memberEmail: string
+  title: string
+  conetent: string
+  boardCategory: boardCategory
+  yarnName: string
+  yarnWeight: float
+  yarnLength: float
+  needle: string
+  time: string
+  user: {
+    userId: number
+    profileImage: string
+    nickname: string
+    isFollow: boolean
+  }
+  pattern: {
+    patternId: number
+    patternImage: string
+  }
+}
