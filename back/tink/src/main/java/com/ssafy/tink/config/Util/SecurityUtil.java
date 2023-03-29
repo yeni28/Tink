@@ -7,12 +7,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.ssafy.tink.config.oAuth.OAuth2UserDetail;
 
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@NoArgsConstructor
 public class SecurityUtil {
 
-	public static Optional<String> getAuthenticationInfo() {
+	public static Optional<String> getCurrentAuthentication() {
 		// 사용자 정보를 가지고있는 authentication 객체를 가져와야합니다.
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		// 만약 정보를 가져오지 못하였으면 빈 Optional 객체를 반환
@@ -28,10 +30,11 @@ public class SecurityUtil {
 			OAuth2UserDetail userDetail = (OAuth2UserDetail)authentication.getPrincipal();
 			// memberId를 저장
 			memberId = String.valueOf(userDetail.getId());
-			return Optional.of(memberId);
-		} else {
+		} else if ( authentication.getPrincipal() instanceof String) {
+			memberId = (String) authentication.getPrincipal();
+		}  else {
 			log.debug("sorry, what is authentication Type?");
-			return Optional.empty();
 		}
+		return Optional.ofNullable(memberId);
 	}
 }

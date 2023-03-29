@@ -9,17 +9,15 @@ interface CardProps {
   title: string
   userImgUrl: string
   userName: string
+  src: string
 }
 
-function CardSm({ isLiked, title, userImgUrl, userName }: CardProps) {
+function CardSm({ isLiked, title, userImgUrl, userName, src }: CardProps) {
   const [showLike, setShowLike] = useState(isLiked)
   return (
     <div className="w-[14.25rem] h-[15rem]">
       <div className="relative">
-        <atoms.ImageSm
-          alt={'random'}
-          src={'https://source.unsplash.com/random'}
-        />
+        <atoms.ImageSm alt={'random'} src={src} />
         <button
           className="absolute bottom-[4px] right-[8px]"
           type="button"
@@ -28,8 +26,8 @@ function CardSm({ isLiked, title, userImgUrl, userName }: CardProps) {
           {showLike ? <HeartFill /> : <Heart />}
         </button>
       </div>
-      <div className="mt-[8px] flex-col gap-[8px]">
-        <div className="truncate text-body ">{title}</div>
+      <div className="mt-[8px] flex-col gap-[12x]">
+        <div className="truncate text-body text-center">{title}</div>
         <div className="flex gap-[6px] justify-center">
           <img
             alt="userImage"
