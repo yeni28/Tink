@@ -7,6 +7,10 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +18,7 @@ import lombok.Setter;
 @IdClass(NotificationId.class)
 @Setter
 @Getter
+@DynamicInsert
 public class Notification {
 
 	@Id
@@ -26,10 +31,12 @@ public class Notification {
 	private Member member;
 
 	@ManyToOne
-	@JoinColumn(name = "board_id")
+	@JoinColumn(name = "board_id", nullable = false)
+	@NotNull
 	private Board board;
 
-	@Column(name = "read_status")
+	@Column(name = "read_status", columnDefinition = "TINYINT", length=2)
+	@ColumnDefault("0")
 	private boolean readStatus;
 
 }

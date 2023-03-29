@@ -1,5 +1,6 @@
 package com.ssafy.tink.db.entity;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 
 import javax.persistence.Entity;
