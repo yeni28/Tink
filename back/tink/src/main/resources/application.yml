@@ -3,4 +3,5 @@ spring:
         group:
             "local": "local, key"
             "dev": "dev, key"
-        active: dev
+            "test":"test, key"
+        active: test
