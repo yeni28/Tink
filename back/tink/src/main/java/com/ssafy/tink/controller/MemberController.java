@@ -36,7 +36,7 @@ public class MemberController {
 
 	@Autowired
 	private MemberServiceImpl memberService;
-	
+
 
 	@GetMapping("/mypage/info")
 	@ApiOperation(value = "마이페이지(자신) 프로필 정보 조회하는 API")
