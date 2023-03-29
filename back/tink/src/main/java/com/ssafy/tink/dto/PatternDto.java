@@ -3,16 +3,17 @@ package com.ssafy.tink.dto;
 import java.util.List;
 
 import io.swagger.annotations.ApiModel;
+import lombok.Builder;
 
 @ApiModel("PatternDTO")
 public class PatternDto {
 
 	int patternId;//pk
 	String parentCategory;//부모 카테고리
-	List<String> category;//도안 카테고리
+	String category;//도안 카테고리
 
 	Float gauge;//게이지 코수
-	int gaugeDivisor;//게이지 크기
+	Float gaugeDivisor;//게이지 크기
 	String guagePattern;//게이지 패턴
 	Float rowGauge;//게이지 단 수
 
@@ -23,5 +24,24 @@ public class PatternDto {
 	int yardageMax;//최대 길이
 	String yarnWeightDescription;//실 굵기
 
-	Float metric;//바늘 사이즈(needle entity column)
+	List<Float> metric;//바늘 사이즈(needle entity column)
+
+	@Builder
+	public PatternDto(int patternId, String parentCategory, String category, Float gauge, Float gaugeDivisor,
+		String guagePattern, Float rowGauge, String patternName, String notes_html, int yardage, int yardageMax,
+		String yarnWeightDescription, List<Float> metric) {
+		this.patternId = patternId;
+		this.parentCategory = parentCategory;
+		this.category = category;
+		this.gauge = gauge;
+		this.gaugeDivisor = gaugeDivisor;
+		this.guagePattern = guagePattern;
+		this.rowGauge = rowGauge;
+		this.patternName = patternName;
+		this.notes_html = notes_html;
+		this.yardage = yardage;
+		this.yardageMax = yardageMax;
+		this.yarnWeightDescription = yarnWeightDescription;
+		this.metric = metric;
+	}
 }

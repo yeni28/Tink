@@ -46,6 +46,11 @@ public class Board extends BaseEntity {
 	@ColumnDefault("0")
 	private int hit;
 
+
+	@Column(length = 45, name = "board_category")
+	private String boardCategory;
+
+
 	@OneToMany(mappedBy = "board")
 	private List<Comment> comments = new ArrayList<>();
 
@@ -53,9 +58,6 @@ public class Board extends BaseEntity {
 	@JoinColumn(name = "member_id", nullable = false)
 	private Member member;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "board_category_id", nullable = false)
-	private BoardCategory boardCategory;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinTable(
@@ -67,6 +69,10 @@ public class Board extends BaseEntity {
 
 	@OneToOne(mappedBy = "board")
 	private Material material;
+
+	@ManyToOne
+	@JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id", nullable = false)
+	private Pattern pattern;
 
 	/*
 	 * 댓글 등록 메서드

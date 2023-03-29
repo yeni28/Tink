@@ -1,12 +1,21 @@
 package com.ssafy.tink.service;
 
+import java.util.Optional;
+
 import com.ssafy.tink.dto.PatternDto;
 
 public interface PatternService {
 
-	void patternDelete(int patternId);
+	int patternDelete(int patternId);
 
-	void patternUpdate(PatternDto patternDto);
+	int patternUpdate(PatternDto patternDto);
 
-	void getPatternList();
+	Optional<PatternDto> getPatternList();
+
+	Optional<PatternDto> getPatternDetail(int patternId);
+
+	void patternLevelVote(int patternId, int memberId);
+
+
+
 }
