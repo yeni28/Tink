@@ -2,13 +2,11 @@ import { createBrowserRouter } from 'react-router-dom'
 
 import RootLayout from './RootLayout'
 
-import { Recommend } from './route'
+import { Recommend, Community, Tutorial } from './route'
 
 import CampaignMainPage from '@/pages/campaign/CampaignMainPage'
-import CommunityMainPage from '@/pages/community/CommunityMainPage'
 import HomePage from '@/pages/home/HomePage'
 import MyPageMainPage from '@/pages/mypage'
-import TutorialMainPage from '@/pages/tutorial/TutorialMainPage'
 
 const routers = createBrowserRouter([
   {
@@ -19,14 +17,8 @@ const routers = createBrowserRouter([
         element: <HomePage />,
       },
       ...Recommend,
-      {
-        path: '/community/review',
-        element: <CommunityMainPage />,
-      },
-      {
-        path: '/tutorial',
-        element: <TutorialMainPage />,
-      },
+      ...Community,
+      ...Tutorial,
       {
         path: '/campaign',
         element: <CampaignMainPage />,

@@ -15,12 +15,12 @@ spring:
         open-in-view: false
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://j8c201.p.ssafy.io:3306/tink?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+        url: jdbc:mysql://j8c201.p.ssafy.io:3306/tinkDB?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
         username: root #임시
-        password: ssafy
+        password: ssafytink
 
 server:
-    port: 8082
+    port: 8080 # 서비스 포트
     servlet:
         context-path: /tink
 app:
@@ -28,7 +28,7 @@ app:
         oauth2:
             authorizedRedirectUri: http://j8c201.p.ssafy.io:9999/oauth2/redirect
     upload:
-        folder: {리눅스 경로}
+        folder: /home/ubuntu/upload # 리눅스 경로
 
 logging:
     level:

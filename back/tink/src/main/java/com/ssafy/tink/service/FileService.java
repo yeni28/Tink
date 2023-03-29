@@ -10,13 +10,14 @@ import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
+import com.ssafy.tink.db.entity.Thumbnail;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.tink.config.Util.FileUtil;
 import com.ssafy.tink.config.ect.BadRequestException;
-import com.ssafy.tink.test.FileSample;
+
 
 @Service
 public class FileService {
@@ -31,7 +32,7 @@ public class FileService {
 		this.thumbPath = folder + File.separator + "thumb";
 	}
 
-	public FileSample singleFileupload(MultipartFile file) throws IOException {
+	public Thumbnail singleFileupload(MultipartFile file) throws IOException {
 		// 유일한 식별ID 생성
 		String fileName = UUID.randomUUID().toString() + ".png";
 		// 썸네일 이미지 생성
@@ -47,16 +48,16 @@ public class FileService {
 		FileUtil.saveImg(origin, originPath, fileName);
 		FileUtil.saveImg(thumb, thumbPath, fileName);
 		// 저장한 경로를 저장한 객체를 반환
-		return FileSample.builder()
-			.originPath(originPath + File.separator + fileName)
-			.thumbPath(thumbPath + File.separator + fileName)
+		return Thumbnail.builder()
+			.mainImg(originPath + File.separator + fileName)
+			.thumbImg(thumbPath + File.separator + fileName)
 			.build();
 	}
 
-	public List<FileSample> multiFileupload(MultipartFile[] files) throws IOException{
-		List<FileSample> list = new ArrayList<>();
+	public List<Thumbnail> multiFileupload(MultipartFile[] files) throws IOException{
+		List<Thumbnail> list = new ArrayList<>();
 		for(MultipartFile file : files) {
-			FileSample sample = singleFileupload(file);
+			Thumbnail sample = singleFileupload(file);
 			list.add(sample);
 		}
 		return list;

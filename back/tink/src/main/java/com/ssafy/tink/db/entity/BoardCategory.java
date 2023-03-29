@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 
 @Entity
@@ -16,7 +17,8 @@ public class BoardCategory {
 	@Column(name = "board_category_id")
 	private int boardCategoryId;
 
-	@Column(name = "category_name")
+	@Column(name = "category_name", length = 50)
+	@NotNull
 	private String categoryName;
 
 }

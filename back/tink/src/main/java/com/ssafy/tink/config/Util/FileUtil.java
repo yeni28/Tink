@@ -3,24 +3,18 @@ package com.ssafy.tink.config.Util;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
-import net.coobird.thumbnailator.Thumbnailator;
 import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.util.ThumbnailatorUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +23,7 @@ public class FileUtil {
 	private static final int THUMB_WEIGHT = 100;
 	private static final int THUMB_HEIGHT = 100;
 	private static final long MAX_SIZE = 1024 * 1024 * 100; // 100MB
+	public static final String FILEEXTENSION = ".png";
 	public static BufferedImage createThumbnail(MultipartFile file) {
 
 		try {
@@ -119,4 +114,22 @@ public class FileUtil {
 		}
 		return "it is not Directory";
 	}
+
+	public static BufferedImage createThumbnail(String url) {
+		try {
+			// 버퍼 데이터를 이용해서 썸네일 이지지 생성 ( corbird 라이브러리 사용 )
+			BufferedImage thumbImage = Thumbnails.of(url)
+				.size(THUMB_WEIGHT, THUMB_HEIGHT)
+				.outputQuality(1.0f)
+				.outputFormat("png")
+				.asBufferedImage();
+			// 썸네일 반환
+			return thumbImage;
+		} catch(IOException e) {
+			log.debug(e.getMessage());
+			return null;
+		}
+	}
+
+
 }

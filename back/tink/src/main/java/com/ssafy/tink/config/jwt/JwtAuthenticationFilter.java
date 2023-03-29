@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	// 토큰이 저장된 헤더의 키값을 지정
-	private static final String AUTHENTICATION_HEADER = "Authentication";
+	private static final String AUTHENTICATION_HEADER = "Authorization";
 	// 토큰를 관리하는 Bean객체 주입 ( 제공자 )
 	private final JwtTokenProvider jwtTokenProvider;
 	@Override

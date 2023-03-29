@@ -11,9 +11,11 @@ interface ImageProps {
 }
 
 interface ImageLg extends ImageProps {
+  src: string
   mainValue?: string
   subValue?: string
   onClick: () => void
+  bgColor?: string
 }
 
 interface ButtonProps {
@@ -37,4 +39,14 @@ interface CommentProps {
   username: string
   create_time: string
   userImage: string
+}
+
+interface CardMdProps {
+  author: string
+  isFollow: boolean
+  titleImgUrl: string
+  title: string
+  views: number
+  likes: number
+  onClick: () => void
 }

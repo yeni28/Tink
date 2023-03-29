@@ -3,7 +3,6 @@ package com.ssafy.tink.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.jaas.memory.InMemoryConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -57,6 +56,7 @@ public class SecurityConfig {
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/oauth2/**").permitAll()
+			.antMatchers("/member/**").hasRole("USER")
 			.antMatchers("/file/**").hasRole("USER")
 			.anyRequest().authenticated();
 

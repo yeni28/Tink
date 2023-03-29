@@ -7,11 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 
 /*
+<<<<<<< HEAD
 * API Response 결과의 반환 값을 관리
 * */
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BaseResponse<T> {
+
 
     private T result;//API 응답 결과 response
     private int resultCode;//API 응답 결과 response
@@ -25,3 +28,6 @@ public class BaseResponse<T> {
     }
 
 }
+
+
+
