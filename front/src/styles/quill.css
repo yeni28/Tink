@@ -1,0 +1,8 @@
+.app .ql-container {
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 40px !important ;
+  height: 100%;
+  margin: 0px;
+  position: relative;
+}
