@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
@@ -50,54 +51,11 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository{
 
 	@Override
 	public List<BoardAndPatternDsl> findBoardAndPatternListById(long memberId) {
-		/*
-		Map<Long, BoardAndPatternDsl> result =  jpaQueryFactory.selectFrom(member)
-			.innerJoin(board).on(member.memberId.eq(board.member.memberId))
-			.innerJoin(pattern).on(member.memberId.eq(pattern.member.memberId))
-			.where(member.memberId.eq(memberId))
-			.transform(groupBy(member.memberId).as(new QBoardAndPatternDsl(
-				member.memberId,
-				set(Projections.bean(CommunityBoardInfoDsl.class,
-					ExpressionUtils.as(
-						JPAExpressions.select(
-							board.boardId,
-							board.boardCategory,
-							board.member.memberId,
-							thumbnail,
-							material)
-							.from(board)
-							.innerJoin(thumbnail).on(board.thumbnail.thumbnailId.eq(thumbnail.thumbnailId))
-							.innerJoin(material).on(board.boardId.eq(material.board.boardId))
-							.where(board.boardCategory.eq(BOARD_CATEGORY_COMMUNTITY))
-						,"com1")).as("community")),
-				set(Projections.bean(BoardInfoDsl.class,
-					ExpressionUtils.as(
-						JPAExpressions.select(
-								board.boardId,
-								board.boardCategory,
-								board.member.memberId,
-								board.createdDate,
-								board.updatedDate)
-							.from(board)
-							.where(board.boardCategory.eq(BOARD_CATEGORY_QEUSTION))
-						,"qna1")).as("question")),
-				set(Projections.bean(BoardInfoDsl.class,
-					ExpressionUtils.as(
-						JPAExpressions.select(
-								board.boardId,
-								board.boardCategory,
-								board.member.memberId,
-								board.createdDate,
-								board.updatedDate)
-							.from(board)
-							.where(board.boardCategory.eq(BOARD_CATEGORY_GROUP))
-						,"gp1")).as("group")),
-				set(new QPatternInfoDsl(pattern.patternId))
-			)));
-		*/
-		Map<Long, BoardAndPatternDsl> result =  jpaQueryFactory.selectFrom(member)
+		BooleanBuilder builder =new BooleanBuilder();
+		Map<Long, BoardAndPatternDsl> result =  jpaQueryFactory.from(member)
 			.join(board).on(member.memberId.eq(board.member.memberId))
 			.join(pattern).on(member.memberId.eq(pattern.member.memberId))
+			.leftJoin(patternThumbnail).on(pattern.patternId.eq(patternThumbnail.pattern.patternId))
 			.where(
 				member.memberId.eq(memberId)
 				.and(board.boardCategory.in(BOARD_CATEGORY_QEUSTION,BOARD_CATEGORY_GROUP)))
