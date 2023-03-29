@@ -3,10 +3,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Card from './components/Card'
-import CastonExplain from './components/CastonExplain'
-import KnitExplain from './components/KnitExplain'
+import explains from './components/explain'
 import { THUMBNAIL_URL, VIDEO_URL } from './components/Media'
-import PurlExplain from './components/PurlExplain'
 
 import bubble2 from '@/assets/drawings/bubble 2.png'
 import mufflerCat from '@/assets/drawings/빨간목도리뜨개냥이.png'
@@ -71,15 +69,15 @@ function Tutorial() {
           </div>
         </div>
         {/* 설명문 */}
-        <div className="absolute top-1/4 left-14">
+        <div className="w-[53.82rem] h-[25.82rem] absolute -bottom-28 -left-7">
           {explain === 'caston' ? (
-            <CastonExplain />
+            <explains.CastonExplain />
           ) : explain === 'knit' ? (
-            <KnitExplain />
+            <explains.KnitExplain />
           ) : explain === 'purl' ? (
-            <PurlExplain />
+            <explains.PurlExplain />
           ) : (
-            ''
+            <explains.DefaultExpalin />
           )}
         </div>
       </div>
