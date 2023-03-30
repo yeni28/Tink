@@ -1,6 +1,6 @@
 import React from 'react'
 
-function UsernameCommunity({ username }: CommunityProps) {
+function UsernameCommunity({ username }: { username: string }) {
   return <div className="text-red text-headline-bold">{username}</div>
 }
 

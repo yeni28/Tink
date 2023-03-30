@@ -53,13 +53,13 @@ function Comment({ comments, setComments }: Props) {
     const create_time = getTime(createdAt)
     const userImgUrl = 'https://source.unsplash.com/random'
     const newComment = {
-      id: randomId,
-      value: newcomment,
-      username: randomname,
-      userImage: userImgUrl,
-      create_time: create_time,
+      commentId: randomId,
+      content: newcomment,
+      nickname: randomname,
+      thumbImg: userImgUrl,
+      updatedDate: create_time,
     }
-    if (newComment.value === '') {
+    if (newComment.content === '') {
       alert('댓글을 입력해 주세요!')
     } else {
       setComments([...comments, newComment])
