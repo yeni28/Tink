@@ -1,5 +1,6 @@
 package com.ssafy.tink.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.tink.dto.BaseResponse;
+import com.ssafy.tink.dto.PageDto;
 import com.ssafy.tink.dto.PatternDto;
+import com.ssafy.tink.service.FileService;
 import com.ssafy.tink.service.PatternService;
 
 import io.swagger.annotations.Api;
@@ -33,10 +38,22 @@ public class PatternController {
 	@Autowired
 	private PatternService patternService;
 
+	@Autowired
+	private FileService fileService;
+
 	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE,
 		MediaType.MULTIPART_FORM_DATA_VALUE}, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "도안 등록", notes = "도안을 등록한다.")
-	public ResponseEntity<BaseResponse<Object>> patternRegister() {
+	public ResponseEntity<BaseResponse<Object>> patternRegister(@RequestBody PatternDto patternDto,
+		@RequestPart(required = false) List<MultipartFile> multipartFile) {
+
+		if(!multipartFile.isEmpty()){
+
+			//다중 도안 이미지 처리
+
+
+		}
+
 		return null;
 	}
 
@@ -51,7 +68,7 @@ public class PatternController {
 				.resultMsg("삭제 실패했습니다")
 				.build();
 		}
-
+ 
 		return BaseResponse.builder()
 			.resultMsg("SUCCESS")
 			.resultCode(HttpStatus.OK.value())
@@ -61,14 +78,14 @@ public class PatternController {
 
 	@PutMapping()
 	@ApiOperation(value = "도안 수정", notes = "도안을 수정한다.")
-	public ResponseEntity<BaseResponse<Object>> patternUpdate(@RequestBody PatternDto patternDto) {
+	public BaseResponse<Object> patternUpdate(@RequestBody(required = false) PatternDto patternDto) {
 		return null;
 	}
 
 	@GetMapping("/search")
 	@ApiOperation(value = "도안 조회", notes = "도안을 조회한다.")
-	public ResponseEntity<BaseResponse<Object>> getPatternList(@RequestParam String writer,
-		@RequestParam String keyword) {
+	public BaseResponse<Object> getPatternList(@RequestBody(required = false) PageDto pageDto) {
+
 		return null;
 	}
 
@@ -94,21 +111,21 @@ public class PatternController {
 
 	@GetMapping("/like")
 	@ApiOperation(value = "도안 좋아요", notes = "도안을 좋아요")
-	public ResponseEntity<BaseResponse<Object>> setPatternLike(@RequestParam int patternId,
+	public BaseResponse<Object> setPatternLike(@RequestParam int patternId,
 		@RequestHeader String accecssToken) {
 		return null;
 	}
 
 	@GetMapping("/level")
 	@ApiOperation(value = "도안 난이도 투표", notes = "도안 난이도를 투표한다.")
-	public ResponseEntity<BaseResponse<Object>> setLevelVote(@RequestParam int difficultyCnt,
+	public BaseResponse<Object> setLevelVote(@RequestParam int difficultyCnt,
 		@RequestParam int patternId) {
 		return null;
 	}
 
 	@GetMapping("/best")
 	@ApiOperation(value = "도안 주간 베스트", notes = "도안 주간 베스트를 조회한다.")
-	public ResponseEntity<BaseResponse<Object>> getWeeklyBest() {
+	public BaseResponse<Object> getWeeklyBest() {
 		return null;
 	}
 
