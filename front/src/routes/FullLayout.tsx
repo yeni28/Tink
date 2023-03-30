@@ -2,16 +2,15 @@ import { Outlet } from 'react-router-dom'
 
 import organisms from '@/components/organisms'
 
-import Detail from '@/routes/detail/Detail'
-
-export default function RootLayout() {
+export default function FullLayout() {
   return (
     <>
       <organisms.Navbar />
-      <Detail>
+      <div className="pt-[6.25rem] w-[72rem] mx-auto">
         <organisms.Header />
-        <Outlet />
-      </Detail>
+      </div>
+
+      <Outlet />
     </>
   )
 }
