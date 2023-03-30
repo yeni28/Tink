@@ -30,7 +30,6 @@ app:
             authorizedRedirectUri: http://localhost:8081/oauth2/redirect     # Token을 받을 Url를 지정
     upload:
         folder: C:\S08P22C201\tink\image      # 파일이 저장될 경로 설정
-#        folder: /Users/junyoungpark/Downloads      # 파일이 저장될 경로 설정
 
 logging:
     level:
