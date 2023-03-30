@@ -71,6 +71,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		tokenProvider.createRefreshToken(authentication, response);
 		// redirectUri에 query로 access토큰을 보줌
 		return UriComponentsBuilder.fromUriString(targetUrl)
+			.queryParam("isCheck","")
 			.queryParam("accessToken", accessToken)
 			.build().toUriString();
 	}

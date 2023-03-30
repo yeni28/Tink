@@ -7,6 +7,7 @@ import static com.ssafy.tink.db.entity.QPattern.*;
 import static com.ssafy.tink.db.entity.QPatternThumbnail.*;
 import static com.ssafy.tink.db.entity.QThumbnail.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,13 +18,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.ExpressionUtils;
-import com.querydsl.core.types.Projections;
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.ssafy.tink.db.entity.Pattern;
+import com.ssafy.tink.db.entity.QPattern;
+import com.ssafy.tink.db.entity.QPatternThumbnail;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
+import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QBoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.QBoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QCommunityBoardInfoDsl;
@@ -146,4 +148,43 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository{
 			.collect(Collectors.toList());
 	}
 
+	@Override
+	public List<PatternInfoDsl> findPatternToRandom(String difficulty) {
+		BooleanBuilder build = new BooleanBuilder();
+		if( !difficulty.isEmpty() ) {
+			build.and(pattern.difficultyAvg.lt(getdifficulty(difficulty)));
+		}
+		Map<Integer, PatternInfoDsl> patterns = jpaQueryFactory.selectFrom(pattern)
+			.leftJoin(patternThumbnail)
+				.on(pattern.patternId.eq(patternThumbnail.patternThumbnailId))
+			.where(build)
+			.transform(groupBy(pattern.patternId).as(new QPatternInfoDsl(
+				pattern.patternId,
+				pattern.name,
+				list(new QPatternThumbInfoDsl(
+					patternThumbnail.patternThumbnailId,
+					patternThumbnail.main_img,
+					patternThumbnail.thumb_img
+				))
+			)));
+		List<PatternInfoDsl> list = patterns.keySet().stream()
+			.map(patterns::get)
+			.collect(Collectors.toList());
+		// 도안을 섞어준다.!!
+		Collections.shuffle(list);
+		return list;
+	}
+
+	private int getdifficulty(String difficulty) {
+		switch (difficulty) {
+			case "low":
+				return 3;
+			case "middle":
+				return 6;
+			case "hight":
+				return 9;
+			default:
+				return 0;
+		}
+	}
 }

@@ -2,6 +2,7 @@ package com.ssafy.tink.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,14 @@ import com.ssafy.tink.config.Util.SecurityUtil;
 import com.ssafy.tink.config.ect.BadRequestException;
 import com.ssafy.tink.db.entity.Follow;
 import com.ssafy.tink.db.entity.Member;
+import com.ssafy.tink.db.entity.Pattern;
 import com.ssafy.tink.db.repository.MemberRepository;
 import com.ssafy.tink.dto.BoardAndPatternDto;
 import com.ssafy.tink.dto.MemberInfoDto;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
+import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +32,7 @@ public class MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository;
-
+	private static final int PAGE_SIZE = 12;
 	@Transactional
 	public Optional<MemberInfoDto> getProfileByMemberId(long memberId) {
 		Optional<Member> member = memberRepository.findById(memberId);
@@ -72,9 +75,12 @@ public class MemberService {
 	}
 
 	@Transactional
-	public Optional<List<BoardAndPatternDsl>> getBoardAndPatternByAuthentication() {
+	public Optional<BoardAndPatternDto> getBoardAndPatternByAuthentication() {
 		Member member = getMemberIdByAuthorization();
-		return Optional.ofNullable(memberRepository.findBoardAndPatternListById(member.getMemberId()));
+		List<BoardAndPatternDsl> boardAndPattern = memberRepository.findBoardAndPatternListById(member.getMemberId());
+		List<CommunityBoardInfoDsl> communityBoardInfoDsls = memberRepository.findMypageCommunityBoardToById(member.getMemberId());
+		return Optional.ofNullable(new BoardAndPatternDto(boardAndPattern, communityBoardInfoDsls));
+		// return Optional.ofNullable(memberRepository.findBoardAndPatternListById(member.getMemberId()));
 	}
 
 	@Transactional
@@ -93,4 +99,21 @@ public class MemberService {
 		}
 		return member.get();
 	}
+
+	@Transactional
+	public List<PatternInfoDsl> getFavoriteFromPattern(String difficulty) {
+		List<PatternInfoDsl> list = memberRepository.findPatternToRandom(difficulty);
+		if(list.size() > PAGE_SIZE ) {
+			List<PatternInfoDsl> randomList = list.stream().filter(pattern -> {
+				if( pattern.getPatternId() % 2 == 0 ) {
+					return true;
+				}
+				return false;
+			}).collect(Collectors.toList());
+			return randomList;
+		}
+		return list;
+	}
+
+
 }

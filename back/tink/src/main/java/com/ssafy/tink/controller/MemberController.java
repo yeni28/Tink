@@ -2,6 +2,7 @@ package com.ssafy.tink.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,13 +11,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.tink.db.dsl.MemberQueryDslRepository;
+import com.ssafy.tink.db.entity.Pattern;
 import com.ssafy.tink.dto.BaseResponse;
 import com.ssafy.tink.dto.BoardAndPatternDto;
 import com.ssafy.tink.dto.MemberInfoDto;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
+import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
 import com.ssafy.tink.service.MemberService;
 
 import io.swagger.annotations.ApiOperation;
@@ -28,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/members")
 @RequiredArgsConstructor
 public class MemberController {
-
+	private final MemberQueryDslRepository memberRepository;
 	@Autowired
 	private MemberService memberService;
 	
@@ -57,11 +62,11 @@ public class MemberController {
 	@GetMapping("/mypage")
 	@ApiOperation(value = "마이페이지(자신) 도안,소모임,자랑글,질문글 조회하는 API")
 	public BaseResponse<Object> getBoardAndPatternByAuthorization() {
-		Optional<List<BoardAndPatternDsl>>list = memberService.getBoardAndPatternByAuthentication();
+		Optional<BoardAndPatternDto> data = memberService.getBoardAndPatternByAuthentication();
 		return BaseResponse.builder()
-			.result(list)
+			.result(data)
 			.resultCode(HttpStatus.OK.value())
-			.resultMsg("도안, 소모임, 자랑글, 질문글 조회하는 API")
+			.resultMsg("도안, 소모임, 자랑글, 질문글 조회 성공")
 			.build();
 	}
 
@@ -87,7 +92,7 @@ public class MemberController {
 	}
 
 	@GetMapping("/info/{id}")
-	@ApiOperation(value = "회원 도안,소모임,자랑글,질문글 조회하는 API")
+	@ApiOperation(value = "회원 프로필 정보 조회 API")
 	public BaseResponse<Object> getProfileByMember(@PathVariable(name = "id") String memberId) {
 		log.info("회원 조회 시작하기");
 		Optional<MemberInfoDto> member = memberService.getProfileByMemberId(Long.parseLong(memberId));
@@ -121,27 +126,28 @@ public class MemberController {
 		return null;
 	}
 
-	@GetMapping("/Test")
-	public BaseResponse<Object> TestQueryDslMebmer() {
-		log.debug("QueryDsl Test 시작합니다.");
-		Optional<List<MemberInfoDsl>> result = memberService.getMemberInfoByQueryDsl();
-		return BaseResponse.builder()
-			.result(result)
-			.resultCode(HttpStatus.OK.value())
-			.resultMsg("QueryDsl 연결 성공")
-			.build();
-	}
-
 	@GetMapping("/{id}")
-	@ApiOperation(value = "회원 정보보기 API")
+	@ApiOperation(value = "회원 도안,소모임,자랑글,질문글 조회하는 API")
 	public BaseResponse<Object> getBoardAndPatternByMember(@PathVariable(name = "id") long memberId) {
-		log.info("회원 조회 시작하기");
+		log.info("회원 API [getBoardAndPatternByMember] 시작하기");
 		Optional<BoardAndPatternDto> data = memberService.getBoardAndPatternByMemberId(memberId);
 		return BaseResponse.builder()
 			.result(data)
 			.resultCode(HttpStatus.OK.value())
-			.resultMsg("도안, 소모임, 자랑글, 질문글 조회하는 API")
+			.resultMsg("도안, 소모임, 자랑글, 질문글 조회 성공")
 			.build();
 	}
+
+	@GetMapping("/favorite/pattern")
+	@ApiOperation(value = "회원가입 선호도 도안 조회 API")
+	public BaseResponse<Object> getPatternWithRandom(@RequestParam(name = "difficulty") String difficulty) {
+		List<PatternInfoDsl> list = memberService.getFavoriteFromPattern(difficulty);
+		return BaseResponse.builder()
+			.result(list)
+			.resultCode(HttpStatus.OK.value())
+			.resultMsg("선호도 조사 도안 조회 성공")
+			.build();
+	}
+
 }
 
