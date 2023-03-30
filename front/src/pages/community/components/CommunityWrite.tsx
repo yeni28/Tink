@@ -1,25 +1,32 @@
 import React, { useMemo, useState } from 'react'
-import ReactQuill from 'react-quill'
+import ReactQuill, { Quill } from 'react-quill'
+
+import ImageResize from '@looop/quill-image-resize-module-react'
 
 import 'react-quill/dist/quill.snow.css'
 import StraitLine from '@/assets/drawings/straitline.png'
+
 function CommunityWrite() {
   const [textCount, settextCount] = useState<string>('')
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value.trim()
-
-    settextCount(event.target.value)
+    const inputValue = event.target.value
+    settextCount(inputValue)
   }
-
+  Quill.register('modules/ImageResize', ImageResize)
   const modules = useMemo(
     () => ({
       toolbar: {
-        container: [['bold'], ['image']],
+        container: [
+          ['bold', 'blockquote'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          ['link', 'image'],
+        ],
         handlers: {
           // image: imageHandler,
         },
       },
+      ImageResize: { modules: ['Resize'] },
     }),
     []
   )
@@ -27,11 +34,10 @@ function CommunityWrite() {
     <div>
       <div className="flex">
         <input
+          className="w-[36rem] h-[2rem] mr-[2rem] bg-transparent text-title1-bold placeholder:text-title1-bold focus: outline-none"
           maxLength={25}
           placeholder="제목을 입력해주세요."
           type="text"
-          className="w-[36rem] h-[2rem] mr-[2rem] bg-transparent text-title1-bold placeholder:text-title1-bold focus: outline-none
-        text-title1"
           onChange={onChange}
         />
         <span className="text-body-bold text-stone-300">
