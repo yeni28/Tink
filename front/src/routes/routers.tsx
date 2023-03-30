@@ -6,6 +6,7 @@ import { Recommend, Community, Tutorial } from './route'
 
 import CampaignMainPage from '@/pages/campaign/CampaignMainPage'
 import HomePage from '@/pages/home/HomePage'
+import Login from '@/pages/login'
 import MyPageMainPage from '@/pages/mypage'
 
 const routers = createBrowserRouter([
@@ -26,6 +27,10 @@ const routers = createBrowserRouter([
       {
         path: '/mypage',
         element: <MyPageMainPage />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
       },
     ],
   },

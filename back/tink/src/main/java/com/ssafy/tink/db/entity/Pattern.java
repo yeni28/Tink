@@ -13,6 +13,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.sun.istack.NotNull;
+
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -28,56 +31,69 @@ public class Pattern extends BaseEntity {
 	@Column(name = "pattern_id")
 	private int patternId;
 
+	@Column(length = 200)
 	private String name;
 
 	@Column(name = "difficulty_sum")
+	@ColumnDefault("0")
 	private int difficultySum;
 
 	@Column(name = "difficulty_cnt")
+	@ColumnDefault("0")
 	private int difficultyCnt;
+
+	@Column(name = "difficulty_avg")
+	@ColumnDefault("0")
+	private Float difficultyAvg;
 
 	@Column(name = "download_url")
 	private String downloadUrl;
 
-	private Float guage;
+	private Float gauge;
 
-	@Column(name = "guage_divisor")
-	private String guageDivisor;
+	@Column(name = "gauge_divisor")
+	private Float gaugeDivisor;
 
-	@Column(name = "guage_pattern")
-	private String guagePattern;
+
+	@Column(name = "gauge_pattern")
+	private String gaugePattern;
+
+	@Column(name = "row_gauge")
+	private Float rowGauge;
 
 	private int yardage;
 
 	@Column(name = "yardage_max")
 	private int yardageMax;
 
-	@Column(name = "sizes_available")
+	@Column(name = "sizes_available", length = 50)
 	private String sizesAvailable;
 
-	@Column(name = "notes_html")
+	@Column(name = "notes_html", length = 500)
 	private String notesHtml;
 
-	@Column(name = "yarn_weight_description")
+	@Column(name = "yarn_weight_description", length = 25)
 	private String yarnWeightDescription;
 
-	@Column(name = "yardage_description")
+	@Column(name = "yardage_description", length = 50)
 	private String yardageDescription;
 
 	@OneToMany
 	@JoinTable(
 		name = "PATTERN_NEEDLE",
-		joinColumns = @JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id"),
-		inverseJoinColumns = @JoinColumn(name = "needle_id", referencedColumnName = "needle_id")
+		joinColumns = @JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id", nullable = false),
+		inverseJoinColumns = @JoinColumn(name = "needle_id", referencedColumnName = "needle_id",  nullable = false)
 	)
 	private List<Needle> needles = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id", referencedColumnName = "category_id")
+	@JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
+	@NotNull
 	private Category category;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id", referencedColumnName = "member_id")
+	@JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
+	@NotNull
 	private Member member;
 
 	@OneToMany
@@ -102,61 +118,11 @@ public class Pattern extends BaseEntity {
 	@OneToMany(mappedBy = "pattern")
 	private List<Pack> packs = new ArrayList<>();
 
-	public void setPatternId(int patternId) {
-		this.patternId = patternId;
-	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public void setDifficultySum(int difficultySum) {
-		this.difficultySum = difficultySum;
-	}
-
-	public void setDifficultyCnt(int difficultyCnt) {
-		this.difficultyCnt = difficultyCnt;
-	}
-
-	public void setDownloadUrl(String downloadUrl) {
-		this.downloadUrl = downloadUrl;
-	}
-
-	public void setGuage(Float guage) {
-		this.guage = guage;
-	}
-
-	public void setGuageDivisor(String guageDivisor) {
-		this.guageDivisor = guageDivisor;
-	}
-
-	public void setGuagePattern(String guagePattern) {
-		this.guagePattern = guagePattern;
-	}
-
-	public void setYardage(int yardage) {
-		this.yardage = yardage;
-	}
-
-	public void setYardageMax(int yardageMax) {
-		this.yardageMax = yardageMax;
-	}
-
-	public void setSizesAvailable(String sizesAvailable) {
-		this.sizesAvailable = sizesAvailable;
-	}
-
-	public void setNotesHtml(String notesHtml) {
-		this.notesHtml = notesHtml;
-	}
-
-	public void setYarnWeightDescription(String yarnWeightDescription) {
-		this.yarnWeightDescription = yarnWeightDescription;
-	}
-
-	public void setYardageDescription(String yardageDescription) {
-		this.yardageDescription = yardageDescription;
-	}
 
 	public void setCategory(Category category) {
 		this.category = category;
