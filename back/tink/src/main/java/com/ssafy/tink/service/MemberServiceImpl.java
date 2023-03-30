@@ -1,6 +1,8 @@
 package com.ssafy.tink.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,9 +16,13 @@ import com.ssafy.tink.config.ect.BadRequestException;
 import com.ssafy.tink.db.entity.Follow;
 import com.ssafy.tink.db.entity.Member;
 import com.ssafy.tink.db.entity.Pattern;
+import com.ssafy.tink.db.entity.PatternLikeId;
+import com.ssafy.tink.db.entity.PatternLikes;
 import com.ssafy.tink.db.repository.MemberRepository;
+import com.ssafy.tink.db.repository.PatternLikesRepository;
 import com.ssafy.tink.dto.BoardAndPatternDto;
 import com.ssafy.tink.dto.MemberInfoDto;
+import com.ssafy.tink.dto.PatternLikeDto;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
@@ -28,10 +34,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class MemberService {
+public class MemberServiceImpl {
 
 	@Autowired
 	private MemberRepository memberRepository;
+	@Autowired
+	private PatternLikesRepository patternLikesRepository;
 	private static final int PAGE_SIZE = 12;
 	@Transactional
 	public Optional<MemberInfoDto> getProfileByMemberId(long memberId) {
@@ -115,5 +123,29 @@ public class MemberService {
 		return list;
 	}
 
+	public String likedPatternToMember(List<PatternLikeDto> patterns) {
+		Member member = getMemberIdByAuthorization();
+		Map<PatternLikeId, PatternLikes> likes = new HashMap<>();
+		for(PatternLikeDto patternLike : patterns) {
 
+			PatternLikeId id = new PatternLikeId(
+				member.getMemberId(),
+				patternLike.getPattern());
+
+			PatternLikes Like = PatternLikes.builder()
+				.member(member)
+				.pattern(Pattern.builder()
+						.patternId(patternLike.getPattern())
+						.build())
+				.build();
+
+			likes.put(id, Like);
+		}
+
+		likes.keySet().stream()
+			.map(likes::get)
+			.forEach(patternLikesRepository::save);
+
+		return "SUCCESS";
+	}
 }

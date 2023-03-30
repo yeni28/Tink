@@ -43,30 +43,15 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository{
 
 	private static final int MYPAGE_BOARD_LIMIT = 3;
-	private static final String BOARD_CATEGORY_COMMUNTITY = "Commnuity";
-	private static final String BOARD_CATEGORY_QEUSTION = "Qna";
-	private static final String BOARD_CATEGORY_GROUP = "Club";
+	private static final String BOARD_CATEGORY_COMMUNTITY = "review";
+	private static final String BOARD_CATEGORY_QEUSTION = "question";
+	private static final String BOARD_CATEGORY_GROUP = "group";
 
 	@Autowired
 	private final JPAQueryFactory jpaQueryFactory;
 	@Autowired
 	private final EntityManager entityManager;
 
-	/*
-		select *
-		from member m join (select b.member_id, b.board_id, b.board_category, b.title, b.content, t.thumbnail_id, t.main_img, t.thumb_img, b.created_date, b.updated_date
-							from board b left join jarang_img j on b.board_id = j.board_id
-										left join thumbnail t on j.thumbnail_id = t.thumbnail_id
-							where b.board_category = "Commnuity"
-							UNION
-							select b.member_id, b.board_id, b.board_category, b.title, b.content, t.thumbnail_id, t.main_img, t.thumb_img, b.created_date, b.updated_date
-							from board b left join jarang_img j on j.board_id = b.board_id
-										 left join thumbnail t on t.thumbnail_id = j.thumbnail_id
-							where b.board_category IN ("Club","Qna")) as btm on btm.member_id = m.member_id
-						join ( select p.pattern_id, pt.main_img, pt.thumb_img, p.member_id
-							from pattern p left join pattern_thumbnail pt on p.pattern_id = pt.pattern_id) ppt on ppt.member_id = m.member_id
-		where m.member_id = 2;
-	* */
 	@Override
 	public List<BoardAndPatternDsl> findBoardAndPatternListById(long memberId) {
 		BooleanBuilder builder =new BooleanBuilder();

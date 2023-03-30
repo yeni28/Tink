@@ -44,4 +44,5 @@ public class PatternDto {
 		this.yarnWeightDescription = yarnWeightDescription;
 		this.metric = metric;
 	}
+
 }

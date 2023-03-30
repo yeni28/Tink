@@ -19,12 +19,17 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @DynamicUpdate
 @DynamicInsert
 @Getter
+@NoArgsConstructor
 public class Pattern extends BaseEntity {
 
 	@Id
@@ -96,13 +101,8 @@ public class Pattern extends BaseEntity {
 	@NotNull
 	private Member member;
 
-	@OneToMany
-	@JoinTable(
-		name = "PATTERN_LIKES",
-		joinColumns = @JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id"),
-		inverseJoinColumns = @JoinColumn(name = "member_id", referencedColumnName = "member_id")
-	)
-	private List<Member> patternLikes = new ArrayList<>();
+	@OneToMany(mappedBy = "pattern")
+	private List<PatternLikes> patternLikes = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(
@@ -130,5 +130,10 @@ public class Pattern extends BaseEntity {
 
 	public void setMember(Member member) {
 		this.member = member;
+	}
+
+	@Builder
+	public Pattern(int patternId) {
+		this.patternId = patternId;
 	}
 }

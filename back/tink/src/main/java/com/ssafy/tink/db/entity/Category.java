@@ -35,8 +35,7 @@ public class Category {
 	private int depth;
 
 	@ManyToOne
-	@NotNull
-	@JoinColumn(name = "parent_id", referencedColumnName = "category_id", nullable = false)
+	@JoinColumn(name = "parent_id", referencedColumnName = "category_id")
 	private Category parent;
 
 	@OneToMany(mappedBy = "category")

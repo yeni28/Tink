@@ -2,7 +2,6 @@ package com.ssafy.tink.controller;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,19 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.tink.db.dsl.MemberQueryDslRepository;
-import com.ssafy.tink.db.entity.Pattern;
 import com.ssafy.tink.dto.BaseResponse;
 import com.ssafy.tink.dto.BoardAndPatternDto;
 import com.ssafy.tink.dto.MemberInfoDto;
-import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
-import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
+import com.ssafy.tink.dto.PatternLikeDto;
 import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
-import com.ssafy.tink.service.MemberService;
+import com.ssafy.tink.service.MemberServiceImpl;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	private final MemberQueryDslRepository memberRepository;
 	@Autowired
-	private MemberService memberService;
+	private MemberServiceImpl memberService;
 	
 
 	@GetMapping("/mypage/info")
@@ -146,6 +144,17 @@ public class MemberController {
 			.result(list)
 			.resultCode(HttpStatus.OK.value())
 			.resultMsg("선호도 조사 도안 조회 성공")
+			.build();
+	}
+
+	@PostMapping("/favorite/patterns")
+	@ApiOperation(value = "도안 선호도 대입하는 부분")
+	public BaseResponse<Object> enrolledFavorite(@RequestBody List<PatternLikeDto> patternLikeDto) {
+		String save = memberService.likedPatternToMember(patternLikeDto);
+		return BaseResponse.builder()
+			.result(save)
+			.resultCode(HttpStatus.OK.value())
+			.resultMsg("선택하신 도안 선호도가 대입되었습니다.")
 			.build();
 	}
 
