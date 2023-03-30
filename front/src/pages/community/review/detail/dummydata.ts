@@ -9,7 +9,7 @@ const review_detail_dummy: ReviewDetail = {
   yarnWeight: 30,
   yarnLength: 200,
   needle: '대바늘 2호',
-  time: '2023-03-29 17시',
+  time: '일주일',
   boardId: 1,
   user: {
     isFollow: true,
