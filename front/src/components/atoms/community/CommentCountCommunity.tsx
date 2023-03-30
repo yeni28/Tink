@@ -1,7 +1,7 @@
 import React from 'react'
 import { AiOutlineComment } from 'react-icons/ai'
 
-function CommentCountCommunity({ comment }: CommunityProps) {
+function CommentCountCommunity({ comment }: { comment: number }) {
   return (
     <div className="flex  text-grey items-center">
       <AiOutlineComment size="1.3rem" />
