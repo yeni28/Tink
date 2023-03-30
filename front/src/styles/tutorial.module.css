@@ -1,0 +1,5 @@
+.imageBox {
+  @apply w-auto h-full aspect-video
+  mx-auto 
+  bg-no-repeat bg-cover  bg-left bg-[url('@/assets/sprite/purl_sprite.png')];
+}

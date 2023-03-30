@@ -1,7 +1,7 @@
 import React from 'react'
 
 function PurlTutorial() {
-  return <div>PurlTutorial</div>
+  return <div></div>
 }
 
 export default PurlTutorial
