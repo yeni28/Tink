@@ -27,7 +27,7 @@ interface ButtonProps {
 
 interface CommunityProps {
   title?: string
-  body?: string
+  content?: string
   username?: string
   view?: number
   comment?: number
@@ -48,5 +48,30 @@ interface CardMdProps {
   title: string
   views: number
   likes: number
+  onClick: () => void
+}
+
+interface member {
+  memberId: number
+  email?: string
+  nickname: string
+  follows?: boolean
+  follower?: string
+  thumnail?: {
+    thumnailId?: number
+    mainImg?: string
+    thumImag: string
+  }
+}
+interface CardTextProps {
+  boardId: number
+  title: string
+  content: string
+  createDate: string
+  updateDate?: string
+  liked: number
+  hit: number
+  member?: member
+  commentCnt: number
   onClick: () => void
 }
