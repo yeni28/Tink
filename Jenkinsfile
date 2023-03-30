@@ -29,7 +29,7 @@ pipeline {
             steps{
                 dir('back/tink'){
                     sh '''
-                        su root -c "cp /home/ubuntu/config/application-key.yml /var/lib/docker/volumes/jenkins_home/_data/workspace/tink-pipeline/back/tink/src/main/resources"
+                        cp /home/ubuntu/config/application-key.yml /var/lib/docker/volumes/jenkins_home/_data/workspace/tink-pipeline/back/tink/src/main/resources
                     '''
                 }
             }
