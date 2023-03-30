@@ -63,7 +63,7 @@ interface GroupPost {
   title: string
   content: string
   boardCategory: boardCategory
-  multipartFile: Blob
+  multipartFile: Blob // 파일업로드
 }
 
 interface GroupPut extends GroupPost {
@@ -84,7 +84,7 @@ interface GroupDetail {
   comments: CommentProps[]
 }
 
-type QuestionList = CardTextProps
+type GroupList = CardTextProps
 
 // 질문
 // request data
