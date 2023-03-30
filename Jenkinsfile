@@ -25,12 +25,20 @@ pipeline {
                 }
             }
         }
+        stage('copy file'){
+            steps{
+                dir('back/tink'){
+                    // src = "/src/main/resources/application-key.yml";
+                    // dest = "/var/jenkins_home/workspace/tink-pipeline/back/tink/src/main/resources/application-key.yml";
+                    sh '''
+                        cp  /src/main/resources/application-key.yml /var/jenkins_home/workspace/tink-pipeline/back/tink/src/main/resources/application-key.yml
+                    '''
+                }
+            }
+        }
         stage('build'){
             steps{
                 dir('back/tink'){
-                    sh '''
-                        cp /src/main/resources/application-key.yml /var/jenkins_home/workspace/tink-pipeline/back/tink/src/main/resources/application-key.yml
-                    '''
                     sh'''
                         echo build start
                         chmod +x gradlew
