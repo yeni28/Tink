@@ -10,7 +10,7 @@ const CommentList = ({ comments, deleteComment }: Props) => {
       <div>
         {comments.map((comment, idx) => {
           return (
-            <div key={comment.commentId} className="w-[48.8rem]">
+            <div key={comment.commentId} className="w-[51rem] mb-[1.5rem]">
               <div className="flex place-content-between	">
                 <div className="flex">
                   {/* 유저 이미지 */}
