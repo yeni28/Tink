@@ -1,7 +1,7 @@
 import React from 'react'
 
-function BodyCommunity({ body }: CommunityProps) {
-  return <div className="text-body">{body}</div>
+function BodyCommunity({ content }: { content: string }) {
+  return <div className="text-body">{content}</div>
 }
 
 export default BodyCommunity
