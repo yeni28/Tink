@@ -1,7 +1,10 @@
-import React, { useEffect, useRef, useLayoutEffect } from 'react'
+import React, { useEffect, useRef, useLayoutEffect,  Suspense  } from 'react'
 
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Html } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
+import Knit_1_complete from '@/assets/tutorial/knit/step_one/Knit_1_complete'
 
 import tuto from '@/styles/tutorial.module.css'
 
