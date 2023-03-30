@@ -39,6 +39,7 @@ interface CardTextProps {
   nickname: string
 }
 
+// comment
 interface CommentProps {
   commentId: number
   updatedDate: string

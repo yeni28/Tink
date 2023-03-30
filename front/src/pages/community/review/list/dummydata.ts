@@ -1,4 +1,4 @@
-interface Props extends CardMdProps {
+interface Props extends Omit<CardMdProps, 'onClick'> {
   id: number
 }
 
@@ -6,7 +6,6 @@ const review_list_dummy: Props[] = [
   {
     id: 1,
     titleImgUrl: 'https://source.unsplash.com/random',
-    onClick: () => console.log('디테일 들어가보자'),
     views: 156,
     likes: 7456,
     isFollow: false,
@@ -16,7 +15,6 @@ const review_list_dummy: Props[] = [
   {
     id: 2,
     titleImgUrl: 'https://source.unsplash.com/random',
-    onClick: () => console.log('디테일 들어가보자'),
     views: 156,
     likes: 7456,
     isFollow: true,
@@ -26,7 +24,6 @@ const review_list_dummy: Props[] = [
   {
     id: 3,
     titleImgUrl: 'https://source.unsplash.com/random',
-    onClick: () => console.log('디테일 들어가보자'),
     views: 156,
     likes: 7456,
     isFollow: true,
@@ -36,7 +33,6 @@ const review_list_dummy: Props[] = [
   {
     id: 4,
     titleImgUrl: 'https://source.unsplash.com/random',
-    onClick: () => console.log('디테일 들어가보자'),
     views: 156,
     likes: 7456,
     isFollow: false,
@@ -46,7 +42,6 @@ const review_list_dummy: Props[] = [
   {
     id: 5,
     titleImgUrl: 'https://source.unsplash.com/random',
-    onClick: () => console.log('디테일 들어가보자'),
     views: 156,
     likes: 7456,
     isFollow: true,
@@ -56,7 +51,6 @@ const review_list_dummy: Props[] = [
   {
     id: 6,
     titleImgUrl: 'https://source.unsplash.com/random',
-    onClick: () => console.log('디테일 들어가보자'),
     views: 156,
     likes: 7456,
     isFollow: false,
@@ -66,7 +60,6 @@ const review_list_dummy: Props[] = [
   {
     id: 7,
     titleImgUrl: 'https://source.unsplash.com/random',
-    onClick: () => console.log('디테일 들어가보자'),
     views: 156,
     likes: 7456,
     isFollow: false,
@@ -76,7 +69,6 @@ const review_list_dummy: Props[] = [
   {
     id: 8,
     titleImgUrl: 'https://source.unsplash.com/random',
-    onClick: () => console.log('디테일 들어가보자'),
     views: 156,
     likes: 7456,
     isFollow: true,
@@ -86,7 +78,6 @@ const review_list_dummy: Props[] = [
   {
     id: 9,
     titleImgUrl: 'https://source.unsplash.com/random',
-    onClick: () => console.log('디테일 들어가보자'),
     views: 156,
     likes: 7456,
     isFollow: false,
@@ -96,7 +87,6 @@ const review_list_dummy: Props[] = [
   {
     id: 10,
     titleImgUrl: 'https://source.unsplash.com/random',
-    onClick: () => console.log('디테일 들어가보자'),
     views: 156,
     likes: 7456,
     isFollow: true,
@@ -106,7 +96,6 @@ const review_list_dummy: Props[] = [
   {
     id: 11,
     titleImgUrl: 'https://source.unsplash.com/random',
-    onClick: () => console.log('디테일 들어가보자'),
     views: 156,
     likes: 7456,
     isFollow: false,
@@ -116,7 +105,6 @@ const review_list_dummy: Props[] = [
   {
     id: 12,
     titleImgUrl: 'https://source.unsplash.com/random',
-    onClick: () => console.log('디테일 들어가보자'),
     views: 156,
     likes: 7456,
     isFollow: true,

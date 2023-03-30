@@ -20,7 +20,7 @@ spring:
     password: ssafy # 유저PW
 
 server:
-  port: 8081              # 서비스 포트지정
+  port: 8082              # 서비스 포트지정
   servlet:
     context-path: /     # contextPaht를 지정하면 기본 uri가 지정된다.
 
