@@ -16,7 +16,7 @@ import { Knit_1_complete } from '@/assets/tutorial/knit/step_one/Knit_1_complete
 
 import { angleToRadians } from '@/utills/angle'
 
-function stepone() {
+function Stepone() {
   // Code to move around camera
   const orbitControlRef = useRef<OrbitControlsImpl>(null)
   useFrame((state) => {
@@ -116,4 +116,4 @@ function stepone() {
     </>
   )
 }
-export default stepone
+export default Stepone

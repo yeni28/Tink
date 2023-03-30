@@ -4,7 +4,8 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Html } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import Knit_1_complete from '@/assets/tutorial/knit/step_one/Knit_1_complete'
+import Stepone from './components/stepone'
+
 
 import tuto from '@/styles/tutorial.module.css'
 
@@ -63,7 +64,11 @@ function KnitTutorial() {
 
       {/* 3d model 영역 */}
       <section className="w-full h-full bg-red relative">
-        <h1>Hello world!</h1>
+      <Canvas shadows className="h-screen">
+        <Suspense fallback={null}>
+          <Stepone />
+        </Suspense>
+      </Canvas>
       </section>
     </div>
   )
