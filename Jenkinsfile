@@ -28,12 +28,10 @@ pipeline {
         stage('copy file'){
             steps{
                 dir('back/tink'){
-                    // src = "/src/main/resources/application-key.yml";
-                    // dest = "/var/jenkins_home/workspace/tink-pipeline/back/tink/src/main/resources/application-key.yml";
+                    src = "/home/ubuntu/config/application-key.yml";
+                    dest = "/var/jenkins_home/workspace/tink-pipeline/back/tink/src/main/resources/application-key.yml";
                     sh '''
-                        cd src/main/resources
-                        echo $(pwd)
-                        cp  -f ./application-key.yml /var/jenkins_home/workspace/tink-pipeline/back/tink/src/main/resources/application-key.yml
+                        cp  -f  $src $dest
                     '''
                 }
             }
