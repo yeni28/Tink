@@ -103,7 +103,8 @@ public class PatternServiceImpl implements PatternService {
 			.notesHtml(patternDto.getNotes_html())
 			.rowGauge(patternDto.getRowGauge())
 			.name(patternDto.getPatternName())
-			
+			.yardage(patternDto.getYardage())
+			.yardageDescription(patternDto.getYarnWeightDescription())
 			.build();
 
 
