@@ -13,12 +13,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.sun.istack.NotNull;
-
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.sun.istack.NotNull;
+
+import lombok.Builder;
 import lombok.Getter;
 
 @Entity
@@ -54,7 +55,6 @@ public class Pattern extends BaseEntity {
 	@Column(name = "gauge_divisor")
 	private Float gaugeDivisor;
 
-
 	@Column(name = "gauge_pattern")
 	private String gaugePattern;
 
@@ -82,9 +82,9 @@ public class Pattern extends BaseEntity {
 	@JoinTable(
 		name = "PATTERN_NEEDLE",
 		joinColumns = @JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id", nullable = false),
-		inverseJoinColumns = @JoinColumn(name = "needle_id", referencedColumnName = "needle_id",  nullable = false)
+		inverseJoinColumns = @JoinColumn(name = "needle_id", referencedColumnName = "needle_id", nullable = false)
 	)
-	private List<Needle> needles = new ArrayList<>();
+	private final List<Needle> needles = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
@@ -102,7 +102,7 @@ public class Pattern extends BaseEntity {
 		joinColumns = @JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id"),
 		inverseJoinColumns = @JoinColumn(name = "member_id", referencedColumnName = "member_id")
 	)
-	private List<Member> patternLikes = new ArrayList<>();
+	private final List<Member> patternLikes = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(
@@ -110,19 +110,41 @@ public class Pattern extends BaseEntity {
 		joinColumns = @JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id"),
 		inverseJoinColumns = @JoinColumn(name = "keyword_id", referencedColumnName = "keyword_id")
 	)
-	private List<Keyword> keywords = new ArrayList<>();
+	private final List<Keyword> keywords = new ArrayList<>();
 
 	@OneToMany(mappedBy = "pattern")
 	private List<PatternThumbnail> patternThumbnails;
 
 	@OneToMany(mappedBy = "pattern")
-	private List<Pack> packs = new ArrayList<>();
+	private final List<Pack> packs = new ArrayList<>();
 
+	@Builder
+	public Pattern(String name, int difficultySum, int difficultyCnt, Float difficultyAvg, String downloadUrl,
+		Float gauge, Float gaugeDivisor, String gaugePattern, Float rowGauge, int yardage, int yardageMax,
+		String sizesAvailable, String notesHtml, String yarnWeightDescription, String yardageDescription,
+		Category category, Member member) {
+		this.name = name;
+		this.difficultySum = difficultySum;
+		this.difficultyCnt = difficultyCnt;
+		this.difficultyAvg = difficultyAvg;
+		this.downloadUrl = downloadUrl;
+		this.gauge = gauge;
+		this.gaugeDivisor = gaugeDivisor;
+		this.gaugePattern = gaugePattern;
+		this.rowGauge = rowGauge;
+		this.yardage = yardage;
+		this.yardageMax = yardageMax;
+		this.sizesAvailable = sizesAvailable;
+		this.notesHtml = notesHtml;
+		this.yarnWeightDescription = yarnWeightDescription;
+		this.yardageDescription = yardageDescription;
+		this.category = category;
+		this.member = member;
+	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public void setCategory(Category category) {
 		this.category = category;

@@ -4,8 +4,10 @@ import java.util.List;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
+import lombok.Getter;
 
 @ApiModel("PatternDTO")
+@Getter
 public class PatternDto {
 
 	int patternId;//pk
@@ -25,6 +27,7 @@ public class PatternDto {
 	String yarnWeightDescription;//실 굵기
 
 	List<Float> metric;//바늘 사이즈(needle entity column)
+
 
 	@Builder
 	public PatternDto(int patternId, String parentCategory, String category, Float gauge, Float gaugeDivisor,

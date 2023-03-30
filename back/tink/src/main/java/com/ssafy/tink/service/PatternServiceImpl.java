@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import com.ssafy.tink.db.entity.Needle;
 import com.ssafy.tink.db.entity.Pattern;
+import com.ssafy.tink.db.entity.Thumbnail;
 import com.ssafy.tink.db.repository.PatternRepository;
 import com.ssafy.tink.dto.PatternDto;
+import com.ssafy.tink.dto.PatternThumbnailDto;
 
 @Service
 public class PatternServiceImpl implements PatternService {
@@ -23,7 +25,7 @@ public class PatternServiceImpl implements PatternService {
 
 	@Transactional
 	@Override
-	public int patternDelete(int patternId) {
+	public int deletePattern(int patternId) {
 
 		Optional<Pattern> pattern = patternRepository.findByPatternId(patternId);
 		if(!pattern.isPresent()){
@@ -41,7 +43,7 @@ public class PatternServiceImpl implements PatternService {
 	}
 
 	@Override
-	public int patternUpdate(PatternDto patternDto) {
+	public int updatePattern(PatternDto patternDto) {
 		return 0;
 	}
 
@@ -61,7 +63,7 @@ public class PatternServiceImpl implements PatternService {
 	}
 
 	@Override
-	public void patternLevelVote(int patternId, int memberId) {
+	public void setLevelVote(int patternId, int memberId) {
 
 	}
 
@@ -89,6 +91,23 @@ public class PatternServiceImpl implements PatternService {
 			.build();
 
 		return Optional.ofNullable(patternDto);
+	}
+
+	@Override
+	public int insertPattern(PatternDto patternDto, List<PatternThumbnailDto> thumbnail) {
+
+		Pattern pattern = Pattern.builder()
+			.gaugePattern(patternDto.getGuagePattern())
+			.gauge(patternDto.getGauge())
+			.gaugeDivisor(patternDto.getGaugeDivisor())
+			.notesHtml(patternDto.getNotes_html())
+			.rowGauge(patternDto.getRowGauge())
+			.name(patternDto.getPatternName())
+			
+			.build();
+
+
+		return 0;
 	}
 
 
