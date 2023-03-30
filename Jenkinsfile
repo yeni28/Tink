@@ -3,7 +3,6 @@ pipeline {
     
     environment {
         repository = "goals11/repo"
-        //DOCKERHUB_CREDENTIALS = credentials('docker-key') // jenkins에 등록해 놓은 docker hub credentials 이름
         springImg = ""
         nginxImg = ""
         mysqlImg = ""
@@ -56,7 +55,6 @@ pipeline {
                         color: "good", 
                         message: "Build SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
                     )  
-                    echo 'jenkins build success OK'
                     sh 'docker image prune --force'
                 }
                 failure {
@@ -64,7 +62,6 @@ pipeline {
                         color: "danger", 
                         message: "Build FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Link to build>)"
                     )
-                    echo 'jenkins build fail'
                 }
             }
         }
@@ -114,7 +111,7 @@ pipeline {
                 script{
                     try{
                         echo 'tink spring create container start'
-                        sh "docker run -d -p 8080:8080 \
+                        sh "docker run -d -p 8081:8081 \
                                     --name tink-spring \
                                     --rm goals11/repo:spring$ver"
 
