@@ -77,17 +77,12 @@ const HEADER_DATA = [
     subtitle: HEARDER_SUBTITLE.COMMUNITY.QNA,
   },
   {
-    route: '/community/review/detail/:id',
-    title: HEADER_TITLE.COMMUNITY,
-    subtitle: HEARDER_SUBTITLE.COMMUNITY.REVIEW,
-  },
-  {
-    route: '/community/group/detail/:id',
+    route: '/community/group/detail/',
     title: HEADER_TITLE.COMMUNITY,
     subtitle: HEARDER_SUBTITLE.COMMUNITY.MEET,
   },
   {
-    route: '/community/question/detail/:id',
+    route: '/community/question/detail/',
     title: HEADER_TITLE.COMMUNITY,
     subtitle: HEARDER_SUBTITLE.COMMUNITY.QNA,
   },

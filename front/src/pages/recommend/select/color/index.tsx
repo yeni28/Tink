@@ -25,7 +25,7 @@ function ColorSelectRecommend() {
     <div className="flex justify-center items-center pt-16 relative">
       <div className="relative flex justify-center">
         <img alt="border" src={FileBox} width="50%" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className="w-[34rem] h-[23rem] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <input
             accept="image/*"
             className="hidden"
@@ -33,18 +33,21 @@ function ColorSelectRecommend() {
             type="file"
             onChange={onChangeFile}
           />
-          <label className="flex flex-col items-center" htmlFor="picture">
+          <label
+            className="w-full h-full flex flex-col justify-center items-center"
+            htmlFor="picture"
+          >
             {(imgPreview && (
               <img
                 alt="preview"
-                className="object-cover w-10/12 cursor-pointer"
+                className="w-full h-full cursor-pointer object-contain"
                 src={imgPreview}
               />
             )) || (
               <>
                 <img
                   alt="preview"
-                  className="object-cover cursor-pointer w-[196px] h-[209px] mb-5"
+                  className="object-contain cursor-pointer w-[196px] h-[209px] mb-5"
                   src={FileCat}
                 />
                 <p className="font-cha text-title2">사진을 올려주라냥</p>
