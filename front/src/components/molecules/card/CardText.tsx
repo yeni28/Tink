@@ -14,7 +14,7 @@ function CardText({ onClick }: { onClick: () => void }) {
         </div>
         <div className="mb-[1.75rem]">
           <atoms.BodyCommunity
-            body={
+            content={
               '장덕동에서 뜨개구리를 함께 뜨는 뜨개구리 모임 입니다.뜨개질을 마친 후엔 장인 족발집에서 회식을 할 예정입니다.'
             }
           />
