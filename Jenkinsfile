@@ -28,6 +28,9 @@ pipeline {
         stage('build'){
             steps{
                 dir('back/tink'){
+                    sh '''
+                        cp ./src/main/resources/application-key.yml ./src/main/resources/application-key.yml
+                    '''
                     sh'''
                         echo build start
                         chmod +x gradlew
