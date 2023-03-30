@@ -31,6 +31,7 @@ pipeline {
                     // src = "/src/main/resources/application-key.yml";
                     // dest = "/var/jenkins_home/workspace/tink-pipeline/back/tink/src/main/resources/application-key.yml";
                     sh '''
+                        echo $(pwd)
                         cp  /src/main/resources/application-key.yml /var/jenkins_home/workspace/tink-pipeline/back/tink/src/main/resources/application-key.yml
                     '''
                 }
