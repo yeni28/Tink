@@ -47,6 +47,7 @@ public class BoardInfoDsl {
 		this.updatedDate = updatedDate;
 		this.title = title;
 		this.content = content;
+
 	}
 
 }

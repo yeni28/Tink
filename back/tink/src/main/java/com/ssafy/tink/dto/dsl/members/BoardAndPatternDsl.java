@@ -1,6 +1,7 @@
 package com.ssafy.tink.dto.dsl.members;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.querydsl.core.annotations.QueryProjection;
@@ -15,10 +16,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 public class BoardAndPatternDsl {
 
 	private long memberId;
+	private List<CommunityBoardInfoDsl> community;
 	@Builder.Default
 	private Set<BoardInfoDsl> board = new HashSet<>();
 	@Builder.Default

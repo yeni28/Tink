@@ -37,4 +37,4 @@ logging:
     level:
         web: INFO
         com: INFO
-        root: DEBUG
+        root: INFO

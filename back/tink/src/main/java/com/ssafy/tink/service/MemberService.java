@@ -13,8 +13,10 @@ import com.ssafy.tink.config.ect.BadRequestException;
 import com.ssafy.tink.db.entity.Follow;
 import com.ssafy.tink.db.entity.Member;
 import com.ssafy.tink.db.repository.MemberRepository;
+import com.ssafy.tink.dto.BoardAndPatternDto;
 import com.ssafy.tink.dto.MemberInfoDto;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
+import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
 
 import lombok.RequiredArgsConstructor;
@@ -76,8 +78,10 @@ public class MemberService {
 	}
 
 	@Transactional
-	public Optional<List<BoardAndPatternDsl>> getBoardAndPatternByMemberId(long MemberId) {
-		return Optional.ofNullable(memberRepository.findBoardAndPatternListById(MemberId));
+	public Optional<BoardAndPatternDto> getBoardAndPatternByMemberId(long memberId) {
+		List<BoardAndPatternDsl> boardAndPattern = memberRepository.findBoardAndPatternListById(memberId);
+		List<CommunityBoardInfoDsl> communityBoardInfoDsls = memberRepository.findMypageCommunityBoardToById(memberId);
+		return Optional.ofNullable(new BoardAndPatternDto(boardAndPattern, communityBoardInfoDsls));
 	}
 
 	private Member getMemberIdByAuthorization() {

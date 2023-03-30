@@ -32,20 +32,18 @@ public class CommunityBoardInfoDsl {
 
 	@Builder.Default
 	private ThumbnailInfoDsl thumbnail = new ThumbnailInfoDsl();
-	@Builder.Default
-	private MaterialInfoDsl material = new MaterialInfoDsl();
+	private MaterialInfoDsl material;
 
 	@QueryProjection
 	public CommunityBoardInfoDsl(
 		int boardId,
 		String boardCategory,
 		long memberId,
-		ThumbnailInfoDsl thumbnail,
-		MaterialInfoDsl material,
+		String title,
+		String content,
 		Timestamp createdDate,
 		Timestamp updateDate,
-		String title,
-		String content) {
+		ThumbnailInfoDsl thumbnail) {
 		this.boardId = boardId;
 		this.boardCategory = boardCategory;
 		this.memberId = memberId;
@@ -54,7 +52,6 @@ public class CommunityBoardInfoDsl {
 		this.title = title;
 		this.content = content;
 		this.thumbnail = thumbnail;
-		this.material = material;
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.tink.dto.BaseResponse;
+import com.ssafy.tink.dto.BoardAndPatternDto;
 import com.ssafy.tink.dto.MemberInfoDto;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
@@ -135,9 +136,9 @@ public class MemberController {
 	@ApiOperation(value = "회원 정보보기 API")
 	public BaseResponse<Object> getBoardAndPatternByMember(@PathVariable(name = "id") long memberId) {
 		log.info("회원 조회 시작하기");
-		Optional<List<BoardAndPatternDsl>>list = memberService.getBoardAndPatternByMemberId(memberId);
+		Optional<BoardAndPatternDto> data = memberService.getBoardAndPatternByMemberId(memberId);
 		return BaseResponse.builder()
-			.result(list)
+			.result(data)
 			.resultCode(HttpStatus.OK.value())
 			.resultMsg("도안, 소모임, 자랑글, 질문글 조회하는 API")
 			.build();
