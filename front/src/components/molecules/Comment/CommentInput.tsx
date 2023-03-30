@@ -44,7 +44,7 @@ function Comment({ comments, setComments }: Props) {
     return months || weeks || days || hours || minutes || seconds
   }
   // 댓글작성
-  const submitComment = () => {
+  const submitComment = async () => {
     const randomId = Math.random()
     const randomname = Math.random().toString(36).substring(2, 11)
     // create시간입니다.
