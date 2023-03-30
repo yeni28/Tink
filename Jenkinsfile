@@ -29,7 +29,7 @@ pipeline {
             steps{
                 dir('back/tink'){
                     sh '''
-                        cp /src/main/resources/application-key.yml /src/main/resources/application-key.yml
+                        cp /src/main/resources/application-key.yml /var/jenkins_home/workspace/tink-pipeline/back/tink/src/main/resources/application-key.yml
                     '''
                     sh'''
                         echo build start
