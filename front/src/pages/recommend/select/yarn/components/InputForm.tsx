@@ -4,9 +4,9 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import atoms from '@/components/atoms'
 
 type YarnInfo = {
-  weight: string
-  length: string
-  guage: string
+  yarnWeight: string
+  yarnLength: string
+  gauge: string
 }
 
 function InputForm() {
@@ -28,16 +28,16 @@ function InputForm() {
         >
           <div className="flex justify-between w-72">
             <label className="text-title2-bold"> 무게 </label>
-            <input {...register('weight')} />
+            <input {...register('yarnWeight')} />
           </div>
           <div className="flex justify-between w-72">
             <label className="text-title2-bold"> 길이 </label>
-            <input {...register('length')} />
+            <input {...register('yarnLength')} />
           </div>
 
           <div className="flex justify-between w-72">
             <label className="text-title2-bold"> 게이지 </label>
-            <input {...register('guage')} />
+            <input {...register('gauge')} />
           </div>
         </form>
 
