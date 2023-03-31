@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useLayoutEffect,  Suspense  } from 'react'
+import React, { useEffect, useRef, useLayoutEffect, Suspense } from 'react'
 
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Html } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import Stepone from './components/stepone'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+import Stepone from './components/stepone'
 
 import tuto from '@/styles/tutorial.module.css'
 
@@ -25,6 +25,7 @@ function KnitTutorial() {
   const imageViewer = useRef(null)
   const imageScene = useRef(null)
   const comp = useRef()
+
   useLayoutEffect(() => {
     gsap.set(imageViewer.current, { width: horizDiff, height: vertDiff })
     const setPos = gsap.quickSetter(imageViewer.current, 'background-position')
@@ -63,13 +64,19 @@ function KnitTutorial() {
       </section>
 
       {/* 3d model 영역 */}
-      <section className="w-full h-full bg-red relative">
-      <Canvas shadows className="h-screen">
-        <Suspense fallback={null}>
-          <Stepone />
-        </Suspense>
-      </Canvas>
+      <section className="w-full h-screen bg-red relative">
+        <Canvas shadows className="h-screen">
+          <Suspense fallback={null}>
+            <Stepone />
+          </Suspense>
+        </Canvas>
       </section>
+
+      {/* <section ref={imageScene} className="w-full h-screen bg-mint">
+        <div ref={imageViewer} className={tuto.secondImage}>
+          {' '}
+        </div>
+      </section> */}
     </div>
   )
 }

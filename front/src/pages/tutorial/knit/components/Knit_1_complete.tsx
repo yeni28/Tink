@@ -54,7 +54,7 @@ type GLTFResult = GLTF & {
 }
 
 export function Knit_1_complete(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF('/knit_1_complete.glb') as GLTFResult
+  const { nodes, materials } = useGLTF('/models/knit/knit_1_complete.glb') as GLTFResult
   return (
     <group {...props} dispose={null}>
       <group position={[-5.36, -1.82, 2.62]} rotation={[-Math.PI / 2, 0, 0]}>
