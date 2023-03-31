@@ -19,9 +19,6 @@ import org.springframework.stereotype.Repository;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.tink.db.entity.Pattern;
-import com.ssafy.tink.db.entity.QPattern;
-import com.ssafy.tink.db.entity.QPatternThumbnail;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
@@ -166,7 +163,7 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository{
 				return 3;
 			case "middle":
 				return 6;
-			case "hight":
+			case "high":
 				return 9;
 			default:
 				return 0;

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.SliceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -71,7 +73,6 @@ public class MemberController {
 	@GetMapping("/mypage/pattern")
 	@ApiOperation(value = "마이페이지(자신) 도안 전체 조회하는 API")
 	public BaseResponse<Object> getAllPatternByMember() {
-
 		return null;
 	}
 
