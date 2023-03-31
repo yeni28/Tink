@@ -9,7 +9,7 @@ import '@/styles/global.css'
 const container = document.getElementById('root') as HTMLElement
 
 createRoot(container).render(
-  <StrictMode>
-    <RouterProvider router={routers} />
-  </StrictMode>
+  // <StrictMode>
+  <RouterProvider router={routers} />
+  // </StrictMode>
 )

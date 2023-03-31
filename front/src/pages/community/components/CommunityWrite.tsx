@@ -48,6 +48,7 @@ function CommunityWrite() {
       <ReactQuill
         modules={modules}
         placeholder="내용을 입력해주세요."
+        style={{ height: '45rem' }}
         theme="snow"
       />
     </div>

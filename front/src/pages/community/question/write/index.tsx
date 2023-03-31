@@ -4,7 +4,6 @@ import Write from '../../components/CommunityWrite'
 
 import DrawingLine from '@/assets/drawings/drawingline.png'
 import InputBox from '@/assets/drawings/inputlinebox.png'
-import StraitLine from '@/assets/drawings/straitline.png'
 import atoms from '@/components/atoms'
 
 function WriteQuestionCommunity() {
@@ -13,8 +12,7 @@ function WriteQuestionCommunity() {
       <img alt="line" src={DrawingLine} />
       <div className="flex flex-col items-center">
         <img alt="border" className="relative" src={InputBox} width="75%" />
-
-        <div className="mt-[6rem] flex justify-center absolute  w-[42rem]">
+        <div className="mt-[6rem] flex justify-center absolute w-[42rem]">
           <Write />
         </div>
       </div>
