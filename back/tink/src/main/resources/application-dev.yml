@@ -21,7 +21,7 @@ spring:
     data:
         redis:
             host: tink-redis
-            post: 6379
+            port: 6379
 
 server:
     port: 8081 # 서비스 포트

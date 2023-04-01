@@ -3,6 +3,8 @@ package com.ssafy.tink.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.SliceImpl;
@@ -23,10 +25,15 @@ import com.ssafy.tink.dto.MemberInfoDto;
 import com.ssafy.tink.dto.PatternLikeDto;
 import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
 import com.ssafy.tink.service.MemberServiceImpl;
+import com.ssafy.tink.dto.PatternLikeDto;
+import com.ssafy.tink.dto.TokenDto;
+import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
+import com.ssafy.tink.service.MemberServiceImpl;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import springfox.documentation.annotations.ApiIgnore;
 
 @Slf4j
 @RestController
@@ -159,5 +166,16 @@ public class MemberController {
 			.build();
 	}
 
+	@GetMapping("/refresh")
+	@ApiOperation(value = "로그인한 회원의 리플래쉬 토큰 가져오기")
+	public BaseResponse<Object> getRefreshTokenByAuthentication(@ApiIgnore HttpSession session) {
+		log.info("회원 API [getRefreshTokenByAuthentication] 시작하기");
+		TokenDto token = memberService.getRefreshToken(session);
+		return BaseResponse.builder()
+			.result(token)
+			.resultCode(HttpStatus.OK.value())
+			.resultMsg("리플래쉬 토큰 발급이 성공하였습니다.")
+			.build();
+	}
 }
 

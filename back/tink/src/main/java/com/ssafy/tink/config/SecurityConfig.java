@@ -59,6 +59,7 @@ public class SecurityConfig {
 			.antMatchers("/members/{id}","/members/info/{id}").permitAll()
 			.antMatchers("/members/favorite/**").hasRole("USER")
 			.antMatchers("/members/mypage/**").hasRole("USER")
+			.antMatchers("/members/refresh").hasRole("USER")
 			.antMatchers("/file/**").hasRole("USER")
 			.anyRequest().authenticated();
 
