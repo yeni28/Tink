@@ -81,13 +81,13 @@ public class Pattern extends BaseEntity {
 	@Column(name = "yardage_description", length = 50)
 	private String yardageDescription;
 
-	@OneToMany
+	@ManyToMany
 	@JoinTable(
 		name = "PATTERN_NEEDLE",
 		joinColumns = @JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id", nullable = false),
 		inverseJoinColumns = @JoinColumn(name = "needle_id", referencedColumnName = "needle_id", nullable = false)
 	)
-	private final List<Needle> needles = new ArrayList<>();
+	private List<Needle> needles = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
@@ -160,4 +160,13 @@ public class Pattern extends BaseEntity {
 	public void setMember(Member member) {
 		this.member = member;
 	}
+
+	/*
+	 * 해당 패턴의 바늘 정보 삽입
+	 * */
+	public void addNeedle(Needle needle) {
+		this.getNeedles().add(needle);
+		needle.getPatterns().add(this);
+	}
+
 }

@@ -1,6 +1,5 @@
 package com.ssafy.tink.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,12 +7,11 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.tink.db.entity.Needle;
 import com.ssafy.tink.db.entity.Pattern;
-import com.ssafy.tink.db.entity.Thumbnail;
+import com.ssafy.tink.db.repository.NeedleRepository;
 import com.ssafy.tink.db.repository.PatternRepository;
 import com.ssafy.tink.dto.PatternDto;
 import com.ssafy.tink.dto.PatternThumbnailDto;
@@ -24,19 +22,22 @@ public class PatternServiceImpl implements PatternService {
 	@Autowired
 	private PatternRepository patternRepository;
 
+	@Autowired
+	private NeedleRepository needleRepository;
+
 	@Transactional
 	@Override
-	public void deletePattern(int patternId) throws Exception{
+	public void deletePattern(int patternId) throws Exception {
 
 		Optional<Pattern> pattern = patternRepository.findByPatternId(patternId);
-		if(pattern.isPresent()){
+		if (pattern.isPresent()) {
 			patternRepository.deleteById(patternId);
 		}
 
 	}
 
 	@Override
-	public void updatePattern(PatternDto patternDto) throws Exception{
+	public void updatePattern(PatternDto patternDto) throws Exception {
 	}
 
 	@Override
@@ -48,9 +49,9 @@ public class PatternServiceImpl implements PatternService {
 	public Optional<PatternDto> getPatternDetail(int patternId) {
 		Optional<Pattern> pattern = patternRepository.findByPatternId(patternId);
 
-		if (!pattern.isPresent())
+		if (!pattern.isPresent()) {
 			return Optional.empty();
-
+		}
 		return createPatternDto(pattern.get());
 	}
 
@@ -62,12 +63,11 @@ public class PatternServiceImpl implements PatternService {
 	private Optional<PatternDto> createPatternDto(Pattern pattern) {
 
 		List<Float> metrics = new ArrayList<>();
-		for (Needle needle: pattern.getNeedles()) {
+		for (Needle needle : pattern.getNeedles()) {
 			metrics.add(needle.getMetric());
 		}
 
 		PatternDto patternDto = PatternDto.builder()
-			.patternId(pattern.getPatternId())
 			.guagePattern(pattern.getGaugePattern())
 			.patternName(pattern.getName())
 			.category(pattern.getCategory().getCategoryName())
@@ -86,11 +86,9 @@ public class PatternServiceImpl implements PatternService {
 	}
 
 	@Override
-	public void insertPattern(PatternDto patternDto, List<PatternThumbnailDto> thumbnail) throws Exception{
+	public void insertPattern(PatternDto patternDto, List<PatternThumbnailDto> thumbnail) throws Exception {
 
 		//입력한 카데고리에 해당하는 Category를 넣음
-
-		//바늘 테이블에 metric 삽입
 
 		Pattern pattern = Pattern.builder()
 			.gaugePattern(patternDto.getGuagePattern())
@@ -103,10 +101,13 @@ public class PatternServiceImpl implements PatternService {
 			.yardageDescription(patternDto.getYarnWeightDescription())
 			.build();
 
+		//바늘 테이블에 삽입
+		for (Float metricData : patternDto.getMetric()) {
+			Needle needle = Needle.builder().metric(metricData).build();
+			pattern.addNeedle(needle);
+		}
 
 		patternRepository.save(pattern);
 	}
-
-
 
 }
