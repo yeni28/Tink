@@ -8,9 +8,14 @@ interface Pattern {
   patternName: string
 }
 
-function Search({ setPattern }: { setPattern: (pattern: Pattern) => void }) {
+interface Props {
+  setPattern: React.Dispatch<React.SetStateAction<Pattern>>
+}
+
+function Search({ setPattern }: Props) {
   const [results, setResults] = useState<Pattern[]>([])
   const input = useRef<HTMLInputElement>(null)
+
   const onSubmit = () => {
     const filter = input.current ? input.current.value.trim() : false
     if (filter) console.log(filter)
@@ -48,7 +53,7 @@ function Search({ setPattern }: { setPattern: (pattern: Pattern) => void }) {
   })
 
   return (
-    <div className="w-full py-3 px-5 bg-white border-[1px] border-black rounded-md">
+    <div className="w-80 py-3 px-5 bg-white border-[1px] border-black rounded-md absolute">
       <div className="flex items-center">
         <input
           ref={input}

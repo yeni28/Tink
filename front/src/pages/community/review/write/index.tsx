@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
 
+import Material from './components/Material'
 import ReviewWrite from './components/ReviewWrite'
-import Search from './components/Search'
+
+import { setReviewPostData } from '../../apis/SetFormData'
+
+import atoms from '@/components/atoms'
 
 interface Pattern {
   patternId: number | null
@@ -10,19 +14,28 @@ interface Pattern {
 }
 
 function WriteReviewCommunity() {
-  const [titleImage, setTitleImage] = useState<any>()
+  const [titleImage, setTitleImage] = useState<File | null>(null)
   const [imgPreview, setImgPreview] = useState<any>()
-  const { register, handleSubmit, watch, setValue } = useForm<ReviewPost>()
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<ReviewPost>()
 
   // 대표 사진 파일 삽입
   const onChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitleImage(e.target.files)
+    if (e.target.files) {
+      const file = e.target.files[0]
+      setTitleImage(file)
+    }
   }
 
   // 대표 사진 미리보기 임시 url 설정
   useEffect(() => {
-    if (titleImage && titleImage.length > 0) {
-      const file = titleImage[0]
+    if (titleImage) {
+      const file = titleImage
       setImgPreview(URL.createObjectURL(file))
     }
   }, [titleImage])
@@ -33,14 +46,39 @@ function WriteReviewCommunity() {
     patternName: '',
   })
 
-  const onSubmit: SubmitHandler<ReviewPost> = (data) => console.log(data)
+  const submitHandler: SubmitHandler<ReviewPost> = (data) => {
+    data.boardCategory = 'review'
+    data.memberEmail = '이메일 작업 필요'
+
+    if (!titleImage) return
+
+    const formData = setReviewPostData(data, titleImage)
+
+    // formData 확인용
+    // const entries = formData.entries()
+    // for (const pair of entries) {
+    //   console.log(pair[0] + ', ' + pair[1])
+    // }
+  }
+
+  const errorHandler: SubmitErrorHandler<ReviewPost> = (errors) => {
+    if (errors.multipartFile) alert(`${errors.multipartFile.message}`)
+    if (!errors.multipartFile && errors.title) alert(`${errors.title.message}`)
+    if (!errors.multipartFile && !errors.title && errors.content)
+      alert(`${errors.content.message}`)
+  }
 
   return (
     <div className="pt-[25.56rem]">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <button type="submit">제출</button>
+      <form
+        onSubmit={handleSubmit(submitHandler, errorHandler)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') e.preventDefault()
+        }}
+      >
         <div id="title-image">
-          <div className="h-[30rem] absolute left-0 top-0 bg-white opacity-70 z-20" />
+          {/* 대표 사진 위 흰색 레이어 */}
+          <div className="w-full h-[30rem] absolute left-0 top-0 bg-white opacity-70 z-20" />
           <div
             className="w-full h-[30rem] pt-[100px] overflow-hidden absolute left-0 top-0 bg-no-repeat bg-cover bg-center flex flex-col justify-center items-center"
             id="title-image"
@@ -51,13 +89,18 @@ function WriteReviewCommunity() {
               className="hidden"
               id="picture"
               type="file"
+              {...register('multipartFile', {
+                required: '대표사진을 등록해주세요.',
+              })}
               onChange={onChangeFile}
             />
             <label className="z-20" htmlFor="picture">
-              <p className="text-title3-bold">자랑글에 보여지는 첫 화면!</p>
-              <p className="text-title3-bold mb-6">
-                대표 사진을 업로드해 주세요.
-              </p>
+              <div className="flex flex-col items-center">
+                <p className="text-title3-bold">자랑글에 보여지는 첫 화면!</p>
+                <p className="text-title3-bold mb-6">
+                  대표 사진을 업로드해 주세요.
+                </p>
+              </div>
               <div className="rounded-[0.63rem] w-[13.13rem] h-12 text-title3-bold bg-grey text-white cursor-pointer flex justify-center items-center">
                 대표 사진 추가 하기
               </div>
@@ -66,99 +109,25 @@ function WriteReviewCommunity() {
         </div>
         <div className="flex flex-col items-center">
           <p className="text-headline text-grey">
-            뜨개 작품을 이해하는 데 많은 도움이 되는 정보예요! 꼼꼼히 입력해주실
-            수록 더 좋아요.
+            뜨개 작품을 이해하는 데 많은 도움이 되는 정보예요! 꼼꼼히 입력해
+            주실수록 더 좋아요.
           </p>
-          <div
-            className="flex justify-between w-[60rem] h-[15rem] px-14 py-5"
-            id="material"
-          >
-            <div className="flex flex-col gap-5">
-              <div className="flex w-80 justify-between">
-                <label className="text-headline" htmlFor="yarnName">
-                  실 이름
-                </label>
-                <input
-                  {...register('yarnName')}
-                  className="focus: outline-none"
-                  id="yarnName"
-                  type="text"
-                />
-              </div>
-              <div className="flex w-80 justify-between">
-                <label className="text-headline" htmlFor="yarnLength">
-                  실 길이
-                </label>
-                <input
-                  {...register('yarnLength')}
-                  className="focus: outline-none"
-                  id="yarnLength"
-                  type="number"
-                />
-              </div>
-              <div className="flex w-80 justify-between">
-                <label className="text-headline" htmlFor="yarnWeight">
-                  실 무게
-                </label>
-                <input
-                  {...register('yarnWeight')}
-                  className="focus: outline-none"
-                  id="yarnWeight"
-                  type="number"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col gap-5">
-              <div className="flex w-80 justify-between">
-                <label className="text-headline" htmlFor="needle">
-                  사용한 바늘
-                </label>
-                <input
-                  {...register('needle')}
-                  className="focus: outline-none"
-                  id="needle"
-                  type="text"
-                />
-              </div>
-              <div className="flex w-80 justify-between">
-                <label className="text-headline" htmlFor="time">
-                  소요 기간
-                </label>
-                <input
-                  {...register('time')}
-                  className="focus: outline-none"
-                  id="time"
-                  type="text"
-                />
-              </div>
-              <div>
-                <div className="flex w-80 justify-between mb-3">
-                  <label className="text-headline" htmlFor="pattern">
-                    도안
-                  </label>
-                  <input
-                    {...register('patternId')}
-                    readOnly
-                    className="focus: outline-none cursor-pointer"
-                    id="pattern"
-                    type="text"
-                    value={pattern.patternName}
-                    onClick={() => console.log}
-                  />
-                </div>
-                <Search
-                  setPattern={(pattern: Pattern) => setPattern(pattern)}
-                />
-              </div>
-            </div>
-          </div>
+          <Material
+            pattern={pattern}
+            register={register}
+            setPattern={setPattern}
+          />
           <div>
             <ReviewWrite
+              errors={errors}
               register={register}
               setValue={setValue}
               watch={watch}
             />
           </div>
+        </div>
+        <div className="flex justify-end mt-5 my-64">
+          <atoms.ButtonDoodle innerValue="올리기" type="submit" />
         </div>
       </form>
     </div>

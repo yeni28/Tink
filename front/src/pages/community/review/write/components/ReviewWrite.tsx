@@ -1,5 +1,10 @@
-import React, { useMemo, useState } from 'react'
-import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form'
+import React, { useMemo, useState, useEffect } from 'react'
+import {
+  FieldErrors,
+  UseFormRegister,
+  UseFormSetValue,
+  UseFormWatch,
+} from 'react-hook-form'
 import ReactQuill, { Quill } from 'react-quill'
 
 import ImageResize from '@looop/quill-image-resize-module-react'
@@ -7,14 +12,18 @@ import ImageResize from '@looop/quill-image-resize-module-react'
 import 'react-quill/dist/quill.snow.css'
 import StraitLine from '@/assets/drawings/straitline.png'
 
+Quill.register('modules/imageResize', ImageResize)
+
 function ReviewWrite({
   register,
   watch,
   setValue,
+  errors,
 }: {
   register: UseFormRegister<ReviewPost>
   watch: UseFormWatch<ReviewPost>
   setValue: UseFormSetValue<ReviewPost>
+  errors: FieldErrors<ReviewPost>
 }) {
   const [textCount, settextCount] = useState<string>('')
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +51,6 @@ function ReviewWrite({
     ['clean'], // remove formatting button
   ]
 
-  Quill.register('modules/imageResize', ImageResize)
   const modules = useMemo(
     () => ({
       toolbar: toolbarOptions,
@@ -51,11 +59,16 @@ function ReviewWrite({
     []
   )
 
+  useEffect(() => {
+    register('content', { required: '본문을 입력해주세요.' })
+  }, [register])
+
   const onEditorStateChange = (value: string) => {
     setValue('content', value)
   }
 
   const editorContent = watch('content')
+
   return (
     <div>
       <div className="flex">
@@ -64,7 +77,7 @@ function ReviewWrite({
           maxLength={25}
           placeholder="제목을 입력해주세요."
           type="text"
-          {...register('title')}
+          {...register('title', { required: '제목을 입력해주세요.' })}
           onChange={onChange}
         />
         <span className="w-32 text-body-bold text-stone-300">
