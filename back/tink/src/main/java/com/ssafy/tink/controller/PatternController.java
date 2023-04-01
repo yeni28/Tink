@@ -49,10 +49,16 @@ public class PatternController {
 	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE,
 		MediaType.MULTIPART_FORM_DATA_VALUE}, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "도안 등록", notes = "도안을 등록한다.")
-	public BaseResponse<Object> patternRegister(@RequestBody PatternDto patternDto,
+	public BaseResponse<Object> patternRegister(@RequestHeader String accessToken, @RequestBody PatternDto patternDto,
 		@RequestPart(required = false) List<MultipartFile> multipartFile) {
 
-		if (!multipartFile.isEmpty()) {
+		if (multipartFile.isEmpty()) {
+			return BaseResponse.builder()
+				.result("FAILED")
+				.resultCode(HttpStatus.NOT_FOUND.value())
+				.resultMsg("이미지 데이터가 없습니다.")
+				.build();
+		}
 
 			List<PatternThumbnailDto> fileList = new ArrayList<>();
 
@@ -69,24 +75,43 @@ public class PatternController {
 				} catch (IOException e) {
 					e.printStackTrace();
 					return BaseResponse.builder()
-						.result("SUCCESS")
-						.resultCode(HttpStatus.OK.value())
-						.resultMsg("데이터 삽입에 성공했습니다.")
+						.result("FAILED")
+						.resultCode(HttpStatus.NOT_FOUND.value())
+						.resultMsg("데이터 삽입에 실패했습니다.")
 						.build();
 				}
 			}
-			patternService.insertPattern(patternDto, fileList);
 
-		}
+			try{
+				patternService.insertPattern(patternDto, fileList);
+			}catch (Exception e){
+				e.printStackTrace();
 
-		return null;
+				return BaseResponse.builder()
+					.result("FAILED")
+					.resultCode(HttpStatus.NOT_FOUND.value())
+					.resultMsg("데이터 삽입에 실패했습니다.")
+					.build();
+			}
+
+			return BaseResponse.builder()
+				.result("FAILED")
+				.resultCode(HttpStatus.NOT_FOUND.value())
+				.resultMsg("데이터 삽입에 실패했습니다.")
+				.build();
+
+
+
 	}
 
 	@DeleteMapping("/{patternId}")
 	@ApiOperation(value = "도안 삭제", notes = "도안을 삭제한다.")
 	public BaseResponse<Object> patternDelete(@PathVariable @ApiParam(value = "도안 PK") int patternId) {
-		int result = patternService.deletePattern(patternId);
-		if (result == 0) {
+
+		try{
+		patternService.deletePattern(patternId);
+
+		}catch (Exception e){
 			return BaseResponse.builder()
 				.result("FAILED")
 				.resultCode(HttpStatus.NO_CONTENT.value())

@@ -9,11 +9,11 @@ import com.ssafy.tink.dto.PatternThumbnailDto;
 
 public interface PatternService {
 
-	int insertPattern(PatternDto patternDto, List<PatternThumbnailDto> thumbnail);
+	void insertPattern(PatternDto patternDto, List<PatternThumbnailDto> thumbnail) throws Exception;
 
-	int deletePattern(int patternId);
+	void deletePattern(int patternId) throws Exception;
 
-	int updatePattern(PatternDto patternDto);
+	void updatePattern(PatternDto patternDto) throws Exception;
 
 	Optional<PatternDto> getPatternList();
 

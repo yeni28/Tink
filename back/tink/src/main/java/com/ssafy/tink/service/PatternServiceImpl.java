@@ -1,5 +1,6 @@
 package com.ssafy.tink.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,26 +26,17 @@ public class PatternServiceImpl implements PatternService {
 
 	@Transactional
 	@Override
-	public int deletePattern(int patternId) {
+	public void deletePattern(int patternId) throws Exception{
 
 		Optional<Pattern> pattern = patternRepository.findByPatternId(patternId);
-		if(!pattern.isPresent()){
-			return 0;
-		}
-
-		try{
+		if(pattern.isPresent()){
 			patternRepository.deleteById(patternId);
-		}catch (DataIntegrityViolationException e){
-			e.printStackTrace();
-			return 0;
 		}
 
-		return 1;
 	}
 
 	@Override
-	public int updatePattern(PatternDto patternDto) {
-		return 0;
+	public void updatePattern(PatternDto patternDto) throws Exception{
 	}
 
 	@Override
@@ -94,7 +86,11 @@ public class PatternServiceImpl implements PatternService {
 	}
 
 	@Override
-	public int insertPattern(PatternDto patternDto, List<PatternThumbnailDto> thumbnail) {
+	public void insertPattern(PatternDto patternDto, List<PatternThumbnailDto> thumbnail) throws Exception{
+
+		//입력한 카데고리에 해당하는 Category를 넣음
+
+		//바늘 테이블에 metric 삽입
 
 		Pattern pattern = Pattern.builder()
 			.gaugePattern(patternDto.getGuagePattern())
@@ -108,7 +104,7 @@ public class PatternServiceImpl implements PatternService {
 			.build();
 
 
-		return 0;
+		patternRepository.save(pattern);
 	}
 
 

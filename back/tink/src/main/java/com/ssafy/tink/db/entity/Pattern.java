@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -30,6 +32,7 @@ public class Pattern extends BaseEntity {
 
 	@Id
 	@Column(name = "pattern_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int patternId;
 
 	@Column(length = 200)
@@ -140,6 +143,10 @@ public class Pattern extends BaseEntity {
 		this.yardageDescription = yardageDescription;
 		this.category = category;
 		this.member = member;
+	}
+
+	public Pattern() {
+
 	}
 
 	public void setName(String name) {
