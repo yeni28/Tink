@@ -1,8 +1,8 @@
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 import numpy as np
+from django.http import JsonResponse
 import json
-import re
 
 # json에서 임시로 데이터 읽어옴
 def getData():
@@ -90,14 +90,18 @@ def getColumn(patternList):
 
     return patternData   
 
-def recommend(patterns, row):
-    item_df = pd.DataFrame(patterns, index=row, columns=["gauge", "gauge_divisor", "row_gauge", "yardage", "yardage_max" , "wpi"])
+def recommend(request):
+
+    req_data = json.loads(request.body)
+    patterns = req_data['patterns']
+    user_input = req_data['user_input']
+
+    item_df = pd.DataFrame(patterns, columns=["gauge", "gauge_divisor", "row_gauge", "yardage", "yardage_max" , "wpi"])
+    item_df.set_index('pattern_id', inplace=True)
     item_df = item_df.fillna(0) # 결측치 0으로 세팅
     
     # 사용자 데이터(임시로 지정함)
-    usr_item = pd.DataFrame({
-         "gauge":[22], "gauge_divisor":[3], "row_gauge":[24], "yardage":[1000], "yardage_max":[1400], "wpi":[7]
-    })
+    usr_item = pd.DataFrame(user_input, columns=["gauge", "gauge_divisor", "row_gauge", "yardage", "yardage_max" , "wpi"])
 
     cosine_similarities = cosine_similarity(item_df, usr_item)
 
@@ -108,19 +112,9 @@ def recommend(patterns, row):
     # 결과 출력
     print(result)
 
-    recommendPatternId = []
-    # 유사도의 도안 id를 저장
-    for index, row in result.iterrows():
-        recommendPatternId.append([row['data']])
+    recommendPatternId = result.index.tolist()
 
-    # # 각 행 벡터와 사용자 입력 벡터 간의 코사인 유사도 계산
-    # cosine_similarities = np.dot(item_df.to_numpy(), usr_item.to_numpy().T) / (np.linalg.norm(item_df, axis=1) * np.linalg.norm(usr_item))
-
-    # 가장 유사한 데이터 추출
-    # most_similar_index = np.argmax(cosine_similarities, axis=0)
-    # most_similar_id = item_df.index[most_similar_index]
-    # most_similar_data = item_df.loc[most_similar_id]
-          
+    return JsonResponse({'recommendPatternId': recommendPatternId})
 
 if __name__ == "__main__":
      patternList = getData()
