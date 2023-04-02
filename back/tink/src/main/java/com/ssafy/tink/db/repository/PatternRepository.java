@@ -1,5 +1,6 @@
 package com.ssafy.tink.db.repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,4 +39,10 @@ public interface PatternRepository extends JpaRepository<Pattern, Integer> {
 	@EntityGraph(attributePaths = {"category", "needles"})
 	@Query(value = "SELECT * FROM Pattern p WHERE p.pattern_id=:patternId and p.member_id=:memberId", nativeQuery = true)
 	Optional<Pattern> findByPattern(@Param("patternId") int patternId, @Param("memberId") Long memberId);
+
+	@Query(value = "select * from pattern p inner join "
+		+ "(select pattern_id, count(*) as like_count from pattern_likes pl "
+		+ "WHERE pl.created_date >= :createdDate AND pl.created_date < :endDate group by pattern_id order by like_count desc) pl "
+		+ "on p.pattern_id = pl.pattern_id", nativeQuery = true)
+	List<Pattern> findWeeklyBest(@Param("createdDate") Timestamp createdDate, @Param("endDate") Timestamp endDate);
 }

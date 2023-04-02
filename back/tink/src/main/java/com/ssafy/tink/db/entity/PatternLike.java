@@ -1,7 +1,5 @@
 package com.ssafy.tink.db.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -18,10 +16,10 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "pattern_likes")
-@IdClass(PatternLike.class)
+@IdClass(PatternLikeId.class)
 @Getter
 @NoArgsConstructor
-public class PatternLike implements Serializable {
+public class PatternLike extends BaseEntity {
 
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)

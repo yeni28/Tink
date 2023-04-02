@@ -27,6 +27,7 @@ public class PatternThumbnailDto {
 	}
 
 	public PatternThumbnailDto(PatternThumbnail thumbnail) {
+		this.patternId = thumbnail.getPattern().getPatternId();
 		this.mainImg = thumbnail.getMainImg();
 		this.thumbImg = thumbnail.getThumbImg();
 	}

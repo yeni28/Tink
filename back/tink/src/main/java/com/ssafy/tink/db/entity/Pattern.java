@@ -99,7 +99,7 @@ public class Pattern extends BaseEntity {
 	@JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
 	@NotNull
 	private Member member;
-	@OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)
 	@JsonBackReference
 	private List<PatternThumbnail> patternThumbnails;
@@ -193,8 +193,36 @@ public class Pattern extends BaseEntity {
 		needle.getPatterns().add(this);
 	}
 
-	@OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	@JsonBackReference
 	private List<PatternLike> patternLikes = new ArrayList<>();
 
+	@Override
+	public String toString() {
+		return "Pattern{" +
+			"keywords=" + keywords +
+			", packs=" + packs +
+			", needles=" + needles +
+			", patternId=" + patternId +
+			", name='" + name + '\'' +
+			", difficultySum=" + difficultySum +
+			", difficultyCnt=" + difficultyCnt +
+			", difficultyAvg=" + difficultyAvg +
+			", downloadUrl='" + downloadUrl + '\'' +
+			", gauge=" + gauge +
+			", gaugeDivisor=" + gaugeDivisor +
+			", gaugePattern='" + gaugePattern + '\'' +
+			", rowGauge=" + rowGauge +
+			", yardage=" + yardage +
+			", yardageMax=" + yardageMax +
+			", sizesAvailable='" + sizesAvailable + '\'' +
+			", notesHtml='" + notesHtml + '\'' +
+			", yarnWeightDescription='" + yarnWeightDescription + '\'' +
+			", yardageDescription='" + yardageDescription + '\'' +
+			", category=" + category +
+			", member=" + member +
+			", patternThumbnails=" + patternThumbnails +
+			", patternLikes=" + patternLikes +
+			'}';
+	}
 }

@@ -10,11 +10,11 @@ import com.ssafy.tink.db.entity.PatternThumbnail;
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 @ApiModel("PatternInfoDto")
-@ToString
 @Getter
+@NoArgsConstructor
 public class PatternInfoDto {
 
 	private List<NeedleDto> needles = new ArrayList<>();

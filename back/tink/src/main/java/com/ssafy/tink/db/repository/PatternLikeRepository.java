@@ -7,4 +7,5 @@ import com.ssafy.tink.db.entity.PatternLike;
 
 @Repository
 public interface PatternLikeRepository extends JpaRepository<PatternLike, Integer> {
+
 }

@@ -257,7 +257,23 @@ public class PatternController {
 	@GetMapping("/best")
 	@ApiOperation(value = "도안 주간 베스트", notes = "도안 주간 베스트를 조회한다.")
 	public BaseResponse<Object> getWeeklyBest() {
-		return null;
+
+		try {
+			List<PatternInfoDto> results = patternService.getWeeklyBest();
+
+			return BaseResponse.builder()
+				.result(results)
+				.resultCode(HttpStatus.OK.value())
+				.resultMsg("정상적으로 조회되었습니다.")
+				.build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return BaseResponse.builder()
+				.result("FAILED")
+				.resultCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+				.resultMsg("처리되지 못했습니다.")
+				.build();
+		}
 	}
 
 }

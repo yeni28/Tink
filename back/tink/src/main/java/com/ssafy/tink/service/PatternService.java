@@ -1,5 +1,7 @@
 package com.ssafy.tink.service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -358,6 +360,17 @@ public class PatternService {
 			.build();
 
 		patternLikeRepository.save(patternLike);
+	}
+
+	public List<PatternInfoDto> getWeeklyBest() throws Exception {
+		Timestamp createdDate = Timestamp.valueOf(LocalDateTime.now());
+		Timestamp endDate = Timestamp.valueOf(LocalDateTime.now().plusWeeks(1));
+
+		List<Pattern> patterns = patternRepository.findWeeklyBest(createdDate, endDate);
+
+		List<PatternInfoDto> results = patterns.stream().map(PatternInfoDto::new).collect(Collectors.toList());
+		return results;
+
 	}
 
 }
