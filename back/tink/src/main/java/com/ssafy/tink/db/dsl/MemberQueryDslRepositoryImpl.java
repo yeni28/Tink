@@ -18,8 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.ssafy.tink.db.entity.QPatternThumbnail;
+import com.ssafy.tink.db.entity.QThumbnail;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
+import com.ssafy.tink.dto.dsl.members.BoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
 import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
@@ -168,5 +172,69 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository{
 			default:
 				return 0;
 		}
+	}
+
+	@Override
+	public List<PatternInfoDsl> findPatternAllByMypage() {
+		Map<Integer, PatternInfoDsl> result = jpaQueryFactory.from(pattern)
+			.leftJoin(patternThumbnail).on(pattern.patternId.eq(patternThumbnail.pattern.patternId))
+			.orderBy(pattern.createdDate.desc())
+			.transform(groupBy(pattern.patternId).as(new QPatternInfoDsl(
+				pattern.patternId,
+				pattern.name,
+				list(new QPatternThumbInfoDsl(
+					patternThumbnail.patternThumbnailId,
+					patternThumbnail.main_img,
+					patternThumbnail.thumb_img
+				)))
+			));
+
+		return result.keySet().stream()
+			.map(result::get)
+			.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<BoardInfoDsl> findBoardAllByMypage(String category) {
+		Map<Integer, BoardInfoDsl> result = jpaQueryFactory.selectFrom(board)
+			.where(board.boardCategory.eq(category))
+			.orderBy(board.createdDate.desc())
+			.transform(groupBy(board.boardId).as(new QBoardInfoDsl(
+				board.boardId,
+				board.boardCategory,
+				board.member.memberId,
+				board.createdDate,
+				board.updatedDate,
+				board.title,
+				board.content
+			)));
+		return result.keySet().stream()
+			.map(result::get)
+			.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<CommunityBoardInfoDsl> findCommuntityAllByMypage() {
+		Map<Integer, CommunityBoardInfoDsl> result = jpaQueryFactory.selectFrom(board)
+			.leftJoin(thumbnail).on(thumbnail.thumbnailId.eq(board.thumbnail.thumbnailId))
+			.where(board.boardCategory.eq(BOARD_CATEGORY_COMMUNTITY))
+			.orderBy(board.createdDate.desc())
+			.transform(groupBy(board.boardId).as(new QCommunityBoardInfoDsl(
+				board.boardId,
+				board.boardCategory,
+				board.member.memberId,
+				board.title,
+				board.content,
+				board.createdDate,
+				board.updatedDate,
+				new QThumbnailInfoDsl(
+					thumbnail.thumbnailId,
+					thumbnail.mainImg,
+					thumbnail.thumbImg
+				)
+			)));
+		return result.keySet().stream()
+			.map(result::get)
+			.collect(Collectors.toList());
 	}
 }

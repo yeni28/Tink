@@ -11,6 +11,8 @@ import com.ssafy.tink.dto.BoardAndPatternDto;
 import com.ssafy.tink.dto.MemberInfoDto;
 import com.ssafy.tink.dto.PatternLikeDto;
 import com.ssafy.tink.dto.TokenDto;
+import com.ssafy.tink.dto.dsl.members.BoardInfoDsl;
+import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
 import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
 
@@ -24,5 +26,9 @@ public interface MemberService {
 	Optional<BoardAndPatternDto> getBoardAndPatternByMemberId(long memberId);
 	List<PatternInfoDsl> getFavoriteFromPattern(String difficulty);
 	String likedPatternToMember(List<PatternLikeDto> patterns);
+
+	List<PatternInfoDsl> getPatternAllByMypage();
+	List<BoardInfoDsl> getBoardAllByMypage(String category);
+	List<CommunityBoardInfoDsl> getCommnutityBoardAllByMypage();
 	TokenDto getRefreshToken(HttpSession session);
 }

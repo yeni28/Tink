@@ -29,6 +29,7 @@ import com.ssafy.tink.dto.MemberInfoDto;
 import com.ssafy.tink.dto.PatternLikeDto;
 import com.ssafy.tink.dto.TokenDto;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
+import com.ssafy.tink.dto.dsl.members.BoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
 import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
@@ -163,5 +164,23 @@ public class MemberServiceImpl implements MemberService{
 			.refreshToken(refresh)
 			.build();
 		return token;
+	}
+
+	@Override
+	@Transactional
+	public List<PatternInfoDsl> getPatternAllByMypage() {
+		return memberRepository.findPatternAllByMypage();
+	}
+
+	@Override
+	@Transactional
+	public List<BoardInfoDsl> getBoardAllByMypage(String category) {
+		return memberRepository.findBoardAllByMypage(category);
+	}
+
+	@Override
+	@Transactional
+	public List<CommunityBoardInfoDsl> getCommnutityBoardAllByMypage() {
+		return memberRepository.findCommuntityAllByMypage();
 	}
 }
