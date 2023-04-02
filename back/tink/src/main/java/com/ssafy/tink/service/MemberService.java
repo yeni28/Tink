@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Service;
+
 import com.ssafy.tink.dto.BoardAndPatternDto;
 import com.ssafy.tink.dto.MemberInfoDto;
 import com.ssafy.tink.dto.PatternLikeDto;
@@ -12,6 +14,7 @@ import com.ssafy.tink.dto.TokenDto;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
 import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
 
+@Service
 public interface MemberService {
 
 	Optional<MemberInfoDto> getProfileByMemberId(long memberId);
