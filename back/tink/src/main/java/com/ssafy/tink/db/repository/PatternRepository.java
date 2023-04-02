@@ -17,6 +17,10 @@ import com.ssafy.tink.db.entity.Pattern;
 @Repository
 public interface PatternRepository extends JpaRepository<Pattern, Integer> {
 
+	//추천 시스템을 위한 쿼리
+	@Query("SELECT p FROM Pattern p")
+	List<Pattern> findAllPattern();
+
 	@EntityGraph(attributePaths = {"category", "needles"})
 	Optional<Pattern> findByPatternId(int patternId);
 
