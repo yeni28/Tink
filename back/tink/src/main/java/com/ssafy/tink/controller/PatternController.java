@@ -47,11 +47,10 @@ public class PatternController {
 	@Autowired
 	private FileService fileService;
 
-	@PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,
-		"application/octet-stream"}, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "도안 등록", notes = "도안을 등록한다.")
 	public BaseResponse<Object> patternRegister(@RequestPart("patternDto") PatternDto patternDto,
-		@RequestPart List<MultipartFile> multipartFile) {
+		@RequestPart("files") List<MultipartFile> multipartFile) {
 
 		if (multipartFile.isEmpty()) {
 			return BaseResponse.builder()
@@ -128,7 +127,7 @@ public class PatternController {
 	@PutMapping()
 	@ApiOperation(value = "도안 수정", notes = "도안을 수정한다.")
 	public BaseResponse<Object> patternUpdate(@RequestPart("patternDto") PatternDto patternDto,
-		@RequestPart("multipartFile") List<MultipartFile> multipartFile) {
+		@RequestPart("files") List<MultipartFile> multipartFile) {
 
 		List<PatternThumbnailDto> fileList = new ArrayList<>();
 

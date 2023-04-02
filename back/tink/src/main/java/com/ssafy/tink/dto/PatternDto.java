@@ -4,9 +4,11 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @ApiModel("PatternDTO")
 @Getter
+@NoArgsConstructor
 public class PatternDto {
 
 	int patternId;//pk
