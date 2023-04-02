@@ -1,5 +1,7 @@
 package com.ssafy.tink.dto;
 
+import com.ssafy.tink.db.entity.PatternThumbnail;
+
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,7 +9,7 @@ import lombok.Getter;
 @ApiModel("PatternThumbnailDto")
 @Getter
 public class PatternThumbnailDto {
-	
+
 	private String mainImg;
 
 	private String thumbImg;
@@ -15,10 +17,14 @@ public class PatternThumbnailDto {
 	private int patternId;
 
 	@Builder
-	public PatternThumbnailDto(String mainImg, String thumbImg, int patternId) {
+	public PatternThumbnailDto(String mainImg, String thumbImg) {
 		this.mainImg = mainImg;
 		this.thumbImg = thumbImg;
-		this.patternId = patternId;
+	}
+
+	public PatternThumbnailDto(PatternThumbnail thumbnail) {
+		this.mainImg = thumbnail.getMainImg();
+		this.thumbImg = thumbnail.getThumbImg();
 	}
 
 }

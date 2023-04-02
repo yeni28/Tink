@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,6 +54,7 @@ public class Needle {
 	private String prettyMetric;
 
 	@ManyToMany(mappedBy = "needles")
+	@JsonBackReference
 	private List<Pattern> patterns = new ArrayList<>();
 
 	@Builder

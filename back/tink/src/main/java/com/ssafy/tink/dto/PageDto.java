@@ -3,9 +3,13 @@ package com.ssafy.tink.dto;
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @ApiModel("PageDto")
 @Getter
+@NoArgsConstructor
+@ToString
 public class PageDto {
 
 	//현재 페이지
@@ -15,19 +19,13 @@ public class PageDto {
 	private String keyword;
 
 	//정렬 방식
-	private SortTypeEnum sortTypeEnum;
+	private String sortType;
 
 	@Builder
-	public PageDto(int nowPageNum, String keyword, SortTypeEnum sortTypeEnum) {
+	public PageDto(int nowPageNum, String keyword, String sortType) {
 		this.nowPageNum = nowPageNum;
 		this.keyword = keyword;
-		this.sortTypeEnum = sortTypeEnum;
+		this.sortType = sortType;
 	}
 
-}
-
-enum SortTypeEnum{
-	LATELY,
-	NAME,
-	BEST
 }

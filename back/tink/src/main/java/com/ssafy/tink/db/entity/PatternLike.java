@@ -1,5 +1,7 @@
 package com.ssafy.tink.db.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -8,34 +10,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.sun.istack.NotNull;
-
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "difficulty_vote")
-@IdClass(DifficultyVoteId.class)
+@Table(name = "pattern_likes")
+@IdClass(PatternLike.class)
 @Getter
-public class DifficultyVote {
+@NoArgsConstructor
+public class PatternLike implements Serializable {
 
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id", referencedColumnName = "member_id")
+	@JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
 	private Member member;
 
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id")
+	@JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id", nullable = false)
 	private Pattern pattern;
 
-	@NotNull
-	private int score;
-
 	@Builder
-	public DifficultyVote(Member member, Pattern pattern, int score) {
+	public PatternLike(Member member, Pattern pattern) {
 		this.member = member;
 		this.pattern = pattern;
-		this.score = score;
 	}
+
 }

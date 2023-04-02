@@ -14,11 +14,15 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
+
 import lombok.Getter;
+import lombok.ToString;
 
 @Entity
 @Getter
+@ToString
 public class Category {
 
 	@Id
@@ -35,13 +39,13 @@ public class Category {
 	private int depth;
 
 	@ManyToOne
-	@NotNull
-	@JoinColumn(name = "parent_id", referencedColumnName = "category_id", nullable = false)
+	@JoinColumn(name = "parent_id", referencedColumnName = "category_id")
 	private Category parent;
 
 	@OneToMany(mappedBy = "category")
+	@JsonManagedReference
 	private List<Pattern> patterns = new ArrayList<>();
-	
+
 	public void addPattern(Pattern pattern) {
 		pattern.setCategory(this);
 		patterns.add(pattern);
