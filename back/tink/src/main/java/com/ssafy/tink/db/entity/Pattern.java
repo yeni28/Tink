@@ -19,6 +19,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -26,20 +28,15 @@ import com.sun.istack.NotNull;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @DynamicUpdate
 @DynamicInsert
 @Getter
+@NoArgsConstructor
 public class Pattern extends BaseEntity {
 
-	// @ManyToMany
-	// @JoinTable(
-	// 	name = "PATTERN_LIKES",
-	// 	joinColumns = @JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id"),
-	// 	inverseJoinColumns = @JoinColumn(name = "member_id", referencedColumnName = "member_id")
-	// )
-	// private final List<Member> patternLikes = new ArrayList<>();
 	@ManyToMany
 	@JoinTable(
 		name = "PATTERN_KEYWORD",
@@ -102,7 +99,9 @@ public class Pattern extends BaseEntity {
 	@JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
 	@NotNull
 	private Member member;
-	@OneToMany(mappedBy = "pattern")
+	@OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, orphanRemoval = true)
+	@Fetch(FetchMode.SUBSELECT)
+	@JsonBackReference
 	private List<PatternThumbnail> patternThumbnails;
 
 	@Builder
@@ -127,18 +126,6 @@ public class Pattern extends BaseEntity {
 		this.yardageDescription = yardageDescription;
 		this.category = category;
 		this.member = member;
-	}
-
-	public Pattern() {
-
-	}
-
-	/*
-	 * 해당 패턴의 바늘 정보 삽입
-	 * */
-	public void addNeedle(Needle needle) {
-		this.getNeedles().add(needle);
-		needle.getPatterns().add(this);
 	}
 
 	public void setDifficultySum(int difficultySum) {
@@ -193,20 +180,21 @@ public class Pattern extends BaseEntity {
 		this.yardageMax = yardageMax;
 	}
 
-	public void setSizesAvailable(String sizesAvailable) {
-		this.sizesAvailable = sizesAvailable;
-	}
-
 	public void setNotesHtml(String notesHtml) {
 		this.notesHtml = notesHtml;
 	}
 
-	public void setYarnWeightDescription(String yarnWeightDescription) {
-		this.yarnWeightDescription = yarnWeightDescription;
+	public void addPatternThumbnail(PatternThumbnail patternThumbnail) {
+		this.getPatternThumbnails().add(patternThumbnail);
+		patternThumbnail.setPattern(this);
 	}
 
-	public void setYardageDescription(String yardageDescription) {
-		this.yardageDescription = yardageDescription;
+	/*
+	 * 해당 패턴의 바늘 정보 삽입
+	 * */
+	public void addNeedle(Needle needle) {
+		this.getNeedles().add(needle);
+		needle.getPatterns().add(this);
 	}
 
 }

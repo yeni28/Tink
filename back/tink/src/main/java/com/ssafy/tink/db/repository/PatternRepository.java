@@ -35,4 +35,7 @@ public interface PatternRepository extends JpaRepository<Pattern, Integer> {
 	@Query(value = "SELECT * FROM Pattern p INNER JOIN (SELECT pattern_id, COUNT(*) AS like_count FROM pattern_likes GROUP BY pattern_id ORDER BY like_count DESC ) pl ON p.pattern_id = pl.pattern_id ORDER BY pl.like_count DESC, p.name ASC", nativeQuery = true)
 	List<Pattern> findOrderByLikes(Pageable pageable);
 
+	@EntityGraph(attributePaths = {"category", "needles"})
+	@Query(value = "SELECT * FROM Pattern p WHERE p.pattern_id=:patternId and p.member_id=:memberId", nativeQuery = true)
+	Optional<Pattern> findByPattern(@Param("patternId") int patternId, @Param("memberId") Long memberId);
 }

@@ -58,17 +58,35 @@ public class PatternService {
 	@Transactional
 	public void deletePattern(int patternId) throws Exception {
 
-		Optional<Pattern> pattern = patternRepository.findByPatternId(patternId);
-		if (pattern.isPresent()) {
-			patternRepository.deleteById(patternId);
-		} else {
+		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
+		Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
+
+		Optional<Pattern> getPattern = patternRepository.findByPattern(patternId,
+			member.get().getMemberId());
+
+		if (!getPattern.isPresent()) {
 			throw new Exception();
 		}
+
+		//해당 도안을 등록한 사용자가 아닌 경우
+		if (!getPattern.get().getMember().getMemberId().equals(member.get().getMemberId())) {
+			throw new Exception();
+		}
+
+		patternRepository.deleteById(patternId);
 
 	}
 
 	public void updatePattern(PatternDto patternDto, List<PatternThumbnailDto> fileList) throws Exception {
-		Optional<Pattern> getPattern = patternRepository.findByPatternId(patternDto.getPatternId());
+		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
+		Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
+
+		Optional<Pattern> getPattern = patternRepository.findByPattern(patternDto.getPatternId(),
+			member.get().getMemberId());
+
+		if (!getPattern.isPresent()) {
+			throw new Exception();
+		}
 
 		Pattern updatePattern = getPattern.get();
 
@@ -81,7 +99,15 @@ public class PatternService {
 		updatePattern.setYardage(patternDto.getYardage());
 		updatePattern.setYardageMax(patternDto.getYardageMax());
 
-		//파일 수정 처리 추가하기
+		//파일 수정 처리
+		for (PatternThumbnailDto dto : fileList) {
+			PatternThumbnail request = PatternThumbnail.builder()
+				.mainImg(dto.getMainImg())
+				.pattern(updatePattern)
+				.thumbImg(dto.getThumbImg())
+				.build();
+			updatePattern.addPatternThumbnail(request);
+		}
 
 		patternRepository.save(updatePattern);
 	}
@@ -225,8 +251,8 @@ public class PatternService {
 
 	public void setLevelVote(int patternId, int difficultyNum) throws Exception {
 		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
-		//Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
-		Optional<Member> member = memberRepository.findById((long)10);
+		Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
+
 		Optional<Pattern> pattern = patternRepository.findByPatternId(patternId);
 
 		//난이도 테이블에 투표 정보 저장
@@ -263,48 +289,65 @@ public class PatternService {
 		Optional<Category> category = categoryRepository.findByCategoryName(patternDto.getCategory());
 
 		//해당 userId에 해당하는 member를 찾음
-		//Optional<Member> member = memberRepository.findById(Long.parseLong(userId));
-		Optional<Member> member = memberRepository.findById((long)10);
+		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
+		Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
+		//Optional<Member> member = memberRepository.findById((long)(10));
+
+		System.out.println(patternDto);
+		System.out.println(thumbnail.toString());
+
+		if (!category.isPresent()) {
+			throw new Exception();
+		}
+		if (!member.isPresent()) {
+			throw new Exception();
+		}
 
 		//도안 테이블 삽입
-		if (category.isPresent() && member.isPresent()) {
-			Pattern pattern = Pattern.builder()
-				.gaugePattern(patternDto.getGuagePattern())
-				.gauge(patternDto.getGauge())
-				.gaugeDivisor(patternDto.getGaugeDivisor())
-				.notesHtml(patternDto.getNotesHtml())
-				.rowGauge(patternDto.getRowGauge())
-				.name(patternDto.getPatternName())
-				.yardage(patternDto.getYardage())
-				.yardageMax(patternDto.getYardageMax())
-				.yardageDescription(patternDto.getYarnWeightDescription())
-				.category(category.get())
-				.member(member.get())
+		Pattern pattern = Pattern.builder()
+			.gaugePattern(patternDto.getGuagePattern())
+			.gauge(patternDto.getGauge())
+			.gaugeDivisor(patternDto.getGaugeDivisor())
+			.notesHtml(patternDto.getNotesHtml())
+			.rowGauge(patternDto.getRowGauge())
+			.name(patternDto.getPatternName())
+			.yardage(patternDto.getYardage())
+			.yardageMax(patternDto.getYardageMax())
+			.yardageDescription(patternDto.getYarnWeightDescription())
+			.category(category.get())
+			.member(member.get())
+			.build();
+
+		System.out.println(pattern.toString());
+
+		//도안 썸네일 테이블에 삽입
+		for (PatternThumbnailDto dto : thumbnail) {
+			PatternThumbnail request = PatternThumbnail.builder()
+				.mainImg(dto.getMainImg())
+				.thumbImg(dto.getThumbImg())
+				.pattern(pattern)
 				.build();
+			patternThumbnailRepository.save(request);
 
-			//도안 썸네일 테이블에 삽입
-			for (PatternThumbnailDto dto : thumbnail) {
-				PatternThumbnail request = PatternThumbnail.builder()
-					.mainImg(dto.getMainImg())
-					.thumbImg(dto.getThumbImg())
-					.pattern(pattern)
-					.build();
-				patternThumbnailRepository.save(request);
-			}
-
-			//바늘 테이블에 삽입
-			Needle needle = Needle.builder().metric(patternDto.getMetric()).build();
-			pattern.addNeedle(needle);
-
-			patternRepository.save(pattern);
+			pattern.addPatternThumbnail(request);//PatternThumbnail 객체를 Pattern 객체의 patternThumbnails 리스트에 추가
 		}
+
+		//바늘 테이블에 삽입
+		Needle needle = Needle.builder().metric(patternDto.getMetric()).build();
+		pattern.addNeedle(needle);
+
+		patternRepository.save(pattern);
+
 	}
 
 	public void setPatternLike(int patternId) throws Exception {
-		//Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
-		Optional<Member> member = memberRepository.findById((long)10);
-		//Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
+		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
+		Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
 		Optional<Pattern> pattern = patternRepository.findByPatternId(patternId);
+
+		if (!member.isPresent() || !pattern.isPresent()) {
+			throw new Exception();
+		}
 
 		Pattern getPattern = pattern.get();
 		Member getMember = member.get();
@@ -314,12 +357,7 @@ public class PatternService {
 			.member(getMember)
 			.build();
 
-		try {
-			patternLikeRepository.save(patternLike);
-		} catch (Exception e) {
-			throw new Exception();
-		}
-
+		patternLikeRepository.save(patternLike);
 	}
 
 }

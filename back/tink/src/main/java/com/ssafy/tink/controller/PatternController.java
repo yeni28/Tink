@@ -234,13 +234,23 @@ public class PatternController {
 
 	@GetMapping("/level")
 	@ApiOperation(value = "도안 난이도 투표", notes = "도안 난이도를 투표한다.")
-	public void setLevelVote(@RequestParam int difficultyNum,
+	public BaseResponse<Object> setLevelVote(@RequestParam int difficultyNum,
 		@RequestParam int patternId) {
 
 		try {
 			patternService.setLevelVote(patternId, difficultyNum);
+			return BaseResponse.builder()
+				.result("SUCCESS")
+				.resultCode(HttpStatus.OK.value())
+				.resultMsg("정상적으로 처리되었습니다.")
+				.build();
 		} catch (Exception e) {
 			e.printStackTrace();
+			return BaseResponse.builder()
+				.result("FAILED")
+				.resultCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+				.resultMsg("처리되지 못했습니다.")
+				.build();
 		}
 	}
 

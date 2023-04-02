@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
 import lombok.Builder;
@@ -34,6 +35,7 @@ public class PatternThumbnail {
 	@ManyToOne
 	@JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id", nullable = false)
 	@NotNull
+	@JsonManagedReference
 	private Pattern pattern;
 
 	@Builder
@@ -47,5 +49,9 @@ public class PatternThumbnail {
 	public PatternThumbnail(String mainImg, String thumbImg) {
 		this.mainImg = mainImg;
 		this.thumbImg = thumbImg;
+	}
+
+	public void setPattern(Pattern pattern) {
+		this.pattern = pattern;
 	}
 }

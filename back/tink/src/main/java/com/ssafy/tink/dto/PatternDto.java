@@ -64,4 +64,23 @@ public class PatternDto {
 		this.yarnWeightDescription = yarnWeightDescription;
 		this.metric = metric;
 	}
+
+	@Override
+	public String toString() {
+		return "PatternDto{" +
+			"patternId=" + patternId +
+			", parentCategory='" + parentCategory + '\'' +
+			", category='" + category + '\'' +
+			", gauge=" + gauge +
+			", gaugeDivisor=" + gaugeDivisor +
+			", guagePattern='" + guagePattern + '\'' +
+			", rowGauge=" + rowGauge +
+			", patternName='" + patternName + '\'' +
+			", notesHtml='" + notesHtml + '\'' +
+			", yardage=" + yardage +
+			", yardageMax=" + yardageMax +
+			", yarnWeightDescription='" + yarnWeightDescription + '\'' +
+			", metric=" + metric +
+			'}';
+	}
 }

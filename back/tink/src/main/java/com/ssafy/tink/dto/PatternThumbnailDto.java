@@ -5,9 +5,13 @@ import com.ssafy.tink.db.entity.PatternThumbnail;
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @ApiModel("PatternThumbnailDto")
 @Getter
+@ToString
+@NoArgsConstructor
 public class PatternThumbnailDto {
 
 	private String mainImg;
