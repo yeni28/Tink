@@ -93,7 +93,7 @@ public class Pattern extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
 	@NotNull
-	@JsonBackReference
+	@JsonManagedReference
 	private Category category;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
@@ -152,10 +152,6 @@ public class Pattern extends BaseEntity {
 		this.member = member;
 	}
 
-	public void setDownloadUrl(String downloadUrl) {
-		this.downloadUrl = downloadUrl;
-	}
-
 	public void setGauge(Float gauge) {
 		this.gauge = gauge;
 	}
@@ -196,5 +192,9 @@ public class Pattern extends BaseEntity {
 		this.getNeedles().add(needle);
 		needle.getPatterns().add(this);
 	}
+
+	@OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonBackReference
+	private List<PatternLike> patternLikes = new ArrayList<>();
 
 }
