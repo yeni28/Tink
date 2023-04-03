@@ -25,6 +25,7 @@ import com.ssafy.tink.db.repository.JarangLikesRepository;
 import com.ssafy.tink.db.repository.MaterialRepository;
 import com.ssafy.tink.db.repository.MemberRepository;
 import com.ssafy.tink.db.repository.PatternRepository;
+import com.ssafy.tink.db.repository.ReviewInfoInterface;
 import com.ssafy.tink.db.repository.ThumbnailRepository;
 import com.ssafy.tink.dto.PatternInfoDto;
 import com.ssafy.tink.dto.PatternListDto;
@@ -180,20 +181,20 @@ public class ReviewService {
 	}
 
 	@Transactional
-	public List<Board> getBoardList(String filter, String boardCategory) {
+	public List<ReviewInfoInterface> getBoardList(String filter, String boardCategory) {
 
-		List<Board> reviewList;
+		List<ReviewInfoInterface> reviewList = new ArrayList<>();
 
 		if(filter.equals("최신순")){
-			reviewList = boardRepository.findBoardAllByBoardCategoryOrderByBoardIdDesc(boardCategory).orElseThrow(()->{
+			reviewList = boardRepository.findReviewAllByBoardCategoryOrderByBoardIdDesc(boardCategory).orElseThrow(()->{
 				return new IllegalArgumentException("게시글 목록 정보를 찾을 수 없습니다.");
 			});
 		}else if(filter.equals("인기순")){
-			reviewList = boardRepository.findBoardAllByBoardCategoryOrderByHitDesc(boardCategory).orElseThrow(()->{
+			reviewList = boardRepository.findReviewAllByBoardCategoryOrderByHitDesc(boardCategory).orElseThrow(()->{
 				return new IllegalArgumentException("게시글 목록 정보를 찾을 수 없습니다.");
 			});
 		}else{
-			reviewList = boardRepository.findBoardAllByBoardCategoryOrderByBoardIdAsc(boardCategory).orElseThrow(()->{
+			reviewList = boardRepository.findReviewAllByBoardCategoryOrderByBoardIdAsc(boardCategory).orElseThrow(()->{
 				return new IllegalArgumentException("게시글 목록 정보를 찾을 수 없습니다.");
 			});
 		}
