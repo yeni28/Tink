@@ -15,17 +15,26 @@ import lombok.Setter;
 @NoArgsConstructor
 public class MemberInfoDto {
 
-	private long memberId;
 	private String email;
+	private String nickname;
 	private long follows;
 	private long follower;
+	private boolean isFollow;
 	private Thumbnail thumbnail;
 
 	@Builder
-	public MemberInfoDto(String email, Thumbnail thumbnail, long follower, long follows) {
+	public MemberInfoDto(
+		String email,
+		String nickname,
+		Thumbnail thumbnail,
+		long follower,
+		long follows,
+		boolean isFollow) {
 		this.email = email;
+		this.nickname = nickname;
 		this.thumbnail = thumbnail;
 		this.follower = follower;
 		this.follows = follows;
+		this.isFollow = isFollow;
 	}
 }
