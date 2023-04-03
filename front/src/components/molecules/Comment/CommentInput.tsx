@@ -92,7 +92,7 @@ function Comment({ comments, setComments }: Props) {
             value={newcomment}
             onChange={onChange}
             // 엔터키로 입력 가능
-            onKeyPress={handleKeyPress}
+            onKeyUp={handleKeyPress}
           />
           <button
             className="w-[9rem] ml-[2rem]"

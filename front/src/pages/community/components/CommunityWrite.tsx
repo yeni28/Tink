@@ -5,6 +5,7 @@ import ImageResize from '@looop/quill-image-resize-module-react'
 
 import 'react-quill/dist/quill.snow.css'
 import StraitLine from '@/assets/drawings/straitline.png'
+Quill.register('modules/ImageResize', ImageResize)
 
 function CommunityWrite() {
   const [textCount, settextCount] = useState<string>('')
@@ -13,7 +14,6 @@ function CommunityWrite() {
     const inputValue = event.target.value
     settextCount(inputValue)
   }
-  Quill.register('modules/ImageResize', ImageResize)
   const modules = useMemo(
     () => ({
       toolbar: {
@@ -48,6 +48,7 @@ function CommunityWrite() {
       <ReactQuill
         modules={modules}
         placeholder="내용을 입력해주세요."
+        style={{ height: '45rem' }}
         theme="snow"
       />
     </div>

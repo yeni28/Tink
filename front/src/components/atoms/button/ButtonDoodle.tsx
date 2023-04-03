@@ -3,15 +3,16 @@ import React from 'react'
 import Doodle from '@/assets/drawings/ButtonDoodle.png'
 
 interface ButtonDoodleProps {
+  type?: 'button' | 'submit' | 'reset'
   innerValue: string
-  onClick: () => void
+  onClick?: () => void
 }
 
-function ButtonDoodle({ innerValue, onClick }: ButtonDoodleProps) {
+function ButtonDoodle({ innerValue, onClick, type }: ButtonDoodleProps) {
   return (
     <button
       className="font-cha text-title2 text-white relative"
-      type="button"
+      type={type}
       onClick={onClick}
     >
       <img alt="doodle" className="w-[8.44rem] h-[3.94rem] " src={Doodle} />
