@@ -5,20 +5,28 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import com.sun.istack.NotNull;
+import javax.persistence.TableGenerator;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Material {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	@Column(name = "material_id")
 	private int materialId;
 
@@ -26,10 +34,10 @@ public class Material {
 	private String yarnName;
 
 	@Column(name = "yarn_weight")
-	private String yarnWeight;
+	private Float yarnWeight;
 
 	@Column(name = "yarn_length")
-	private String yarnLength;
+	private Float yarnLength;
 
 	private String needle;
 

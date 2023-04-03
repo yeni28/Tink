@@ -2,7 +2,9 @@ package com.ssafy.tink.db.entity;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +22,7 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ssafy.tink.config.msg.AuthProvider;
 import com.ssafy.tink.config.msg.MemberRole;
 
@@ -44,7 +47,8 @@ public class Member extends BaseEntity {
 	@Column(length = 100)
 	private String email;
 
-	private Date birth;
+	// private Date birth;
+	private String birth;
 
 	@Column(length = 50)
 	private String nickname;
@@ -61,16 +65,16 @@ public class Member extends BaseEntity {
 	@ColumnDefault("1")
 	private boolean status;
 
-	@OneToMany(mappedBy = "member")
-	private List<Follow> follows = new ArrayList<>();
+	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+	private Set<Follow> follows = new HashSet<>();
 
-	@OneToMany(mappedBy = "member")
-	private List<Notification> notifications = new ArrayList<>();
+	// @OneToMany(mappedBy = "member")
+	// private List<Notification> notifications = new ArrayList<>();
 
-	@OneToMany(mappedBy = "member")
-	private List<Pattern> patterns;
+	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+	private Set<Pattern> patterns = new HashSet<>();
 
-	@OneToMany(mappedBy = "member")
+	@OneToMany(mappedBy = "member", cascade = CascadeType.PERSIST)
 	private List<Board> boards = new ArrayList<>();
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
@@ -82,10 +86,10 @@ public class Member extends BaseEntity {
 	/*
 	 * 알림 등록
 	 * */
-	public void addNotification(Notification notification) {
-		notification.setMember(this);
-		notifications.add(notification);
-	}
+	// public void addNotification(Notification notification) {
+	// 	notification.setMember(this);
+	// 	notifications.add(notification);
+	// }
 
 	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
@@ -95,10 +99,13 @@ public class Member extends BaseEntity {
 		this.email = email;
 	}
 
-	public void setBirth(Date birth) {
+	// public void setBirth(Date birth) {
+	// 	this.birth = birth;
+	// }
+
+	public void setBirth(String birth) {
 		this.birth = birth;
 	}
-
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}

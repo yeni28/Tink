@@ -1,20 +1,28 @@
 package com.ssafy.tink.db.entity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.TableGenerator;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +39,7 @@ import lombok.NoArgsConstructor;
 public class Board extends BaseEntity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "board_id")
 	private int boardId;
 
@@ -42,16 +51,23 @@ public class Board extends BaseEntity {
 
 	private int hit;
 
-	@OneToMany(mappedBy = "board")
-	private List<Comment> comments = new ArrayList<>();
+	// delete : cascade 영속성 전이 에러 해결
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Comment> comments = new HashSet<>();
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonBackReference
+	// @ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name = "member_id")
 	private Member member;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pattern_id")
+	private Pattern pattern;
+
 	private String boardCategory;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinTable(
 		name = "jarang_img",
 		joinColumns = @JoinColumn(name = "board_id", referencedColumnName = "board_id"),
@@ -59,7 +75,7 @@ public class Board extends BaseEntity {
 	)
 	private Thumbnail thumbnail;
 
-	@OneToOne(mappedBy = "board")
+	@OneToOne(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Material material;
 
 	/*
@@ -70,4 +86,30 @@ public class Board extends BaseEntity {
 		comments.add(comment);
 	}
 
+	// review 자랑글 수정
+	public void update(String title, String content, Material material){
+		this.title= title;
+		this.content = content;
+		this.material = material;
+	}
+	// qnaGroup 질문글, 소모임 수정
+	public void updateBoard(String title, String content){
+		this.title= title;
+		this.content = content;
+	}
+
+	@Override
+	public String toString() {
+		return "Board{" +
+			"boardId=" + boardId +
+			", title='" + title + '\'' +
+			", content='" + content + '\'' +
+			", liked=" + liked +
+			", hit=" + hit +
+			", comments=" + comments +
+			", boardCategory='" + boardCategory + '\'' +
+			", thumbnail=" + thumbnail +
+			", material=" + material +
+			'}';
+	}
 }
