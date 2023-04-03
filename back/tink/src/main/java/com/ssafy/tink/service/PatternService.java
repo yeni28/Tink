@@ -23,12 +23,12 @@ import com.ssafy.tink.db.entity.DifficultyVote;
 import com.ssafy.tink.db.entity.Member;
 import com.ssafy.tink.db.entity.Needle;
 import com.ssafy.tink.db.entity.Pattern;
-import com.ssafy.tink.db.entity.PatternLike;
+import com.ssafy.tink.db.entity.PatternLikes;
 import com.ssafy.tink.db.entity.PatternThumbnail;
 import com.ssafy.tink.db.repository.CategoryRepository;
 import com.ssafy.tink.db.repository.DifficultyVoteRepository;
 import com.ssafy.tink.db.repository.MemberRepository;
-import com.ssafy.tink.db.repository.PatternLikeRepository;
+import com.ssafy.tink.db.repository.PatternLikesRepository;
 import com.ssafy.tink.db.repository.PatternRepository;
 import com.ssafy.tink.db.repository.PatternThumbnailRepository;
 import com.ssafy.tink.dto.CategoryDto;
@@ -55,7 +55,7 @@ public class PatternService {
 	@Autowired
 	private PatternThumbnailRepository patternThumbnailRepository;
 	@Autowired
-	private PatternLikeRepository patternLikeRepository;
+	private PatternLikesRepository patternLikeRepository;
 
 	@Transactional
 	public void deletePattern(int patternId) throws Exception {
@@ -352,13 +352,13 @@ public class PatternService {
 		Member getMember = member.get();
 
 		//이전에 이미 도안에 좋아요를 누른 경우
-		Optional<PatternLike> checkLike = patternLikeRepository.searchPatternLike(patternId, member.get().getMemberId());
+		Optional<PatternLikes> checkLike = patternLikeRepository.searchPatternLike(patternId, member.get().getMemberId());
 		if(checkLike.isPresent()){
 			return 0;
 		}
 
 		//도안에 좋아요를 누르지 않은 경우
-		PatternLike patternLike = PatternLike.builder()
+		PatternLikes patternLike = PatternLikes.builder()
 			.pattern(getPattern)
 			.member(getMember)
 			.build();

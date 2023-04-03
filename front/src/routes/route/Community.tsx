@@ -25,29 +25,32 @@ const Community = [
       {
         path: 'group',
         element: <GroupCommunity />,
-        children: [{ path: 'list', element: <ListGroupCommunity /> }],
+        children: [
+          { path: 'list', element: <ListGroupCommunity /> },
+          { path: 'detail/:id', element: <DetailGroupCommunity /> },
+          { path: 'write', element: <WriteGroupCommunity /> },
+        ],
       },
       {
         path: 'question',
         element: <QuestionCommunity />,
-        children: [{ path: 'list', element: <ListQuestionCommunity /> }],
+        children: [
+          { path: 'list', element: <ListQuestionCommunity /> },
+          { path: 'detail/:id', element: <DetailQuestionCommunity /> },
+          { path: 'write', element: <WriteQuestionCommunity /> },
+        ],
       },
       {
         path: 'review',
         element: <ReviewCommunity />,
-        children: [{ path: 'list', element: <ListReviewCommunity /> }],
+        children: [
+          { path: 'list', element: <ListReviewCommunity /> },
+          { path: 'write', element: <WriteReviewCommunity /> },
+        ],
       },
     ],
   },
-  { path: 'community/question/write', element: <WriteQuestionCommunity /> },
-  {
-    path: 'community/question/detail/:id',
-    element: <DetailQuestionCommunity />,
-  },
-  { path: 'community/group/write', element: <WriteGroupCommunity /> },
-  { path: 'community/group/detail/:id', element: <DetailGroupCommunity /> },
-  { path: 'community/review/detail/:id', element: <DetailReviewCommunity /> },
-  { path: 'community/review/write', element: <WriteReviewCommunity /> },
+  { path: '/community/review/detail/:id', element: <DetailReviewCommunity /> },
 ]
 
 export default Community

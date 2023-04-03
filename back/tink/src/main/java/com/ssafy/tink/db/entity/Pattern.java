@@ -126,7 +126,7 @@ public class Pattern extends BaseEntity {
 	private final List<PatternThumbnail> patternThumbnails = new ArrayList<>();
 	@OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	@JsonBackReference
-	private final List<PatternLike> patternLikes = new ArrayList<>();
+	private final List<PatternLikes> patternLikes = new ArrayList<>();
 
 	@Builder
 	public Pattern(String name, int difficultySum, int difficultyCnt, Float difficultyAvg, String downloadUrl,

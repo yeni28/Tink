@@ -10,7 +10,7 @@ function CardText(Props: Props) {
   const { commentCnt, content, hit, nickname, onClick, title } = Props
   return (
     <div
-      className=" w-[35.38rem] h-[14.5rem] p-[1.87rem] rounded-[1.55rem] bg-white"
+      className=" w-[35rem] h-[13rem] p-[1.87rem] rounded-[1.55rem] bg-white hover:scale-105 duration-500"
       onClick={onClick}
     >
       <div>

@@ -18,6 +18,10 @@ spring:
         url: jdbc:mysql://j8c201.p.ssafy.io:3306/tinkDB?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
         username: root #임시
         password: ssafytink
+    data:
+        redis:
+            host: tink-redis
+            port: 6379
 
 server:
     port: 8081 # 서비스 포트

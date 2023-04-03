@@ -77,6 +77,8 @@ public class Member extends BaseEntity {
 	@JoinColumn(name = "image_id", referencedColumnName = "thumbnail_id", nullable = false)
 	private Thumbnail thumbnail;
 
+	@OneToMany(mappedBy = "member")
+	private List<PatternLikes> patternLikes;
 	/*
 	 * 알림 등록
 	 * */

@@ -1,7 +1,7 @@
 import React from 'react'
 
 function CastonTutorial() {
-  return <div>CastonTutorial</div>
+  return <div>Caston Tuto</div>
 }
 
 export default CastonTutorial

@@ -10,12 +10,12 @@ interface ReviewPost {
   boardCategory: boardCategory
   // 재료 정보 (옵션)
   yarnName?: string
-  yarnWeight?: float
-  yarnLength?: float
+  yarnWeight?: number
+  yarnLength?: number
   needle?: string
   time?: string // 소요기간
   patternId?: number
-  multipartFile: Blob // 대표사진
+  multipartFile: any // 대표사진
 }
 
 interface ReviewPut extends ReviewPost {
@@ -34,8 +34,8 @@ interface ReviewDetail {
   boardCategory: boardCategory
   material: {
     yarnName: string
-    yarnWeight: float
-    yarnLength: float
+    yarnWeight: number
+    yarnLength: number
     needle: string
     time: string // 소요기간
   }

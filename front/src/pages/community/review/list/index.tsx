@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 import review_list_dummy from './dummydata'
 import { sortList } from './sortList'
@@ -8,15 +8,27 @@ import organisms from '@/components/organisms'
 function ListReviewCommunity() {
   const [selected, setSelected] = useState<string>(sortList[0].sortName)
   const [isSelectOpen, setSelectOpen] = useState<boolean>(false)
+  const toggleRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const handleOutsideClose = (e: { target: any }) => {
+      // useRef current에 담긴 엘리먼트 바깥을 클릭 시 드롭메뉴 닫힘
+      if (
+        isSelectOpen &&
+        toggleRef.current &&
+        !toggleRef.current.contains(e.target)
+      ) {
+        setSelectOpen(false)
+      }
+    }
+    document.addEventListener('click', handleOutsideClose)
+
+    return () => document.removeEventListener('click', handleOutsideClose)
+  }, [isSelectOpen])
 
   return (
-    <div
-      className="mt-3"
-      onClick={() => {
-        isSelectOpen && setSelectOpen(false)
-      }}
-    >
-      <div className="flex justify-end relative mb-10">
+    <div className="mt-3">
+      <div ref={toggleRef} className="flex justify-end relative mb-10">
         <div
           className="cursor-pointer"
           onClick={() => setSelectOpen(!isSelectOpen)}
