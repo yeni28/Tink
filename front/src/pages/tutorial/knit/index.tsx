@@ -1,4 +1,5 @@
 import React, { useRef, useLayoutEffect, Suspense } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Canvas } from '@react-three/fiber'
 import gsap from 'gsap'
@@ -69,6 +70,8 @@ function KnitTutorial() {
     return () => ctx.revert()
   }, [])
 
+  const navigate = useNavigate()
+
   return (
     <div>
       {/* 이미지 영역 */}
@@ -109,7 +112,7 @@ function KnitTutorial() {
         <div className="absolute bottom-20 right-20">
           <atoms.ButtonDoodle
             innerValue=">  다음"
-            onClick={() => console.log('helloworld!')}
+            onClick={() => navigate('/tutorial/knit/2')}
           />
         </div>
       </section>

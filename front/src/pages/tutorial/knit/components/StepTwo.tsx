@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useLayoutEffect, Suspense } from 'react'
-
-import { Html } from '@react-three/drei'
+import React, { useRef, useLayoutEffect, Suspense } from 'react'
 
 import { Canvas } from '@react-three/fiber'
 import gsap from 'gsap'
@@ -48,7 +46,6 @@ function StepTwo() {
           pin: true,
           anticipatePin: 1,
           scrub: true,
-          // markers: true,
         },
         onUpdate: () =>
           setPos(`
@@ -64,7 +61,6 @@ function StepTwo() {
           start: 'top top',
           end: '+=' + 1000,
           scrub: true,
-          // markers: true,
         },
       })
     }, comp)
@@ -85,9 +81,7 @@ function StepTwo() {
         <div ref={explainBox} className="relative mt-20 w-[300px]">
           <img src={explain_box} />
           <div className="absolute top-6 left-20">
-            <p className="font-cha text-body">
-              바늘을 아래에서 위로 올려주라냥
-            </p>
+            <p className="font-cha text-body">반시계 방향으로 실을 감으라냥</p>
             <p className="font-cha text-title2-bold">3d로 돌려보라냥</p>
           </div>
         </div>
