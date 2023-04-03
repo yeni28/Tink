@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -129,10 +130,11 @@ public class Pattern extends BaseEntity {
 	private final List<PatternLikes> patternLikes = new ArrayList<>();
 
 	@Builder
-	public Pattern(String name, int difficultySum, int difficultyCnt, Float difficultyAvg, String downloadUrl,
+	public Pattern(int patternId, String name, int difficultySum, int difficultyCnt, Float difficultyAvg, String downloadUrl,
 		Float gauge, Float gaugeDivisor, String gaugePattern, Float rowGauge, int yardage, int yardageMax,
 		String sizesAvailable, String notesHtml, String yarnWeightDescription, String yardageDescription,
 		Category category, Member member) {
+		this.patternId = patternId;
 		this.name = name;
 		this.difficultySum = difficultySum;
 		this.difficultyCnt = difficultyCnt;
