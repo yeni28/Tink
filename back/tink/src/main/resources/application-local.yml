@@ -40,7 +40,7 @@ app:
 #        folder: /Users/junyoungpark/Downloads      # 파일이 저장될 경로 설정
 
 logging:
-  level:
-    web: INFO
-    com: INFO
-    root: INFO
+    level:
+        web: INFO
+        com: INFO
+        root: INFO

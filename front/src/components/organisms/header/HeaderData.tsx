@@ -1,4 +1,5 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
 import {
   HEADER_TITLE,
@@ -101,31 +102,6 @@ const HEADER_DATA = [
     route: '/campaign',
     title: HEADER_TITLE.CAMPAIGN,
     subtitle: HEARDER_SUBTITLE.CAMPAIGN,
-  },
-  {
-    route: '/mypage',
-    title: HEADER_TITLE.MY_PAGE,
-    subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
-  },
-  {
-    route: '/mypage/all',
-    title: HEADER_TITLE.MY_PAGE,
-    subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
-  },
-  {
-    route: '/mypage/group',
-    title: HEADER_TITLE.MY_PAGE,
-    subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
-  },
-  {
-    route: '/mypage/question',
-    title: HEADER_TITLE.MY_PAGE,
-    subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
-  },
-  {
-    route: '/mypage/review',
-    title: HEADER_TITLE.MY_PAGE,
-    subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
   },
 ]
 
