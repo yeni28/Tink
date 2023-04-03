@@ -33,7 +33,7 @@ function CardMd({
           </button>
         </div>
       </div>
-      <div className="cursor-pointer" onClick={onClick}>
+      <div className="cursor-pointer " onClick={onClick}>
         <atoms.ImageMd src={titleImgUrl} />
       </div>
       <p className="my-2 text-title2-bold flex justify-center">{title}</p>
