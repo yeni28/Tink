@@ -215,7 +215,14 @@ public class PatternController {
 	@ApiOperation(value = "도안 좋아요", notes = "도안을 좋아요")
 	public BaseResponse<Object> setPatternLike(@RequestParam int patternId) {
 		try {
-			patternService.setPatternLike(patternId);
+			int result = patternService.setPatternLike(patternId);
+			if(result == 0){
+				return BaseResponse.builder()
+					.result(0)
+					.resultCode(HttpStatus.OK.value())
+					.resultMsg("이미 좋아요 눌렀어요.")
+					.build();
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();

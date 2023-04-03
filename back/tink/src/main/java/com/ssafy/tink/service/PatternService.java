@@ -342,7 +342,7 @@ public class PatternService {
 
 	}
 
-	public void setPatternLike(int patternId) throws Exception {
+	public int setPatternLike(int patternId) throws Exception {
 		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
 		Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
 		Optional<Pattern> pattern = patternRepository.findByPatternId(patternId);
@@ -354,12 +354,20 @@ public class PatternService {
 		Pattern getPattern = pattern.get();
 		Member getMember = member.get();
 
+		//이전에 이미 도안에 좋아요를 누른 경우
+		Optional<PatternLike> checkLike = patternLikeRepository.searchPatternLike(patternId, member.get().getMemberId());
+		if(checkLike.isPresent()){
+			return 0;
+		}
+
+		//도안에 좋아요를 누르지 않은 경우
 		PatternLike patternLike = PatternLike.builder()
 			.pattern(getPattern)
 			.member(getMember)
 			.build();
 
 		patternLikeRepository.save(patternLike);
+		return 1;
 	}
 
 	public List<PatternInfoDto> getWeeklyBest() throws Exception {
