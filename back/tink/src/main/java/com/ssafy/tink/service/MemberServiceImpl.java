@@ -66,18 +66,23 @@ public class MemberServiceImpl implements MemberService{
 
 		long follows = 0;
 		long follower = 0;
+		boolean isFollow = false;
 
 		if ( !member.getFollows().isEmpty() ) {
 			Stream<Follow> stream = member.getFollows().stream();
 			follows = stream.filter( follow -> follow.getToId() == member.getMemberId() ? true : false).count();
 			follower = stream.filter( follow -> follow.getMember().getMemberId() == member.getMemberId() ? true : false).count();
 		}
-
+		
+		// 팔로우 여부 판별
+		
 		MemberInfoDto memberInfo = MemberInfoDto.builder()
 			.email(member.getEmail())
+			.nickname(member.getNickname())
 			.follows(follows)
 			.follower(follower)
 			.thumbnail(member.getThumbnail())
+			.isFollow(isFollow)
 			.build();
 
 		return Optional.ofNullable(memberInfo);
