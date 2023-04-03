@@ -22,6 +22,8 @@ import com.ssafy.tink.dto.BaseResponse;
 import com.ssafy.tink.dto.BoardAndPatternDto;
 import com.ssafy.tink.dto.MemberInfoDto;
 import com.ssafy.tink.dto.PatternLikeDto;
+import com.ssafy.tink.dto.dsl.members.BoardInfoDsl;
+import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
 import com.ssafy.tink.dto.TokenDto;
 import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
 import com.ssafy.tink.service.MemberServiceImpl;
@@ -76,21 +78,34 @@ public class MemberController {
 	@GetMapping("/mypage/pattern")
 	@ApiOperation(value = "마이페이지(자신) 도안 전체 조회하는 API")
 	public BaseResponse<Object> getAllPatternByMember() {
-		return null;
+		List<PatternInfoDsl> patterns = memberService.getPatternAllByMypage();
+		return BaseResponse.builder()
+			.result(patterns)
+			.resultCode(HttpStatus.OK.value())
+			.resultMsg("마이페이지(자신) 도안 전체 조회")
+			.build();
 	}
 
 	@GetMapping("/mypage/community")
 	@ApiOperation(value = "마이페이지(자신) 자랑글 전체 조회하는 API")
 	public BaseResponse<Object> getAllCommunityByMember() {
-
-		return null;
+		List<CommunityBoardInfoDsl> patterns = memberService.getCommnutityBoardAllByMypage();
+		return BaseResponse.builder()
+			.result(patterns)
+			.resultCode(HttpStatus.OK.value())
+			.resultMsg("마이페이지(자신) 자랑글 전체 조회 조회")
+			.build();
 	}
 
 	@GetMapping("/mypage/board")
 	@ApiOperation(value = "마이페이지(자신) 소모임글, 질문글  조회하는 API")
-	public BaseResponse<Object> getAllBoardByMember() {
-
-		return null;
+	public BaseResponse<Object> getAllBoardByMember(@RequestParam(name = "category") String category) {
+		List<BoardInfoDsl> boardList = memberService.getBoardAllByMypage(category);
+		return BaseResponse.builder()
+			.result(boardList)
+			.resultCode(HttpStatus.OK.value())
+			.resultMsg("마이페이지(자신) 소모임글, 질문글  조회")
+			.build();
 	}
 
 	@GetMapping("/info/{id}")
