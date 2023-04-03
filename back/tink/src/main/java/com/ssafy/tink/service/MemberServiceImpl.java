@@ -3,6 +3,7 @@ package com.ssafy.tink.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.nimbusds.oauth2.sdk.util.StringUtils;
 import com.ssafy.tink.config.Util.SecurityUtil;
 import com.ssafy.tink.config.ect.BadRequestException;
 import com.ssafy.tink.db.entity.Follow;
@@ -89,8 +91,19 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Transactional
-	public Optional<List<MemberInfoDsl>> getMemberInfoByQueryDsl() {
-		return Optional.ofNullable(memberRepository.findMember());
+	public MemberInfoDsl getMemberInfoByQueryDsl(String memberId) throws NoSuchElementException {
+		Optional<String> loginMember = SecurityUtil.getCurrentAuthentication();
+		MemberInfoDsl memberInfo = null;
+		// 유저정보를 토대로 정보 검색 ( "", null => false )
+		if ( StringUtils.isNotBlank(memberId) ) {
+			memberInfo = memberRepository.findMember(Long.parseLong(memberId)).get();
+			memberRepository.existsFollow(Long.parseLong(loginMember.get()));
+			memberInfo.setFollow(false);
+			return null;
+		}
+		memberInfo = memberRepository.findMember(Long.parseLong(loginMember.get())).get();
+		memberInfo.setFollow(false);
+		return memberInfo;
 	}
 
 	@Transactional
