@@ -98,7 +98,7 @@ public class Pattern extends BaseEntity {
 	private int yardage;
 
 	@Column(name = "yardage_max")
-	private int yardageMax;
+	private Integer yardageMax;
 
 	@Column(name = "sizes_available", length = 50)
 	private String sizesAvailable;
@@ -195,5 +195,10 @@ public class Pattern extends BaseEntity {
 		this.getNeedles().add(needle);
 		needle.getPatterns().add(this);
 	}
+
+	public void setPatternId(int patternId){
+		this.patternId = patternId;
+	}
+
 
 }

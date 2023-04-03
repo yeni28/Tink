@@ -69,6 +69,9 @@ public class ReviewService {
 		Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
 		Optional<Pattern> pattern = patternRepository.findById(community.getPatternId());
 
+		Pattern p = new Pattern();
+		p.setPatternId(community.getPatternId());
+
 		Board boardInfo = Board.builder()
 			.title(community.getTitle())
 			.content(community.getContent())
@@ -76,9 +79,7 @@ public class ReviewService {
 				.memberId(Long.parseLong(memberId.get()))
 				.build())
 			.boardCategory(community.getBoardCategory())
-			.pattern(Pattern.builder()
-				.patternId(community.getPatternId())
-				.build())
+			.pattern(p)
 			.thumbnail(member.get().getThumbnail())
 			.build();
 
