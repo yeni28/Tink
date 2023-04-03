@@ -17,6 +17,6 @@ export const MenuData = [
   },
   {
     title: 'My Page',
-    url: '/mypage',
+    url: '/mypage/user/all',
   },
 ]

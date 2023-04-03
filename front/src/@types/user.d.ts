@@ -3,8 +3,9 @@ interface Member {
   memberId: number
   email?: string
   nickname: string
-  follows?: boolean
-  follower?: string
+  follows?: number
+  follower?: number
+  isFollow?: boolean
   thumbnail?: {
     thumbnailId?: number
     mainImg?: string

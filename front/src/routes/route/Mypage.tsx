@@ -8,7 +8,7 @@ import MyReview from '@/pages/mypage/review'
 
 const Mypage = [
   {
-    path: '/mypage',
+    path: '/mypage/:id',
     element: <MyPageMainPage />,
     children: [
       {
