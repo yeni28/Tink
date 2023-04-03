@@ -45,12 +45,12 @@ public class SecurityConfig {
 	private JwtTokenProvider jwtTokenProvider;
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-		http.csrf().disable()			// csrf 해제
-			.formLogin().disable()		// form으로 로그인하는 방식 해제
-			.httpBasic().disable()		//
-			.sessionManagement()		// session 설정관리
+		http.csrf().disable()            // csrf 해제
+			.formLogin().disable()        // form으로 로그인하는 방식 해제
+			.httpBasic().disable()        //
+			.sessionManagement()        // session 설정관리
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		// 특정 API에 접근하는 권한을 확인하거나 permitAll을 설정하는 구간
 		http.authorizeRequests()
@@ -66,16 +66,16 @@ public class SecurityConfig {
 		http.oauth2Login()
 			// 인증된 정보를 가져오는 부분
 			.authorizationEndpoint()
-				.baseUri("/oauth2/authorization")	// OAuth2 기본URI
-				.authorizationRequestRepository(cookieAuthorizationRequestRepository)
+			.baseUri("/oauth2/authorization")    // OAuth2 기본URI
+			.authorizationRequestRepository(cookieAuthorizationRequestRepository)
 			// 특정 OAuth2 token을 받아오는 부분
 			.and()
 			.redirectionEndpoint()
-				.baseUri("/*/oauth2/code/**")
+			.baseUri("/*/oauth2/code/**")
 			// OAuth2 server에서 받은 사용자 정보를 가지고 구현한 Service를 실행 ( 인증된 Authentication 객체 생성 )
 			.and()
 			.userInfoEndpoint()
-				.userService(userService)
+			.userService(userService)
 			// 성공했을 때 인증된 Authentication 객체를 가지고 토큰을 생성
 			// 실패했을 때 핸들링 로직수행
 			.and()

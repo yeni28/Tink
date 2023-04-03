@@ -8,34 +8,34 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "difficulty_vote")
-@IdClass(DifficultyVoteId.class)
+@Table(name = "pattern_likes")
+@IdClass(PatternLikeId.class)
 @Getter
-public class DifficultyVote {
+@NoArgsConstructor
+public class PatternLike extends BaseEntity {
 
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id", referencedColumnName = "member_id")
+	@JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
 	private Member member;
 
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id")
+	@JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id", nullable = false)
+	@JsonManagedReference
 	private Pattern pattern;
 
-	@NotNull
-	private int score;
-
 	@Builder
-	public DifficultyVote(Member member, Pattern pattern, int score) {
+	public PatternLike(Member member, Pattern pattern) {
 		this.member = member;
 		this.pattern = pattern;
-		this.score = score;
 	}
+
 }
