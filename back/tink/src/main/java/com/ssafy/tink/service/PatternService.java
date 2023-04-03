@@ -295,8 +295,6 @@ public class PatternService {
 		Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
 		//Optional<Member> member = memberRepository.findById((long)(10));
 
-		System.out.println(patternDto);
-		System.out.println(thumbnail.toString());
 
 		if (!category.isPresent()) {
 			throw new Exception();
@@ -315,12 +313,11 @@ public class PatternService {
 			.name(patternDto.getPatternName())
 			.yardage(patternDto.getYardage())
 			.yardageMax(patternDto.getYardageMax())
-			.yardageDescription(patternDto.getYarnWeightDescription())
+			.yarnWeightDescription(patternDto.getYarnWeightDescription())
 			.category(category.get())
 			.member(member.get())
 			.build();
 
-		System.out.println(pattern.toString());
 
 		//도안 썸네일 테이블에 삽입
 		for (PatternThumbnailDto dto : thumbnail) {
@@ -329,7 +326,7 @@ public class PatternService {
 				.thumbImg(dto.getThumbImg())
 				.pattern(pattern)
 				.build();
-			patternThumbnailRepository.save(request);
+			//patternThumbnailRepository.save(request);
 
 			pattern.addPatternThumbnail(request);//PatternThumbnail 객체를 Pattern 객체의 patternThumbnails 리스트에 추가
 		}

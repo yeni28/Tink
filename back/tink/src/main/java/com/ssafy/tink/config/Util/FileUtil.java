@@ -37,6 +37,8 @@ public class FileUtil {
 				.outputQuality(1.0f)
 				.outputFormat("png")
 				.asBufferedImage();
+
+			in.close();
 			// 썸네일 반환
 			return thumbImage;
 		} catch(IOException e) {

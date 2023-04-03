@@ -59,7 +59,6 @@ public class SecurityConfig {
 			.antMatchers("/members/{id}", "members/info/{id}").permitAll()
 			.antMatchers("/members/mypage/**").hasRole("USER")
 			.antMatchers("/file/**").hasRole("USER")
-			.antMatchers("/patterns/**").permitAll()
 			.anyRequest().authenticated();
 
 		http.oauth2Login()

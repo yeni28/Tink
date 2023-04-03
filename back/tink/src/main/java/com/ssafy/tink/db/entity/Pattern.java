@@ -44,10 +44,12 @@ public class Pattern extends BaseEntity {
 		inverseJoinColumns = @JoinColumn(name = "keyword_id", referencedColumnName = "keyword_id")
 	)
 	private final List<Keyword> keywords = new ArrayList<>();
+
 	@OneToMany(mappedBy = "pattern", cascade = CascadeType.PERSIST,
 		orphanRemoval = true)
 	private final List<Pack> packs = new ArrayList<>();
-	@ManyToMany
+
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
 		name = "PATTERN_NEEDLE",
 		joinColumns = @JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id", nullable = false),
@@ -55,54 +57,76 @@ public class Pattern extends BaseEntity {
 	)
 	@JsonManagedReference
 	private final List<Needle> needles = new ArrayList<>();
+
 	@Id
 	@Column(name = "pattern_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int patternId;
+
 	@Column(length = 200)
 	private String name;
+
 	@Column(name = "difficulty_sum")
 	@ColumnDefault("0")
 	private int difficultySum;
+
 	@Column(name = "difficulty_cnt")
 	@ColumnDefault("0")
 	private int difficultyCnt;
+
 	@Column(name = "difficulty_avg")
 	@ColumnDefault("0")
 	private Float difficultyAvg;
+
 	@Column(name = "download_url")
 	private String downloadUrl;
+
 	private Float gauge;
+
 	@Column(name = "gauge_divisor")
 	private Float gaugeDivisor;
+
 	@Column(name = "gauge_pattern")
 	private String gaugePattern;
+
 	@Column(name = "row_gauge")
 	private Float rowGauge;
+
 	private int yardage;
+
 	@Column(name = "yardage_max")
 	private int yardageMax;
+
 	@Column(name = "sizes_available", length = 50)
 	private String sizesAvailable;
+
 	@Column(name = "notes_html", length = 500)
 	private String notesHtml;
+
 	@Column(name = "yarn_weight_description", length = 25)
 	private String yarnWeightDescription;
+
 	@Column(name = "yardage_description", length = 50)
 	private String yardageDescription;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
 	@NotNull
 	@JsonManagedReference
 	private Category category;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
 	@NotNull
 	private Member member;
+
 	@OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)
 	@JsonBackReference
-	private List<PatternThumbnail> patternThumbnails;
+	private final List<PatternThumbnail> patternThumbnails = new ArrayList<>();
+	@OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonBackReference
+	private final List<PatternLike> patternLikes = new ArrayList<>();
 
 	@Builder
 	public Pattern(String name, int difficultySum, int difficultyCnt, Float difficultyAvg, String downloadUrl,
@@ -193,36 +217,4 @@ public class Pattern extends BaseEntity {
 		needle.getPatterns().add(this);
 	}
 
-	@OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	@JsonBackReference
-	private List<PatternLike> patternLikes = new ArrayList<>();
-
-	@Override
-	public String toString() {
-		return "Pattern{" +
-			"keywords=" + keywords +
-			", packs=" + packs +
-			", needles=" + needles +
-			", patternId=" + patternId +
-			", name='" + name + '\'' +
-			", difficultySum=" + difficultySum +
-			", difficultyCnt=" + difficultyCnt +
-			", difficultyAvg=" + difficultyAvg +
-			", downloadUrl='" + downloadUrl + '\'' +
-			", gauge=" + gauge +
-			", gaugeDivisor=" + gaugeDivisor +
-			", gaugePattern='" + gaugePattern + '\'' +
-			", rowGauge=" + rowGauge +
-			", yardage=" + yardage +
-			", yardageMax=" + yardageMax +
-			", sizesAvailable='" + sizesAvailable + '\'' +
-			", notesHtml='" + notesHtml + '\'' +
-			", yarnWeightDescription='" + yarnWeightDescription + '\'' +
-			", yardageDescription='" + yardageDescription + '\'' +
-			", category=" + category +
-			", member=" + member +
-			", patternThumbnails=" + patternThumbnails +
-			", patternLikes=" + patternLikes +
-			'}';
-	}
 }
