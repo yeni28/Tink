@@ -131,31 +131,6 @@ public class Pattern extends BaseEntity {
 	@JsonBackReference
 	private final List<PatternLikes> patternLikes = new ArrayList<>();
 
-	@Builder
-	public Pattern(int patternId, String name, int difficultySum, int difficultyCnt, Float difficultyAvg, String downloadUrl,
-		Float gauge, Float gaugeDivisor, String gaugePattern, Float rowGauge, int yardage, int yardageMax,
-		String sizesAvailable, String notesHtml, String yarnWeightDescription, String yardageDescription,
-		Category category, Member member) {
-		this.patternId = patternId;
-		this.name = name;
-		this.difficultySum = difficultySum;
-		this.difficultyCnt = difficultyCnt;
-		this.difficultyAvg = difficultyAvg;
-		this.downloadUrl = downloadUrl;
-		this.gauge = gauge;
-		this.gaugeDivisor = gaugeDivisor;
-		this.gaugePattern = gaugePattern;
-		this.rowGauge = rowGauge;
-		this.yardage = yardage;
-		this.yardageMax = yardageMax;
-		this.sizesAvailable = sizesAvailable;
-		this.notesHtml = notesHtml;
-		this.yarnWeightDescription = yarnWeightDescription;
-		this.yardageDescription = yardageDescription;
-		this.category = category;
-		this.member = member;
-	}
-
 	public void setDifficultySum(int difficultySum) {
 		this.difficultySum = difficultySum;
 	}
