@@ -24,19 +24,19 @@ function WriteQuestionCommunity() {
 
   //   const formData = setReviewPostData(data, titleImage)
 
-    // formData 확인용
-    // const entries = formData.entries()
-    // for (const pair of entries) {
-    //   console.log(pair[0] + ', ' + pair[1])
-    // }
-  }
+  // formData 확인용
+  // const entries = formData.entries()
+  // for (const pair of entries) {
+  //   console.log(pair[0] + ', ' + pair[1])
+  // }
+  // }
 
   // const errorHandler: SubmitErrorHandler<QuestionPost> = (errors) => {
   //   if (errors.multipartFile) alert(`${errors.multipartFile.message}`)
   //   if (!errors.multipartFile && errors.title) alert(`${errors.title.message}`)
   //   if (!errors.multipartFile && !errors.title && errors.content)
   //     alert(`${errors.content.message}`)
-  }
+  // }
   return (
     <div>
       <form
