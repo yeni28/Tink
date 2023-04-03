@@ -13,7 +13,7 @@ export const interceptors = (instance: AxiosInstance) => {
   return instance
 }
 
-const BASE_URL = 'http://http://j8c201.p.ssafy.io'
+const BASE_URL = 'http://j8c201.p.ssafy.io:8082/tink'
 
 // 단순 get요청으로 인증값이 필요없는 경우
 const axiosApi = (url: string, options?: object) => {
