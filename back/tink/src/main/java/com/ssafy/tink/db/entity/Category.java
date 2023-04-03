@@ -14,8 +14,11 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
+
 import lombok.Getter;
+import lombok.ToString;
 
 @Entity
 @Getter
@@ -39,8 +42,9 @@ public class Category {
 	private Category parent;
 
 	@OneToMany(mappedBy = "category")
+	@JsonBackReference
 	private List<Pattern> patterns = new ArrayList<>();
-	
+
 	public void addPattern(Pattern pattern) {
 		pattern.setCategory(this);
 		patterns.add(pattern);

@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.tink.db.entity.QPatternThumbnail;
 import com.ssafy.tink.db.entity.QThumbnail;
@@ -41,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository{
+public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 
 	private static final int MYPAGE_BOARD_LIMIT = 3;
 	private static final String BOARD_CATEGORY_COMMUNTITY = "review";
@@ -55,13 +54,13 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository{
 
 	@Override
 	public List<BoardAndPatternDsl> findBoardAndPatternListById(long memberId) {
-		BooleanBuilder builder =new BooleanBuilder();
+		BooleanBuilder builder = new BooleanBuilder();
 
-		Map<Long, BoardAndPatternDsl> result =  jpaQueryFactory.from(member)
+		Map<Long, BoardAndPatternDsl> result = jpaQueryFactory.from(member)
 			.join(board).on(member.memberId.eq(board.member.memberId))
 			.join(pattern).on(member.memberId.eq(pattern.member.memberId)
 				.and(board.boardCategory.in(
-					BOARD_CATEGORY_QEUSTION,BOARD_CATEGORY_GROUP)))
+					BOARD_CATEGORY_QEUSTION, BOARD_CATEGORY_GROUP)))
 			.leftJoin(patternThumbnail).on(pattern.patternId.eq(patternThumbnail.pattern.patternId))
 			.where(member.memberId.eq(memberId))
 			.transform(groupBy(member.memberId).as(new QBoardAndPatternDsl(
@@ -79,8 +78,8 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository{
 					pattern.name,
 					list(new QPatternThumbInfoDsl(
 						patternThumbnail.patternThumbnailId,
-						patternThumbnail.main_img,
-						patternThumbnail.thumb_img
+						patternThumbnail.mainImg,
+						patternThumbnail.thumbImg
 					))
 				))
 			)));
@@ -92,7 +91,7 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository{
 
 	@Override
 	public List<MemberInfoDsl> findMember() {
-		Map<Long, MemberInfoDsl> result =  jpaQueryFactory.selectFrom(member)
+		Map<Long, MemberInfoDsl> result = jpaQueryFactory.selectFrom(member)
 			.innerJoin(thumbnail).on(member.thumbnail.thumbnailId.eq(thumbnail.thumbnailId))
 			.transform(groupBy(member.memberId).as(new QMemberInfoDsl(
 				member.memberId,
