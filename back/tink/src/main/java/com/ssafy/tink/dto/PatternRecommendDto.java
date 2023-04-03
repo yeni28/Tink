@@ -18,6 +18,8 @@ public class PatternRecommendDto {
 	int yardage;
 	int yardageMax;
 
+	int patternId;
+
 	@Builder
 	public PatternRecommendDto(Pattern pattern) {
 		this.gauge = pattern.getGauge();
@@ -25,6 +27,7 @@ public class PatternRecommendDto {
 		this.rowGauge = pattern.getRowGauge();
 		this.yardage = pattern.getYardage();
 		this.yardageMax = pattern.getYardageMax();
+		this.patternId = pattern.getPatternId();
 	}
 
 }

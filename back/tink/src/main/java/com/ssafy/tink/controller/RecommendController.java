@@ -3,7 +3,8 @@ package com.ssafy.tink.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,11 +22,9 @@ public class RecommendController {
 	@Autowired
 	private PatternService patternService;
 
-
-	@GetMapping ("/")
-	public String sendPatternJson(){
+	@PostMapping("/yarn")
+	public String sendPatternJsonForYarn(@RequestBody PatternRecommendDto patternRecommendDto) {
 		List<PatternRecommendDto> getData = patternService.getPatternForRecommend();
-		System.out.println(getData.toArray());
 
 		return djangoClient.postPatternJsonForYarn(getData);
 	}

@@ -12,6 +12,6 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableRedisHttpSession
 public class TinkApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(TinkApplication.class,args);
+		SpringApplication.run(TinkApplication.class, args);
 	}
 }
