@@ -10,14 +10,35 @@ import json
 
   
 @require_POST
-def recommendYarnByUser(request):
+def recommendByYarn(request):
+    
+    req_data = json.loads(request.body.decode('utf-8'))
+    
+    patterns = []
+    
 
-    req_data = json.loads(request.body)
-    patterns = req_data['patterns']
-    user_input = req_data['user_input']
+    for data in req_data:
+        patternId = data['patternId']
+        gauge = data['gauge']
+        gauge_divisor = data['gaugeDivisor']
+        row_gauge = data['rowGauge']
+        yardage = data['yardage']
+        yardage_max = data['yardageMax']
+        pattern = {
+            'patternId':patternId,
+            'gauge': gauge,
+            'gauge_divisor': gauge_divisor,
+            'row_gauge': row_gauge,
+            'yardage': yardage,
+            'yardage_max': yardage_max
+        }
+    patterns.append(pattern)
+
+
+    print(patterns.count)
 
     item_df = pd.DataFrame(patterns, columns=["gauge", "gauge_divisor", "row_gauge", "yardage", "yardage_max" , "wpi"])
-    item_df.set_index('pattern_id', inplace=True)
+    item_df.set_index('patternId', inplace=True)
     item_df = item_df.fillna(0) # 결측치 0으로 세팅
     
     # 사용자 데이터(임시로 지정함)

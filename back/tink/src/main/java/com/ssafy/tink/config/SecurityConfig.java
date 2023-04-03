@@ -56,7 +56,7 @@ public class SecurityConfig {
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/oauth2/**").permitAll()
-			.antMatchers("/members/{id}","/members/info/{id}").permitAll()
+			.antMatchers("/members/{id}", "/members/info/{id}").permitAll()
 			.antMatchers("/members/favorite/**").hasRole("USER")
 			.antMatchers("/members/mypage/**").hasRole("USER")
 			.antMatchers("/members/refresh").hasRole("USER")
