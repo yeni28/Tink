@@ -44,7 +44,9 @@ public class CommentService {
 		Comment commentInfo = Comment.builder()
 			.content(comment.getContent())
 			.board(board.get())
-			.member(member.get())
+			.member(Member.builder()
+				.memberId(Long.parseLong(memberId.get()))
+				.build())
 			.build();
 
 		return commentRepository.save(commentInfo);
