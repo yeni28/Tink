@@ -16,12 +16,18 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @DynamicUpdate
 @DynamicInsert
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Board extends BaseEntity {
 
 	@Id

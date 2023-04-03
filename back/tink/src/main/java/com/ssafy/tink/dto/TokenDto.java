@@ -2,18 +2,16 @@ package com.ssafy.tink.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-@Getter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class TokenDto {
 
-	private String access;
-	private String refresh;
+	private String accessToken;
+	private String refreshToken;
 
 }

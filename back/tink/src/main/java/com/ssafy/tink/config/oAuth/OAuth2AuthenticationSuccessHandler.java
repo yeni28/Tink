@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -69,7 +70,10 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		// JWT 생성 ( accessToken, refreshToken )
 		String accessToken = tokenProvider.createAccessToken(authentication);
 		// refreshToken은 생성과 동시에 저장하도록 처리할 것임
-		tokenProvider.createRefreshToken(authentication, response);
+		String refreshToken = tokenProvider.createRefreshToken(authentication, response);
+		log.info("리플래쉬 토큰 값 : " + refreshToken);
+		HttpSession session = request.getSession();
+		session.setAttribute(userDetail.getName(), refreshToken);
 		// redirectUri에 query로 access토큰을 보줌
 		return UriComponentsBuilder.fromUriString(targetUrl)
 			.queryParam("isCheck",userDetail.isCheck())

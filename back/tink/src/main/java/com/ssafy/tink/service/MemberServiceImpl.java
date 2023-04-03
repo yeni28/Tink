@@ -7,7 +7,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,9 +23,11 @@ import com.ssafy.tink.db.entity.PatternLikeId;
 import com.ssafy.tink.db.entity.PatternLikes;
 import com.ssafy.tink.db.repository.MemberRepository;
 import com.ssafy.tink.db.repository.PatternLikesRepository;
+import com.ssafy.tink.dto.BaseResponse;
 import com.ssafy.tink.dto.BoardAndPatternDto;
 import com.ssafy.tink.dto.MemberInfoDto;
 import com.ssafy.tink.dto.PatternLikeDto;
+import com.ssafy.tink.dto.TokenDto;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
@@ -34,7 +39,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class MemberServiceImpl {
+public class MemberServiceImpl implements MemberService{
 
 	@Autowired
 	private MemberRepository memberRepository;
@@ -123,6 +128,7 @@ public class MemberServiceImpl {
 		return list;
 	}
 
+	@Transactional
 	public String likedPatternToMember(List<PatternLikeDto> patterns) {
 		Member member = getMemberIdByAuthorization();
 		Map<PatternLikeId, PatternLikes> likes = new HashMap<>();
@@ -147,5 +153,15 @@ public class MemberServiceImpl {
 			.forEach(patternLikesRepository::save);
 
 		return "SUCCESS";
+	}
+
+	public TokenDto getRefreshToken(HttpSession session) {
+		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
+		String refresh = (String) session.getAttribute(memberId.get());
+		log.debug("session 가져온 값 : " + refresh);
+		TokenDto token = TokenDto.builder()
+			.refreshToken(refresh)
+			.build();
+		return token;
 	}
 }
