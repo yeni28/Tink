@@ -1,36 +1,29 @@
 package com.ssafy.tink.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.ssafy.tink.db.entity.Pattern;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @ApiModel("PatternRecommendDto")
 @Getter
 @NoArgsConstructor
-public class PatternRecommendDto {
+@ToString
+public class YarnRecommendDto {
 
 	Float gauge;
 	Float gaugeDivisor;
 	Float rowGauge;
 	int yardage;
 	int yardageMax;
-
+	
 	int patternId;
 
-	List<PatternRecommendDto> pattern = new ArrayList<>();
-
-	public void setPattern(List<PatternRecommendDto> pattern) {
-		this.pattern = pattern;
-	}
-
 	@Builder
-	public PatternRecommendDto(Pattern pattern) {
+	public YarnRecommendDto(Pattern pattern) {
 		this.gauge = pattern.getGauge();
 		this.gaugeDivisor = pattern.getGaugeDivisor();
 		this.rowGauge = pattern.getRowGauge();
