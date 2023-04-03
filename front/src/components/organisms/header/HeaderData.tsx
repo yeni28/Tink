@@ -107,6 +107,26 @@ const HEADER_DATA = [
     title: HEADER_TITLE.MY_PAGE,
     subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
   },
+  {
+    route: '/mypage/all',
+    title: HEADER_TITLE.MY_PAGE,
+    subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
+  },
+  {
+    route: '/mypage/group',
+    title: HEADER_TITLE.MY_PAGE,
+    subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
+  },
+  {
+    route: '/mypage/question',
+    title: HEADER_TITLE.MY_PAGE,
+    subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
+  },
+  {
+    route: '/mypage/review',
+    title: HEADER_TITLE.MY_PAGE,
+    subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
+  },
 ]
 
 export { HEADER_DATA }
