@@ -36,6 +36,8 @@ import lombok.NoArgsConstructor;
 @DynamicInsert
 @Getter
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Pattern extends BaseEntity {
 
 	@ManyToMany

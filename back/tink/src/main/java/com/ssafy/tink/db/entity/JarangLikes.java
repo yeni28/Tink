@@ -21,11 +21,11 @@ import java.io.Serializable;
 public class JarangLikes implements Serializable {
 
     @Id
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Member member;
 
     @Id
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Board board;
 
 }
