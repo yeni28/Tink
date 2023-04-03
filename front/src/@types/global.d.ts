@@ -3,40 +3,17 @@ declare module '*.css' {
   export default styleObject
 }
 
-interface ImageProps {
-  src: string
-  alt?: string
-  width?: number
-  height?: number
-}
+type CommunityFilter = '최신순' | '인기순'
+type PatternFilter = '최신순' | '인기순' | '이름순'
 
-interface ImageLg extends ImageProps {
-  src: string
-  mainValue?: string
-  subValue?: string
-  onClick: () => void
-  bgColor?: string
-}
-
-interface ButtonProps {
-  bgColor: 'red' | 'black'
-  textColor: 'white' | 'black'
-  innerValue: string
-  onClick?: () => void
-}
-
-interface CommunityProps {
-  title?: string
-  body?: string
-  username?: string
-  view?: number
-  comment?: number
-}
-
-interface CommentProps {
-  id: number
-  value: string
-  username: string
-  create_time: string
-  userImage: string
+interface Alarm {
+  commentCnt: number // 알림 총개수
+  comments: {
+    notificationId: number
+    boardCategory: boardCategory
+    title: string // 질문, 커뮤니티 글의 제목
+    commentId: number
+    createdDate: string
+    readStatus: 0 | 1 // (0:안읽음,   1: 읽음)
+  }[]
 }

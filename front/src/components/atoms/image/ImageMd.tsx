@@ -5,7 +5,7 @@ function ImageMd({ src, alt }: ImageProps): JSX.Element {
     <div>
       <img
         alt={alt}
-        className="object-cover rounded-3xl w-[356px] h-[218px]"
+        className="object-cover rounded-3xl w-[356px] h-[218px] "
         src={src}
       />
     </div>

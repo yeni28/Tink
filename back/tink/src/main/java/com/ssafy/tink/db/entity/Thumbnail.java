@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.TableGenerator;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,20 +18,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableGenerator(
-	name = "THUMBNAIL_SQL_GENERATOR",
-	table = "THUMBNAIL_SEQ",
-	pkColumnName = "THUMBNAIL_SEQ",
-	initialValue = 1,
-	allocationSize = 1
-)
 public class Thumbnail {
 
 	@Id
-	@GeneratedValue(
-		strategy = GenerationType.TABLE,
-		generator = "THUMBNAIL_SEQ"
-	)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "thumbnail_id")
 	private int thumbnailId;
 
@@ -39,5 +30,10 @@ public class Thumbnail {
 
 	@Column(name = "thumb_img")
 	private String thumbImg;
+
+
+	public void setThumbnailId(int thumbnailId) {
+		this.thumbnailId = thumbnailId;
+	}
 
 }

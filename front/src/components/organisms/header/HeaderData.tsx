@@ -42,7 +42,7 @@ const HEADER_DATA = [
     subtitle: HEARDER_SUBTITLE.RECOMMEND.USER_PATTERN,
   },
   {
-    route: '/recommend/color/result',
+    route: '/recommend/select/color/result',
     title: HEADER_TITLE.RECOMMEND,
     subtitle: HEARDER_SUBTITLE.RECOMMEND.USER_COLOR,
   },
@@ -62,10 +62,41 @@ const HEADER_DATA = [
     subtitle: HEARDER_SUBTITLE.TUTORIAL.CAST_ON,
   },
   {
-    route: '/community/review',
+    route: '/community/review/list',
     title: HEADER_TITLE.COMMUNITY,
     subtitle: HEARDER_SUBTITLE.COMMUNITY.REVIEW,
   },
+  {
+    route: '/community/group/list',
+    title: HEADER_TITLE.COMMUNITY,
+    subtitle: HEARDER_SUBTITLE.COMMUNITY.MEET,
+  },
+  {
+    route: '/community/question/list',
+    title: HEADER_TITLE.COMMUNITY,
+    subtitle: HEARDER_SUBTITLE.COMMUNITY.QNA,
+  },
+  {
+    route: '/community/group/detail/',
+    title: HEADER_TITLE.COMMUNITY,
+    subtitle: HEARDER_SUBTITLE.COMMUNITY.MEET,
+  },
+  {
+    route: '/community/question/detail/',
+    title: HEADER_TITLE.COMMUNITY,
+    subtitle: HEARDER_SUBTITLE.COMMUNITY.QNA,
+  },
+  {
+    route: '/community/group/write',
+    title: HEADER_TITLE.COMMUNITY,
+    subtitle: HEARDER_SUBTITLE.COMMUNITY.MEET,
+  },
+  {
+    route: '/community/question/write',
+    title: HEADER_TITLE.COMMUNITY,
+    subtitle: HEARDER_SUBTITLE.COMMUNITY.QNA,
+  },
+
   {
     route: '/campaign',
     title: HEADER_TITLE.CAMPAIGN,
@@ -73,6 +104,26 @@ const HEADER_DATA = [
   },
   {
     route: '/mypage',
+    title: HEADER_TITLE.MY_PAGE,
+    subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
+  },
+  {
+    route: '/mypage/all',
+    title: HEADER_TITLE.MY_PAGE,
+    subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
+  },
+  {
+    route: '/mypage/group',
+    title: HEADER_TITLE.MY_PAGE,
+    subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
+  },
+  {
+    route: '/mypage/question',
+    title: HEADER_TITLE.MY_PAGE,
+    subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
+  },
+  {
+    route: '/mypage/review',
     title: HEADER_TITLE.MY_PAGE,
     subtitle: HEARDER_SUBTITLE.MY_PAGE.USER_INFO,
   },

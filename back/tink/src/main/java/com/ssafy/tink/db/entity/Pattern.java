@@ -3,9 +3,12 @@ package com.ssafy.tink.db.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -13,80 +16,26 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.sun.istack.NotNull;
+
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @DynamicUpdate
 @DynamicInsert
 @Getter
+@NoArgsConstructor
 public class Pattern extends BaseEntity {
-
-	@Id
-	@Column(name = "pattern_id")
-	private int patternId;
-
-	private String name;
-
-	@Column(name = "difficulty_sum")
-	private int difficultySum;
-
-	@Column(name = "difficulty_cnt")
-	private int difficultyCnt;
-
-	@Column(name = "download_url")
-	private String downloadUrl;
-
-	private Float guage;
-
-	@Column(name = "guage_divisor")
-	private String guageDivisor;
-
-	@Column(name = "guage_pattern")
-	private String guagePattern;
-
-	private int yardage;
-
-	@Column(name = "yardage_max")
-	private int yardageMax;
-
-	@Column(name = "sizes_available")
-	private String sizesAvailable;
-
-	@Column(name = "notes_html")
-	private String notesHtml;
-
-	@Column(name = "yarn_weight_description")
-	private String yarnWeightDescription;
-
-	@Column(name = "yardage_description")
-	private String yardageDescription;
-
-	@OneToMany
-	@JoinTable(
-		name = "PATTERN_NEEDLE",
-		joinColumns = @JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id"),
-		inverseJoinColumns = @JoinColumn(name = "needle_id", referencedColumnName = "needle_id")
-	)
-	private List<Needle> needles = new ArrayList<>();
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id", referencedColumnName = "category_id")
-	private Category category;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id", referencedColumnName = "member_id")
-	private Member member;
-
-	@OneToMany
-	@JoinTable(
-		name = "PATTERN_LIKES",
-		joinColumns = @JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id"),
-		inverseJoinColumns = @JoinColumn(name = "member_id", referencedColumnName = "member_id")
-	)
-	private List<Member> patternLikes = new ArrayList<>();
 
 	@ManyToMany
 	@JoinTable(
@@ -94,20 +43,113 @@ public class Pattern extends BaseEntity {
 		joinColumns = @JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id"),
 		inverseJoinColumns = @JoinColumn(name = "keyword_id", referencedColumnName = "keyword_id")
 	)
-	private List<Keyword> keywords = new ArrayList<>();
+	private final List<Keyword> keywords = new ArrayList<>();
 
-	@OneToMany(mappedBy = "pattern")
-	private List<PatternThumbnail> patternThumbnails;
+	@OneToMany(mappedBy = "pattern", cascade = CascadeType.PERSIST,
+		orphanRemoval = true)
+	private final List<Pack> packs = new ArrayList<>();
 
-	@OneToMany(mappedBy = "pattern")
-	private List<Pack> packs = new ArrayList<>();
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+		name = "PATTERN_NEEDLE",
+		joinColumns = @JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id", nullable = false),
+		inverseJoinColumns = @JoinColumn(name = "needle_id", referencedColumnName = "needle_id", nullable = false)
+	)
+	@JsonManagedReference
+	private final List<Needle> needles = new ArrayList<>();
 
-	public void setPatternId(int patternId) {
-		this.patternId = patternId;
-	}
+	@Id
+	@Column(name = "pattern_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int patternId;
 
-	public void setName(String name) {
+	@Column(length = 200)
+	private String name;
+
+	@Column(name = "difficulty_sum")
+	@ColumnDefault("0")
+	private int difficultySum;
+
+	@Column(name = "difficulty_cnt")
+	@ColumnDefault("0")
+	private int difficultyCnt;
+
+	@Column(name = "difficulty_avg")
+	@ColumnDefault("0")
+	private Float difficultyAvg;
+
+	@Column(name = "download_url")
+	private String downloadUrl;
+
+	private Float gauge;
+
+	@Column(name = "gauge_divisor")
+	private Float gaugeDivisor;
+
+	@Column(name = "gauge_pattern")
+	private String gaugePattern;
+
+	@Column(name = "row_gauge")
+	private Float rowGauge;
+
+	private int yardage;
+
+	@Column(name = "yardage_max")
+	private int yardageMax;
+
+	@Column(name = "sizes_available", length = 50)
+	private String sizesAvailable;
+
+	@Column(name = "notes_html", length = 500)
+	private String notesHtml;
+
+	@Column(name = "yarn_weight_description", length = 25)
+	private String yarnWeightDescription;
+
+	@Column(name = "yardage_description", length = 50)
+	private String yardageDescription;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false)
+	@NotNull
+	@JsonManagedReference
+	private Category category;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "member_id", referencedColumnName = "member_id", nullable = false)
+	@NotNull
+	private Member member;
+
+	@OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
+	@JsonBackReference
+	private final List<PatternThumbnail> patternThumbnails = new ArrayList<>();
+	@OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonBackReference
+	private final List<PatternLikes> patternLikes = new ArrayList<>();
+
+	@Builder
+	public Pattern(String name, int difficultySum, int difficultyCnt, Float difficultyAvg, String downloadUrl,
+		Float gauge, Float gaugeDivisor, String gaugePattern, Float rowGauge, int yardage, int yardageMax,
+		String sizesAvailable, String notesHtml, String yarnWeightDescription, String yardageDescription,
+		Category category, Member member) {
 		this.name = name;
+		this.difficultySum = difficultySum;
+		this.difficultyCnt = difficultyCnt;
+		this.difficultyAvg = difficultyAvg;
+		this.downloadUrl = downloadUrl;
+		this.gauge = gauge;
+		this.gaugeDivisor = gaugeDivisor;
+		this.gaugePattern = gaugePattern;
+		this.rowGauge = rowGauge;
+		this.yardage = yardage;
+		this.yardageMax = yardageMax;
+		this.sizesAvailable = sizesAvailable;
+		this.notesHtml = notesHtml;
+		this.yarnWeightDescription = yarnWeightDescription;
+		this.yardageDescription = yardageDescription;
+		this.category = category;
+		this.member = member;
 	}
 
 	public void setDifficultySum(int difficultySum) {
@@ -118,20 +160,36 @@ public class Pattern extends BaseEntity {
 		this.difficultyCnt = difficultyCnt;
 	}
 
-	public void setDownloadUrl(String downloadUrl) {
-		this.downloadUrl = downloadUrl;
+	public void setDifficultyAvg(Float difficultyAvg) {
+		this.difficultyAvg = difficultyAvg;
 	}
 
-	public void setGuage(Float guage) {
-		this.guage = guage;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setGuageDivisor(String guageDivisor) {
-		this.guageDivisor = guageDivisor;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
-	public void setGuagePattern(String guagePattern) {
-		this.guagePattern = guagePattern;
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	public void setGauge(Float gauge) {
+		this.gauge = gauge;
+	}
+
+	public void setGaugeDivisor(Float gaugeDivisor) {
+		this.gaugeDivisor = gaugeDivisor;
+	}
+
+	public void setGaugePattern(String gaugePattern) {
+		this.gaugePattern = gaugePattern;
+	}
+
+	public void setRowGauge(Float rowGauge) {
+		this.rowGauge = rowGauge;
 	}
 
 	public void setYardage(int yardage) {
@@ -142,27 +200,21 @@ public class Pattern extends BaseEntity {
 		this.yardageMax = yardageMax;
 	}
 
-	public void setSizesAvailable(String sizesAvailable) {
-		this.sizesAvailable = sizesAvailable;
-	}
-
 	public void setNotesHtml(String notesHtml) {
 		this.notesHtml = notesHtml;
 	}
 
-	public void setYarnWeightDescription(String yarnWeightDescription) {
-		this.yarnWeightDescription = yarnWeightDescription;
+	public void addPatternThumbnail(PatternThumbnail patternThumbnail) {
+		this.getPatternThumbnails().add(patternThumbnail);
+		patternThumbnail.setPattern(this);
 	}
 
-	public void setYardageDescription(String yardageDescription) {
-		this.yardageDescription = yardageDescription;
+	/*
+	 * 해당 패턴의 바늘 정보 삽입
+	 * */
+	public void addNeedle(Needle needle) {
+		this.getNeedles().add(needle);
+		needle.getPatterns().add(this);
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
 }

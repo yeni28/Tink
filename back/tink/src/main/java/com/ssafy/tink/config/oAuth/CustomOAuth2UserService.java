@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.tink.config.Util.FileUtil;
 import com.ssafy.tink.config.ect.OAuth2ProcessException;
@@ -50,7 +51,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 	public OAuth2User process(OAuth2UserRequest request, OAuth2User user) {
 		AuthProvider authProvider = AuthProvider.valueOf(request.getClientRegistration().getRegistrationId().toUpperCase());
 		OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.create(authProvider, user.getAttributes());
-
+		Boolean isCheck = true;
 		if( oAuth2UserInfo == null ) {
 			 throw new OAuth2ProcessException(" 이메일을 찾을 수 없습니다. ");
 		}
@@ -73,10 +74,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		// 회원가입이 되어 있지않으면 해당 유저를 가입시키기
 		else {
 			member = createUser(oAuth2UserInfo, authProvider);
+			isCheck = false;
 		}
-		return OAuth2UserDetail.create(member, user.getAttributes());
+		return OAuth2UserDetail.create(member, isCheck, user.getAttributes());
 	}
 
+	@Transactional
 	public Member createUser( OAuth2UserInfo userInfo, AuthProvider authProvider) {
 
 		Member member = Member.builder()

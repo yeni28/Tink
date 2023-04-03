@@ -2,7 +2,7 @@ import React from 'react'
 
 import { MdOutlineRefresh } from 'react-icons/md'
 
-import patternLineBox from '@/assets/drawings/patternLineBox.png'
+import patternLineBox from '@/assets/drawings/patternLIneBox.png'
 import atoms from '@/components/atoms'
 
 import organisms from '@/components/organisms'

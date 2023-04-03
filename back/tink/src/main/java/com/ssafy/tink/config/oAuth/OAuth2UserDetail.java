@@ -18,23 +18,29 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OAuth2UserDetail implements UserDetails, OAuth2User {
 
-	public Long		id;
-	public String	email;
+	private Long		id;
+	private String	email;
+	private boolean	isCheck;
 
-	public Collection<? extends GrantedAuthority> authorities;
-	public Map<String, Object> attirbutes;
+	private Collection<? extends GrantedAuthority> authorities;
+	private Map<String, Object> attirbutes;
 
 	public void setAttirbutes(Map<String,Object> attirbutes) {
 		this.attirbutes = attirbutes;
 	}
 
-	public OAuth2UserDetail(Long id, String email, Collection<? extends GrantedAuthority> authorities) {
+	public OAuth2UserDetail(
+		Long id,
+		String email,
+		Collection<? extends GrantedAuthority> authorities,
+		boolean isCheck) {
 		this.id 			= 	id;
 		this.email 			= 	email;
 		this.authorities 	= 	authorities;
+		this.isCheck		=	isCheck;
 	}
 
-	public static OAuth2UserDetail create(Member member) {
+	public static OAuth2UserDetail create(Member member, boolean isCheck) {
 		// 소셜로 로그인한 사용자는 기본적으로 USER 권한으로 셋팅함
 		Collection<? extends GrantedAuthority> authorities =
 			Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
@@ -42,11 +48,12 @@ public class OAuth2UserDetail implements UserDetails, OAuth2User {
 		return new OAuth2UserDetail(
 			member.getMemberId(),
 			member.getEmail(),
-			authorities
+			authorities,
+			isCheck
 		);
 	}
-	public static OAuth2UserDetail create(Member member, Map<String, Object> attributes) {
-		OAuth2UserDetail userDetails = OAuth2UserDetail.create(member);
+	public static OAuth2UserDetail create(Member member, boolean isCheck, Map<String, Object> attributes) {
+		OAuth2UserDetail userDetails = OAuth2UserDetail.create(member, isCheck);
 		userDetails.setAttirbutes(attributes);
 		return userDetails;
 	}
@@ -99,5 +106,9 @@ public class OAuth2UserDetail implements UserDetails, OAuth2User {
 	@Override
 	public boolean isEnabled() {
 		return false;
+	}
+
+	public boolean isCheck() {
+		return isCheck;
 	}
 }

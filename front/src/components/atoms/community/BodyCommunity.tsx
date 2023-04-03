@@ -1,7 +1,13 @@
 import React from 'react'
 
-function BodyCommunity({ body }: CommunityProps) {
-  return <div className="text-body">{body}</div>
+import Parser from 'html-react-parser'
+
+function BodyCommunity({ content }: { content: string }) {
+  return (
+    <div className="text-body">
+      {Parser(content.length < 100 ? content : content.slice(0, 70) + '...')}
+    </div>
+  )
 }
 
 export default BodyCommunity

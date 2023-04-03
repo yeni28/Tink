@@ -97,7 +97,7 @@ public class JwtTokenProvider {
 				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());
 		// 가져온 정보를 가지고 Principal 객체로 만들기
-		OAuth2UserDetail principal = new OAuth2UserDetail(Long.valueOf(userid), "", authorities);
+		OAuth2UserDetail principal = new OAuth2UserDetail(Long.valueOf(userid), "", authorities, true);
 		// principal 객체를 가지고 Authentication 객체를 생성
 		return new UsernamePasswordAuthenticationToken(principal, "", authorities);
 	}

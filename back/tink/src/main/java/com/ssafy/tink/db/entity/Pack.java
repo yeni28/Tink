@@ -2,11 +2,14 @@ package com.ssafy.tink.db.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -21,18 +24,19 @@ public class Pack {
 
 	@Id
 	@Column(name = "pack_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int packId;
 
 	@Column(name = "primary_pack_id")
 	private String primaryPackId;
 
 	@Column(name = "prject_id")
-	private String projectId;
+	private int projectId;
 
 	private String skeins;
 
 	@Column(name = "stash_id")
-	private String stashId;
+	private int stashId;
 
 	@Column(name = "total_grams")
 	private String totalGrams;
@@ -47,7 +51,7 @@ public class Pack {
 	private String totalYards;
 
 	@Column(name = "yarn_id")
-	private String yarnId;
+	private int yarnId;
 
 	@Column(name = "yarn_name")
 	private String yarnName;
@@ -56,7 +60,7 @@ public class Pack {
 	private String yarnWeightCrochetGauge;
 
 	@Column(name = "yarn_weight_id")
-	private String yarnWeightId;
+	private int yarnWeightId;
 
 	@Column(name = "yarn_weight_knit_gauge")
 	private String yarnWeightKnitGauge;
@@ -85,7 +89,7 @@ public class Pack {
 	private String yarnCompanyName;
 
 	@Column(name = "yarn_yarn_company_id")
-	private String yarnCompanyId;
+	private int yarnCompanyId;
 
 	@Column(name = "quantity_description")
 	private String quantityDescription;
@@ -97,7 +101,7 @@ public class Pack {
 	private String dyeLot;
 
 	@Column(name = "color_family_id")
-	private String colorFamilyId;
+	private int colorFamilyId;
 
 	@Column(name = "grams_per_skein")
 	private Float gramsPerSkein;
@@ -111,10 +115,10 @@ public class Pack {
 	@Column(name = "ounces_per_skein")
 	private Float ouncesPerSkein;
 
-	@Column(name = "prefer_metric_weight")
+	@Column(name = "prefer_metric_weight", columnDefinition = "TINYINT", length=1)
 	private Boolean preferMetricWeight;
 
-	@Column(name = "prefer_metric_length")
+	@Column(name = "prefer_metric_length", columnDefinition = "TINYINT", length=1)
 	private Boolean preferMetricLength;
 
 	@Column(name = "shop_id")
@@ -124,6 +128,6 @@ public class Pack {
 	private String threadSize;
 
 	@ManyToOne
-	@JoinColumn(name = "pattern_id")
+	@JoinColumn(name = "pattern_id", nullable = false)
 	private Pattern pattern;
 }

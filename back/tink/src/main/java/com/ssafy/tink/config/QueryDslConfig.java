@@ -1,13 +1,16 @@
 package com.ssafy.tink.config;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.querydsl.jpa.impl.JPAQueryFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
+/*
+* querydsl 사용을 위한 config
+* */
 @Configuration
 public class QueryDslConfig {
 
@@ -15,7 +18,7 @@ public class QueryDslConfig {
 	private EntityManager entityManager;
 
 	@Bean
-	public JPAQueryFactory jpaQueryFactory() {
+	public JPAQueryFactory JPAQuery() {
 		return new JPAQueryFactory(entityManager);
 	}
 

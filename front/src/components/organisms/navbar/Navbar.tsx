@@ -4,9 +4,13 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { GrClose } from 'react-icons/gr'
 import { NavLink, useLocation } from 'react-router-dom'
 
+import { LogoutMenuData } from '@/components/organisms/navbar/LogoutNavbarMenuData'
 import { MenuData } from '@/components/organisms/navbar/NavbarMenuData'
 
 function NewNavbar() {
+  // 로그인 여부 판단하기
+  const [isLogin, setIsLogin] = useState(false)
+
   // 작은 화면에서 menu 열고 닫는 부분
   const [openMenu, setOpenMenu] = useState(false)
   const onClickHandler = () => {
@@ -41,6 +45,25 @@ function NewNavbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [prevScrollPos, visible])
 
+  const MenuDataNods = () => {
+    return MenuData.map((item, index: number) => {
+      return (
+        <NavLink key={index} to={item.url}>
+          <li className="whitespace-nowrap ">{item.title}</li>
+        </NavLink>
+      )
+    })
+  }
+  const LogoutMenuDatas = () => {
+    return LogoutMenuData.map((item, index: number) => {
+      return (
+        <NavLink key={index} to={item.url}>
+          <li className="whitespace-nowrap ">{item.title}</li>
+        </NavLink>
+      )
+    })
+  }
+
   return (
     <nav
       style={{ top: visible ? '0' : '-6.25rem', transition: 'top 0.6s' }}
@@ -64,13 +87,7 @@ function NewNavbar() {
           ' ml:bg-beige ml:absolute ml:top-0 ml:left-1/2 ml:pt-24 ml:flex ml:flex-col ml:justify-start grid grid-cols-5 gap-5 list-none items-center text-center justify-end'
         }
       >
-        {MenuData.map((item, index: number) => {
-          return (
-            <NavLink key={index} to={item.url}>
-              <li className="whitespace-nowrap ">{item.title}</li>
-            </NavLink>
-          )
-        })}
+        {isLogin ? MenuDataNods() : LogoutMenuDatas()}
       </ul>
     </nav>
   )

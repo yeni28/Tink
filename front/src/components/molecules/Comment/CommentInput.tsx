@@ -44,7 +44,7 @@ function Comment({ comments, setComments }: Props) {
     return months || weeks || days || hours || minutes || seconds
   }
   // 댓글작성
-  const submitComment = () => {
+  const submitComment = async () => {
     const randomId = Math.random()
     const randomname = Math.random().toString(36).substring(2, 11)
     // create시간입니다.
@@ -53,13 +53,13 @@ function Comment({ comments, setComments }: Props) {
     const create_time = getTime(createdAt)
     const userImgUrl = 'https://source.unsplash.com/random'
     const newComment = {
-      id: randomId,
-      value: newcomment,
-      username: randomname,
-      userImage: userImgUrl,
-      create_time: create_time,
+      commentId: randomId,
+      content: newcomment,
+      nickname: randomname,
+      thumbImg: userImgUrl,
+      updatedDate: create_time,
     }
-    if (newComment.value === '') {
+    if (newComment.content === '') {
       alert('댓글을 입력해 주세요!')
     } else {
       setComments([...comments, newComment])
@@ -92,7 +92,7 @@ function Comment({ comments, setComments }: Props) {
             value={newcomment}
             onChange={onChange}
             // 엔터키로 입력 가능
-            onKeyPress={handleKeyPress}
+            onKeyUp={handleKeyPress}
           />
           <button
             className="w-[9rem] ml-[2rem]"
