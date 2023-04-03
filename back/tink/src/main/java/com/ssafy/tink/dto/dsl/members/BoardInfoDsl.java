@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+// @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @EqualsAndHashCode(of = "boardId")
 public class BoardInfoDsl {
@@ -28,16 +28,16 @@ public class BoardInfoDsl {
 	private long memberId;
 	private String title;
 	private String content;
-	private Timestamp createdDate;
-	private Timestamp updatedDate;
+	private String createdDate;
+	private String updatedDate;
 
 	@QueryProjection
 	public BoardInfoDsl(
 		int boardId,
 		String boardCategory,
 		long memberId,
-		Timestamp createdDate,
-		Timestamp updatedDate,
+		String createdDate,
+		String updatedDate,
 		String title,
 		String content) {
 		this.boardId = boardId;
