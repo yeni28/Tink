@@ -291,4 +291,4 @@ export function Knit1(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/knit_1_complete.glb')
+useGLTF.preload('/models/knit/knit1.glb')

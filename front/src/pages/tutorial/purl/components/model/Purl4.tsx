@@ -291,4 +291,4 @@ export function Purl4(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/purl_4_complete-transformed.glb')
+useGLTF.preload('/models/purl/purl4.glb')
