@@ -32,8 +32,7 @@ public class Follow implements Serializable {
 	@JoinColumn(name = "from_id")
 	private Member member;
 
-	@Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	@NotNull
-	private Timestamp createdAt;
+	@Column(name = "created_at")
+	private String createdAt;
 
 }

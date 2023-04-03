@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 
 /*
-<<<<<<< HEAD
 * API Response 결과의 반환 값을 관리
 * */
 

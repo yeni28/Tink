@@ -61,6 +61,8 @@ public class SecurityConfig {
 			.antMatchers("/members/mypage/**").hasRole("USER")
 			.antMatchers("/members/refresh").hasRole("USER")
 			.antMatchers("/file/**").hasRole("USER")
+			.antMatchers("/board/**").hasRole("USER")
+			.antMatchers("/review/**").hasRole("USER")
 			.anyRequest().authenticated();
 
 		http.oauth2Login()

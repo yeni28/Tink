@@ -31,7 +31,9 @@ public class Thumbnail {
 	@Column(name = "thumb_img")
 	private String thumbImg;
 
+
 	public void setThumbnailId(int thumbnailId) {
 		this.thumbnailId = thumbnailId;
 	}
+
 }
