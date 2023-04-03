@@ -233,7 +233,7 @@ public class PatternController {
 				.build();
 		}
 		return BaseResponse.builder()
-			.result("SUCCESS")
+			.result(1)
 			.resultCode(HttpStatus.OK.value())
 			.resultMsg("정상적으로 처리되었습니다.")
 			.build();
