@@ -36,6 +36,7 @@ import com.ssafy.tink.dto.NeedleDto;
 import com.ssafy.tink.dto.PageDto;
 import com.ssafy.tink.dto.PatternDto;
 import com.ssafy.tink.dto.PatternInfoDto;
+import com.ssafy.tink.dto.PatternRecommendDto;
 import com.ssafy.tink.dto.PatternThumbnailDto;
 
 @Service
@@ -377,5 +378,13 @@ public class PatternService {
 		return results;
 
 	}
+
+	public List<PatternRecommendDto> getPatternForRecommend(){
+		List<Pattern> patterns = patternRepository.findAllPattern();
+		List<PatternRecommendDto> results = patterns.stream().map(PatternRecommendDto::new).collect(Collectors.toList());
+
+		return results;
+	}
+
 
 }
