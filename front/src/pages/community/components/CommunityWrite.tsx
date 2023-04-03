@@ -44,7 +44,12 @@ function CommunityWrite() {
           {textCount.replace(/<br\s*\/?>/gm, '\n').length} / 25
         </span>
       </div>
-      <img alt="line" className="mb-2" src={StraitLine} />
+      <img
+        alt="line"
+        className="mb-2"
+        referrerPolicy="no-referrer"
+        src={StraitLine}
+      />
       <ReactQuill
         modules={modules}
         placeholder="내용을 입력해주세요."

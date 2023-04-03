@@ -32,6 +32,7 @@ function CardSm({ isLiked, title, userImgUrl, userName, src }: CardProps) {
           <img
             alt="userImage"
             className="w-[20px] h-[20px] rounded-full"
+            referrerPolicy="no-referrer"
             src={userImgUrl}
           />
           <div className="text-footnote text-grey">{userName}</div>

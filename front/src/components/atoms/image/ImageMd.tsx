@@ -6,6 +6,7 @@ function ImageMd({ src, alt }: ImageProps): JSX.Element {
       <img
         alt={alt}
         className="object-cover rounded-3xl w-[356px] h-[218px] "
+        referrerPolicy="no-referrer"
         src={src}
       />
     </div>

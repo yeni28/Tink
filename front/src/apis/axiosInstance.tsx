@@ -5,7 +5,8 @@ export const interceptors = (instance: AxiosInstance) => {
     (config) => {
       const token = localStorage.getItem('access-token')
 
-      config.headers.Authorization = `Bearer ${token}`
+      // config.headers.Authorization = `Bearer ${token}`
+      config.headers.Authorization = `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVfVVNFUiIsImlzcyI6ImRlYnJhaW5zIiwiaWF0IjoxNjgwNTA5NzMwLCJleHAiOjE2ODA1MTMzMzB9._LgHKY_rYAfd-55z5cIncFlGQcz6TVCRwc1QszmTMFHsQA5WHD_Kio4U4AUoJEfjfDtpsZBsuO0z9g7Uvav9Fg`
       return config
     },
     (error) => Promise.reject(error.response)
@@ -13,7 +14,8 @@ export const interceptors = (instance: AxiosInstance) => {
   return instance
 }
 
-const BASE_URL = 'http://j8c201.p.ssafy.io:8082/tink'
+// const BASE_URL = 'http://j8c201.p.ssafy.io:8081/tink' // 메인서버
+const BASE_URL = 'http://localhost:8081' // 테스트 로컬 서버
 
 // 단순 get요청으로 인증값이 필요없는 경우
 const axiosApi = (url: string, options?: object) => {

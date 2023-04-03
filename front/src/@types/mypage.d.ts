@@ -4,6 +4,7 @@ interface Mypage {
   email: string
   follows: number
   follower: number
+  isFollow: boolean
   nickname: string
   thumbnail?: {
     thumbnailId?: number

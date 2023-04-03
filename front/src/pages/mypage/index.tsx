@@ -11,7 +11,7 @@ import {
 } from '@/components/organisms/header/HeaderConstants'
 
 function MyPageMainPage() {
-  const [member, setMember] = useState<Member>()
+  const [member, setMember] = useState<Mypage>()
   const params = useParams()
   const profileId = params.id
   useEffect(() => {
@@ -56,6 +56,7 @@ function MyPageMainPage() {
           <img
             alt="프로필 이미지"
             className="w-[8.19rem] h-[8.19rem] rounded-full mb-6"
+            referrerPolicy="no-referrer"
             src={member?.thumbnail?.thumbImg}
           />
           <p className="text-title1-bold mb-3">{member?.nickname}</p>
