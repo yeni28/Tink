@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.tink.config.DjangoClient;
 import com.ssafy.tink.dto.PatternRecommendDto;
 import com.ssafy.tink.service.PatternService;
 
-@RestController("/recommend")
+@RestController
+@RequestMapping("/recommend")
 public class RecommendController {
 
 	@Autowired
@@ -22,11 +22,12 @@ public class RecommendController {
 	private PatternService patternService;
 
 
-	@PostMapping("/")
-	public String sendPatternJson(@RequestBody PatternRecommendDto patternRecommendDto){
+	@GetMapping ("/")
+	public String sendPatternJson(){
 		List<PatternRecommendDto> getData = patternService.getPatternForRecommend();
+		System.out.println(getData.toArray());
 
-		return djangoClient.postJson(getData, patternRecommendDto);
+		return djangoClient.postPatternJsonForYarn(getData);
 	}
 
 }

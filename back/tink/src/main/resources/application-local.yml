@@ -17,7 +17,7 @@ spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver             # DB driver를 설정
         url: jdbc:mysql://localhost:3306/tink?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
-        username: root  # 유저ID
+        username: ssafy  # 유저ID
         password: ssafy # 유저PW
     data:
         redis:
@@ -43,4 +43,4 @@ logging:
     level:
         web: INFO
         com: INFO
-        root: DEBUG
+        root: INFO
