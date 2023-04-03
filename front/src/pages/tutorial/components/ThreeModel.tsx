@@ -1,19 +1,14 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 
 import {
   Environment,
   OrbitControls,
-  PerspectiveCamera,
   OrthographicCamera,
 } from '@react-three/drei'
 
-import { useFrame } from '@react-three/fiber'
-import gsap from 'gsap'
 import * as THREE from 'three'
 
 import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
-
-import { Knit1 } from '@/pages/tutorial/knit/components/model/Knit1'
 
 import { angleToRadians } from '@/utills/angle'
 
