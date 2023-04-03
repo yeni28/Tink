@@ -49,4 +49,7 @@ public interface PatternRepository extends JpaRepository<Pattern, Integer> {
 		+ "WHERE pl.created_date >= :createdDate AND pl.created_date < :endDate group by pattern_id order by like_count desc) pl "
 		+ "on p.pattern_id = pl.pattern_id", nativeQuery = true)
 	List<Pattern> findWeeklyBest(@Param("createdDate") Timestamp createdDate, @Param("endDate") Timestamp endDate);
+
+	Optional<List<Pattern>> findAllByNameContainingOrderByName(String name);
+
 }
