@@ -5,7 +5,7 @@ import { Canvas } from '@react-three/fiber'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-import Stepone from '@/pages/tutorial/knit/components/stepone'
+// import ThreeModel from '@/pages/tutorial/knit/components/'
 
 import tuto from '@/styles/tutorial.module.css'
 
@@ -66,9 +66,7 @@ function PurlTutorial() {
       {/* 3d model 영역 */}
       <section className="w-full h-screen bg-red relative">
         <Canvas shadows className="h-screen">
-          <Suspense fallback={null}>
-            <Stepone />
-          </Suspense>
+          <Suspense fallback={null}>{/* <ThreeModel /> */}</Suspense>
         </Canvas>
       </section>
 

@@ -1,30 +1,32 @@
-import React, { useRef, useLayoutEffect, Suspense } from 'react'
+import React, { useEffect, useRef, useLayoutEffect, Suspense } from 'react'
+
+import { Html } from '@react-three/drei'
 
 import { Canvas } from '@react-three/fiber'
 import gsap from 'gsap'
+
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-import { Knit1 } from './components/model/Knit1'
-
-import ThreeModel from '../components/ThreeModel'
+import { Knit2 } from './model/Knit2'
 
 import snailCat from '@/assets/drawings/털실에깔린냥이.png'
 import atoms from '@/components/atoms'
 import explain_box from '@/pages/tutorial/components/atoms/explain_box.png'
+import ThreeModel from '@/pages/tutorial/components/ThreeModel'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const rows = 1
-const columns = 8
-const missingImages = 0 // The number of missing images in the last column
-const frame_count = rows * columns - missingImages - 1
+const columns = 10
+const missingImages = 0
 
-const imageWidth = 15360 // This is an approximate value
-const imageHeight = 1080 // This is an approximate value
+const frame_count = rows * columns - missingImages - 1
+const imageWidth = 19200
+const imageHeight = 1080
 const horizDiff = imageWidth / columns
 const vertDiff = imageHeight / rows
 
-function KnitTutorial() {
+function StepTwo() {
   const imageViewer = useRef(null)
   const imageScene = useRef(null)
   const explainBox = useRef(null)
@@ -77,8 +79,8 @@ function KnitTutorial() {
         <div
           ref={imageViewer}
           className="w-auto h-full aspect-video
-  mx-auto 
-  bg-no-repeat bg-cover  bg-left bg-[url('@/assets/sprite/knit1.png')]"
+             mx-auto 
+          bg-no-repeat bg-cover  bg-left bg-[url('@/assets/sprite/knit2.png')]"
         ></div>
         <div ref={explainBox} className="relative mt-20 w-[300px]">
           <img src={explain_box} />
@@ -95,7 +97,7 @@ function KnitTutorial() {
       <section className="w-full h-screen relative ">
         <Canvas shadows className="h-screen">
           <Suspense fallback={null}>
-            <ThreeModel model={<Knit1 />} />
+            <ThreeModel model={<Knit2 />} />
           </Suspense>
         </Canvas>
         <div className="w-[20.625rem] h-[12rem] bg-pink bg-opacity-50 rounded-3xl py-8 px-6 absolute bottom-20 left-20">
@@ -117,4 +119,4 @@ function KnitTutorial() {
   )
 }
 
-export default KnitTutorial
+export default StepTwo
