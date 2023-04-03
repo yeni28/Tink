@@ -1,5 +1,8 @@
 package com.ssafy.tink.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ssafy.tink.db.entity.Pattern;
 
 import io.swagger.annotations.ApiModel;
@@ -19,6 +22,12 @@ public class PatternRecommendDto {
 	int yardageMax;
 
 	int patternId;
+
+	List<PatternRecommendDto> pattern = new ArrayList<>();
+
+	public void setPattern(List<PatternRecommendDto> pattern) {
+		this.pattern = pattern;
+	}
 
 	@Builder
 	public PatternRecommendDto(Pattern pattern) {
