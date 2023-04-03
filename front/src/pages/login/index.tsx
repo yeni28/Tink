@@ -26,7 +26,7 @@ function Login() {
       // const PARAMS = new URL(document.location).searchParams
       // const KAKAO_CODE = PARAMS.get('code')
 
-      const backHost = `${HOST}/oauth2/authorization/google?redirect_url=${REDIRECT_URI}`
+      const backHost = `${HOST}/tink/oauth2/authorization/google?redirect_url=${REDIRECT_URI}`
       await axios({
         url: backHost,
         method: 'GET',
