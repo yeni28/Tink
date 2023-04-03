@@ -25,8 +25,8 @@ public class CommunityBoardInfoDsl {
 	private int boardId;
 	private String boardCategory;
 	private long memberId;
-	private Timestamp createdDate;
-	private Timestamp updatedDate;
+	private String createdDate;
+	private String updatedDate;
 	private String title;
 	private String content;
 
@@ -41,8 +41,8 @@ public class CommunityBoardInfoDsl {
 		long memberId,
 		String title,
 		String content,
-		Timestamp createdDate,
-		Timestamp updateDate,
+		String createdDate,
+		String updateDate,
 		ThumbnailInfoDsl thumbnail) {
 		this.boardId = boardId;
 		this.boardCategory = boardCategory;

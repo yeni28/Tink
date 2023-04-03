@@ -148,8 +148,8 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 				pattern.name,
 				list(new QPatternThumbInfoDsl(
 					patternThumbnail.patternThumbnailId,
-					patternThumbnail.main_img,
-					patternThumbnail.thumb_img
+					patternThumbnail.mainImg,
+					patternThumbnail.thumbImg
 				))
 			)));
 		List<PatternInfoDsl> list = patterns.keySet().stream()
@@ -183,8 +183,8 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 				pattern.name,
 				list(new QPatternThumbInfoDsl(
 					patternThumbnail.patternThumbnailId,
-					patternThumbnail.main_img,
-					patternThumbnail.thumb_img
+					patternThumbnail.mainImg,
+					patternThumbnail.thumbImg
 				)))
 			));
 
