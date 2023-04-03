@@ -79,9 +79,6 @@ public class ReviewService {
 				.memberId(Long.parseLong(memberId.get()))
 				.build())
 			.boardCategory(community.getBoardCategory())
-			// .pattern(Pattern.builder()
-			// 	.patternId(community.getPatternId())
-			// 	.build())
 			.pattern(p)
 			.thumbnail(member.get().getThumbnail())
 			.build();
