@@ -25,11 +25,13 @@ import com.ssafy.tink.db.repository.JarangLikesRepository;
 import com.ssafy.tink.db.repository.MaterialRepository;
 import com.ssafy.tink.db.repository.MemberRepository;
 import com.ssafy.tink.db.repository.PatternRepository;
+import com.ssafy.tink.db.repository.ReviewInfoInterface;
 import com.ssafy.tink.db.repository.ThumbnailRepository;
 import com.ssafy.tink.dto.PatternInfoDto;
 import com.ssafy.tink.dto.PatternListDto;
 import com.ssafy.tink.dto.ReviewInfoDto;
 import com.ssafy.tink.dto.ReviewInputDto;
+import com.ssafy.tink.dto.ThumbnailDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -60,7 +62,7 @@ public class ReviewService {
 	private ThumbnailRepository thumbnailRepository;
 
 	@Transactional
-	public Object create(ReviewInputDto community) {
+	public Object create(ReviewInputDto community, Thumbnail thumbnail) {
 
 		if(!community.getBoardCategory().equals("review"))
 			return new IllegalArgumentException("커뮤니티 카테고리가 잘못되었습니다.");
@@ -80,7 +82,10 @@ public class ReviewService {
 				.build())
 			.boardCategory(community.getBoardCategory())
 			.pattern(p)
-			.thumbnail(member.get().getThumbnail())
+			.thumbnail(Thumbnail.builder()
+				.thumbImg(thumbnail.getThumbImg())
+				.mainImg(thumbnail.getMainImg())
+				.build())
 			.build();
 
 		Material materialInfo = Material.builder()
@@ -155,8 +160,8 @@ public class ReviewService {
 			.boardId(review.getBoardId())
 			.title(review.getTitle())
 			.content(review.getContent())
-			.createdDate(review.getCreatedDate())
-			.updatedDate(review.getUpdatedDate())
+			.createdDate(String.valueOf(review.getCreatedDate()))
+			.updatedDate(String.valueOf(review.getUpdatedDate()))
 			.liked((int)cntLikes)
 			.hit(review.getHit())
 			.nickname(fromMember.get().getNickname())
@@ -180,20 +185,20 @@ public class ReviewService {
 	}
 
 	@Transactional
-	public List<Board> getBoardList(String filter, String boardCategory) {
+	public List<ReviewInfoInterface> getBoardList(String filter, String boardCategory) {
 
-		List<Board> reviewList;
+		List<ReviewInfoInterface> reviewList = new ArrayList<>();
 
 		if(filter.equals("최신순")){
-			reviewList = boardRepository.findBoardAllByBoardCategoryOrderByBoardIdDesc(boardCategory).orElseThrow(()->{
+			reviewList = boardRepository.findReviewAllByBoardCategoryOrderByBoardIdDesc(boardCategory).orElseThrow(()->{
 				return new IllegalArgumentException("게시글 목록 정보를 찾을 수 없습니다.");
 			});
 		}else if(filter.equals("인기순")){
-			reviewList = boardRepository.findBoardAllByBoardCategoryOrderByHitDesc(boardCategory).orElseThrow(()->{
+			reviewList = boardRepository.findReviewAllByBoardCategoryOrderByHitDesc(boardCategory).orElseThrow(()->{
 				return new IllegalArgumentException("게시글 목록 정보를 찾을 수 없습니다.");
 			});
 		}else{
-			reviewList = boardRepository.findBoardAllByBoardCategoryOrderByBoardIdAsc(boardCategory).orElseThrow(()->{
+			reviewList = boardRepository.findReviewAllByBoardCategoryOrderByBoardIdAsc(boardCategory).orElseThrow(()->{
 				return new IllegalArgumentException("게시글 목록 정보를 찾을 수 없습니다.");
 			});
 		}

@@ -15,12 +15,18 @@ spring:
     open-in-view: false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver             # DB driver를 설정
-    url: jdbc:mysql://localhost:3306/tink?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
     username: ssafy  # 유저ID
     password: ssafy # 유저PW
+  data:
+    redis:
+      host: http://j8c201.p.ssafy.io
+      port: 6379
+  session:
+    store-type: redis
 
 server:
-  port: 8082              # 서비스 포트지정
+  port: 8081              # 서비스 포트지정
   servlet:
     context-path: /     # contextPaht를 지정하면 기본 uri가 지정된다.
 
@@ -29,7 +35,7 @@ app:
     oauth2:
       authorizedRedirectUri: http://localhost:3000/login     # Token을 받을 Url를 지정
   upload:
-    folder: D:\upload      # 파일이 저장될 경로 설정
+    folder: C:\S08P22C201\tink\image      # 파일이 저장될 경로 설정
 #        folder: /Users/junyoungpark/Downloads      # 파일이 저장될 경로 설정
 
 logging:

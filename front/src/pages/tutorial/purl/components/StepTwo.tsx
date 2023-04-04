@@ -6,7 +6,7 @@ import gsap from 'gsap'
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-import { Knit2 } from './model/Knit2'
+import { Purl2 } from './model/Purl2'
 
 import snailCat from '@/assets/drawings/털실에깔린냥이.png'
 import atoms from '@/components/atoms'
@@ -16,11 +16,11 @@ import ThreeModel from '@/pages/tutorial/components/ThreeModel'
 gsap.registerPlugin(ScrollTrigger)
 
 const rows = 1
-const columns = 10
+const columns = 9
 const missingImages = 0
 
 const frame_count = rows * columns - missingImages - 1
-const imageWidth = 19200
+const imageWidth = 17280
 const imageHeight = 1080
 const horizDiff = imageWidth / columns
 const vertDiff = imageHeight / rows
@@ -79,7 +79,7 @@ function StepTwo() {
           ref={imageViewer}
           className="w-auto h-full aspect-video
              mx-auto 
-          bg-no-repeat bg-cover  bg-left bg-[url('@/assets/sprite/knit2.png')]"
+          bg-no-repeat bg-cover  bg-left bg-[url('@/assets/sprite/purl2.png')]"
         ></div>
         <div ref={explainBox} className="relative mt-20 w-[300px]">
           <img src={explain_box} />
@@ -94,7 +94,7 @@ function StepTwo() {
       <section className="w-full h-screen relative ">
         <Canvas shadows className="h-screen">
           <Suspense fallback={null}>
-            <ThreeModel model={<Knit2 />} />
+            <ThreeModel model={<Purl2 />} />
           </Suspense>
         </Canvas>
         <div className="w-[20.625rem] h-[12rem] bg-pink bg-opacity-50 rounded-3xl py-8 px-6 absolute bottom-20 left-20">
@@ -108,7 +108,7 @@ function StepTwo() {
         <div className="absolute bottom-20 right-20">
           <atoms.ButtonDoodle
             innerValue=">  다음"
-            onClick={() => navigate('/tutorial/knit/3')}
+            onClick={() => navigate('/tutorial/purl/3')}
           />
         </div>
       </section>

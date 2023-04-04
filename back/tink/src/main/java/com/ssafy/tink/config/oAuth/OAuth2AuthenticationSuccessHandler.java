@@ -71,6 +71,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		String accessToken = tokenProvider.createAccessToken(authentication);
 		// refreshToken은 생성과 동시에 저장하도록 처리할 것임
 		String refreshToken = tokenProvider.createRefreshToken(authentication, response);
+		log.info("엑세스 토큰 값 : " + accessToken);
 		log.info("리플래쉬 토큰 값 : " + refreshToken);
 		HttpSession session = request.getSession();
 		session.setAttribute(userDetail.getName(), refreshToken);

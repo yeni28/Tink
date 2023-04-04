@@ -3,6 +3,7 @@ package com.ssafy.tink.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.nimbusds.oauth2.sdk.util.StringUtils;
 import com.ssafy.tink.config.Util.SecurityUtil;
 import com.ssafy.tink.config.ect.BadRequestException;
 import com.ssafy.tink.db.entity.Follow;
@@ -31,6 +33,7 @@ import com.ssafy.tink.dto.TokenDto;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.BoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
+import com.ssafy.tink.dto.dsl.members.FollowInfoDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
 import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
 
@@ -89,8 +92,25 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Transactional
-	public Optional<List<MemberInfoDsl>> getMemberInfoByQueryDsl() {
-		return Optional.ofNullable(memberRepository.findMember());
+	public MemberInfoDsl getMemberInfoByQueryDsl(String memberId) throws NoSuchElementException {
+		Optional<String> loginMember = SecurityUtil.getCurrentAuthentication();
+		MemberInfoDsl memberInfo = null;
+		// 유저정보를 토대로 정보 검색 ( "", null => false )
+		if ( StringUtils.isNotBlank(memberId) ) {
+			memberInfo = memberRepository.findMember(Long.parseLong(memberId)).get();
+			memberInfo.setIsFollow(false);
+			FollowInfoDsl follow = memberRepository.existsFollow(Long.parseLong(loginMember.get())).get();
+			for(MemberInfoDsl follower : follow.getMember() ) {
+				if ( follower.getMemberId() == memberInfo.getMemberId() ) {
+					memberInfo.setIsFollow(true);
+					break;
+				}
+			}
+			return memberInfo;
+		}
+		memberInfo = memberRepository.findMember(Long.parseLong(loginMember.get())).get();
+		memberInfo.setIsFollow(false);
+		return memberInfo;
 	}
 
 	@Transactional

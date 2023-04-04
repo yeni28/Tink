@@ -1,5 +1,6 @@
 package com.ssafy.tink.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.tink.config.Util.SecurityUtil;
-import com.ssafy.tink.config.ect.BadRequestException;
 import com.ssafy.tink.db.entity.Board;
 import com.ssafy.tink.db.entity.Comment;
 import com.ssafy.tink.db.entity.JarangLikes;
@@ -19,9 +19,8 @@ import com.ssafy.tink.db.repository.CommentRepository;
 import com.ssafy.tink.db.repository.FollowRepository;
 import com.ssafy.tink.db.repository.JarangLikesRepository;
 import com.ssafy.tink.db.repository.MemberRepository;
+import com.ssafy.tink.db.repository.QnaGroupInfoInterface;
 import com.ssafy.tink.db.repository.ThumbnailRepository;
-import com.ssafy.tink.dto.CommentInfoDto;
-import com.ssafy.tink.dto.CommentInputDto;
 import com.ssafy.tink.dto.QnaGroupInfoDto;
 import com.ssafy.tink.dto.QnaGroupInputDto;
 
@@ -113,8 +112,8 @@ public class QnaGroupService {
 			.boardId(board.getBoardId())
 			.title(board.getTitle())
 			.content(board.getContent())
-			.createdDate(board.getCreatedDate())
-			.updatedDate(board.getUpdatedDate())
+			.createdDate(String.valueOf(board.getCreatedDate()))
+			.updatedDate(String.valueOf(board.getUpdatedDate()))
 			.liked((int)cntLikes)
 			.hit(board.getHit())
 			.nickname(fromMember.get().getNickname())
@@ -131,12 +130,12 @@ public class QnaGroupService {
 	}
 
 	@Transactional
-	public List<Board> getBoardList(String filter, String boardCategory) {
+	public List<QnaGroupInfoInterface> getBoardList(String filter, String boardCategory) {
 
-		List<Board> boardList;
+		List<QnaGroupInfoInterface> boardList = new ArrayList<>();
 
-		if(filter.equals("최신순")){
-			boardList = boardRepository.findBoardAllByBoardCategoryOrderByBoardIdDesc(boardCategory).orElseThrow(()->{
+		if(filter.equals("최신순")) {
+			boardList = boardRepository.findBoardAllByBoardCategoryOrderByBoardIdDesc(boardCategory).orElseThrow(() -> {
 				return new IllegalArgumentException("게시글 목록 정보를 찾을 수 없습니다.");
 			});
 		}else if(filter.equals("인기순")){

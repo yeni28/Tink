@@ -2,6 +2,7 @@ package com.ssafy.tink.db.dsl;
 
 import static com.querydsl.core.group.GroupBy.*;
 import static com.ssafy.tink.db.entity.QBoard.*;
+import static com.ssafy.tink.db.entity.QFollow.*;
 import static com.ssafy.tink.db.entity.QMember.*;
 import static com.ssafy.tink.db.entity.QPattern.*;
 import static com.ssafy.tink.db.entity.QPatternThumbnail.*;
@@ -10,6 +11,7 @@ import static com.ssafy.tink.db.entity.QThumbnail.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
@@ -18,17 +20,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.ExpressionUtils;
+import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.tink.db.entity.QPatternThumbnail;
-import com.ssafy.tink.db.entity.QThumbnail;
+import com.ssafy.tink.db.entity.QMember;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.BoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
+import com.ssafy.tink.dto.dsl.members.FollowInfoDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
 import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QBoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.QBoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QCommunityBoardInfoDsl;
+import com.ssafy.tink.dto.dsl.members.QFollowInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QMemberInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QPatternInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QPatternThumbInfoDsl;
@@ -87,24 +93,39 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 		return result.keySet().stream()
 			.map(result::get)
 			.collect(Collectors.toList());
+
 	}
 
 	@Override
-	public List<MemberInfoDsl> findMember() {
-		Map<Long, MemberInfoDsl> result = jpaQueryFactory.selectFrom(member)
-			.innerJoin(thumbnail).on(member.thumbnail.thumbnailId.eq(thumbnail.thumbnailId))
+	public Optional<MemberInfoDsl> findMember(Long memberId) {
+			Map<Long, MemberInfoDsl> result = jpaQueryFactory.selectFrom(member)
+			.leftJoin(thumbnail).on(member.thumbnail.thumbnailId.eq(thumbnail.thumbnailId))
+			.where(member.memberId.eq(memberId))
 			.transform(groupBy(member.memberId).as(new QMemberInfoDsl(
 				member.memberId,
 				member.email,
-				list(new QThumbnailInfoDsl(
+				member.nickname,
+				new QThumbnailInfoDsl(
 					thumbnail.thumbnailId,
 					thumbnail.mainImg,
 					thumbnail.thumbImg
-				))
-			)));
-		return result.keySet().stream()
-			.map(result::get)
-			.collect(Collectors.toList());
+				))));
+
+			MemberInfoDsl memberInfo = result.keySet().stream()
+									.map(result::get)
+									.findFirst().get();
+
+			memberInfo.setFollows(jpaQueryFactory.select(follow.count())
+									.from(follow)
+									.where(follow.toId.castToNum(Long.class).eq(memberId))
+									.fetchFirst());
+
+			memberInfo.setFollower(jpaQueryFactory.select(follow.count())
+									.from(follow)
+									.where(follow.member.memberId.eq(memberId))
+									.fetchFirst());
+
+		return Optional.ofNullable(memberInfo);
 	}
 
 	public List<CommunityBoardInfoDsl> findMypageCommunityBoardToById(long memberId) {
@@ -235,5 +256,24 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 		return result.keySet().stream()
 			.map(result::get)
 			.collect(Collectors.toList());
+	}
+
+	@Override
+	public Optional<FollowInfoDsl> existsFollow(Long memberId) {
+
+		Map<Long, FollowInfoDsl> result = jpaQueryFactory.selectFrom(member)
+			.leftJoin(follow).on(member.memberId.eq(follow.member.memberId))
+			.where(member.memberId.eq(memberId))
+			.transform(groupBy(member.memberId).as(new QFollowInfoDsl(
+				member.memberId,
+				set(new QMemberInfoDsl(
+					follow.toId.castToNum(Long.class),
+					member.email,
+					member.nickname
+				))
+			)));
+		return result.keySet().stream()
+			.map(result::get)
+			.findFirst();
 	}
 }

@@ -78,7 +78,7 @@ public class Member extends BaseEntity {
 	private List<Board> boards = new ArrayList<>();
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "image_id", referencedColumnName = "thumbnail_id", nullable = false)
+	@JoinColumn(name = "image_id", referencedColumnName = "thumbnail_id")
 	private Thumbnail thumbnail;
 
 	@OneToMany(mappedBy = "member")
