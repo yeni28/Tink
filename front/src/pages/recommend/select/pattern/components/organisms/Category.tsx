@@ -1,4 +1,14 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+
+import {
+  categoryData,
+  clothingData,
+  accessoriesData,
+  homeData,
+  petData,
+  toysData,
+  componentsData,
+} from './CategoryData'
 
 import atoms from '@/components/atoms'
 
@@ -6,16 +16,32 @@ import lineBox1 from '@/pages/recommend/select/pattern/components/atoms/line box
 import lineBox2 from '@/pages/recommend/select/pattern/components/atoms/line box2.png'
 import lineBox3 from '@/pages/recommend/select/pattern/components/atoms/line box3.png'
 
-const categoryData = [
-  { id: 'Clothing', name: '옷', key: 1 },
-  { id: 'Accessories ', name: '액세서리', key: 2 },
-  { id: 'Home', name: '홈', key: 3 },
-  { id: 'Toys and Hobbies', name: '장난감 및 취미', key: 4 },
-  { id: 'Pet ', name: '반려동물', key: 5 },
-  { id: 'Components ', name: '세부요소', key: 6 },
-]
-
 function Category() {
+  const [category, setCategory] = useState('')
+  const [subCategory, setSubCategory] = useState<any>()
+
+  const setSubCategoryData = (category: string) => {
+    if (category) {
+      if (category === 'Clothing') {
+        setSubCategory(clothingData)
+      } else if (category === 'Accessories') {
+        setSubCategory(accessoriesData)
+      } else if (category === 'Home') {
+        setSubCategory(homeData)
+      } else if (category === 'Toys and Hobbies') {
+        setSubCategory(toysData)
+      } else if (category === 'Pet') {
+        setSubCategory(petData)
+      } else {
+        setSubCategory(componentsData)
+      }
+    }
+  }
+  useEffect(() => {
+    setSubCategoryData(category)
+    console.log(category)
+    console.log(subCategory)
+  }, [category])
   const onClickHandler = () => {
     console.log('Hello')
   }
@@ -30,13 +56,15 @@ function Category() {
               return (
                 <div key={item.key} className="flex items-center my-3 mx-2">
                   <input
+                    className="appearance-none w-4 h-4 border-black border mr-3 checked:bg-black"
                     id={item.id}
-                    name={item.name}
-                    type="checkbox"
-                    className="appearance-none w-4 h-4 border-black border mr-3
-     checked:bg-black"
+                    name="category"
+                    type="radio"
+                    onClick={() => {
+                      setCategory(item.id)
+                    }}
                   />
-                  <label htmlFor={item.name}>{item.name}</label>
+                  <label htmlFor={item.id}>{item.name}</label>
                 </div>
               )
             })}
@@ -47,13 +75,33 @@ function Category() {
 
         <div className="w-[13.58rem] h-[20.87rem] relative">
           <img className="w-full h-full" src={lineBox2} />
-          <div className="absolute top-0 left-0">Category2</div>
+          <div className="absolute top-2 left-3 p-4">
+            {subCategory &&
+              subCategory.map((item: any) => {
+                return (
+                  <div
+                    key={item.key}
+                    className="flex items-center my-3 mx-2"
+                    onClick={() => {
+                      console.log('clicked')
+                    }}
+                  >
+                    <input
+                      className="appearance-none w-4 h-4 border-black border mr-3 checked:bg-black"
+                      id={item.id}
+                      // name="category"
+                      type="checkbox"
+                    />
+                    <label htmlFor={item.id}>{item.name}</label>
+                  </div>
+                )
+              })}
+          </div>
         </div>
 
         {/* 세번째 카테고리 */}
         <div className="w-[28.46rem] h-[20.88 rem] relative">
           <img className="w-full h-full" src={lineBox3} />
-          <div className="absolute top-0 left-0">Category3</div>
         </div>
 
         {/* 다음 버튼 */}
