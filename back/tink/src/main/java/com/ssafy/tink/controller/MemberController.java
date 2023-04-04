@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.tink.config.Util.SecurityUtil;
+import com.ssafy.tink.db.entity.Member;
 import com.ssafy.tink.dto.BaseResponse;
 import com.ssafy.tink.dto.BoardAndPatternDto;
 import com.ssafy.tink.dto.MemberInfoDto;
@@ -30,6 +32,7 @@ import com.ssafy.tink.dto.TokenDto;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
 import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
 import com.ssafy.tink.service.MemberServiceImpl;
+import com.ssafy.tink.service.RedisServiceImpl;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -44,7 +47,8 @@ public class MemberController {
 
 	@Autowired
 	private MemberServiceImpl memberService;
-
+	@Autowired
+	private RedisServiceImpl redisServiceImpl;
 
 	@GetMapping("/mypage/info")
 	@ApiOperation(value = "마이페이지(자신) 프로필 정보 조회하는 API")
@@ -186,9 +190,10 @@ public class MemberController {
 	@ApiOperation(value = "로그인한 회원의 리플래쉬 토큰 가져오기")
 	public BaseResponse<Object> getRefreshTokenByAuthentication(@ApiIgnore HttpSession session) {
 		log.info("회원 API [getRefreshTokenByAuthentication] 시작하기");
-		TokenDto token = memberService.getRefreshToken(session);
+		String member = SecurityUtil.getCurrentAuthentication().get();
+		String token = redisServiceImpl.getRefreshTokenByAuthentication(Long.parseLong(member));
 		return BaseResponse.builder()
-			.result(token)
+			.result(TokenDto.builder().refreshToken(token).build())
 			.resultCode(HttpStatus.OK.value())
 			.resultMsg("리플래쉬 토큰 발급이 성공하였습니다.")
 			.build();
