@@ -16,9 +16,9 @@ spring:
         open-in-view: false
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver             # DB driver를 설정
-        url: jdbc:mysql://localhost:3306/tink?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+        url: jdbc:mysql://localhost:3306/tinkDB?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
         username: root  # 유저ID
-        password: ssafy # 유저PW
+        password: ssafytink # 유저PW
     data:
         redis:
             host: localhost
@@ -34,7 +34,7 @@ server:
 app:
     auth:
         oauth2:
-            authorizedRedirectUri: http://localhost:8081/oauth2/redirect     # Token을 받을 Url를 지정
+            authorizedRedirectUri: http://localhost:3000/login     # Token을 받을 Url를 지정
     upload:
         folder: C:\S08P22C201\tink\image      # 파일이 저장될 경로 설정
 #        folder: /Users/junyoungpark/Downloads      # 파일이 저장될 경로 설정
