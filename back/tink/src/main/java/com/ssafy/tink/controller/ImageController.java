@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class ImageController {
 
-	@Value("${upload.folder}")
+	@Value("${app.upload.folder}")
 	String UPLOAD_PATH; // 업로드 할 위치
 
 	// 이미지 불러오기
