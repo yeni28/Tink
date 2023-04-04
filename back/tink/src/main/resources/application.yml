@@ -5,3 +5,4 @@ spring:
       "dev": "dev, key"
       "test": "test, key"
     active: dev
+

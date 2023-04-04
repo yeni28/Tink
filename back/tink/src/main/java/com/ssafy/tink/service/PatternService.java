@@ -36,8 +36,8 @@ import com.ssafy.tink.dto.NeedleDto;
 import com.ssafy.tink.dto.PageDto;
 import com.ssafy.tink.dto.PatternDto;
 import com.ssafy.tink.dto.PatternInfoDto;
-import com.ssafy.tink.dto.PatternRecommendDto;
 import com.ssafy.tink.dto.PatternThumbnailDto;
+import com.ssafy.tink.dto.YarnRecommendDto;
 
 @Service
 public class PatternService {
@@ -296,7 +296,6 @@ public class PatternService {
 		Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
 		//Optional<Member> member = memberRepository.findById((long)(10));
 
-
 		if (!category.isPresent()) {
 			throw new Exception();
 		}
@@ -318,7 +317,6 @@ public class PatternService {
 			.category(category.get())
 			.member(member.get())
 			.build();
-
 
 		//도안 썸네일 테이블에 삽입
 		for (PatternThumbnailDto dto : thumbnail) {
@@ -353,8 +351,9 @@ public class PatternService {
 		Member getMember = member.get();
 
 		//이전에 이미 도안에 좋아요를 누른 경우
-		Optional<PatternLikes> checkLike = patternLikeRepository.searchPatternLike(patternId, member.get().getMemberId());
-		if(checkLike.isPresent()){
+		Optional<PatternLikes> checkLike = patternLikeRepository.searchPatternLike(patternId,
+			member.get().getMemberId());
+		if (checkLike.isPresent()) {
 			return 0;
 		}
 
@@ -379,12 +378,11 @@ public class PatternService {
 
 	}
 
-	public List<PatternRecommendDto> getPatternForRecommend(){
+	public List<YarnRecommendDto> getPatternForRecommend() {
 		List<Pattern> patterns = patternRepository.findAllPattern();
-		List<PatternRecommendDto> results = patterns.stream().map(PatternRecommendDto::new).collect(Collectors.toList());
+		List<YarnRecommendDto> results = patterns.stream().map(YarnRecommendDto::new).collect(Collectors.toList());
 
 		return results;
 	}
-
 
 }
