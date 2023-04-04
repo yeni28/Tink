@@ -4,10 +4,9 @@ import ReactQuill, { Quill } from 'react-quill'
 import ImageResize from '@looop/quill-image-resize-module-react'
 
 import 'react-quill/dist/quill.snow.css'
-import axios from 'axios'
 import { RangeStatic } from 'quill'
 
-import { axAuth, axBase } from '@/apis/axiosInstance'
+import { axBase } from '@/apis/axiosInstance'
 import StraitLine from '@/assets/drawings/straitline.png'
 
 Quill.register('modules/ImageResize', ImageResize)
@@ -45,30 +44,23 @@ function CommunityWrite() {
           multipartFiles: formData,
         },
       })
-        .then((res) => console.log(res.data))
+        .then((res) => {
+          if (quillRef.current) {
+            // 현재 Editor 커서 위치에 서버로부터 전달받은 이미지 불러오는 url을 이용하여 이미지 태그 추가
+            const index = (
+              quillRef.current.getEditor().getSelection() as RangeStatic
+            ).index
+
+            const quillEditor = quillRef.current.getEditor()
+            quillEditor.setSelection(index, 1)
+
+            quillEditor.clipboard.dangerouslyPasteHTML(
+              index,
+              `<img src=${res.data.result} alt='innerImg' />`
+            )
+          }
+        })
         .catch((err) => console.log(err))
-
-      axios({
-        method: 'get',
-        url: 'http://localhost:8081/members/info/1',
-      })
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err))
-
-      if (quillRef.current) {
-        // 현재 Editor 커서 위치에 서버로부터 전달받은 이미지 불러오는 url을 이용하여 이미지 태그 추가
-        const index = (
-          quillRef.current.getEditor().getSelection() as RangeStatic
-        ).index
-
-        const quillEditor = quillRef.current.getEditor()
-        quillEditor.setSelection(index, 1)
-
-        // quillEditor.clipboard.dangerouslyPasteHTML(
-        //   index,
-        //   `<img src=${res.data} alt=${'alt text'} />`
-        // )
-      }
     }
   }
 
