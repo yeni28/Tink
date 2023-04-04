@@ -4,7 +4,6 @@ import Parser from 'html-react-parser'
 
 import question_detail_dummy from './dummydata'
 
-import DrawingLine from '@/assets/drawings/drawingline.png'
 import straitline from '@/assets/drawings/straitline.png'
 
 import atoms from '@/components/atoms'
@@ -28,9 +27,6 @@ function DetailQuestionCommunityt() {
 
   return (
     <div>
-      <div>
-        <img alt="line" src={DrawingLine} />
-      </div>
       <div>
         <p className="mt-[1.625rem] text-grey text-title1-bold">질문</p>
         <p className="text-largetitle-bold mt-[1.2rem]">{question?.title}</p>
