@@ -3,8 +3,7 @@ import axios, { AxiosInstance } from 'axios'
 export const interceptors = (instance: AxiosInstance) => {
   instance.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem('access-token')
-
+      const token = localStorage.getItem('accessToken')
       config.headers.Authorization = `Bearer ${token}`
       return config
     },
