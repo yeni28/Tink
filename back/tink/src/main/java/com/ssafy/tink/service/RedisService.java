@@ -8,5 +8,5 @@ import com.ssafy.tink.dto.TokenDto;
 public interface RedisService {
 	TokenDto setAccessWithRefresh(TokenDto token);
 
-	void getRefreshTokenByAuthentication();
+	String getRefreshTokenByAuthentication(Long memberId);
 }

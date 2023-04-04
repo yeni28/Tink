@@ -385,4 +385,7 @@ public class PatternService {
 		return results;
 	}
 
+	public void getPatternByContentsFilter() {
+
+	}
 }
