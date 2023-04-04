@@ -44,6 +44,16 @@ public class MemberInfoDsl {
 		this.thumbnailInfoDsl = thumbnailInfoDsl;
 	}
 
+	@QueryProjection
+	public MemberInfoDsl(
+		Long memberId,
+		String email,
+		String nickname) {
+		this.memberId = memberId;
+		this.email = email;
+		this.nickname = nickname;
+	}
+
 	public void setFollow(boolean follow) {
 		isFollow = follow;
 	}

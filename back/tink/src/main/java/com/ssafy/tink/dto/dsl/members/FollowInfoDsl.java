@@ -1,7 +1,9 @@
 package com.ssafy.tink.dto.dsl.members;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.querydsl.core.annotations.QueryProjection;
 import com.ssafy.tink.db.entity.Member;
@@ -19,10 +21,10 @@ public class FollowInfoDsl {
 
 	private int fromId;
 	@Builder.Default
-	private List<Member> member = new ArrayList<>();
+	private Set<MemberInfoDsl> member = new HashSet<>();
 
 	@QueryProjection
-	public FollowInfoDsl(int fromId, List<Member> member) {
+	public FollowInfoDsl(int fromId, Set<MemberInfoDsl> member) {
 		this.fromId = fromId;
 		this.member = member;
 	}

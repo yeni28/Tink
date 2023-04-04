@@ -8,6 +8,7 @@ import com.ssafy.tink.db.entity.Pattern;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.BoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
+import com.ssafy.tink.dto.dsl.members.FollowInfoDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
 import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
 
@@ -20,5 +21,5 @@ public interface MemberQueryDslRepository {
 	List<PatternInfoDsl> findPatternAllByMypage();
 	List<BoardInfoDsl> findBoardAllByMypage(String category);
 	List<CommunityBoardInfoDsl> findCommuntityAllByMypage();
-	boolean existsFollow(Long memberId);
+	Optional<FollowInfoDsl> existsFollow(Long memberId);
 }

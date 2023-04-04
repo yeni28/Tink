@@ -24,14 +24,17 @@ import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.ssafy.tink.db.entity.QMember;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.BoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
+import com.ssafy.tink.dto.dsl.members.FollowInfoDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
 import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QBoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.QBoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QCommunityBoardInfoDsl;
+import com.ssafy.tink.dto.dsl.members.QFollowInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QMemberInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QPatternInfoDsl;
 import com.ssafy.tink.dto.dsl.members.QPatternThumbInfoDsl;
@@ -256,7 +259,21 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 	}
 
 	@Override
-	public boolean existsFollow(Long memberId) {
-		return false;
+	public Optional<FollowInfoDsl> existsFollow(Long memberId) {
+
+		Map<Long, FollowInfoDsl> result = jpaQueryFactory.selectFrom(follow)
+			.join(member).on(member.memberId.castToNum(Integer.class).eq(follow.toId))
+			.where(follow.member.memberId.eq(memberId))
+			.transform(groupBy(follow.member.memberId).as(new QFollowInfoDsl(
+				follow.member.memberId.castToNum(Integer.class),
+				set(new QMemberInfoDsl(
+					follow.toId.castToNum(Long.class),
+					member.email,
+					member.nickname
+				))
+			)));
+		return result.keySet().stream()
+			.map(result::get)
+			.findFirst();
 	}
 }

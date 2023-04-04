@@ -33,6 +33,7 @@ import com.ssafy.tink.dto.TokenDto;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.BoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
+import com.ssafy.tink.dto.dsl.members.FollowInfoDsl;
 import com.ssafy.tink.dto.dsl.members.MemberInfoDsl;
 import com.ssafy.tink.dto.dsl.members.PatternInfoDsl;
 
@@ -97,9 +98,15 @@ public class MemberServiceImpl implements MemberService{
 		// 유저정보를 토대로 정보 검색 ( "", null => false )
 		if ( StringUtils.isNotBlank(memberId) ) {
 			memberInfo = memberRepository.findMember(Long.parseLong(memberId)).get();
-			memberRepository.existsFollow(Long.parseLong(loginMember.get()));
 			memberInfo.setFollow(false);
-			return null;
+			FollowInfoDsl follow = memberRepository.existsFollow(Long.parseLong(loginMember.get())).get();
+			for(MemberInfoDsl follower : follow.getMember() ) {
+				if ( follower.getMemberId() == memberInfo.getMemberId() ) {
+					memberInfo.setFollow(true);
+					break;
+				}
+			}
+			return memberInfo;
 		}
 		memberInfo = memberRepository.findMember(Long.parseLong(loginMember.get())).get();
 		memberInfo.setFollow(false);
