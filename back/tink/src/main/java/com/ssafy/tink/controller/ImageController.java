@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,7 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class ImageController {
 
-	String UPLOAD_PATH = "C:\\myUpload"; // 업로드 할 위치
+	@Value("${upload.folder}")
+	String UPLOAD_PATH; // 업로드 할 위치
 
 	// 이미지 불러오기
 	@GetMapping("/{fileId}/{fileType}")
