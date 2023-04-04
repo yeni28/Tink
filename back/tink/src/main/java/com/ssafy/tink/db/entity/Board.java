@@ -29,6 +29,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Entity
 @DynamicUpdate
@@ -44,8 +45,11 @@ public class Board extends BaseEntity {
 	@Column(name = "board_id")
 	private int boardId;
 
+	@NonNull
 	private String title;
 
+	@NonNull
+	@Column(length = 1000)
 	private String content;
 
 	@ColumnDefault("0")
@@ -59,7 +63,6 @@ public class Board extends BaseEntity {
 	private Set<Comment> comments = new HashSet<>();
 
 	@JsonBackReference
-	// @ManyToOne(cascade = CascadeType.PERSIST)
 	@ManyToOne
 	@JoinColumn(name = "member_id")
 	private Member member;
@@ -68,6 +71,7 @@ public class Board extends BaseEntity {
 	@JoinColumn(name = "pattern_id")
 	private Pattern pattern;
 
+	@NonNull
 	private String boardCategory;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
@@ -89,30 +93,10 @@ public class Board extends BaseEntity {
 		comments.add(comment);
 	}
 
-	// review 자랑글 수정
-	public void update(String title, String content, Material material){
-		this.title= title;
-		this.content = content;
-		this.material = material;
-	}
 	// qnaGroup 질문글, 소모임 수정
 	public void updateBoard(String title, String content){
 		this.title= title;
 		this.content = content;
 	}
 
-	@Override
-	public String toString() {
-		return "Board{" +
-			"boardId=" + boardId +
-			", title='" + title + '\'' +
-			", content='" + content + '\'' +
-			", liked=" + liked +
-			", hit=" + hit +
-			", comments=" + comments +
-			", boardCategory='" + boardCategory + '\'' +
-			", thumbnail=" + thumbnail +
-			", material=" + material +
-			'}';
-	}
 }
