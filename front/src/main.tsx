@@ -11,9 +11,9 @@ import '@/styles/global.css'
 const container = document.getElementById('root') as HTMLElement
 
 createRoot(container).render(
-  <StrictMode>
-    <RecoilRoot>
-      <RouterProvider router={routers} />
-    </RecoilRoot>
-  </StrictMode>
+  // <StrictMode>
+  <RecoilRoot>
+    <RouterProvider router={routers} />
+  </RecoilRoot>
+  // </StrictMode>
 )

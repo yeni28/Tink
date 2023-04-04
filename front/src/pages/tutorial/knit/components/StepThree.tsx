@@ -6,7 +6,7 @@ import gsap from 'gsap'
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-import { Knit2 } from './model/Knit2'
+import { Knit3 } from './model/Knit3'
 
 import snailCat from '@/assets/drawings/털실에깔린냥이.png'
 import atoms from '@/components/atoms'
@@ -25,7 +25,7 @@ const imageHeight = 1080
 const horizDiff = imageWidth / columns
 const vertDiff = imageHeight / rows
 
-function StepTwo() {
+function StepThree() {
   const imageViewer = useRef(null)
   const imageScene = useRef(null)
   const explainBox = useRef(null)
@@ -79,12 +79,12 @@ function StepTwo() {
           ref={imageViewer}
           className="w-auto h-full aspect-video
              mx-auto 
-          bg-no-repeat bg-cover  bg-left bg-[url('@/assets/sprite/knit2.png')]"
+          bg-no-repeat bg-cover  bg-left bg-[url('@/assets/sprite/knit3.png')]"
         ></div>
         <div ref={explainBox} className="relative mt-20 w-[300px]">
           <img src={explain_box} />
           <div className="absolute top-6 left-20">
-            <p className="font-cha text-body">반시계 방향으로 실을 감으라냥</p>
+            <p className="font-cha text-body">코의 앞쪽으로 바늘을 빼라냥</p>
             <p className="font-cha text-title2-bold">3d로 돌려보라냥</p>
           </div>
         </div>
@@ -94,7 +94,7 @@ function StepTwo() {
       <section className="w-full h-screen relative ">
         <Canvas shadows className="h-screen">
           <Suspense fallback={null}>
-            <ThreeModel model={<Knit2 />} />
+            <ThreeModel model={<Knit3 />} />
           </Suspense>
         </Canvas>
         <div className="w-[20.625rem] h-[12rem] bg-pink bg-opacity-50 rounded-3xl py-8 px-6 absolute bottom-20 left-20">
@@ -108,7 +108,7 @@ function StepTwo() {
         <div className="absolute bottom-20 right-20">
           <atoms.ButtonDoodle
             innerValue=">  다음"
-            onClick={() => navigate('/tutorial/knit/3')}
+            onClick={() => navigate('/tutorial/knit/4')}
           />
         </div>
       </section>
@@ -116,4 +116,4 @@ function StepTwo() {
   )
 }
 
-export default StepTwo
+export default StepThree

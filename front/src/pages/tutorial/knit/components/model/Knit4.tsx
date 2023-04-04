@@ -300,4 +300,4 @@ export function Knit4(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/knit-4-complete-transformed.glb')
+useGLTF.preload('/models/knit/knit4.glb')
