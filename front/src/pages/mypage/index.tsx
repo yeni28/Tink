@@ -11,16 +11,15 @@ import {
 } from '@/components/organisms/header/HeaderConstants'
 
 function MyPageMainPage() {
-  const [member, setMember] = useState<Member>()
+  const [member, setMember] = useState<Mypage>()
   const params = useParams()
-  const profileId = params.id
+  const memberId = params.id
+
   useEffect(() => {
     let url
-    if (profileId === 'user') url = '/members/mypage/info'
-    else url = `/members/info/${profileId}`
-    axAuth({
-      url: url,
-    })
+    if (memberId === 'user') url = '/members/mypage/info'
+    else url = `/members/info/${memberId}`
+    axAuth({ url })
       .then((res) => {
         setMember(res.data.result)
       })
@@ -30,11 +29,12 @@ function MyPageMainPage() {
   const follow = () => {
     axAuth({
       url: '/members/follow',
-      data: { toId: profileId },
+      data: { toId: memberId },
     })
       .then((res) => {
-        if (member !== undefined)
-          setMember({ ...member, isFollow: res.data.result.isFollow })
+        if (member !== undefined) {
+          setMember({ ...member, follow: res.data.result.follow })
+        }
       })
       .catch((err) => console.log(err))
   }
@@ -56,7 +56,8 @@ function MyPageMainPage() {
           <img
             alt="프로필 이미지"
             className="w-[8.19rem] h-[8.19rem] rounded-full mb-6"
-            src={member?.thumbnail?.thumbImg}
+            referrerPolicy="no-referrer"
+            src={member?.thumbnailInfoDsl?.thumbImg}
           />
           <p className="text-title1-bold mb-3">{member?.nickname}</p>
           <div className="mb-3">
@@ -66,12 +67,12 @@ function MyPageMainPage() {
             <span className="mr-2 text-grey">팔로잉</span>
             <span>{member?.follows}</span>
           </div>
-          {profileId === 'user' ? (
+          {memberId === 'user' ? (
             <div className="w-[10.63rem]"></div>
           ) : (
             <atoms.ButtonSquareMd1
-              bgColor={member?.isFollow ? 'black' : 'red'}
-              innerValue={member?.isFollow ? '팔로잉' : '팔로우'}
+              bgColor={member?.follow ? 'black' : 'red'}
+              innerValue={member?.follow ? '팔로잉' : '팔로우'}
               textColor="white"
               onClick={follow}
             />

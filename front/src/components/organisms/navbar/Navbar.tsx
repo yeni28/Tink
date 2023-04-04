@@ -17,6 +17,10 @@ function NewNavbar() {
 
   // 로그인 여부 판단하기
   const [isLogin, setIsLogin] = useState(false)
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken')
+    if (token) setIsLogin(true)
+  })
 
   // 작은 화면에서 menu 열고 닫는 부분
   const [openMenu, setOpenMenu] = useState(false)
@@ -71,7 +75,9 @@ function NewNavbar() {
             </NavLink>
           )
         })}
-        <li onClick={GoogleLogin}>Login</li>
+        <li className="cursor-pointer" onClick={GoogleLogin}>
+          login
+        </li>
       </>
     )
   }
