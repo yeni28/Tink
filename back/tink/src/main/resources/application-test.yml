@@ -1,7 +1,7 @@
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: test
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher     # swagger 2.6.x부터 pathmatch가 변경되어 ' ant_path_matcher'를 주입
@@ -9,7 +9,6 @@ spring:
     show-sql: true # true 설정시 JPA 쿼리문 확인 가능
     hibernate:
       ddl-auto: none # DDL(create, alter, drop) 정의시 DB의 고유 기능을 사용할 수 있다.
-      use-new-id-generator-mappings: false
     properties:
       hibernate:
         format_sql: true # JPA의 구현체인 Hibernate가 동작하면서 발생한 SQL의 가독성을 높여준다.
@@ -21,7 +20,7 @@ spring:
     password: ssafy # 유저PW
   data:
     redis:
-      host: localhost
+      host: http://j8c201.p.ssafy.io
       port: 6379
   session:
     store-type: redis
@@ -34,7 +33,7 @@ server:
 app:
   auth:
     oauth2:
-      authorizedRedirectUri: http://localhost:8081/oauth2/redirect     # Token을 받을 Url를 지정
+      authorizedRedirectUri: http://localhost:3000/login     # Token을 받을 Url를 지정
   upload:
     folder: C:\S08P22C201\tink\image      # 파일이 저장될 경로 설정
 #        folder: /Users/junyoungpark/Downloads      # 파일이 저장될 경로 설정
