@@ -76,9 +76,9 @@ public class MemberServiceImpl implements MemberService{
 			follows = stream.filter( follow -> follow.getToId() == member.getMemberId() ? true : false).count();
 			follower = stream.filter( follow -> follow.getMember().getMemberId() == member.getMemberId() ? true : false).count();
 		}
-		
+
 		// 팔로우 여부 판별
-		
+
 		MemberInfoDto memberInfo = MemberInfoDto.builder()
 			.email(member.getEmail())
 			.nickname(member.getNickname())
