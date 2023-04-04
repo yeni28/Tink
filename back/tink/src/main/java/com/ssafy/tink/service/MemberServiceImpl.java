@@ -76,9 +76,9 @@ public class MemberServiceImpl implements MemberService{
 			follows = stream.filter( follow -> follow.getToId() == member.getMemberId() ? true : false).count();
 			follower = stream.filter( follow -> follow.getMember().getMemberId() == member.getMemberId() ? true : false).count();
 		}
-		
+
 		// 팔로우 여부 판별
-		
+
 		MemberInfoDto memberInfo = MemberInfoDto.builder()
 			.email(member.getEmail())
 			.nickname(member.getNickname())
@@ -183,8 +183,6 @@ public class MemberServiceImpl implements MemberService{
 
 	public TokenDto getRefreshToken(HttpSession session) {
 		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
-		String attr = session.getId();
-		Object obj = session.getAttribute(session.getId());
 		String refresh = (String) session.getAttribute(memberId.get());
 		log.debug("session 가져온 값 : " + refresh);
 		TokenDto token = TokenDto.builder()
