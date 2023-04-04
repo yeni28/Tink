@@ -6,6 +6,15 @@ import lineBox1 from '@/pages/recommend/select/pattern/components/atoms/line box
 import lineBox2 from '@/pages/recommend/select/pattern/components/atoms/line box2.png'
 import lineBox3 from '@/pages/recommend/select/pattern/components/atoms/line box3.png'
 
+const categoryData = [
+  { id: 'Clothing', name: '옷', key: 1 },
+  { id: 'Accessories ', name: '액세서리', key: 2 },
+  { id: 'Home', name: '홈', key: 3 },
+  { id: 'Toys and Hobbies', name: '장난감 및 취미', key: 4 },
+  { id: 'Pet ', name: '반려동물', key: 5 },
+  { id: 'Components ', name: '세부요소', key: 6 },
+]
+
 function Category() {
   const onClickHandler = () => {
     console.log('Hello')
@@ -16,7 +25,22 @@ function Category() {
         {/* 첫번째 카테고리 */}
         <div className="w-[13.58rem] h-[20.87rem] relative">
           <img className="w-full h-full" src={lineBox1} />
-          <div className="absolute top-0 left-0">Category1</div>
+          <div className="absolute top-2 left-3 p-4">
+            {categoryData.map((item) => {
+              return (
+                <div key={item.key} className="flex items-center my-3 mx-2">
+                  <input
+                    id={item.id}
+                    name={item.name}
+                    type="checkbox"
+                    className="appearance-none w-4 h-4 border-black border mr-3
+     checked:bg-black"
+                  />
+                  <label htmlFor={item.name}>{item.name}</label>
+                </div>
+              )
+            })}
+          </div>
         </div>
 
         {/* 두번째 카테고리 */}

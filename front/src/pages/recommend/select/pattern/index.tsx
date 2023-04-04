@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-import Attribute from './organisms/Attribute'
-import Category from './organisms/Category'
-import Level from './organisms/Level'
+import Attribute from './components/organisms/Attribute'
+import Category from './components/organisms/Category'
+import Level from './components/organisms/Level'
 
 import atoms from '@/components/atoms'
 
