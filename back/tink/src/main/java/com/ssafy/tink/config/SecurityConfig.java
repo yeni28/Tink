@@ -28,7 +28,8 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-
+	@Autowired
+	private CorsConfig corsConfig;
 	@Autowired
 	private CustomAuthorizationRequestRepository cookieAuthorizationRequestRepository;
 	@Autowired
@@ -47,7 +48,8 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-		http.csrf().disable()            // csrf 해제
+		http.addFilter(corsConfig.corsFilter())
+			.csrf().disable()            // csrf 해제
 			.formLogin().disable()        // form으로 로그인하는 방식 해제
 			.httpBasic().disable()        //
 			.sessionManagement()        // session 설정관리
@@ -56,13 +58,14 @@ public class SecurityConfig {
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/oauth2/**").permitAll()
-			.antMatchers("/members/{id}","/members/info/{id}").permitAll()
+			.antMatchers("/members/{id}", "/members/info/{id}").permitAll()
 			.antMatchers("/members/favorite/**").hasRole("USER")
 			.antMatchers("/members/mypage/**").hasRole("USER")
 			.antMatchers("/members/refresh").hasRole("USER")
 			.antMatchers("/file/**").hasRole("USER")
 			.antMatchers("/board/**").hasRole("USER")
 			.antMatchers("/review/**").hasRole("USER")
+			.antMatchers("/memberinfo").permitAll()
 			.anyRequest().authenticated();
 
 		http.oauth2Login()

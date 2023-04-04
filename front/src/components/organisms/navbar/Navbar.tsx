@@ -4,10 +4,17 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { GrClose } from 'react-icons/gr'
 import { NavLink, useLocation } from 'react-router-dom'
 
+import { GOOGLE_URL } from '@/apis/login/OAuth'
+
 import { LogoutMenuData } from '@/components/organisms/navbar/LogoutNavbarMenuData'
 import { MenuData } from '@/components/organisms/navbar/NavbarMenuData'
 
 function NewNavbar() {
+  // 구글 로그인 창 열기
+  function GoogleLogin() {
+    window.location.href = GOOGLE_URL
+  }
+
   // 로그인 여부 판단하기
   const [isLogin, setIsLogin] = useState(false)
 
@@ -55,13 +62,18 @@ function NewNavbar() {
     })
   }
   const LogoutMenuDatas = () => {
-    return LogoutMenuData.map((item, index: number) => {
-      return (
-        <NavLink key={index} to={item.url}>
-          <li className="whitespace-nowrap ">{item.title}</li>
-        </NavLink>
-      )
-    })
+    return (
+      <>
+        {LogoutMenuData.map((item, index: number) => {
+          return (
+            <NavLink key={index} to={item.url}>
+              <li className="whitespace-nowrap ">{item.title}</li>
+            </NavLink>
+          )
+        })}
+        <li onClick={GoogleLogin}>Login</li>
+      </>
+    )
   }
 
   return (

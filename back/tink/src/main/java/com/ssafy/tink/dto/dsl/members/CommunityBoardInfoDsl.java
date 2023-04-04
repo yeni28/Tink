@@ -1,6 +1,7 @@
 package com.ssafy.tink.dto.dsl.members;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import com.querydsl.core.annotations.QueryProjection;
 import com.ssafy.tink.db.entity.Material;
@@ -25,8 +26,8 @@ public class CommunityBoardInfoDsl {
 	private int boardId;
 	private String boardCategory;
 	private long memberId;
-	private String createdDate;
-	private String updatedDate;
+	private LocalDateTime createdDate;
+	private LocalDateTime updatedDate;
 	private String title;
 	private String content;
 
@@ -41,8 +42,8 @@ public class CommunityBoardInfoDsl {
 		long memberId,
 		String title,
 		String content,
-		String createdDate,
-		String updateDate,
+		LocalDateTime createdDate,
+		LocalDateTime updateDate,
 		ThumbnailInfoDsl thumbnail) {
 		this.boardId = boardId;
 		this.boardCategory = boardCategory;

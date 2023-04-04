@@ -10,20 +10,45 @@ import json
 
   
 @require_POST
-def recommendYarnByUser(request):
+def recommendByYarn(request):
+    
+    req_data = json.loads(request.body.decode('utf-8'))
+    
+    patterns = []
+    user_input = {}
 
-    req_data = json.loads(request.body)
-    patterns = req_data['patterns']
-    user_input = req_data['user_input']
+    for i, data in enumerate(req_data):
+        patternId = data['patternId']
+        gauge = data['gauge']
+        gauge_divisor = data['gaugeDivisor']
+        row_gauge = data['rowGauge']
+        yardage = data['yardage']
+        yardage_max = data['yardageMax']
+        pattern = {
+            'patternId':patternId,
+            'gauge': gauge,
+            'gauge_divisor': gauge_divisor,
+            'row_gauge': row_gauge,
+            'yardage': yardage,
+            'yardage_max': yardage_max
+        }
+        if i == len(req_data) - 1:
+            user_input = pattern
+        else:
+            patterns.append(pattern)
 
-    item_df = pd.DataFrame(patterns, columns=["gauge", "gauge_divisor", "row_gauge", "yardage", "yardage_max" , "wpi"])
-    item_df.set_index('pattern_id', inplace=True)
+
+    item_df = pd.DataFrame(patterns, columns=["patternId", "gauge", "gauge_divisor", "row_gauge", "yardage", "yardage_max"])
+    item_df.set_index('patternId', inplace=True)
     item_df = item_df.fillna(0) # 결측치 0으로 세팅
     
-    # 사용자 데이터(임시로 지정함)
-    usr_item = pd.DataFrame(user_input, columns=["gauge", "gauge_divisor", "row_gauge", "yardage", "yardage_max" , "wpi"])
+    # 사용자 데이터
+    usr_item = pd.DataFrame([user_input], columns=["patternId", "gauge", "gauge_divisor", "row_gauge", "yardage", "yardage_max"])
+    usr_item.set_index('patternId', inplace=True)
+    
+    #print(usr_item)
 
-    cosine_similarities = cosine_similarity(item_df, usr_item)
+    cosine_similarities = cosine_similarity(usr_item, item_df)
 
     # 결과 데이터 프레임 생성 및 유사도를 기준으로 내림차순 정렬
     result = pd.DataFrame({'similarity': cosine_similarities[:, 0], 'data': item_df.values.tolist()}, index=item_df.index)

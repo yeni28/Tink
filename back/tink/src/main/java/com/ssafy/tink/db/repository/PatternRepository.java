@@ -12,10 +12,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.ssafy.tink.db.dsl.PatternQueryDslRepository;
 import com.ssafy.tink.db.entity.Pattern;
 
 @Repository
-public interface PatternRepository extends JpaRepository<Pattern, Integer> {
+public interface PatternRepository extends JpaRepository<Pattern, Integer>,
+	PatternQueryDslRepository {
 
 	//추천 시스템을 위한 쿼리
 	@Query("SELECT p FROM Pattern p")

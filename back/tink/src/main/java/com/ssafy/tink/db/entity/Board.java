@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.TableGenerator;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -47,8 +48,10 @@ public class Board extends BaseEntity {
 
 	private String content;
 
+	@ColumnDefault("0")
 	private int liked;
 
+	@ColumnDefault("0")
 	private int hit;
 
 	// delete : cascade 영속성 전이 에러 해결
