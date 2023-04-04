@@ -19,12 +19,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FollowInfoDsl {
 
-	private int fromId;
+	private Long fromId;
 	@Builder.Default
 	private Set<MemberInfoDsl> member = new HashSet<>();
 
 	@QueryProjection
-	public FollowInfoDsl(int fromId, Set<MemberInfoDsl> member) {
+	public FollowInfoDsl(Long fromId, Set<MemberInfoDsl> member) {
 		this.fromId = fromId;
 		this.member = member;
 	}

@@ -261,11 +261,11 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 	@Override
 	public Optional<FollowInfoDsl> existsFollow(Long memberId) {
 
-		Map<Long, FollowInfoDsl> result = jpaQueryFactory.selectFrom(follow)
-			.join(member).on(member.memberId.castToNum(Integer.class).eq(follow.toId))
-			.where(follow.member.memberId.eq(memberId))
-			.transform(groupBy(follow.member.memberId).as(new QFollowInfoDsl(
-				follow.member.memberId.castToNum(Integer.class),
+		Map<Long, FollowInfoDsl> result = jpaQueryFactory.selectFrom(member)
+			.leftJoin(follow).on(member.memberId.eq(follow.member.memberId))
+			.where(member.memberId.eq(memberId))
+			.transform(groupBy(member.memberId).as(new QFollowInfoDsl(
+				member.memberId,
 				set(new QMemberInfoDsl(
 					follow.toId.castToNum(Long.class),
 					member.email,
