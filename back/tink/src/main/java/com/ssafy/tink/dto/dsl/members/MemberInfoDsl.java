@@ -54,7 +54,7 @@ public class MemberInfoDsl {
 		this.nickname = nickname;
 	}
 
-	public void setFollow(boolean follow) {
+	public void setIsFollow(boolean follow) {
 		isFollow = follow;
 	}
 

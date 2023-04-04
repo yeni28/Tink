@@ -98,18 +98,18 @@ public class MemberServiceImpl implements MemberService{
 		// 유저정보를 토대로 정보 검색 ( "", null => false )
 		if ( StringUtils.isNotBlank(memberId) ) {
 			memberInfo = memberRepository.findMember(Long.parseLong(memberId)).get();
-			memberInfo.setFollow(false);
+			memberInfo.setIsFollow(false);
 			FollowInfoDsl follow = memberRepository.existsFollow(Long.parseLong(loginMember.get())).get();
 			for(MemberInfoDsl follower : follow.getMember() ) {
 				if ( follower.getMemberId() == memberInfo.getMemberId() ) {
-					memberInfo.setFollow(true);
+					memberInfo.setIsFollow(true);
 					break;
 				}
 			}
 			return memberInfo;
 		}
 		memberInfo = memberRepository.findMember(Long.parseLong(loginMember.get())).get();
-		memberInfo.setFollow(false);
+		memberInfo.setIsFollow(false);
 		return memberInfo;
 	}
 

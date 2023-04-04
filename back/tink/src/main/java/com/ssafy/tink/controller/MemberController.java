@@ -50,21 +50,21 @@ public class MemberController {
 	@ApiOperation(value = "마이페이지(자신) 프로필 정보 조회하는 API")
 	public BaseResponse<Object> getProfileByAuthorization() {
 		log.info("마이페이지 조회 시작하기");
-		Optional<MemberInfoDto> member = memberService.getProfileByAuthentication();
-
-		if( !member.isPresent() || member.get() == null) {
-			BaseResponse.builder()
-				.result("FAILED")
-				.resultCode(HttpStatus.NOT_FOUND.value())
-				.resultMsg("자신의 정보를 가져오는데 실패하였습니다.")
+		try {
+			MemberInfoDsl memberInfo = memberService.getMemberInfoByQueryDsl(null);
+			return BaseResponse.builder()
+				.result(memberInfo)
+				.resultCode(HttpStatus.OK.value())
+				.resultMsg("정상적으로 회원 정보 조회 성공")
+				.build();
+		} catch (NoSuchElementException e) {
+			log.debug("정보가 없습니다.");
+			return BaseResponse.builder()
+				.result(null)
+				.resultCode(HttpStatus.NO_CONTENT.value())
+				.resultMsg("잘못된 정보를 입력하였습니다.")
 				.build();
 		}
-
-		return BaseResponse.builder()
-			.result(member)
-			.resultCode(HttpStatus.OK.value())
-			.resultMsg("정상적으로 조회되었습니다.")
-			.build();
 	}
 
 	@GetMapping("/mypage")
@@ -113,19 +113,23 @@ public class MemberController {
 
 	@GetMapping("/info/{id}")
 	@ApiOperation(value = "회원 프로필 정보 조회 API")
-	public ResponseEntity<Object> getProfileByMember(@PathVariable(name = "id") String memberId) {
+	public BaseResponse<Object> getProfileByMember(@PathVariable(name = "id") String memberId) {
 		log.info("회원 조회 시작하기");
-		Optional<MemberInfoDto> member = memberService.getProfileByMemberId(Long.parseLong(memberId));
-
-		if( !member.isPresent() || member.get() == null) {
-			BaseResponse.builder()
-				.result("FAILED")
-				.resultCode(HttpStatus.NOT_FOUND.value())
-				.resultMsg("회원 정보를 가져오는데 실패하였습니다.")
+		try {
+			MemberInfoDsl memberInfo = memberService.getMemberInfoByQueryDsl(memberId);
+			return BaseResponse.builder()
+				.result(memberInfo)
+				.resultCode(HttpStatus.OK.value())
+				.resultMsg("정상적으로 회원 정보 조회 성공")
+				.build();
+		} catch (NoSuchElementException e) {
+			log.debug("정보가 없습니다.");
+			return BaseResponse.builder()
+				.result(null)
+				.resultCode(HttpStatus.NO_CONTENT.value())
+				.resultMsg("잘못된 정보를 입력하였습니다.")
 				.build();
 		}
-
-		return new ResponseEntity<>(member.get(),HttpStatus.OK);
 	}
 
 	@PutMapping("/mypage")
@@ -189,25 +193,26 @@ public class MemberController {
 			.resultMsg("리플래쉬 토큰 발급이 성공하였습니다.")
 			.build();
 	}
-	@GetMapping("/memberinfo")
-	@ApiOperation(value = "회원 프로필 정보 조회 API")
-	public BaseResponse<Object> getMemberInfoFromDsl(@RequestParam(name = "id", required = false) String id) {
-		try {
-			MemberInfoDsl memberInfo = memberService.getMemberInfoByQueryDsl(id);
-			return BaseResponse.builder()
-				.result(memberInfo)
-				.resultCode(HttpStatus.OK.value())
-				.resultMsg("정상적으로 회원 정보 조회 성공")
-				.build();
-		} catch (NoSuchElementException e) {
-			log.debug("정보가 없습니다.");
-			return BaseResponse.builder()
-				.result(null)
-				.resultCode(HttpStatus.NO_CONTENT.value())
-				.resultMsg("잘못된 정보를 입력하였습니다.")
-				.build();
-		}
-	}
+
+	// @GetMapping("/memberinfo")
+	// @ApiOperation(value = "회원 프로필 정보 조회 API")
+	// public BaseResponse<Object> getMemberInfoFromDsl(@RequestParam(name = "id", required = false) String id) {
+	// 	try {
+	// 		MemberInfoDsl memberInfo = memberService.getMemberInfoByQueryDsl(id);
+	// 		return BaseResponse.builder()
+	// 			.result(memberInfo)
+	// 			.resultCode(HttpStatus.OK.value())
+	// 			.resultMsg("정상적으로 회원 정보 조회 성공")
+	// 			.build();
+	// 	} catch (NoSuchElementException e) {
+	// 		log.debug("정보가 없습니다.");
+	// 		return BaseResponse.builder()
+	// 			.result(null)
+	// 			.resultCode(HttpStatus.NO_CONTENT.value())
+	// 			.resultMsg("잘못된 정보를 입력하였습니다.")
+	// 			.build();
+	// 	}
+	// }
 
 }
 
