@@ -31,6 +31,7 @@ import com.ssafy.tink.dto.PatternInfoDto;
 import com.ssafy.tink.dto.PatternListDto;
 import com.ssafy.tink.dto.ReviewInfoDto;
 import com.ssafy.tink.dto.ReviewInputDto;
+import com.ssafy.tink.dto.ThumbnailDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -61,7 +62,7 @@ public class ReviewService {
 	private ThumbnailRepository thumbnailRepository;
 
 	@Transactional
-	public Object create(ReviewInputDto community) {
+	public Object create(ReviewInputDto community, Thumbnail thumbnail) {
 
 		if(!community.getBoardCategory().equals("review"))
 			return new IllegalArgumentException("커뮤니티 카테고리가 잘못되었습니다.");
@@ -81,7 +82,10 @@ public class ReviewService {
 				.build())
 			.boardCategory(community.getBoardCategory())
 			.pattern(p)
-			.thumbnail(member.get().getThumbnail())
+			.thumbnail(Thumbnail.builder()
+				.thumbImg(thumbnail.getThumbImg())
+				.mainImg(thumbnail.getMainImg())
+				.build())
 			.build();
 
 		Material materialInfo = Material.builder()
