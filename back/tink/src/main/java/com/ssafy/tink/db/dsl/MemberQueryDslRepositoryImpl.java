@@ -87,6 +87,7 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 		return result.keySet().stream()
 			.map(result::get)
 			.collect(Collectors.toList());
+
 	}
 
 	@Override
