@@ -13,7 +13,6 @@ import com.sun.istack.NotNull;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
