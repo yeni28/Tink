@@ -21,7 +21,7 @@ public interface MemberService {
 
 	Optional<MemberInfoDto> getProfileByMemberId(long memberId);
 	Optional<MemberInfoDto> getProfileByAuthentication();
-	Optional<List<MemberInfoDsl>> getMemberInfoByQueryDsl();
+	MemberInfoDsl getMemberInfoByQueryDsl(String memberId);
 	Optional<BoardAndPatternDto> getBoardAndPatternByAuthentication();
 	Optional<BoardAndPatternDto> getBoardAndPatternByMemberId(long memberId);
 	List<PatternInfoDsl> getFavoriteFromPattern(String difficulty);
