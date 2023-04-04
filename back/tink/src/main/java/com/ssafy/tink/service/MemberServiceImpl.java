@@ -163,6 +163,8 @@ public class MemberServiceImpl implements MemberService{
 
 	public TokenDto getRefreshToken(HttpSession session) {
 		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
+		String attr = session.getId();
+		Object obj = session.getAttribute(session.getId());
 		String refresh = (String) session.getAttribute(memberId.get());
 		log.debug("session 가져온 값 : " + refresh);
 		TokenDto token = TokenDto.builder()
