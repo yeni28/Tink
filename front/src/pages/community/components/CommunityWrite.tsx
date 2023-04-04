@@ -6,7 +6,7 @@ import ImageResize from '@looop/quill-image-resize-module-react'
 import 'react-quill/dist/quill.snow.css'
 import { RangeStatic } from 'quill'
 
-import { axBase } from '@/apis/axiosInstance'
+import { axAuth, axBase } from '@/apis/axiosInstance'
 import StraitLine from '@/assets/drawings/straitline.png'
 
 Quill.register('modules/ImageResize', ImageResize)
@@ -37,12 +37,10 @@ function CommunityWrite() {
       }
 
       // file 데이터 담아서 서버에 전달하여 이미지 업로드
-      await axBase({
+      await axAuth({
         method: 'post',
         url: '/img/uploadImage',
-        data: {
-          multipartFiles: formData,
-        },
+        data: formData,
       })
         .then((res) => {
           if (quillRef.current) {
