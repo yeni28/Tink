@@ -237,13 +237,13 @@ public class PatternService {
 
 		PatternInfoDto info = PatternInfoDto.builder()
 			.id(patternInfo.getPatternId())
-			.difficultySum(patternInfo.getDifficultySum())
+			.difficultySum(Integer.valueOf(patternInfo.getDifficultySum()))
 			.difficultyCnt(patternInfo.getDifficultyCnt())
 			.notesHtml(patternInfo.getNotesHtml())
 			.yardageMax(patternInfo.getYardageMax() == null ? 0 : patternInfo.getYardageMax())
 			.gaugePattern(patternInfo.getGaugePattern())
 			.downloadUrl(patternInfo.getDownloadUrl())
-			.difficultyAvg(patternInfo.getDifficultyAvg())
+			.difficultyAvg(Float.valueOf(patternInfo.getDifficultyAvg()))
 			.sizesAvailable(patternInfo.getSizesAvailable())
 			.yarnWeightDescription(patternInfo.getYarnWeightDescription())
 			.yardage(patternInfo.getYardage())
@@ -295,13 +295,13 @@ public class PatternService {
 		//pattern 테이블도 갱신해줌
 		Pattern updatePattern = pattern.get();
 
-		int sum = updatePattern.getDifficultySum() + difficultyNum;
+		int sum = Integer.valueOf(updatePattern.getDifficultySum()) + difficultyNum;
 		int cnt = updatePattern.getDifficultyCnt() + 1;
 		Float avg = (float)(sum / cnt);
 
-		updatePattern.setDifficultyAvg(avg);
+		updatePattern.setDifficultyAvg(String.valueOf(avg));
 		updatePattern.setDifficultyCnt(cnt);
-		updatePattern.setDifficultySum(sum);
+		updatePattern.setDifficultySum(String.valueOf(sum));
 
 		Pattern savedPattern = patternRepository.save(updatePattern);
 		if (savedPattern == null) {

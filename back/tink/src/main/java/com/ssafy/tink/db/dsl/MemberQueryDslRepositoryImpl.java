@@ -14,17 +14,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.ExpressionUtils;
-import com.querydsl.core.types.Projections;
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.tink.db.entity.QMember;
 import com.ssafy.tink.dto.dsl.members.BoardAndPatternDsl;
 import com.ssafy.tink.dto.dsl.members.BoardInfoDsl;
 import com.ssafy.tink.dto.dsl.members.CommunityBoardInfoDsl;
@@ -55,8 +49,6 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 
 	@Autowired
 	private final JPAQueryFactory jpaQueryFactory;
-	@Autowired
-	private final EntityManager entityManager;
 
 	@Override
 	public List<BoardAndPatternDsl> findBoardAndPatternListById(long memberId) {
@@ -158,7 +150,7 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 	public List<PatternInfoDsl> findPatternToRandom(String difficulty) {
 		BooleanBuilder build = new BooleanBuilder();
 		if( !difficulty.isEmpty() ) {
-			build.and(pattern.difficultyAvg.lt(getdifficulty(difficulty)));
+			build.and(pattern.difficultyAvg.castToNum(Double.class).lt(getdifficulty(difficulty)));
 		}
 		Map<Integer, PatternInfoDsl> patterns = jpaQueryFactory.selectFrom(pattern)
 			.leftJoin(patternThumbnail)
