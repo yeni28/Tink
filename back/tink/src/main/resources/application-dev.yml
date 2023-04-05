@@ -20,7 +20,7 @@ spring:
         password: ssafytink
     data:
         redis:
-            host: tink-redis
+            host: j8c201.p.ssafy.io
             port: 6379
 
 server:
