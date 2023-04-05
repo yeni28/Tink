@@ -1,6 +1,7 @@
 package com.ssafy.tink.dto.dsl.members;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 
@@ -28,16 +29,16 @@ public class BoardInfoDsl {
 	private long memberId;
 	private String title;
 	private String content;
-	private Timestamp createdDate;
-	private Timestamp updatedDate;
+	private LocalDateTime createdDate;
+	private LocalDateTime updatedDate;
 
 	@QueryProjection
 	public BoardInfoDsl(
 		int boardId,
 		String boardCategory,
 		long memberId,
-		Timestamp createdDate,
-		Timestamp updatedDate,
+		LocalDateTime createdDate,
+		LocalDateTime updatedDate,
 		String title,
 		String content) {
 		this.boardId = boardId;

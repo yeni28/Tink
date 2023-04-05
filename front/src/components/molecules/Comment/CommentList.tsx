@@ -15,7 +15,11 @@ const CommentList = ({ comments, deleteComment }: Props) => {
                 <div className="flex">
                   {/* 유저 이미지 */}
                   <div className="h-[2.8rem] w-[2.88rem] rounded-[2rem] overflow-hidden">
-                    <img alt="user_image" src={comment.thumbImg} />
+                    <img
+                      alt="user_image"
+                      referrerPolicy="no-referrer"
+                      src={comment.thumbImg}
+                    />
                   </div>
                   {/* 네임/시간/댓글 */}
                   <div>

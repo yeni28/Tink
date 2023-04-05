@@ -15,9 +15,4 @@ export const LogoutMenuData = [
     title: 'Campaign',
     url: '/campaign',
   },
-
-  {
-    title: 'Login',
-    url: '/login',
-  },
 ]

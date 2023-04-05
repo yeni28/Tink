@@ -51,8 +51,10 @@ public class BoardController {
 				.build();
 		}
 
+		qnaGroupService.create(QnaGroup);
+
 		return BaseResponse.builder()
-				.result(qnaGroupService.create(QnaGroup))
+				.result("SUCCESS")
 				.resultCode(HttpStatus.OK.value())
 				.resultMsg("정상적으로 글이 작성되었습니다.")
 				.build();
@@ -81,7 +83,7 @@ public class BoardController {
 		// 조횟수 증가
 		qnaGroupService.updateView(boardId);
 
-		if( !review.isPresent() || review.get() == null) {
+		if( !review.isPresent()) {
 			BaseResponse.builder()
 				.result("FAILED")
 				.resultCode(HttpStatus.NOT_FOUND.value())

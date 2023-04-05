@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import Parser from 'html-react-parser'
 
 import { switchFollow } from './apis/follow'
-import review_detail_dummy from './dummydata'
+// import review_detail_dummy from './dummydata'
 
 import reviewDetailBox from '@/assets/drawings/reviewDetailBox.png'
 import shortline from '@/assets/drawings/shortline.png'
@@ -27,10 +27,10 @@ function DetailReviewCommunity() {
   }
   const params = useParams()
 
-  useEffect(() => {
-    setReview(review_detail_dummy)
-    if (review) setFollow(review.isfollowed)
-  }, [])
+  // useEffect(() => {
+  //   setReview(review_detail_dummy)
+  //   if (review) setFollow(review.isfollowed)
+  // }, [])
 
   return (
     <div className="pt-[30rem]">

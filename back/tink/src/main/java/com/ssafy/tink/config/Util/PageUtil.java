@@ -7,7 +7,6 @@ import org.springframework.data.domain.Sort;
 
 public class PageUtil implements Pageable {
 
-
 	private int pageNumber;
 	private int pageSize;
 	private long offset;

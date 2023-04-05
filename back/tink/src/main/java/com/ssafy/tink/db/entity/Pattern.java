@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,6 +36,8 @@ import lombok.NoArgsConstructor;
 @DynamicInsert
 @Getter
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Pattern extends BaseEntity {
 
 	@ManyToMany
@@ -95,7 +98,7 @@ public class Pattern extends BaseEntity {
 	private int yardage;
 
 	@Column(name = "yardage_max")
-	private int yardageMax;
+	private Integer yardageMax;
 
 	@Column(name = "sizes_available", length = 50)
 	private String sizesAvailable;
@@ -128,28 +131,8 @@ public class Pattern extends BaseEntity {
 	@JsonBackReference
 	private final List<PatternLikes> patternLikes = new ArrayList<>();
 
-	@Builder
-	public Pattern(String name, int difficultySum, int difficultyCnt, Float difficultyAvg, String downloadUrl,
-		Float gauge, Float gaugeDivisor, String gaugePattern, Float rowGauge, int yardage, int yardageMax,
-		String sizesAvailable, String notesHtml, String yarnWeightDescription, String yardageDescription,
-		Category category, Member member) {
-		this.name = name;
-		this.difficultySum = difficultySum;
-		this.difficultyCnt = difficultyCnt;
-		this.difficultyAvg = difficultyAvg;
-		this.downloadUrl = downloadUrl;
-		this.gauge = gauge;
-		this.gaugeDivisor = gaugeDivisor;
-		this.gaugePattern = gaugePattern;
-		this.rowGauge = rowGauge;
-		this.yardage = yardage;
-		this.yardageMax = yardageMax;
-		this.sizesAvailable = sizesAvailable;
-		this.notesHtml = notesHtml;
-		this.yarnWeightDescription = yarnWeightDescription;
-		this.yardageDescription = yardageDescription;
-		this.category = category;
-		this.member = member;
+	public void setPatternId(int patternId){
+		this.patternId = patternId;
 	}
 
 	public void setDifficultySum(int difficultySum) {
@@ -216,5 +199,6 @@ public class Pattern extends BaseEntity {
 		this.getNeedles().add(needle);
 		needle.getPatterns().add(this);
 	}
+
 
 }
