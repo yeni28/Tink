@@ -34,6 +34,7 @@ import com.ssafy.tink.db.repository.PatternThumbnailRepository;
 import com.ssafy.tink.dto.CategoryDto;
 import com.ssafy.tink.dto.NeedleDto;
 import com.ssafy.tink.dto.PageDto;
+import com.ssafy.tink.dto.PatternAndThumbnailDto;
 import com.ssafy.tink.dto.PatternDto;
 import com.ssafy.tink.dto.PatternInfoDto;
 import com.ssafy.tink.dto.PatternThumbnailDto;
@@ -233,7 +234,6 @@ public class PatternService {
 
 		Pattern patternInfo = pattern.get();
 
-		System.out.println(patternInfo.getPatternLikes().size());
 
 		PatternInfoDto info = PatternInfoDto.builder()
 			.id(patternInfo.getPatternId())
@@ -425,5 +425,32 @@ public class PatternService {
 		return recommendResults;
 	}
 
+
+	public PatternAndThumbnailDto getPatternAndThumbnailList(int patternId){
+		Optional<Pattern> pattern = patternRepository.findByPatternId(patternId);
+		if (!pattern.isPresent())
+			return null;
+
+		//thumbnail info response setting
+		List<PatternThumbnail> thumbnails = pattern.get().getPatternThumbnails();
+		List<PatternThumbnailDto> thumbnailList = new ArrayList<>();
+
+		for (PatternThumbnail response : thumbnails) {
+			PatternThumbnailDto dto = PatternThumbnailDto.builder()
+				.thumbImg(response.getThumbImg())
+				.mainImg(response.getMainImg())
+				.build();
+
+			thumbnailList.add(dto);
+		}
+
+		PatternAndThumbnailDto dto = PatternAndThumbnailDto.builder()
+			.thumbnails(thumbnailList)
+			.id(patternId)
+			.name(pattern.get().getName())
+			.build();
+
+		return dto;
+	}
 
 }
