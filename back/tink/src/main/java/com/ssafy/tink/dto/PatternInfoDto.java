@@ -36,7 +36,7 @@ public class PatternInfoDto {
 	private String downloadUrl;
 	private String notesHtml;
 	private int difficultyCnt;
-	private int difficultySum;
+	private Float difficultySum;
 	private Float difficultyAvg;
 	
 	//현재 로그인한 회원의 패턴 좋아요 여부
@@ -51,7 +51,7 @@ public class PatternInfoDto {
 	public PatternInfoDto(List<NeedleDto> needles, CategoryDto category,
 		List<PatternThumbnailDto> thumbnails, int id, String name, Float gauge, Float gaugeDivisor,
 		String gaugePattern, String sizesAvailable, int yardage, String yardageDescription, int yardageMax,
-		String yarnWeightDescription, String downloadUrl, String notesHtml, int difficultyCnt, int difficultySum,
+		String yarnWeightDescription, String downloadUrl, String notesHtml, int difficultyCnt, Float difficultySum,
 		Float difficultyAvg, int patternLikeCheck, int patternLikesCount, Float rowGauge) {
 		this.needles = needles;
 		this.category = category;

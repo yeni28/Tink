@@ -237,7 +237,7 @@ public class PatternService {
 
 		PatternInfoDto info = PatternInfoDto.builder()
 			.id(patternInfo.getPatternId())
-			.difficultySum(Integer.valueOf(patternInfo.getDifficultySum()))
+			.difficultySum(Float.valueOf(patternInfo.getDifficultySum()))
 			.difficultyCnt(patternInfo.getDifficultyCnt())
 			.notesHtml(patternInfo.getNotesHtml())
 			.yardageMax(patternInfo.getYardageMax() == null ? 0 : patternInfo.getYardageMax())
