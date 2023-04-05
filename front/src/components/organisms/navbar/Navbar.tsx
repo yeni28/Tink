@@ -10,6 +10,8 @@ import { LogoutMenuData } from '@/components/organisms/navbar/LogoutNavbarMenuDa
 import { MenuData } from '@/components/organisms/navbar/NavbarMenuData'
 
 function NewNavbar() {
+  // 라우터 이름 확인
+  const routerName = window.location.pathname
   // 구글 로그인 창 열기
   function GoogleLogin() {
     window.location.href = GOOGLE_URL
@@ -79,11 +81,15 @@ function NewNavbar() {
   return (
     <nav
       style={{ top: visible ? '0' : '-6.25rem', transition: 'top 0.6s' }}
-      className="flex justify-between items-center h-[6.25rem] bg-beige px-8 w-full fixed
-      z-50 font-pop text-title3-bold"
+      className={`flex justify-between items-center h-[6.25rem] ${
+        routerName === '/'
+          ? 'bg-gradient-to-l from-black text-white'
+          : 'bg-beige'
+      } px-8 w-full fixed
+      z-50 font-pop text-title3-bold`}
     >
       {/* Logo가 담기는 영역 */}
-      <div className="text-red cursor-pointer justify-self-start">
+      <div className="text-black cursor-pointer justify-self-start">
         <NavLink to="/">
           <div className="">Tink</div>
         </NavLink>
