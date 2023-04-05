@@ -112,8 +112,7 @@ pipeline {
                     try{
                         echo 'tink spring create container start'
                         sh "docker run -d -p 8081:8081 \
-                                    --name tink-spring \
-                                    --rm goals11/repo:spring$ver"
+                                    --name tink-spring goals11/repo:spring$ver"
 
                         echo 'tink-nginx nginx create container start'
                         sh "docker run -d -p 3000:80 \
