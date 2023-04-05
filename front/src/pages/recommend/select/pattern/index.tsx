@@ -15,8 +15,14 @@ export const categoryState = atom<any>({
   default: [],
 })
 
+export const keywordState = atom<any>({
+  key: 'keywordState',
+  default: [],
+})
+
 function PatternSelectRecommend() {
   const categoryList = useRecoilValue(categoryState)
+  const keywordList = useRecoilValue(keywordState)
   const [option, setOption] = useState({
     category: true,
     attribute: false,
@@ -84,7 +90,7 @@ function PatternSelectRecommend() {
             <Level />
           )}
 
-          {/* 선택 완료 영역 */}
+          {/* 선택 카테고리 영역 */}
           <div className="absolute -top-20 -right-36 p-4">
             <div className="min-h-[10rem]">
               <p className="text-title2-bold">선택 카테고리</p>
@@ -103,11 +109,22 @@ function PatternSelectRecommend() {
               </div>
             </div>
 
-            {/* 속성 영역 */}
+            {/* 선택 키워드 영역 */}
             <div className="mt-3">
               <p className="text-title2-bold">선택 키워드</p>
               <img src={lace} />
-              <div className="mt-2 flex flex-wrap w-[13.5rem] gap-2"></div>
+              <div className="mt-2 flex flex-wrap w-[13.5rem] gap-2">
+                {keywordList.map((keywordItem: any) => {
+                  return (
+                    <atoms.ButtonTag
+                      key={keywordItem.key}
+                      bgColor="red"
+                      innerValue={keywordItem.name}
+                      textColor="white"
+                    />
+                  )
+                })}
+              </div>
             </div>
           </div>
         </div>
