@@ -77,7 +77,7 @@ function StepFour() {
           ref={imageViewer}
           className="w-auto h-full aspect-video
              mx-auto 
-          bg-no-repeat bg-cover  bg-left bg-[url('@/assets/sprite/Knit4.png')]"
+          bg-no-repeat bg-cover  bg-left bg-[url('@/assets/sprite/knit4.png')]"
         ></div>
         <div ref={explainBox} className="relative mt-20 w-[300px]">
           <img src={explain_box} />
