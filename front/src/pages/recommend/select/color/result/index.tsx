@@ -5,6 +5,7 @@ import { extractColors } from 'extract-colors'
 import { FinalColor } from 'extract-colors/lib/types/Color'
 
 import underline1 from '@/assets/drawings/underline1.png'
+import yarn from '@/assets/drawings/yarn.png'
 import colorBox from '@/pages/recommend/select/color/result/components/extractedColorBox'
 import resultColor from '@/pages/recommend/select/color/result/components/resultColorBox'
 
