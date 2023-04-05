@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import FileBox from '@/assets/drawings/fileLineBox.png'
+import yarn from '@/assets/drawings/yarn.png'
 import FileCat from '@/assets/drawings/파일냥이.png'
 import atoms from '@/components/atoms'
 
@@ -67,6 +68,9 @@ function ColorSelectRecommend() {
               : alert('사진을 올려주세요!')
           }}
         />
+      </div>
+      <div className="absolute -top-4 -right-[16.5rem] w-[12.75rem]">
+        <img src={yarn} />
       </div>
     </div>
   )

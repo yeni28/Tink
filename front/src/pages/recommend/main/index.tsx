@@ -1,6 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import color from './components/color.jpg'
+import pattern from './components/pattern.jpg'
+import yarn2 from './components/yarn.jpg'
+
 import spotlight from '@/assets/drawings/spotlight.gif'
 import yarn from '@/assets/drawings/yarn.png'
 import redMufflerKnitCat from '@/assets/drawings/빨간목도리뜨개냥이.png'
@@ -23,19 +27,19 @@ function RecommendMainPage() {
         first={{
           alt: 'imageLg',
           mainValue: '도안',
-          src: 'https://images.unsplash.com/photo-1677274207822-e726bbba46e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY3OTQ3MDE3Mg&ixlib=rb-4.0.3&q=80&w=1080',
+          src: pattern,
           onClick: () => navigate('/recommend/select/pattern'),
         }}
         second={{
           alt: 'imageLg',
           mainValue: '실',
-          src: 'https://images.unsplash.com/photo-1677796503531-8bc3388d987e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY3OTQ3MDE1NA&ixlib=rb-4.0.3&q=80&w=1080',
+          src: yarn2,
           onClick: () => navigate('/recommend/select/yarn'),
         }}
         third={{
           alt: 'imageLg',
           mainValue: '색 조합',
-          src: 'https://images.unsplash.com/photo-1677643492253-5f994feaf015?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY3OTYxODEwOQ&ixlib=rb-4.0.3&q=80&w=1080',
+          src: color,
           onClick: () => navigate('/recommend/select/color'),
         }}
       />
