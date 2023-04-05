@@ -12,6 +12,8 @@ import {
   componentsData,
 } from './CategoryData'
 
+import NextButton from '../molecules/NextButton'
+
 import atoms from '@/components/atoms'
 import { categoryState } from '@/pages/recommend/select/pattern'
 
@@ -129,9 +131,7 @@ function Category() {
         </div>
 
         {/* 다음 버튼 */}
-        <div className="absolute -bottom-20 -right-14">
-          <atoms.ButtonDoodle innerValue={'다음'} onClick={onClickHandler} />
-        </div>
+        <NextButton />
       </div>
     </div>
   )

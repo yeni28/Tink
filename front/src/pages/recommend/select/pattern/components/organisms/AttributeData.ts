@@ -30,7 +30,7 @@ const neckData = [
   { id: 'collar', name: '카라', key: 19 },
   { id: 'crew-neck', name: '크루넥', key: 20 },
   { id: 'scoop-neck', name: '스쿱넥', key: 21 },
-  { id: 'square-neck', name: '스퀘어넥', key: 21 },
+  { id: 'square-neck', name: '스퀘어넥', key: 22 },
   { id: 'v-neck', name: '브이넥', key: 23 },
 ]
 

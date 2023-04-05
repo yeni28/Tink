@@ -14,6 +14,8 @@ import {
   constructionData,
 } from './AttributeData'
 
+import NextButton from '../molecules/NextButton'
+
 import atoms from '@/components/atoms'
 import { keywordState } from '@/pages/recommend/select/pattern'
 
@@ -55,10 +57,6 @@ function Attribute() {
   useEffect(() => {
     setSubCategoryData(category)
   }, [category])
-
-  const onClickHandler = () => {
-    console.log('Hello')
-  }
 
   const [tagList, setTagList] = useRecoilState(keywordState)
   const [isChecked, setIsChecked] = useState(false)
@@ -137,9 +135,7 @@ function Attribute() {
         </div>
 
         {/* 다음 버튼 */}
-        <div className="absolute -bottom-20 -right-14">
-          <atoms.ButtonDoodle innerValue={'다음'} onClick={onClickHandler} />
-        </div>
+        <NextButton />
       </div>
     </div>
   )

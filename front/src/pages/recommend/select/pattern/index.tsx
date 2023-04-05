@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { atom, selector, useRecoilValue } from 'recoil'
+import { atom, useRecoilValue } from 'recoil'
 
 import Attribute from './components/organisms/Attribute'
 import Category from './components/organisms/Category'
@@ -11,18 +11,25 @@ import atoms from '@/components/atoms'
 import lace from '@/pages/recommend/select/pattern/components/atoms/lace_down.png'
 
 export const categoryState = atom<any>({
-  key: 'categoryState',
+  key: 'categoryAtom',
   default: [],
 })
 
 export const keywordState = atom<any>({
-  key: 'keywordState',
+  key: 'keywordAtom',
   default: [],
+})
+
+export const levelState = atom<any>({
+  key: 'levelAtom',
+  default: '',
 })
 
 function PatternSelectRecommend() {
   const categoryList = useRecoilValue(categoryState)
   const keywordList = useRecoilValue(keywordState)
+  // const level = useRecoilValue(levelState)
+
   const [option, setOption] = useState({
     category: true,
     attribute: false,
@@ -91,11 +98,11 @@ function PatternSelectRecommend() {
           )}
 
           {/* 선택 카테고리 영역 */}
-          <div className="absolute -top-20 -right-36 p-4">
-            <div className="min-h-[10rem]">
-              <p className="text-title2-bold">선택 카테고리</p>
-              <img src={lace} />
-              <div className="mt-2 flex flex-wrap w-[13.5rem] gap-2">
+          <div className="absolute top-2 right-[8rem] p-4 w-[25rem]">
+            <div className="min-h-[8rem] relative">
+              <p className="text-title3-bold">선택 카테고리</p>
+              <img className="absolute top-4" src={lace} />
+              <div className="mt-5 flex flex-wrap gap-2">
                 {categoryList.map((categoryItem: any) => {
                   return (
                     <atoms.ButtonTag
@@ -110,10 +117,10 @@ function PatternSelectRecommend() {
             </div>
 
             {/* 선택 키워드 영역 */}
-            <div className="mt-3">
-              <p className="text-title2-bold">선택 키워드</p>
-              <img src={lace} />
-              <div className="mt-2 flex flex-wrap w-[13.5rem] gap-2">
+            <div className="mt-3 relative">
+              <p className="text-title3-bold">선택 키워드</p>
+              <img className="absolute top-4" src={lace} />
+              <div className="mt-5 flex flex-wrap gap-2">
                 {keywordList.map((keywordItem: any) => {
                   return (
                     <atoms.ButtonTag
