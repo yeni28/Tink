@@ -215,8 +215,12 @@ public class PatternService {
 		CategoryDto categoryDto = CategoryDto.builder()
 			.categoryName(category.getCategoryName())
 			.depth(category.getDepth())
-			.parentCategory(parent)
 			.build();
+
+
+		if(parent != null && parent.getCategoryName() != null){
+			categoryDto.setParentCategory(parent.getCategoryName());
+		}
 
 		//thumbnail info response setting
 		List<PatternThumbnail> thumbnails = pattern.get().getPatternThumbnails();
