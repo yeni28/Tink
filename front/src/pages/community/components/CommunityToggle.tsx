@@ -77,6 +77,7 @@ function CommunityToggle() {
               <img
                 alt="plus"
                 className="w-[2rem] h-[2rem] cursor-pointer :hover "
+                referrerPolicy="no-referrer"
                 src={Plus}
               />
               <div className="absolute bottom-5 flex flex-col items-center hidden mb-5 group-hover:flex">
@@ -90,7 +91,7 @@ function CommunityToggle() {
         </div>
       </div>
       <div>
-        <img alt="line" src={DrawingLine} />
+        <img alt="line" referrerPolicy="no-referrer" src={DrawingLine} />
       </div>
     </div>
   )

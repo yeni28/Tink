@@ -1,6 +1,7 @@
 package com.ssafy.tink.dto.dsl.members;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 
@@ -18,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-// @AllArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @EqualsAndHashCode(of = "boardId")
 public class BoardInfoDsl {
@@ -28,16 +29,16 @@ public class BoardInfoDsl {
 	private long memberId;
 	private String title;
 	private String content;
-	private String createdDate;
-	private String updatedDate;
+	private LocalDateTime createdDate;
+	private LocalDateTime updatedDate;
 
 	@QueryProjection
 	public BoardInfoDsl(
 		int boardId,
 		String boardCategory,
 		long memberId,
-		String createdDate,
-		String updatedDate,
+		LocalDateTime createdDate,
+		LocalDateTime updatedDate,
 		String title,
 		String content) {
 		this.boardId = boardId;
