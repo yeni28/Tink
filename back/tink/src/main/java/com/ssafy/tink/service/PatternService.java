@@ -234,6 +234,7 @@ public class PatternService {
 
 		Pattern patternInfo = pattern.get();
 
+		System.out.println(patternInfo.getPatternLikes().size());
 
 		PatternInfoDto info = PatternInfoDto.builder()
 			.id(patternInfo.getPatternId())
@@ -426,10 +427,12 @@ public class PatternService {
 	}
 
 
+	@Transactional
 	public PatternAndThumbnailDto getPatternAndThumbnailList(int patternId){
-		Optional<Pattern> pattern = patternRepository.findByPatternId(patternId);
+		Optional<Pattern> pattern = patternRepository.findByPatternId(patternId);//카데고리, 도안, 바늘 정보 전부 가져옴
 		if (!pattern.isPresent())
 			return null;
+
 
 		//thumbnail info response setting
 		List<PatternThumbnail> thumbnails = pattern.get().getPatternThumbnails();
@@ -444,13 +447,16 @@ public class PatternService {
 			thumbnailList.add(dto);
 		}
 
-		PatternAndThumbnailDto dto = PatternAndThumbnailDto.builder()
+
+		Pattern patternInfo = pattern.get();
+
+		PatternAndThumbnailDto info = PatternAndThumbnailDto.builder()
+			.id(patternInfo.getPatternId())
+			.name(patternInfo.getName())
 			.thumbnails(thumbnailList)
-			.id(patternId)
-			.name(pattern.get().getName())
 			.build();
 
-		return dto;
+		return info;
 	}
 
 }

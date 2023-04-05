@@ -19,6 +19,7 @@ import com.ssafy.tink.config.DjangoClient;
 import com.ssafy.tink.dto.BaseResponse;
 import com.ssafy.tink.dto.PatternAndThumbnailDto;
 import com.ssafy.tink.dto.PatternInfoDto;
+import com.ssafy.tink.dto.PatternThumbnailDto;
 import com.ssafy.tink.dto.UserPatternRecommendDto;
 import com.ssafy.tink.dto.YarnRecommendDto;
 import com.ssafy.tink.service.PatternService;
