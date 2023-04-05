@@ -54,4 +54,9 @@ public interface PatternRepository extends JpaRepository<Pattern, Integer>,
 
 	Optional<List<Pattern>> findAllByNameContainingOrderByName(String name);
 
+
+	@Query(value="select * from pattern join pattern_likes on pattern.pattern_id = pattern_likes.pattern_id where pattern_likes.member_id =:memberId  and pattern.pattern_id =:patternId ", nativeQuery = true)
+	Optional<Pattern> searchPatternLikes(@Param("patternId") int patternId, @Param("memberId") Long memberId);
+
+
 }

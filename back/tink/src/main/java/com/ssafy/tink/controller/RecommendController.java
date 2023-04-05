@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.tink.config.DjangoClient;
 import com.ssafy.tink.dto.BaseResponse;
 import com.ssafy.tink.dto.PatternInfoDto;
+import com.ssafy.tink.dto.UserPatternRecommendDto;
 import com.ssafy.tink.dto.YarnRecommendDto;
 import com.ssafy.tink.service.PatternService;
 
@@ -83,6 +84,19 @@ public class RecommendController {
 	@ApiOperation(value = "컨텐츠 기반 도안 추천")
 	public void getPatternJsonForYarn(@RequestBody Map<String, List<String>> filter) {
 
+	}
+
+	@GetMapping("/patterns/member")
+	@ApiOperation(value = "사용자 기반 도안 추천")
+	public BaseResponse<Object> getPatternForUser() {
+
+		List<UserPatternRecommendDto> recommendPattern = patternService.getPatternForUserRecommend();
+
+		return BaseResponse.builder()
+			.result(recommendPattern)
+			.resultCode(HttpStatus.OK.value())
+			.resultMsg("사용자 기반 추천 리스트 반환 성공")
+			.build();
 	}
 
 

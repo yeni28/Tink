@@ -19,6 +19,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Getter
 @DynamicInsert
@@ -31,7 +32,7 @@ public class Needle {
 	@Column(name = "needle_id")
 	private int needleId;
 
-	private int us;
+	private String us;
 
 	private Float metric;
 
@@ -39,10 +40,10 @@ public class Needle {
 	private String usSteel;
 
 	@Column(columnDefinition = "TINYINT", length = 2)
-	private boolean crochet;
+	private Boolean crochet;
 
 	@Column(columnDefinition = "TINYINT", length = 2)
-	private boolean knitting;
+	private Boolean knitting;
 
 	@Column(length = 10)
 	private String hook;
@@ -53,13 +54,14 @@ public class Needle {
 	@Column(name = "pretty_metric", length = 10)
 	private String prettyMetric;
 
-	@ManyToMany(mappedBy = "needles")
+	@ManyToMany
 	@JsonBackReference
 	private List<Pattern> patterns = new ArrayList<>();
 
 	@Builder
-	public Needle(int us, Float metric, String usSteel, boolean crochet, boolean knitting, String hook, String name,
-		String prettyMetric) {
+	public Needle(int needleId, String us, Float metric, String usSteel, boolean crochet, boolean knitting,
+		String hook, String name, String prettyMetric, List<Pattern> patterns) {
+		this.needleId = needleId;
 		this.us = us;
 		this.metric = metric;
 		this.usSteel = usSteel;
@@ -68,6 +70,7 @@ public class Needle {
 		this.hook = hook;
 		this.name = name;
 		this.prettyMetric = prettyMetric;
+		this.patterns = patterns;
 	}
 
 }
