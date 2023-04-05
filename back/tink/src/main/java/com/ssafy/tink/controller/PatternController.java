@@ -211,9 +211,9 @@ public class PatternController {
 			.build();
 	}
 
-	@GetMapping("/like")
+	@GetMapping("/like/{patternId}")
 	@ApiOperation(value = "도안 좋아요", notes = "도안을 좋아요")
-	public BaseResponse<Object> setPatternLike(@RequestParam int patternId) {
+	public BaseResponse<Object> setPatternLike(@PathVariable int patternId) {
 		try {
 			int result = patternService.setPatternLike(patternId);
 			if(result == 0){

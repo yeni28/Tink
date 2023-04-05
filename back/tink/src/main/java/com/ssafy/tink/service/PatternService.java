@@ -258,12 +258,10 @@ public class PatternService {
 		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
 
 		if(memberId.isPresent()){
-			System.out.println(Long.parseLong(memberId.get()));
 			Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
 			if(member.isPresent()){
 				//현재 회원과 패턴의 좋아요 여부를 확인함
 				Optional<Pattern> patternLikesCheck = patternRepository.searchPatternLikes(patternId, member.get().getMemberId());
-				System.out.println(patternLikesCheck.isPresent());
 				if(patternLikesCheck.isPresent()){
 					info.setPatternLikeCheck(1);//좋아요를 이미 누름
 				}else{
@@ -374,8 +372,12 @@ public class PatternService {
 		Pattern getPattern = pattern.get();
 		Member getMember = member.get();
 
+		System.out.println(getMember.getMemberId());
+		System.out.println(getPattern.getPatternId());
+
 		//이전에 이미 도안에 좋아요를 누른 경우
 		Optional<PatternLikes> checkLike = patternLikeRepository.searchPatternLike(patternId, member.get().getMemberId());
+		System.out.println(checkLike.isPresent());
 		if(checkLike.isPresent()){
 			return 0;
 		}
