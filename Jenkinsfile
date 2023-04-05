@@ -113,16 +113,19 @@ pipeline {
                         echo 'tink spring create container start'
                         sh "docker run -d -p 8081:8081 \
                                     --name tink-spring \
+                                    --net tink-net \
                                     --rm goals11/repo:spring$ver"
 
                         echo 'tink-nginx nginx create container start'
                         sh "docker run -d -p 3000:80 \
                                     --name tink-react \
+                                    --net tink-net \
                                     --rm goals11/repo:react$ver"
                                     
                         echo 'tink-django create container start'
                         sh "docker run -d -p 8000:8000 \
                                     --name tink-django \
+                                    --net tink-net \
                                     --rm goals11/repo:django$ver"
                     }catch(error){
                         print(error)
