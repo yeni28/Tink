@@ -13,7 +13,7 @@ public class NeedleDto {
 	private String name;
 	private Float metric;
 	private String prettyMetric;
-	private int us;
+	private String us;
 	private String usSteel;
 	private Boolean knitting;
 	private Boolean crochet;
