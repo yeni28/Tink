@@ -227,13 +227,17 @@ public class PatternService {
 			thumbnailList.add(dto);
 		}
 
+
 		Pattern patternInfo = pattern.get();
+
+		System.out.println(patternInfo.getPatternLikes().size());
+
 		PatternInfoDto info = PatternInfoDto.builder()
 			.id(patternInfo.getPatternId())
 			.difficultySum(patternInfo.getDifficultySum())
 			.difficultyCnt(patternInfo.getDifficultyCnt())
 			.notesHtml(patternInfo.getNotesHtml())
-			.yardageMax(patternInfo.getYardageMax())
+			.yardageMax(patternInfo.getYardageMax() == null ? 0 : patternInfo.getYardageMax())
 			.gaugePattern(patternInfo.getGaugePattern())
 			.downloadUrl(patternInfo.getDownloadUrl())
 			.difficultyAvg(patternInfo.getDifficultyAvg())
@@ -246,8 +250,28 @@ public class PatternService {
 			.gaugePattern(patternInfo.getGaugePattern())
 			.needles(needleDtoList)
 			.category(categoryDto)
+			.patternLikesCount(patternInfo.getPatternLikes().size())
 			.thumbnails(thumbnailList)
 			.build();
+
+		//도안 좋아요 여부
+		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
+
+		if(memberId.isPresent()){
+			System.out.println(Long.parseLong(memberId.get()));
+			Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
+			if(member.isPresent()){
+				//현재 회원과 패턴의 좋아요 여부를 확인함
+				Optional<Pattern> patternLikesCheck = patternRepository.searchPatternLikes(patternId, member.get().getMemberId());
+				System.out.println(patternLikesCheck.isPresent());
+				if(patternLikesCheck.isPresent()){
+					info.setPatternLikeCheck(1);//좋아요를 이미 누름
+				}else{
+					info.setPatternLikeCheck(0);
+				}
+			}
+		}
+
 
 		return info;
 	}

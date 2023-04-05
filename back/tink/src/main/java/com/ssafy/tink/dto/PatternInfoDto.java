@@ -38,12 +38,18 @@ public class PatternInfoDto {
 	private int difficultyCnt;
 	private int difficultySum;
 	private Float difficultyAvg;
+	
+	//현재 로그인한 회원의 패턴 좋아요 여부
+	private int patternLikeCheck;
+
+	//현재 도안의 좋아요 개수
+	private int patternLikesCount;
 
 	@Builder
 	public PatternInfoDto(List<NeedleDto> needles, CategoryDto category, List<PatternThumbnailDto> thumbnails, int id,
 		String name, Float gauge, Float gaugeDivisor, String gaugePattern, String sizesAvailable, int yardage,
 		String yardageDescription, int yardageMax, String yarnWeightDescription, String downloadUrl, String notesHtml,
-		int difficultyCnt, int difficultySum, Float difficultyAvg) {
+		int difficultyCnt, int difficultySum, Float difficultyAvg, int patternLikeCheck, int patternLikesCount) {
 		this.needles = needles;
 		this.category = category;
 		this.thumbnails = thumbnails;
@@ -62,6 +68,8 @@ public class PatternInfoDto {
 		this.difficultyCnt = difficultyCnt;
 		this.difficultySum = difficultySum;
 		this.difficultyAvg = difficultyAvg;
+		this.patternLikeCheck = patternLikeCheck;
+		this.patternLikesCount = patternLikesCount;
 	}
 
 	@Builder
@@ -79,4 +87,7 @@ public class PatternInfoDto {
 			Collectors.toList());
 	}
 
+	public void setPatternLikeCheck(int patternLikeCheck) {
+		this.patternLikeCheck = patternLikeCheck;
+	}
 }
