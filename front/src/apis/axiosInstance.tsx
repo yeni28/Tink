@@ -3,8 +3,7 @@ import axios, { AxiosInstance } from 'axios'
 export const interceptors = (instance: AxiosInstance) => {
   instance.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem('access-token')
-
+      const token = localStorage.getItem('accessToken')
       config.headers.Authorization = `Bearer ${token}`
       return config
     },
@@ -13,7 +12,8 @@ export const interceptors = (instance: AxiosInstance) => {
   return instance
 }
 
-const BASE_URL = 'http://j8c201.p.ssafy.io:8082/tink'
+const BASE_URL = 'http://j8c201.p.ssafy.io:8081/tink' // 메인서버
+// const BASE_URL = 'http://localhost:8081' // 테스트 로컬 서버
 
 // 단순 get요청으로 인증값이 필요없는 경우
 const axiosApi = (url: string, options?: object) => {
