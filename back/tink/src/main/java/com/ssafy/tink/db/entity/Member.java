@@ -1,6 +1,5 @@
 package com.ssafy.tink.db.entity;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -22,7 +21,6 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ssafy.tink.config.msg.AuthProvider;
 import com.ssafy.tink.config.msg.MemberRole;
 
@@ -47,9 +45,6 @@ public class Member extends BaseEntity {
 	@Column(length = 100)
 	private String email;
 
-	// private Date birth;
-	private String birth;
-
 	@Column(length = 50)
 	private String nickname;
 
@@ -68,9 +63,6 @@ public class Member extends BaseEntity {
 	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
 	private Set<Follow> follows = new HashSet<>();
 
-	// @OneToMany(mappedBy = "member")
-	// private List<Notification> notifications = new ArrayList<>();
-
 	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
 	private Set<Pattern> patterns = new HashSet<>();
 
@@ -78,18 +70,11 @@ public class Member extends BaseEntity {
 	private List<Board> boards = new ArrayList<>();
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "image_id", referencedColumnName = "thumbnail_id", nullable = false)
+	@JoinColumn(name = "image_id", referencedColumnName = "thumbnail_id")
 	private Thumbnail thumbnail;
 
 	@OneToMany(mappedBy = "member")
 	private List<PatternLikes> patternLikes;
-	/*
-	 * 알림 등록
-	 * */
-	// public void addNotification(Notification notification) {
-	// 	notification.setMember(this);
-	// 	notifications.add(notification);
-	// }
 
 	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
@@ -99,13 +84,6 @@ public class Member extends BaseEntity {
 		this.email = email;
 	}
 
-	// public void setBirth(Date birth) {
-	// 	this.birth = birth;
-	// }
-
-	public void setBirth(String birth) {
-		this.birth = birth;
-	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}

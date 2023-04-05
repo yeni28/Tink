@@ -12,10 +12,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.ssafy.tink.db.dsl.PatternQueryDslRepository;
 import com.ssafy.tink.db.entity.Pattern;
 
 @Repository
-public interface PatternRepository extends JpaRepository<Pattern, Integer> {
+public interface PatternRepository extends JpaRepository<Pattern, Integer>,
+	PatternQueryDslRepository {
 
 	//추천 시스템을 위한 쿼리
 	@Query("SELECT p FROM Pattern p")
@@ -51,5 +53,10 @@ public interface PatternRepository extends JpaRepository<Pattern, Integer> {
 	List<Pattern> findWeeklyBest(@Param("createdDate") Timestamp createdDate, @Param("endDate") Timestamp endDate);
 
 	Optional<List<Pattern>> findAllByNameContainingOrderByName(String name);
+
+
+	@Query(value="select * from pattern join pattern_likes on pattern.pattern_id = pattern_likes.pattern_id where pattern_likes.member_id =:memberId  and pattern.pattern_id =:patternId ", nativeQuery = true)
+	Optional<Pattern> searchPatternLikes(@Param("patternId") int patternId, @Param("memberId") Long memberId);
+
 
 }

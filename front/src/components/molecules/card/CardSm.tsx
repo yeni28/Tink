@@ -5,15 +5,16 @@ import { ReactComponent as HeartFill } from '@/assets/svg/heart_fill.svg'
 import atoms from '@/components/atoms'
 
 interface CardProps {
-  isLiked: boolean
+  isLiked?: boolean
   title: string
-  userImgUrl: string
-  userName: string
+  userImgUrl?: string
+  userName?: string
   src: string
 }
 
 function CardSm({ isLiked, title, userImgUrl, userName, src }: CardProps) {
   const [showLike, setShowLike] = useState(isLiked)
+
   return (
     <div className="w-[14.25rem] h-[15rem]">
       <div className="relative">
@@ -32,6 +33,7 @@ function CardSm({ isLiked, title, userImgUrl, userName, src }: CardProps) {
           <img
             alt="userImage"
             className="w-[20px] h-[20px] rounded-full"
+            referrerPolicy="no-referrer"
             src={userImgUrl}
           />
           <div className="text-footnote text-grey">{userName}</div>

@@ -5,7 +5,6 @@ interface Member {
   nickname: string
   follows?: number
   follower?: number
-  isFollow?: boolean
   thumbnail?: {
     thumbnailId?: number
     mainImg?: string

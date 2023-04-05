@@ -1,5 +1,7 @@
 package com.ssafy.tink.dto;
 
+import java.time.LocalDateTime;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,13 +12,13 @@ import lombok.NoArgsConstructor;
 public class CommentInfoDto {
 
 	private int commentId;
-	private String createdDate;
+	private LocalDateTime createdDate;
 	private String content;
 	private String nickname;
 	private String thumbnail;
 
 	@Builder
-	public CommentInfoDto(int commentId, String createdDate, String content, String nickname, String thumbnail) {
+	public CommentInfoDto(int commentId, LocalDateTime createdDate, String content, String nickname, String thumbnail) {
 		this.commentId = commentId;
 		this.nickname = nickname;
 		this.thumbnail = thumbnail;

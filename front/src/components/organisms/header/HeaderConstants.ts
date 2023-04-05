@@ -5,6 +5,7 @@ const HEADER_TITLE = {
   COMMUNITY: 'Community',
   MY_PAGE: 'My Page',
   CAMPAIGN: 'Campaign',
+  PATTERN: 'Pattern',
   PICK_SKILL_LEVEL: '숙련도를 선택해주세요!',
   PICK_LIKE_PATTERN: '관심있는 도안을 선택해주세요!',
 } as const
@@ -32,6 +33,7 @@ const HEARDER_SUBTITLE = {
   PATTERN: {
     DESIGNER_NAME: 'by Espace Tricot',
     USER_UPLOAD: 'Brad님의 새로운 도안은 어떤 도안일까요?',
+    RESULT: '찾으시는 도안이 있을거에요!',
   },
   COMMUNITY: {
     REVIEW: '내가 만든 뜨개 너를 위해 짜왔지',

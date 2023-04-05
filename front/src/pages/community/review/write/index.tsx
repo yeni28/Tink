@@ -53,12 +53,6 @@ function WriteReviewCommunity() {
     if (!titleImage) return
 
     const formData = setReviewPostData(data, titleImage)
-
-    // formData 확인용
-    // const entries = formData.entries()
-    // for (const pair of entries) {
-    //   console.log(pair[0] + ', ' + pair[1])
-    // }
   }
 
   const errorHandler: SubmitErrorHandler<ReviewPost> = (errors) => {

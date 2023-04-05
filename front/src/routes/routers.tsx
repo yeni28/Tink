@@ -4,7 +4,7 @@ import FullLayout from './FullLayout'
 import MainLayout from './MainLayout'
 import RootLayout from './RootLayout'
 
-import { Recommend, Community, Tutorial, Mypage } from './route'
+import { Recommend, Community, Tutorial, Mypage, Pattern } from './route'
 
 import CampaignMainPage from '@/pages/campaign/CampaignMainPage'
 import Main from '@/pages/home'
@@ -31,8 +31,7 @@ const routers = createBrowserRouter([
       ...Recommend,
       ...Community,
       ...Mypage,
-      // ...Tutorial,
-
+      ...Pattern,
       {
         path: '/campaign',
         element: <CampaignMainPage />,

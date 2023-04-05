@@ -5,4 +5,7 @@ spring:
       "dev": "dev, key"
       "test": "test, key"
     active: dev
-
+  servlet:
+    multipart:
+      #file upload size
+      max-file-size: 3MB
