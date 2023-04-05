@@ -9,6 +9,7 @@ import Level from './components/organisms/Level'
 import atoms from '@/components/atoms'
 
 import lace from '@/pages/recommend/select/pattern/components/atoms/lace_down.png'
+import cat from '@/pages/recommend/select/pattern/components/atoms/talking_cat.png'
 
 export const categoryState = atom<any>({
   key: 'categoryAtom',
@@ -28,7 +29,6 @@ export const levelState = atom<any>({
 function PatternSelectRecommend() {
   const categoryList = useRecoilValue(categoryState)
   const keywordList = useRecoilValue(keywordState)
-  // const level = useRecoilValue(levelState)
 
   const [option, setOption] = useState({
     category: true,
@@ -86,6 +86,11 @@ function PatternSelectRecommend() {
                 </button>
               )
             })}
+          </div>
+
+          {/* 고양이 이미지 */}
+          <div className="absolute -bottom-56 -left-60">
+            <img src={cat} />
           </div>
 
           {/* 선택영역 */}
