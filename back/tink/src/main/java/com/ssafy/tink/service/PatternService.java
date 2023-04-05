@@ -188,6 +188,8 @@ public class PatternService {
 				.prettyMetric(needle.getPrettyMetric())
 				.metric(needle.getMetric())
 				.name(needle.getName())
+				.crochet(needle.getCrochet())
+				.knitting(needle.getKnitting())
 				.build();
 			needleDtoList.add(dto);
 		}
@@ -228,13 +230,17 @@ public class PatternService {
 			thumbnailList.add(dto);
 		}
 
+
 		Pattern patternInfo = pattern.get();
+
+		System.out.println(patternInfo.getPatternLikes().size());
+
 		PatternInfoDto info = PatternInfoDto.builder()
 			.id(patternInfo.getPatternId())
 			.difficultySum(patternInfo.getDifficultySum())
 			.difficultyCnt(patternInfo.getDifficultyCnt())
 			.notesHtml(patternInfo.getNotesHtml())
-			.yardageMax(patternInfo.getYardageMax())
+			.yardageMax(patternInfo.getYardageMax() == null ? 0 : patternInfo.getYardageMax())
 			.gaugePattern(patternInfo.getGaugePattern())
 			.downloadUrl(patternInfo.getDownloadUrl())
 			.difficultyAvg(patternInfo.getDifficultyAvg())
@@ -247,8 +253,27 @@ public class PatternService {
 			.gaugePattern(patternInfo.getGaugePattern())
 			.needles(needleDtoList)
 			.category(categoryDto)
+			.patternLikesCount(patternInfo.getPatternLikes().size())
 			.thumbnails(thumbnailList)
+			.rowGauge(patternInfo.getRowGauge())
 			.build();
+
+		//도안 좋아요 여부
+		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
+
+		if(memberId.isPresent()){
+			Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
+			if(member.isPresent()){
+				//현재 회원과 패턴의 좋아요 여부를 확인함
+				Optional<Pattern> patternLikesCheck = patternRepository.searchPatternLikes(patternId, member.get().getMemberId());
+				if(patternLikesCheck.isPresent()){
+					info.setPatternLikeCheck(1);//좋아요를 이미 누름
+				}else{
+					info.setPatternLikeCheck(0);
+				}
+			}
+		}
+
 
 		return info;
 	}
@@ -351,10 +376,13 @@ public class PatternService {
 		Pattern getPattern = pattern.get();
 		Member getMember = member.get();
 
+		System.out.println(getMember.getMemberId());
+		System.out.println(getPattern.getPatternId());
+
 		//이전에 이미 도안에 좋아요를 누른 경우
-		Optional<PatternLikes> checkLike = patternLikeRepository.searchPatternLike(patternId,
-			member.get().getMemberId());
-		if (checkLike.isPresent()) {
+		Optional<PatternLikes> checkLike = patternLikeRepository.searchPatternLike(patternId, member.get().getMemberId());
+		System.out.println(checkLike.isPresent());
+		if(checkLike.isPresent()){
 			return 0;
 		}
 
