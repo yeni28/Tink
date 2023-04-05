@@ -22,6 +22,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.ssafy.tink.config.Util.CookieUtil;
 import com.ssafy.tink.config.ect.BadRequestException;
 import com.ssafy.tink.config.jwt.JwtTokenProvider;
+import com.ssafy.tink.dto.TokenDto;
+import com.ssafy.tink.service.RedisServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +39,8 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 	private final JwtTokenProvider tokenProvider;
 	@Autowired
 	private final CustomAuthorizationRequestRepository authorizationRequestRepository;
-
+	@Autowired
+	private RedisServiceImpl redisServiceImpl;
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 		Authentication authentication) throws IOException, ServletException {
@@ -71,9 +74,15 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		String accessToken = tokenProvider.createAccessToken(authentication);
 		// refreshToken은 생성과 동시에 저장하도록 처리할 것임
 		String refreshToken = tokenProvider.createRefreshToken(authentication, response);
+		log.info("엑세스 토큰 값 : " + accessToken);
 		log.info("리플래쉬 토큰 값 : " + refreshToken);
-		HttpSession session = request.getSession();
-		session.setAttribute(userDetail.getName(), refreshToken);
+		// 리플래쉬 토큰을 레디스에 저장하는 부분
+		redisServiceImpl.setAccessWithRefresh(TokenDto.builder()
+											.memberId(userDetail.getId())
+											.accessToken(accessToken)
+											.refreshToken(refreshToken)
+											.build()
+		);
 		// redirectUri에 query로 access토큰을 보줌
 		return UriComponentsBuilder.fromUriString(targetUrl)
 			.queryParam("isCheck",userDetail.isCheck())

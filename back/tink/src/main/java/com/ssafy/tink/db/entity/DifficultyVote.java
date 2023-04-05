@@ -12,7 +12,9 @@ import com.sun.istack.NotNull;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Entity
 @Table(name = "difficulty_vote")
 @IdClass(DifficultyVoteId.class)
@@ -38,4 +40,5 @@ public class DifficultyVote {
 		this.pattern = pattern;
 		this.score = score;
 	}
+
 }

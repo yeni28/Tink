@@ -131,6 +131,10 @@ public class Pattern extends BaseEntity {
 	@JsonBackReference
 	private final List<PatternLikes> patternLikes = new ArrayList<>();
 
+	public void setPatternId(int patternId){
+		this.patternId = patternId;
+	}
+
 	public void setDifficultySum(int difficultySum) {
 		this.difficultySum = difficultySum;
 	}
@@ -194,10 +198,6 @@ public class Pattern extends BaseEntity {
 	public void addNeedle(Needle needle) {
 		this.getNeedles().add(needle);
 		needle.getPatterns().add(this);
-	}
-
-	public void setPatternId(int patternId){
-		this.patternId = patternId;
 	}
 
 

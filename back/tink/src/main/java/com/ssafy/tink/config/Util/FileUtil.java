@@ -75,11 +75,12 @@ public class FileUtil {
 				log.debug("파일 저장이 완료되었습니다.");
 				log.debug("파일 크기 : " + fileSize + "byte");
 				return;
-			} else {
-				log.debug("파일 크기를 초과하였습니다. [파일 삭제 중..]");
-				new File(savePath).delete();
-				return;
 			}
+			// else {
+			// 	log.debug("파일 크기를 초과하였습니다. [파일 삭제 중..]");
+			// 	new File(savePath).delete();
+			// 	return;
+			// }
 		} catch( IOException e) {
 
 		}

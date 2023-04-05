@@ -19,9 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.tink.db.entity.Board;
+import com.ssafy.tink.db.entity.Thumbnail;
 import com.ssafy.tink.dto.BaseResponse;
+import com.ssafy.tink.dto.PatternThumbnailDto;
 import com.ssafy.tink.dto.ReviewInfoDto;
 import com.ssafy.tink.dto.ReviewInputDto;
+import com.ssafy.tink.dto.ThumbnailDto;
 import com.ssafy.tink.service.ReviewService;
 import com.ssafy.tink.service.FileService;
 
@@ -56,12 +59,13 @@ public class ReviewController {
 				.build();
 		}
 
+		Thumbnail thumbnail = null;
 		if(multipartFile != null){
-			fileService.singleFileupload(multipartFile);
+			thumbnail = fileService.singleFileupload(multipartFile);
 		}
 
 		return BaseResponse.builder()
-				.result(reviewService.create(community))
+				.result(reviewService.create(community, thumbnail))
 				.resultCode(HttpStatus.OK.value())
 				.resultMsg("정상적으로 자랑글이 작성되었습니다.")
 				.build();

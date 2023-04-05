@@ -2,9 +2,11 @@ package com.ssafy.tink.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,16 +18,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.tink.config.DjangoClient;
 import com.ssafy.tink.dto.BaseResponse;
 import com.ssafy.tink.dto.PatternInfoDto;
+import com.ssafy.tink.dto.UserPatternRecommendDto;
 import com.ssafy.tink.dto.YarnRecommendDto;
 import com.ssafy.tink.service.PatternService;
+
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/recommend")
 public class RecommendController {
 
+	public static final String CATEGORY = "category";
+	public static final String KEYWORD = "keyword";
+	public static final String DIFFICULT = "difficulty";
 	@Autowired
 	private DjangoClient djangoClient;
-
 	@Autowired
 	private PatternService patternService;
 
@@ -72,5 +79,25 @@ public class RecommendController {
 				.build();
 		}
 	}
+
+	@GetMapping("/patterns/contents")
+	@ApiOperation(value = "컨텐츠 기반 도안 추천")
+	public void getPatternJsonForYarn(@RequestBody Map<String, List<String>> filter) {
+
+	}
+
+	@GetMapping("/patterns/member")
+	@ApiOperation(value = "사용자 기반 도안 추천")
+	public BaseResponse<Object> getPatternForUser() {
+
+		List<UserPatternRecommendDto> recommendPattern = patternService.getPatternForUserRecommend();
+
+		return BaseResponse.builder()
+			.result(recommendPattern)
+			.resultCode(HttpStatus.OK.value())
+			.resultMsg("사용자 기반 추천 리스트 반환 성공")
+			.build();
+	}
+
 
 }
