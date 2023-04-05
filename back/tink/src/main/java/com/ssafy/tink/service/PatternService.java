@@ -283,6 +283,7 @@ public class PatternService {
 		return info;
 	}
 
+	@Transactional
 	public void setLevelVote(int patternId, int difficultyNum) throws Exception {
 		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
 		Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));

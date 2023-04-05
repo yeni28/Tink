@@ -53,7 +53,7 @@ def recommendByYarn(request):
     # 결과 데이터 프레임 생성 및 유사도를 기준으로 내림차순 정렬
     result = pd.DataFrame({'similarity': cosine_similarities[:, 0], 'data': item_df.values.tolist()}, index=item_df.index)
 
-    result = result[result['similarity'] > 0.6] # 유사도 0.6 이상인 데이터만 선택함
+    result = result[result['similarity'] > 0.5] # 유사도 0.5 이상인 데이터만 선택함
 
     result = result.sort_values(by='similarity', ascending=False).head(30)
 
