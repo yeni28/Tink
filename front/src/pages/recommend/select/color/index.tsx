@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 
 import FileBox from '@/assets/drawings/fileLineBox.png'
 import yarn from '@/assets/drawings/yarn.png'
-import BoxCat from '@/assets/drawings/슈뢰딩거탈출냥이.png'
 import FileCat from '@/assets/drawings/파일냥이.png'
 import atoms from '@/components/atoms'
 
@@ -72,9 +71,6 @@ function ColorSelectRecommend() {
       </div>
       <div className="absolute -top-4 -right-[16.5rem] w-[12.75rem]">
         <img src={yarn} />
-      </div>
-      <div className="absolute -bottom-44 -left-[7.5rem] w-[12.75rem]">
-        <img src={BoxCat} />
       </div>
     </div>
   )
