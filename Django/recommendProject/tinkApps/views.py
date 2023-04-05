@@ -55,7 +55,9 @@ def recommendByYarn(request):
 
     result = result[result['similarity'] > 0.6] # 유사도 0.6 이상인 데이터만 선택함
 
-    result = result.sort_values(by='similarity', ascending=False)
+    result = result.sort_values(by='similarity', ascending=False).head(30)
+
+
 
     # 결과 출력
     print(len(result))
