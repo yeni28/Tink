@@ -97,7 +97,6 @@ const HEADER_DATA = [
     title: HEADER_TITLE.COMMUNITY,
     subtitle: HEARDER_SUBTITLE.COMMUNITY.QNA,
   },
-
   {
     route: '/campaign',
     title: HEADER_TITLE.CAMPAIGN,
