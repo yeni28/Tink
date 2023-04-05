@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { atom, selector, useRecoilValue } from 'recoil'
+
 import Attribute from './components/organisms/Attribute'
 import Category from './components/organisms/Category'
 import Level from './components/organisms/Level'
@@ -8,7 +10,13 @@ import atoms from '@/components/atoms'
 
 import lace from '@/pages/recommend/select/pattern/components/atoms/lace_down.png'
 
+export const categoryState = atom<any>({
+  key: 'categoryState',
+  default: [],
+})
+
 function PatternSelectRecommend() {
+  const categoryList = useRecoilValue(categoryState)
   const [option, setOption] = useState({
     category: true,
     attribute: false,
@@ -78,14 +86,28 @@ function PatternSelectRecommend() {
 
           {/* 선택 완료 영역 */}
           <div className="absolute -top-20 -right-36 p-4">
-            <p className="text-title2-bold">선택 키워드</p>
-            <img src={lace} />
-            <div className="mt-2">
-              <atoms.ButtonTag
-                bgColor="red"
-                innerValue="상의"
-                textColor="white"
-              />
+            <div className="min-h-[10rem]">
+              <p className="text-title2-bold">선택 카테고리</p>
+              <img src={lace} />
+              <div className="mt-2 flex flex-wrap w-[13.5rem] gap-2">
+                {categoryList.map((categoryItem: any) => {
+                  return (
+                    <atoms.ButtonTag
+                      key={categoryItem.key}
+                      bgColor="red"
+                      innerValue={categoryItem.name}
+                      textColor="white"
+                    />
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* 속성 영역 */}
+            <div className="mt-3">
+              <p className="text-title2-bold">선택 키워드</p>
+              <img src={lace} />
+              <div className="mt-2 flex flex-wrap w-[13.5rem] gap-2"></div>
             </div>
           </div>
         </div>

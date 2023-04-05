@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
+import { useRecoilState } from 'recoil'
+
 import {
   categoryData,
   clothingData,
@@ -11,10 +13,17 @@ import {
 } from './CategoryData'
 
 import atoms from '@/components/atoms'
+import { categoryState } from '@/pages/recommend/select/pattern'
 
 import lineBox1 from '@/pages/recommend/select/pattern/components/atoms/line box1.png'
 import lineBox2 from '@/pages/recommend/select/pattern/components/atoms/line box2.png'
 import lineBox3 from '@/pages/recommend/select/pattern/components/atoms/line box3.png'
+
+interface tagProps {
+  id: string
+  name: string
+  key: number
+}
 
 function Category() {
   const [category, setCategory] = useState('')
@@ -39,11 +48,31 @@ function Category() {
   }
   useEffect(() => {
     setSubCategoryData(category)
-    console.log(category)
-    console.log(subCategory)
   }, [category])
+
   const onClickHandler = () => {
     console.log('Hello')
+  }
+
+  const [tagList, setTagList] = useRecoilState(categoryState)
+  const [isChecked, setIsChecked] = useState(false)
+  const checkedItemHandler = (value: any, isChecked: boolean) => {
+    if (isChecked) {
+      setTagList((prev: any) => [...prev, value])
+      return
+    }
+
+    if (!isChecked && tagList.includes(value)) {
+      setTagList(tagList.filter((item: any) => item !== value))
+      return
+    }
+
+    return
+  }
+
+  const checkHandler = (e: React.ChangeEvent<HTMLInputElement>, value: any) => {
+    setIsChecked(!isChecked)
+    checkedItemHandler(value, e.target.checked)
   }
   return (
     <div>
@@ -52,7 +81,7 @@ function Category() {
         <div className="w-[13.58rem] h-[20.87rem] relative">
           <img className="w-full h-full" src={lineBox1} />
           <div className="absolute top-2 left-3 p-4">
-            {categoryData.map((item) => {
+            {categoryData.map((item: tagProps) => {
               return (
                 <div key={item.key} className="flex items-center my-3 mx-2">
                   <input
@@ -77,20 +106,15 @@ function Category() {
           <img className="w-full h-full" src={lineBox2} />
           <div className="absolute top-2 left-3 p-4">
             {subCategory &&
-              subCategory.map((item: any) => {
+              subCategory.map((item: tagProps) => {
                 return (
-                  <div
-                    key={item.key}
-                    className="flex items-center my-3 mx-2"
-                    onClick={() => {
-                      console.log('clicked')
-                    }}
-                  >
+                  <div key={item.key} className="flex items-center my-3 mx-2">
                     <input
+                      checked={tagList.includes(item)}
                       className="appearance-none w-4 h-4 border-black border mr-3 checked:bg-black"
                       id={item.id}
-                      // name="category"
                       type="checkbox"
+                      onChange={(e) => checkHandler(e, item)}
                     />
                     <label htmlFor={item.id}>{item.name}</label>
                   </div>
