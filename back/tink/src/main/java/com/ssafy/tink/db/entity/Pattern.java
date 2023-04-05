@@ -71,7 +71,7 @@ public class Pattern extends BaseEntity {
 
 	@Column(name = "difficulty_sum")
 	@ColumnDefault("0")
-	private int difficultySum;
+	private String difficultySum;
 
 	@Column(name = "difficulty_cnt")
 	@ColumnDefault("0")
@@ -79,7 +79,7 @@ public class Pattern extends BaseEntity {
 
 	@Column(name = "difficulty_avg")
 	@ColumnDefault("0")
-	private Float difficultyAvg;
+	private String difficultyAvg;
 
 	@Column(name = "download_url")
 	private String downloadUrl;
@@ -135,7 +135,7 @@ public class Pattern extends BaseEntity {
 		this.patternId = patternId;
 	}
 
-	public void setDifficultySum(int difficultySum) {
+	public void setDifficultySum(String difficultySum) {
 		this.difficultySum = difficultySum;
 	}
 
@@ -143,7 +143,7 @@ public class Pattern extends BaseEntity {
 		this.difficultyCnt = difficultyCnt;
 	}
 
-	public void setDifficultyAvg(Float difficultyAvg) {
+	public void setDifficultyAvg(String difficultyAvg) {
 		this.difficultyAvg = difficultyAvg;
 	}
 
