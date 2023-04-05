@@ -55,23 +55,6 @@ public class ImageController {
 		}
 
 		return result;
-
-		// try {
-		// 	FileInputStream fis = new FileInputStream(UPLOAD_PATH + "\\" + fileId + "." + fileType);
-		// 	ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		//
-		// 	byte buffer[] = new byte[1024];
-		// 	int length = 0;
-		//
-		// 	while((length = fis.read(buffer)) != -1) {
-		// 		baos.write(buffer, 0, length);
-		// 	}
-		//
-		// 	return new ResponseEntity<byte[]>(baos.toByteArray(), HttpStatus.OK);
-		//
-		// } catch(IOException e) {
-		// 	return new ResponseEntity<byte[]>(new byte[] {}, HttpStatus.CONFLICT);
-		// }
 	}
 
 	// 이미지 업로드
