@@ -32,7 +32,7 @@ public class Needle {
 	@Column(name = "needle_id")
 	private int needleId;
 
-	private int us;
+	private String us;
 
 	private Float metric;
 
@@ -59,7 +59,7 @@ public class Needle {
 	private List<Pattern> patterns = new ArrayList<>();
 
 	@Builder
-	public Needle(int needleId, int us, Float metric, String usSteel, boolean crochet, boolean knitting,
+	public Needle(int needleId, String us, Float metric, String usSteel, boolean crochet, boolean knitting,
 		String hook, String name, String prettyMetric, List<Pattern> patterns) {
 		this.needleId = needleId;
 		this.us = us;
