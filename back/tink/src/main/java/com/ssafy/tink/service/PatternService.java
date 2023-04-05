@@ -187,6 +187,8 @@ public class PatternService {
 				.prettyMetric(needle.getPrettyMetric())
 				.metric(needle.getMetric())
 				.name(needle.getName())
+				.crochet(needle.getCrochet())
+				.knitting(needle.getKnitting())
 				.build();
 			needleDtoList.add(dto);
 		}
@@ -252,6 +254,7 @@ public class PatternService {
 			.category(categoryDto)
 			.patternLikesCount(patternInfo.getPatternLikes().size())
 			.thumbnails(thumbnailList)
+			.rowGauge(patternInfo.getRowGauge())
 			.build();
 
 		//도안 좋아요 여부
