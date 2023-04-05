@@ -113,8 +113,7 @@ pipeline {
                         echo 'tink spring create container start'
                         sh "docker run -d -p 8081:8081 \
                                     --name tink-spring \
-                                    --net tink-net \
-                                    "
+                                    --net tink-net"
 
                         echo 'tink-nginx nginx create container start'
                         sh "docker run -d -p 3000:80 \
