@@ -36,6 +36,7 @@ public class RecommendController {
 	@Autowired
 	private PatternService patternService;
 
+	@ApiOperation(value = "실 기반 추천")
 	@PostMapping("/yarn")
 	public BaseResponse<Object> sendPatternJsonForYarn(
 		@RequestBody(required = false) YarnRecommendDto yarnRecommendDto) {
