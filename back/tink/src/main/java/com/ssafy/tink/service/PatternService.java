@@ -34,6 +34,7 @@ import com.ssafy.tink.db.repository.PatternThumbnailRepository;
 import com.ssafy.tink.dto.CategoryDto;
 import com.ssafy.tink.dto.NeedleDto;
 import com.ssafy.tink.dto.PageDto;
+import com.ssafy.tink.dto.PatternAndThumbnailDto;
 import com.ssafy.tink.dto.PatternDto;
 import com.ssafy.tink.dto.PatternInfoDto;
 import com.ssafy.tink.dto.PatternThumbnailDto;
@@ -214,8 +215,12 @@ public class PatternService {
 		CategoryDto categoryDto = CategoryDto.builder()
 			.categoryName(category.getCategoryName())
 			.depth(category.getDepth())
-			.parentCategory(parent)
 			.build();
+
+
+		if(parent != null && parent.getCategoryName() != null){
+			categoryDto.setParentCategory(parent.getCategoryName());
+		}
 
 		//thumbnail info response setting
 		List<PatternThumbnail> thumbnails = pattern.get().getPatternThumbnails();
@@ -237,13 +242,13 @@ public class PatternService {
 
 		PatternInfoDto info = PatternInfoDto.builder()
 			.id(patternInfo.getPatternId())
-			.difficultySum(patternInfo.getDifficultySum())
+			.difficultySum(Float.valueOf(patternInfo.getDifficultySum()))
 			.difficultyCnt(patternInfo.getDifficultyCnt())
 			.notesHtml(patternInfo.getNotesHtml())
 			.yardageMax(patternInfo.getYardageMax() == null ? 0 : patternInfo.getYardageMax())
 			.gaugePattern(patternInfo.getGaugePattern())
 			.downloadUrl(patternInfo.getDownloadUrl())
-			.difficultyAvg(patternInfo.getDifficultyAvg())
+			.difficultyAvg(Float.valueOf(patternInfo.getDifficultyAvg()))
 			.sizesAvailable(patternInfo.getSizesAvailable())
 			.yarnWeightDescription(patternInfo.getYarnWeightDescription())
 			.yardage(patternInfo.getYardage())
@@ -278,6 +283,7 @@ public class PatternService {
 		return info;
 	}
 
+	@Transactional
 	public void setLevelVote(int patternId, int difficultyNum) throws Exception {
 		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
 		Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
@@ -295,13 +301,13 @@ public class PatternService {
 		//pattern 테이블도 갱신해줌
 		Pattern updatePattern = pattern.get();
 
-		int sum = updatePattern.getDifficultySum() + difficultyNum;
+		int sum = Integer.valueOf(updatePattern.getDifficultySum()) + difficultyNum;
 		int cnt = updatePattern.getDifficultyCnt() + 1;
 		Float avg = (float)(sum / cnt);
 
-		updatePattern.setDifficultyAvg(avg);
+		updatePattern.setDifficultyAvg(String.valueOf(avg));
 		updatePattern.setDifficultyCnt(cnt);
-		updatePattern.setDifficultySum(sum);
+		updatePattern.setDifficultySum(String.valueOf(sum));
 
 		Pattern savedPattern = patternRepository.save(updatePattern);
 		if (savedPattern == null) {
@@ -425,5 +431,37 @@ public class PatternService {
 		return recommendResults;
 	}
 
+
+	@Transactional
+	public PatternAndThumbnailDto getPatternAndThumbnailList(int patternId){
+		Optional<Pattern> pattern = patternRepository.findByPatternId(patternId);//카데고리, 도안, 바늘 정보 전부 가져옴
+		if (!pattern.isPresent())
+			return null;
+
+
+		//thumbnail info response setting
+		List<PatternThumbnail> thumbnails = pattern.get().getPatternThumbnails();
+		List<PatternThumbnailDto> thumbnailList = new ArrayList<>();
+
+		for (PatternThumbnail response : thumbnails) {
+			PatternThumbnailDto dto = PatternThumbnailDto.builder()
+				.thumbImg(response.getThumbImg())
+				.mainImg(response.getMainImg())
+				.build();
+
+			thumbnailList.add(dto);
+		}
+
+
+		Pattern patternInfo = pattern.get();
+
+		PatternAndThumbnailDto info = PatternAndThumbnailDto.builder()
+			.id(patternInfo.getPatternId())
+			.name(patternInfo.getName())
+			.thumbnails(thumbnailList)
+			.build();
+
+		return info;
+	}
 
 }

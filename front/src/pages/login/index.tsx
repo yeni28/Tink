@@ -31,7 +31,7 @@ function Login() {
     })
 
     if (localStorage.getItem('isCheck') === 'true') {
-      navigate('/main')
+      navigate('/')
     } else {
       navigate('/recommend/first')
     }

@@ -14,7 +14,7 @@ interface ImageLg extends ImageProps {
 }
 
 interface ButtonProps {
-  bgColor: 'red' | 'black'
+  bgColor: 'red' | 'black' | 'white'
   textColor: 'white' | 'black'
   innerValue: string
   onClick?: () => void

@@ -17,7 +17,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.tink.config.DjangoClient;
 import com.ssafy.tink.dto.BaseResponse;
+import com.ssafy.tink.dto.PatternAndThumbnailDto;
 import com.ssafy.tink.dto.PatternInfoDto;
+import com.ssafy.tink.dto.PatternThumbnailDto;
 import com.ssafy.tink.dto.UserPatternRecommendDto;
 import com.ssafy.tink.dto.YarnRecommendDto;
 import com.ssafy.tink.service.PatternService;
@@ -36,6 +38,7 @@ public class RecommendController {
 	@Autowired
 	private PatternService patternService;
 
+	@ApiOperation(value = "실 기반 추천")
 	@PostMapping("/yarn")
 	public BaseResponse<Object> sendPatternJsonForYarn(
 		@RequestBody(required = false) YarnRecommendDto yarnRecommendDto) {
@@ -52,10 +55,10 @@ public class RecommendController {
 			JsonNode recommendNode = node.get("recommendPatternId");
 
 			if (recommendNode.isArray()) {
-				List<PatternInfoDto> recommendResult = new ArrayList<>();
+				List<PatternAndThumbnailDto> recommendResult = new ArrayList<>();
 				for (JsonNode patternIdNode : recommendNode) {
 					int patternId = patternIdNode.asInt();//숫자로 변환
-					PatternInfoDto info = patternService.getPatternDetail(patternId);
+					PatternAndThumbnailDto info = patternService.getPatternAndThumbnailList(patternId);
 					recommendResult.add(info);
 				}
 
