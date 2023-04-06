@@ -1,13 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { MdOutlineRefresh } from 'react-icons/md'
 
+import { useLocation } from 'react-router-dom'
+
+import { axAuth } from '@/apis/axiosInstance'
 import patternLineBox from '@/assets/drawings/patternLIneBox.png'
 import atoms from '@/components/atoms'
 
 import organisms from '@/components/organisms'
 
 function FavoriteFirstRecommend() {
+  // 전체도안
+  const [whole, setWhole] = useState()
+  // 12개 도안
+  const [array, setArray] = useState()
+  const location = useLocation()
+  const start = 0
+  const end = 12
+  useEffect(() => {
+    const difficulty = location.state.difficulty
+    axAuth({
+      url: '/members/favorite/pattern',
+      params: { difficulty },
+    }).then((res) => {
+      console.log(res.data)
+      setWhole(res.data)
+    })
+  }, [])
+
+  const SendFavorite = () => {
+    axAuth({
+      method: 'POST',
+      url: '/members/favorite/patterns',
+      data: {},
+    })
+      // .then((res) => {})
+      .catch((err) => console.log(err))
+  }
+
   return (
     <div className="relative flex justify-center ">
       <div className="absolute -right-36">
