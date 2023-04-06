@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { BsFire, BsFillHeartFill } from 'react-icons/bs'
 
-import { RiArrowLeftSFill, RiArrowRightSFill } from 'react-icons/ri'
-
 import { useParams } from 'react-router-dom'
 
 import Slider from 'react-slick'
@@ -109,14 +107,14 @@ function DetailPattern() {
 
   const onSubmit = () => {
     axAuth({
-      method: 'post',
       url: '/patterns/level',
-      data: { patternId, difficultyNum: voteDifficulty },
+      params: { patternId, difficultyNum: voteDifficulty },
     }).catch((err) => console.log)
+    setClickVote(false)
   }
 
   return (
-    <>
+    <div className="mb-48">
       <header className="mt-[2.63rem] mb-16 flex flex-col items-center">
         <p className="mb-5 font-pop text-supertitle-bold">
           {details?.name ? details.name : 'Peruvian'}
@@ -278,7 +276,7 @@ function DetailPattern() {
           />
         </div>
       )}
-    </>
+    </div>
   )
 }
 

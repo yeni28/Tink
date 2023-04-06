@@ -1,21 +1,27 @@
 import React from 'react'
 
-import { pattern_dummy } from './PatternsDummy'
-
 import molecules from '@/components/molecules'
 
-function Patterns() {
+interface props {
+  datas: {
+    id: number
+    name: string
+    thumbnails: {
+      mainImg: string
+      thumbImg: string
+    }[]
+  }[]
+}
+
+function Patterns({ datas }: props) {
   return (
     <div className="grid grid-cols-4 gap-x-10 gap-y-10 justify-items-center">
-      {pattern_dummy.map((item) => {
+      {datas.map((data, idx) => {
         return (
           <molecules.CardSm
-            key={item.id}
-            isLiked={false}
-            src={item.src}
-            title={item.title}
-            userImgUrl={item.userImgUrl}
-            userName={item.userName}
+            key={data.id}
+            src={data.thumbnails[0].mainImg}
+            title={String(idx)}
           />
         )
       })}
