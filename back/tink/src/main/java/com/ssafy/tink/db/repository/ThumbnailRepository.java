@@ -15,7 +15,6 @@ import com.ssafy.tink.db.entity.Thumbnail;
 public interface ThumbnailRepository extends JpaRepository<Thumbnail, Integer> {
 
 
-	// @Query(value = "select thumbnail_id from jarang_img where board_id", nativeQuery = true)
 	@Query(value = "SELECT *  " +
 		"FROM thumbnail " +
 		"WHERE thumbnail_id = (SELECT m.image_id  " +
@@ -23,5 +22,14 @@ public interface ThumbnailRepository extends JpaRepository<Thumbnail, Integer> {
 		"WHERE m.member_id = :id ) "
 		, nativeQuery = true)
 	Optional<Thumbnail> findByIdNative(@Param("id") Optional<String> memberId);
+
+	@Query(value = "select * "
+		+ "from thumbnail "
+		+ "where thumbnail_id = (select thumbnail_id "
+		+ "from jarang_img "
+		+ "where board_id = :id )"
+		, nativeQuery = true)
+	Optional<Thumbnail> findByBoardIdNative(@Param("id") int boardId);
+
 
 }
