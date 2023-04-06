@@ -24,7 +24,7 @@ function CardSm({ isLiked, title, userImgUrl, userName, src }: CardProps) {
           type="button"
           onClick={() => setShowLike(!showLike)}
         >
-          {showLike ? <HeartFill /> : <Heart />}
+          {/* {showLike ? <HeartFill /> : <Heart />} */}
         </button>
       </div>
       <div className="mt-[8px] flex-col gap-[12x]">

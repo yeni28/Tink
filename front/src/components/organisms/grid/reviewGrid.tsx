@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import molecules from '@/components/molecules'
 
 interface Props extends Omit<CardMdProps, 'onClick'> {
-  id: number
+  boardId: number
 }
 
 function ReviewGrid({ items }: { items: Props[] }) {

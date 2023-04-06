@@ -31,6 +31,7 @@ interface ReviewDetail {
   boardCategory: boardCategory
   patternId: number
   patternThumbnail: string
+  reviewMainImg: string
   yarnName: string
   yarnWeight: number
   yarnLength: number

@@ -21,12 +21,11 @@ interface ButtonProps {
 }
 
 interface CardMdProps {
-  author: string
-  isFollow: boolean
-  titleImgUrl: string
+  nickname: string
+  patternThumnail: string
   title: string
-  views: number
-  likes: number
+  hit: number
+  liked: number
   onClick: () => void
 }
 
