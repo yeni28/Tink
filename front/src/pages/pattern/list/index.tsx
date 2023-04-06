@@ -19,10 +19,10 @@ function ListPattern() {
   useEffect(() => {
     const url = '/recommend/yarn'
     const data = { ...location.state.yarnInfo, patternId: 0 }
-
+    console.log(data)
     axAuth({ method: 'post', url, data }).then((res) => {
       setYarnInfo(res.data.result)
-      console.log(res.data.result)
+      console.log(res)
     })
   }, [])
   return (
@@ -38,25 +38,18 @@ function ListPattern() {
       </header>
       <div className="relative flex justify-center ">
         {/* line box 이미지 영역 */}
-        <img
+        {/* <img
           alt="linebox"
           className="absolute -top-11 right-5"
           src={patternLineBox}
           width="103%"
-        />
+        /> */}
 
         {/* 패턴영역 */}
-        <div className="bg-white px-4 pt-5  mb-16">
+        <div className="bg-white px-4 pt-5  mb-16 rounded-2xl">
           <organisms.Patterns datas={yarnInfo} />
           {/* 하단 영역 */}
-          <div className="mt-[2rem] flex justify-center pb-12">
-            {/* 버튼 */}
-            <div>
-              페이지네이션 url이랑 페이지번호를 패턴영역으로 넘겨주면 패턴영역
-              <br />
-              내에서 비동기통신으로 리스트업
-            </div>
-          </div>
+          <div className="mt-[2rem] flex justify-center pb-12"></div>
         </div>
       </div>
     </>
