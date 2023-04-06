@@ -13,17 +13,16 @@ function ReviewGrid({ items }: { items: Props[] }) {
 
   return (
     <div className="grid grid-cols-3 gap-x-8 gap-y-10 justify-items-center">
-      {items.map((item) => {
+      {items.map((item, idx) => {
         return (
           <molecules.CardMd
-            key={item.id}
-            author={item.author}
-            isFollow={item.isFollow}
-            likes={item.likes}
+            key={`review-${item.boardId}-${idx}`}
+            hit={item.hit}
+            liked={item.liked}
+            nickname={item.nickname}
+            patternThumnail={item.patternThumnail}
             title={item.title}
-            titleImgUrl={item.titleImgUrl}
-            views={item.views}
-            onClick={() => navigate(`/community/review/detail/${item.id}`)}
+            onClick={() => navigate(`/community/review/detail/${item.boardId}`)}
           />
         )
       })}
