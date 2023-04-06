@@ -67,6 +67,7 @@ public class SecurityConfig {
 			.antMatchers("/review/**").hasRole("USER")
 			.antMatchers("/memberinfo").permitAll()
 			.antMatchers("/img/**").permitAll()
+			.antMatchers("/patterns/search", "/patterns/best", "/patterns/*").permitAll()
 			.anyRequest().authenticated();
 
 		http.oauth2Login()
