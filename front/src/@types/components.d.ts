@@ -39,6 +39,16 @@ interface CardTextProps {
   nickname: string
 }
 
+interface CardCampainProps {
+  boardId: number
+  title: string
+  content: string
+  period: string
+  organizer: stirng
+  ImgUrl: string
+  onClick: () => void
+}
+
 // comment
 interface CommentProps {
   commentId: number

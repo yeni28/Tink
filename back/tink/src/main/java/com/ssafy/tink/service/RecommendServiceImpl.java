@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.tink.db.repository.PatternRepository;
+import com.ssafy.tink.dto.dsl.recommend.RecommendPatternDsl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,9 +19,9 @@ public class RecommendServiceImpl implements RecommendService{
 	private PatternRepository patternRepository;
 
 	@Override
-	public void getPatternByContentsFilter(Set<String> category, List<String> keyword,
+	public List<RecommendPatternDsl> getPatternByContentsFilter(Set<String> category, List<String> keyword,
 		String difficulty) {
-
+		return patternRepository.getRecommendByContents(category, keyword, difficulty);
 	}
 
 }

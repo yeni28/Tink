@@ -178,16 +178,9 @@ public class ReviewService {
 			isFollowed = followRepository.existsByMemberAndToId(fromMember.get(), toId);
 		}
 
-		// Optional<JarangLikes> likes = jarangLikesRepository.findByBoardAndMember(review, fromMember.get());
-		// if(likes.isPresent()){
-		// 	isLiked = true;
-		// }
-		//
-		// long cntLikes = jarangLikesRepository.countJarangLikesByBoard(review);
 		Optional<Material> material = materialRepository.findByBoard(review);
 
 		String patternThumbnail = null;
-		String patternThumb = "";
 		int patternId = 0;
 
 		if(review.getPattern() != null){
@@ -209,13 +202,16 @@ public class ReviewService {
 			time = material.get().getTime();
 		}
 
+		Optional<Thumbnail> reviewThumbnail = thumbnailRepository.findByBoardIdNative(review.getBoardId());
+
 		ReviewInfoDto reviewInfo = ReviewInfoDto.builder()
 			.boardId(review.getBoardId())
+			.reviewMainImg(reviewThumbnail.get().getMainImg())
+			.reviewThumnailImg(reviewThumbnail.get().getThumbImg())
 			.title(review.getTitle())
 			.content(review.getContent())
 			.createdDate(String.valueOf(review.getCreatedDate()))
 			.updatedDate(String.valueOf(review.getUpdatedDate()))
-			// .liked((int)cntLikes)
 			.hit(review.getHit())
 			.nickname(fromMember.get().getNickname())
 			.thumbnail(thumbnailRepository.findByIdNative(memberId).get().getThumbImg())

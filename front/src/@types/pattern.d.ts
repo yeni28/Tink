@@ -34,3 +34,59 @@ interface PatternDetail {
   patternLikeCheck: number //현재 로그인 한 상태라면 그 회원의 패턴 좋아요 여부(1이면 좋아요 누름,0이면 X)
   patternLikesCount: number //현재 도안의 좋아요 개수
 }
+
+// 주간 베스트
+interface BestPattern {
+  needles: {
+    prettyMetric: string // 2.75mm
+    us: number // US 2
+    knitting: boolean | null
+    crochet: boolean | null
+  }
+  category: {
+    id: number
+    categoryName: string
+    depth: number
+    parentCategory: string | null
+  }
+  thumbnails: [
+    {
+      mainImg: string
+      thumbImg: string
+      patternId: number
+    },
+    {
+      mainImg: string
+      thumbImg: string
+      patternId: number
+    }
+  ]
+  id: number
+  name: string
+  gauge: number
+  gaugeDivisor: number
+  gaugePattern: string
+  sizesAvailable: string
+  yardage: number
+  yardageDescription: string
+  yardageMax: number
+  yarnWeightDescription: string
+  downloadUrl: string
+  notesHtml: string
+  difficultyCnt: number
+  difficultySum: number
+  difficultyAvg: number
+}
+
+// 뜨개질 선호도 조회
+interface LikePattern {
+  patternId: int
+  name: string
+  patternThumbnails: [
+    {
+      patternThumbnailId: int
+      mainImg: null | string
+      thumbImg: null | string
+    }
+  ]
+}

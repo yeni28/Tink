@@ -104,6 +104,7 @@ function KnitTutorial() {
         <div className="w-[20.625rem] h-[12rem] bg-pink bg-opacity-50 rounded-3xl py-8 px-6 absolute bottom-20 left-20">
           <p className="text-title3">스크롤 : 축소 / 확대</p>
           <p className="text-title3">드래그 : 카메라 회전</p>
+          <p className="text-title3"> Shift + 드래그 : 위치 이동</p>
           <div className="w-[7rem] absolute bottom-4 right-4">
             <img src={snailCat} />
           </div>
