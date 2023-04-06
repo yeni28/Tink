@@ -46,21 +46,21 @@ def recommendByYarn(request):
     usr_item = pd.DataFrame([user_input], columns=["patternId", "gauge", "gauge_divisor", "row_gauge", "yardage", "yardage_max"])
     usr_item.set_index('patternId', inplace=True)
     
-    #print(usr_item)
+    print(usr_item)
 
-    cosine_similarities = cosine_similarity(usr_item, item_df)
+    cosine_similarities = cosine_similarity(item_df, usr_item)
 
     # 결과 데이터 프레임 생성 및 유사도를 기준으로 내림차순 정렬
     result = pd.DataFrame({'similarity': cosine_similarities[:, 0], 'data': item_df.values.tolist()}, index=item_df.index)
 
-    result = result[result['similarity'] > 0.5] # 유사도 0.5 이상인 데이터만 선택함
+    result = result[result['similarity'] > 0.4] # 유사도 0.4 이상인 데이터만 선택함
 
     result = result.sort_values(by='similarity', ascending=False).head(30)
 
 
 
     # 결과 출력
-    print(len(result))
+    print(result)
 
     recommendPatternId = result.index.tolist()
 
