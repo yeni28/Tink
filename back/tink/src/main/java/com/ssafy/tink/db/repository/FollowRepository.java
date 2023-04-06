@@ -8,4 +8,5 @@ import com.ssafy.tink.db.entity.Member;
 public interface FollowRepository extends JpaRepository<Follow, Integer> {
 
 	Boolean findByMemberAndToId(Member member, int toId);
+	Boolean existsByMemberAndToId(Member member, int toId);
 }

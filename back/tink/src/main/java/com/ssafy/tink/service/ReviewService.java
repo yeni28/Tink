@@ -145,7 +145,7 @@ public class ReviewService {
 		boolean isFollowed = false;
 		boolean isLiked = false;
 		if ( !fromMember.get().getFollows().isEmpty() ){
-			isFollowed = followRepository.findByMemberAndToId(fromMember.get(), toId);
+			isFollowed = followRepository.existsByMemberAndToId(fromMember.get(), toId);
 		}
 
 		Optional<JarangLikes> likes = jarangLikesRepository.findByBoardAndMember(review, fromMember.get());
