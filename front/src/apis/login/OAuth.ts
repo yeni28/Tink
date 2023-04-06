@@ -1,4 +1,4 @@
-// // 테스트 환경
+// 테스트 환경
 // export const REDIRECT_URI = 'http://localhost:3000/login'
 // export const HOST = `http://localhost:8081`
 // export const GOOGLE_URL = `${HOST}/oauth2/authorization/google?redirect_uri=${REDIRECT_URI}`
