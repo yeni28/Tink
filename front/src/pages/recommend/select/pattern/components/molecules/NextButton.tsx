@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useRecoilValue } from 'recoil'
-
+import { axAuth } from '@/apis/axiosInstance'
 import atoms from '@/components/atoms'
 
 import {
@@ -31,12 +31,15 @@ function NextButton() {
       const selectedKeyword = keywordList.map((item: any) => {
         return item.id
       })
-      const data = {
+
+      const filter = {
         category: selectedCategory,
         keyword: selectedKeyword,
         difficulty: level,
       }
-      console.log(data)
+
+      console.log(filter);
+      
     }
   }
 

@@ -27,14 +27,14 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 	Object deleteByCommentId(int commentId);
 
 	// 해당 게시글의 댓글 목록
-	@Modifying
+
 	@Query(
 		nativeQuery = true,
 		value = "select c.comment_id, c.created_date, c.content, m.nickname, t.thumb_img "
-		+ "from Comment c "
-		+ "left join Member m "
+		+ "from comment c "
+		+ "left join member m "
 		+ "on c.member_id = m.member_id "
-		+ "left join Thumbnail t "
+		+ "left join thumbnail t "
 		+ "on t.thumbnail_id = m.image_id "
 		+ "where c.board_id= :id")
 	List<CommentInfoInterface> findAllByBoardNative(@Param(("id")) int boardId);

@@ -102,7 +102,7 @@ public class QnaGroupService {
 		boolean isFollowed = false;
 		boolean isLiked = false;
 		if ( !fromMember.get().getFollows().isEmpty() ){
-			isFollowed = followRepository.findByMemberAndToId(fromMember.get(), toId);
+			isFollowed = followRepository.existsByMemberAndToId(fromMember.get(), toId);
 			// isLiked = jarangLikesRepository.findByBoardAndMember(board, fromMember.get());
 		}
 

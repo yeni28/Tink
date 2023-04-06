@@ -47,8 +47,9 @@ public class CommentController {
 				.build();
 		}
 
+		commentService.create(comment);
+
 		return BaseResponse.builder()
-				.result(commentService.create(comment))
 				.resultCode(HttpStatus.OK.value())
 				.resultMsg("정상적으로 자랑글이 작성되었습니다.")
 				.build();
