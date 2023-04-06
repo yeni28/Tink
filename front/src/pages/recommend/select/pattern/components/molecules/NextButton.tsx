@@ -1,6 +1,9 @@
 import React from 'react'
 
+import { useNavigate } from 'react-router-dom'
+
 import { useRecoilValue } from 'recoil'
+
 import { axAuth } from '@/apis/axiosInstance'
 import atoms from '@/components/atoms'
 
@@ -14,6 +17,8 @@ function NextButton() {
   const categoryList = useRecoilValue(categoryState)
   const keywordList = useRecoilValue(keywordState)
   const level = useRecoilValue(levelState)
+
+  const navigate = useNavigate()
 
   const onClickHandler = () => {
     if (categoryList.length == 0) {
@@ -38,8 +43,8 @@ function NextButton() {
         difficulty: level,
       }
 
-      console.log(filter);
-      
+      // console.log(filter)
+      navigate('/recommend/select/pattern/result', { state: { filter } })
     }
   }
 
