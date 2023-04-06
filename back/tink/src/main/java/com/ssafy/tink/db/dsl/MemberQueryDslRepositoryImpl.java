@@ -154,7 +154,7 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 		}
 		Map<Integer, PatternInfoDsl> patterns = jpaQueryFactory.selectFrom(pattern)
 			.leftJoin(patternThumbnail)
-				.on(pattern.patternId.eq(patternThumbnail.patternThumbnailId))
+				.on(pattern.patternId.eq(patternThumbnail.pattern.patternId))
 			.where(build)
 			.transform(groupBy(pattern.patternId).as(new QPatternInfoDsl(
 				pattern.patternId,
