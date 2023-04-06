@@ -15,10 +15,10 @@ spring:
         format_sql: true # JPA의 구현체인 Hibernate가 동작하면서 발생한 SQL의 가독성을 높여준다.
     open-in-view: false
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver             # DB driver를 설정
-    url: jdbc:mysql://localhost:3306/tinkDB?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
-    username: root  # 유저ID
-    password: ssafytink # 유저PW
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://j8c201.p.ssafy.io:3306/tinkDB?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root #임시
+    password: ssafytink
   data:
     redis:
       host: localhost

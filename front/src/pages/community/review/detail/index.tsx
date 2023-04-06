@@ -6,6 +6,7 @@ import Parser from 'html-react-parser'
 import { switchFollow } from './apis/follow'
 // import review_detail_dummy from './dummydata'
 
+import { axAuth } from '@/apis/axiosInstance'
 import reviewDetailBox from '@/assets/drawings/reviewDetailBox.png'
 import shortline from '@/assets/drawings/shortline.png'
 import straitline from '@/assets/drawings/straitline.png'
@@ -17,6 +18,18 @@ function DetailReviewCommunity() {
   const [review, setReview] = useState<ReviewDetail>()
   const [follow, setFollow] = useState<boolean>(false)
   const [comments, setComments] = useState<CommentProps[]>([])
+  const params = useParams()
+
+  useEffect(() => {
+    console.log(params.id)
+    axAuth({
+      url: '/review',
+      params: {
+        boardId: params.id,
+      },
+    }).then((res) => console.log(res.data))
+  }, [])
+
   // 댓글 삭제
   const deleteComment = (id: number) => {
     setComments(
@@ -25,12 +38,6 @@ function DetailReviewCommunity() {
       })
     )
   }
-  const params = useParams()
-
-  // useEffect(() => {
-  //   setReview(review_detail_dummy)
-  //   if (review) setFollow(review.isfollowed)
-  // }, [])
 
   return (
     <div className="pt-[30rem]">
@@ -45,14 +52,10 @@ function DetailReviewCommunity() {
         <div className="flex items-center gap-4" id="profile">
           <atoms.ImageUser
             alt="프로필 사아지인"
-            src={
-              review?.member.thumbnail?.thumbImg
-                ? review.member.thumbnail?.thumbImg
-                : ''
-            }
+            src={review?.thumbnail ? review.thumbnail : ''}
           />
           <span className="text-title3" id="nickname">
-            {review?.member.nickname}
+            {review?.nickname}
           </span>
         </div>
         <atoms.ButtonSquareSm
@@ -77,7 +80,7 @@ function DetailReviewCommunity() {
                 <div id="info-content">
                   <div className="content-center">
                     <p className="w-[12rem] text-center text-body">
-                      {review?.material.yarnName}
+                      {review?.yarnName}
                     </p>
                     <img alt="하단 선" className="w-[12rem]" src={shortline} />
                   </div>
@@ -91,7 +94,7 @@ function DetailReviewCommunity() {
                 <div id="info-content">
                   <div className="content-center">
                     <p className="w-[12rem] text-center text-body">
-                      {review?.material.needle}
+                      {review?.needle}
                     </p>
                     <img alt="하단 선" className="w-[12rem]" src={shortline} />
                   </div>
@@ -106,8 +109,7 @@ function DetailReviewCommunity() {
                 <div id="info-content">
                   <div className="content-center">
                     <p className="w-[12rem] text-center text-body">
-                      {review?.material.yarnLength} m /{' '}
-                      {review?.material.yarnWeight} g
+                      {review?.yarnLength} m / {review?.yarnWeight} g
                     </p>
                     <img alt="하단 선" className="w-[12rem]" src={shortline} />
                   </div>
@@ -121,7 +123,7 @@ function DetailReviewCommunity() {
                 <div id="info-content">
                   <div className="content-center">
                     <p className="w-[12rem] text-center text-body">
-                      {review?.material.time}
+                      {review?.time}
                     </p>
                     <img alt="하단 선" className="w-[12rem]" src={shortline} />
                   </div>
@@ -137,7 +139,7 @@ function DetailReviewCommunity() {
                 <div
                   className="w-[9rem] h-[9rem] rounded-[1rem] bg-cover bg-center"
                   style={{
-                    backgroundImage: `url(${review?.patternThumbImg})`,
+                    backgroundImage: `url(${review?.patternThumbnail})`,
                   }}
                 ></div>
               </div>

@@ -7,6 +7,8 @@ import { useParams } from 'react-router-dom'
 
 import Slider from 'react-slick'
 
+import RightArrow from './component/RightArrow'
+
 import { axAuth, axBase } from '@/apis/axiosInstance'
 
 import DrawingLine from '@/assets/drawings/drawingline.png'
@@ -37,16 +39,20 @@ function DetailPattern() {
     if (localStorage.getItem('accessToken')) setIsLogin(true)
 
     axAuth({
-      url: '/patterns',
-      params: { patternId },
+      url: `/patterns/${patternId}`,
     })
-      .then((res) => setDetails(res.data.result))
+      .then((res) => {
+        setDetails(res.data.result)
+      })
       .catch((err) => console.log(err))
   }, [])
 
   // 이미지 클릭시 새창으로 열기
-  const imgTab = (url: string) =>
-    window.open(url, '_blank', 'noopener, noreferrer')
+  const imgTab = (url: string | undefined) => {
+    if (url) {
+      window.open(url, '_blank', 'noopener, noreferrer')
+    }
+  }
 
   // slick setting
   const settings = {
@@ -55,8 +61,6 @@ function DetailPattern() {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
-    nextArrow: <RiArrowRightSFill />,
-    prevArrow: <RiArrowLeftSFill />,
   }
 
   useEffect(() => {
@@ -116,12 +120,16 @@ function DetailPattern() {
   return (
     <>
       <header className="mt-[2.63rem] mb-16 flex flex-col items-center">
-        <p className="mb-5 font-pop text-supertitle-bold">{details?.name}</p>
+        <p className="mb-5 font-pop text-supertitle-bold">
+          {details?.name ? details.name : 'Peruvian'}
+        </p>
         <div className="bg-black px-9 w-[26rem] h-[2.3125rem] flex items-center justify-between rounded-[1.25rem]">
           <div className="text-red text-title2-bold flex items-center">
             <BsFire className="mr-1" />
             <span className="mr-3">난이도</span>
-            <span className="text-white text-title2">{difficulty} /10</span>
+            <span className="text-white text-title2">
+              {Math.floor(difficulty)} /10
+            </span>
           </div>
           <div className="text-red text-title2-bold flex items-center">
             <BsFillHeartFill className="mr-2" />
@@ -141,7 +149,7 @@ function DetailPattern() {
                 <img
                   alt="thumbnails"
                   className="w-full h-full object-cover rounded-[1.25rem] cursor-pointer"
-                  src={thumbImg.thumbImg}
+                  src={thumbImg.mainImg}
                   onClick={() => imgTab(thumbImg.mainImg)}
                 />
               </div>
@@ -149,16 +157,21 @@ function DetailPattern() {
           })}
         </Slider>
       </div>
-      <img alt="line" referrerPolicy="no-referrer" src={DrawingLine} />
+      <img
+        alt="line"
+        className="mt-8"
+        referrerPolicy="no-referrer"
+        src={DrawingLine}
+      />
       <div className="px-5 flex flex-col gap-8" id="info">
         <div className="flex justify-between" id="upper">
           <div id="up-col-1">
             <p className="text-title2-bold mb-1">뜨개 분류</p>
-            <p className="text-title2">{knitSort}</p>
+            <p>{knitSort}</p>
           </div>
           <div id="up-col-2">
             <p className="text-title2-bold mb-1">게이지</p>
-            <p className="text-title2">
+            <p>
               {details?.gauge}코 {details?.rowGauge}단
             </p>
           </div>
@@ -176,11 +189,11 @@ function DetailPattern() {
         <div className="flex justify-between" id="lower">
           <div id="low-col-1">
             <p className="text-title2-bold mb-1">실 정보</p>
-            <p className="text-title2">{knitSort}</p>
+            <p>{knitSort}</p>
           </div>
           <div id="low-col-2">
             <p className="text-title2-bold mb-1">카테고리</p>
-            <p className="text-title2">
+            <p>
               {details?.category.parentCategory
                 ? `${details?.category.parentCategory} > `
                 : ''}
@@ -189,7 +202,12 @@ function DetailPattern() {
           </div>
           <div id="low-col-3">
             <p className="text-title2-bold mb-1">다운로드 링크</p>
-            <p className="text-title2">{details?.downloadUrl}</p>
+            <p
+              className="cursor-pointer text-blue-500 underline-offset-1 underline"
+              onClick={() => imgTab(details?.downloadUrl)}
+            >
+              다운로드하기
+            </p>
           </div>
         </div>
       </div>
