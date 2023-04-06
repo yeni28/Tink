@@ -85,10 +85,10 @@ public class Pack {
 	@Column(name = "shop_name")
 	private String shopName;
 
-	@Column(name = "yarn_yarn_company_name")
+	@Column(name = "yarn_company_name")
 	private String yarnCompanyName;
 
-	@Column(name = "yarn_yarn_company_id")
+	@Column(name = "yarn_company_id")
 	private int yarnCompanyId;
 
 	@Column(name = "quantity_description")
