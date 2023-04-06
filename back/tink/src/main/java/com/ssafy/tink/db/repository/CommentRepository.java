@@ -31,7 +31,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 	@Query(
 		nativeQuery = true,
 		value = "select c.comment_id, c.created_date, c.content, m.nickname, t.thumb_img "
-		+ "from Comment c "
+		+ "from comment c "
 		+ "left join Member m "
 		+ "on c.member_id = m.member_id "
 		+ "left join Thumbnail t "
