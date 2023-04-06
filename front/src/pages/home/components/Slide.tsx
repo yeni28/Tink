@@ -23,14 +23,14 @@ function Slide() {
 
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplaySpeed: 6800,
+    autoplaySpeed: 6000,
     autoplay: true,
     dotsClass: 'test-css',
   }
   return (
     <section className="page-carousel">
       <Slider {...settings}>
-        <div className=" w-[100%]  h-[100%] relative">
+        <div className=" w-[100%]  h-[100vh] relative">
           <div className="w-full h-[102%] absolute left-0 top-0 bg-black opacity-60 z-30">
             <p className="top-[10rem] left-[5rem] absolute text-supertitle-bold opacity-100 text-white z-40">
               3D 튜토리얼을 통해
@@ -56,7 +56,7 @@ function Slide() {
             </p>
           </div>
           <MainVideo video={main_first} />
-          <div className="top-[50rem] left-[5rem] absolute  opacity-70 z-50 hover:opacity-100">
+          <div className="top-[50vh] left-[5rem] absolute  opacity-70 z-50 hover:opacity-100">
             <atoms.ButtonRoundLg
               bgColor="white"
               innerValue="바로가기"

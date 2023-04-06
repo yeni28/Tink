@@ -37,13 +37,12 @@ body {
 
 /* Slick dots */
 .test-css {
-  position: absolute;
   top: 30rem;
-  width: 100%;
+  width: 100vw;
   list-style: none;
   text-align: end;
   position: absolute;
-  right: 15px;
+  right: 1rem;
   padding: 0;
 }
 
