@@ -142,15 +142,6 @@ public class MemberServiceImpl implements MemberService{
 	@Transactional
 	public List<PatternInfoDsl> getFavoriteFromPattern(String difficulty) {
 		List<PatternInfoDsl> list = memberRepository.findPatternToRandom(difficulty);
-		if(list.size() > PAGE_SIZE ) {
-			List<PatternInfoDsl> randomList = list.stream().filter(pattern -> {
-				if( pattern.getPatternId() % 2 == 0 ) {
-					return true;
-				}
-				return false;
-			}).collect(Collectors.toList());
-			return randomList;
-		}
 		return list;
 	}
 
