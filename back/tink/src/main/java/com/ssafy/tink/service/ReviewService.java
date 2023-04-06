@@ -16,6 +16,7 @@ import com.ssafy.tink.db.entity.JarangLikes;
 import com.ssafy.tink.db.entity.Material;
 import com.ssafy.tink.db.entity.Member;
 import com.ssafy.tink.db.entity.Pattern;
+import com.ssafy.tink.db.entity.PatternThumbnail;
 import com.ssafy.tink.db.entity.Thumbnail;
 import com.ssafy.tink.db.repository.BoardRepository;
 import com.ssafy.tink.db.repository.CommentInfoInterface;
@@ -25,6 +26,7 @@ import com.ssafy.tink.db.repository.JarangLikesRepository;
 import com.ssafy.tink.db.repository.MaterialRepository;
 import com.ssafy.tink.db.repository.MemberRepository;
 import com.ssafy.tink.db.repository.PatternRepository;
+import com.ssafy.tink.db.repository.PatternThumbnailRepository;
 import com.ssafy.tink.db.repository.ReviewInfoInterface;
 import com.ssafy.tink.db.repository.ThumbnailRepository;
 import com.ssafy.tink.dto.PatternInfoDto;
@@ -33,6 +35,7 @@ import com.ssafy.tink.dto.ReviewInfoDto;
 import com.ssafy.tink.dto.ReviewInputDto;
 import com.ssafy.tink.dto.ThumbnailDto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -61,6 +64,9 @@ public class ReviewService {
 	@Autowired
 	private ThumbnailRepository thumbnailRepository;
 
+	@Autowired
+	private PatternThumbnailRepository patternThumbnailRepository;
+
 	@Transactional
 	public Object create(ReviewInputDto community, Thumbnail thumbnail) {
 
@@ -69,31 +75,54 @@ public class ReviewService {
 
 		Optional<String> memberId = SecurityUtil.getCurrentAuthentication();
 		Optional<Member> member = memberRepository.findById(Long.parseLong(memberId.get()));
-		Optional<Pattern> pattern = patternRepository.findById(community.getPatternId());
-
-		Pattern p = new Pattern();
-		p.setPatternId(community.getPatternId());
+		Optional<Pattern> pattern = patternRepository.findByPatternId(community.getPatternId());
 
 		Board boardInfo = Board.builder()
 			.title(community.getTitle())
 			.content(community.getContent())
-			.member(Member.builder()
-				.memberId(Long.parseLong(memberId.get()))
-				.build())
+			.member(member.get())
 			.boardCategory(community.getBoardCategory())
-			.pattern(p)
+			.pattern(Pattern.builder()
+				.patternId(pattern.get().getPatternId())
+				.category(pattern.get().getCategory())
+				.member(Member.builder()
+					.memberId(pattern.get().getMember().getMemberId())
+					.build())
+				.build())
 			.thumbnail(Thumbnail.builder()
 				.thumbImg(thumbnail.getThumbImg())
 				.mainImg(thumbnail.getMainImg())
 				.build())
 			.build();
 
+		String yarnName = null;
+		Float yarnWeight = null;
+		Float yarnLength = null;
+		String needle = null;
+		String time = null;
+
+		if(!community.getYarnName().isEmpty()){
+			yarnName = community.getYarnName();
+		}
+		if(community.getYarnWeight().isNaN()){
+			yarnWeight = community.getYarnWeight();
+		}
+		if(community.getYarnLength().isNaN()){
+			yarnLength = community.getYarnLength();
+		}
+		if(!community.getNeedle().isEmpty()){
+			needle = community.getNeedle();
+		}
+		if(!community.getTime().isEmpty()){
+			time = community.getTime();
+		}
+
 		Material materialInfo = Material.builder()
-			.yarnName(community.getYarnName())
-			.yarnWeight(community.getYarnWeight())
-			.yarnLength(community.getYarnLength())
-			.needle(community.getNeedle())
-			.time(community.getTime())
+			.yarnName(yarnName)
+			.yarnWeight(yarnWeight)
+			.yarnLength(yarnLength)
+			.needle(needle)
+			.time(time)
 			.board(boardInfo)
 			.build();
 
@@ -144,7 +173,8 @@ public class ReviewService {
 
 		boolean isFollowed = false;
 		boolean isLiked = false;
-		if ( !fromMember.get().getFollows().isEmpty() ){
+
+		if ( fromMember.isPresent()){
 			isFollowed = followRepository.existsByMemberAndToId(fromMember.get(), toId);
 		}
 
@@ -156,6 +186,30 @@ public class ReviewService {
 		long cntLikes = jarangLikesRepository.countJarangLikesByBoard(review);
 		Optional<Material> material = materialRepository.findByBoard(review);
 
+		Optional<PatternThumbnail> patternThumbnail = null;
+		String patternThumb = "";
+		int patternId = 0;
+
+		if(review.getPattern() != null){
+			patternThumbnail = patternThumbnailRepository.findByPatternIdNative(review.getPattern().getPatternId());
+			patternThumb = patternThumbnail.get().getThumbImg();
+			patternId = review.getPattern().getPatternId();
+		}
+
+		String yarnName = null;
+		Float yarnWeight = null;
+		Float yarnLength = null;
+		String needle = null;
+		String time = null;
+
+		if(material.isPresent()){
+			yarnName = material.get().getYarnName();
+			yarnWeight = material.get().getYarnWeight();
+			yarnLength = material.get().getYarnLength();
+			needle = material.get().getNeedle();
+			time = material.get().getTime();
+		}
+
 		ReviewInfoDto reviewInfo = ReviewInfoDto.builder()
 			.boardId(review.getBoardId())
 			.title(review.getTitle())
@@ -166,14 +220,14 @@ public class ReviewService {
 			.hit(review.getHit())
 			.nickname(fromMember.get().getNickname())
 			.thumbnail(thumbnailRepository.findByIdNative(memberId).get().getThumbImg())
-			.patternId(review.getPattern().getPatternId())
-			.patternThumbnail("")										// 경로 추가
+			.patternId(patternId)
+			.patternThumbnail(patternThumb)
 			.boardCategory(review.getBoardCategory())
-			.yarnName(material.get().getYarnName())
-			.yarnWeight(material.get().getYarnWeight())
-			.yarnLength(material.get().getYarnLength())
-			.needle(material.get().getNeedle())
-			.time(material.get().getTime())
+			.yarnName(yarnName)
+			.yarnWeight(yarnWeight)
+			.yarnLength(yarnLength)
+			.needle(needle)
+			.time(time)
 			.commentCnt(Long.valueOf(commentCnt).intValue())
 			.comments(comments)
 			.isFollowed(isFollowed)
