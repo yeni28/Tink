@@ -90,3 +90,12 @@ body {
   opacity: 0.75;
   color: #e78078;
 }
+
+.slick-prev:before {
+  opacity: 0;
+  color: black;
+}
+.slick-next:before {
+  opacity: 0;
+  color: black;
+}
