@@ -26,7 +26,7 @@ function FavoriteFirstRecommend() {
 
       {/* 패턴영역 */}
       <div className="bg-white px-4 pt-5  mb-16">
-        <organisms.Patterns />
+        {/* <organisms.Patterns /> */}
         {/* 하단 영역 */}
         <div className="mt-[2rem] flex justify-center pb-12">
           {/* 버튼 */}
