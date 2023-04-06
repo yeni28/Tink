@@ -40,7 +40,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Pattern extends BaseEntity {
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
 		name = "PATTERN_KEYWORD",
 		joinColumns = @JoinColumn(name = "pattern_id", referencedColumnName = "pattern_id"),
