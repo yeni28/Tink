@@ -27,7 +27,8 @@ function Login() {
     axAuth({
       url: '/members/refresh',
     }).then((res) => {
-      console.log(res)
+      const REFRESH_TOKEN = res.data.result.refreshToken
+      if (IS_CHECK) localStorage.setItem('refreshToken', REFRESH_TOKEN)
     })
 
     if (localStorage.getItem('isCheck') === 'true') {
