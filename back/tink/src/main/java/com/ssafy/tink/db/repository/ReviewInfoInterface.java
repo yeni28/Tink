@@ -6,7 +6,7 @@ public interface ReviewInfoInterface {
 
 	String getTitle();
 
-	String getMemberId();
+	String getNickname();
 
 	Integer getHit();
 
