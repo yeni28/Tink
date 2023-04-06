@@ -41,7 +41,7 @@ function BestPatterns({ bestPatterns }: { bestPatterns: BestPattern[] }) {
           return (
             <div key={bestpattern.id}>
               <div
-                className="relative h-[15rem] w-[15rem] rounded-[2rem]  bg-center bg-cover hover:scale-105 duration-500 cursor-pointer"
+                className="relative h-[16rem] w-[16rem] rounded-[2rem]  bg-center bg-cover hover:scale-105 duration-500 cursor-pointer"
                 style={{
                   backgroundImage: `url(${bestpattern?.thumbnails?.[0]?.mainImg})`,
                 }}
