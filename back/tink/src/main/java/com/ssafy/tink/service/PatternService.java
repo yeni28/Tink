@@ -403,10 +403,8 @@ public class PatternService {
 	}
 
 	public List<PatternInfoDto> getWeeklyBest() throws Exception {
-		Timestamp createdDate = Timestamp.valueOf(LocalDateTime.now());
-		Timestamp endDate = Timestamp.valueOf(LocalDateTime.now().plusWeeks(1));
 
-		List<Pattern> patterns = patternRepository.findWeeklyBest(createdDate, endDate);
+		List<Pattern> patterns = patternRepository.findWeeklyBest();
 
 		List<PatternInfoDto> results = patterns.stream().map(PatternInfoDto::new).collect(Collectors.toList());
 		return results;
