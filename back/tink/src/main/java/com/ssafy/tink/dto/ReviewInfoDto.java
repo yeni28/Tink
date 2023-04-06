@@ -57,6 +57,9 @@ public class ReviewInfoDto {
 	@ApiModelProperty(dataType = "String", example = "5시간")
 	private String time;
 
+	private String reviewMainImg;
+	private String reviewThumnailImg;
+
 	// 글 작성자 관련 정보
 	private String nickname;
 	private String thumbnail;
@@ -78,7 +81,7 @@ public class ReviewInfoDto {
 	public ReviewInfoDto(int boardId, String title, String content, String createdDate, String updatedDate, int liked,
 		int hit, String boardCategory, int patternId, String patternThumbnail, String yarnName, Float yarnWeight,
 		Float yarnLength, String needle, String time, String nickname, String thumbnail, int commentCnt,
-		List<CommentInfoInterface> comments, boolean isFollowed, boolean isLiked) {
+		List<CommentInfoInterface> comments, boolean isFollowed, boolean isLiked, String reviewMainImg, String reviewThumnailImg) {
 		this.boardId = boardId;
 		this.title = title;
 		this.content = content;
@@ -100,5 +103,7 @@ public class ReviewInfoDto {
 		this.comments = comments;
 		this.isFollowed = isFollowed;
 		this.isLiked = isLiked;
+		this.reviewMainImg = reviewMainImg;
+		this.reviewThumnailImg = reviewThumnailImg;
 	}
 }

@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
 
+import { useNavigate } from 'react-router-dom'
+
 import Material from './components/Material'
 import ReviewWrite from './components/ReviewWrite'
 
 import { setReviewPostData } from '../../apis/SetFormData'
 
+import { axAuth } from '@/apis/axiosInstance'
 import atoms from '@/components/atoms'
 
 interface Pattern {
   patternId: number | null
-  patternName: string
+  name: string
 }
 
 function WriteReviewCommunity() {
@@ -43,16 +46,26 @@ function WriteReviewCommunity() {
   // 검색한 도안
   const [pattern, setPattern] = useState<Pattern>({
     patternId: null,
-    patternName: '',
+    name: '',
   })
 
+  // 백 연결
+  const navigate = useNavigate()
   const submitHandler: SubmitHandler<ReviewPost> = (data) => {
     data.boardCategory = 'review'
-    data.memberEmail = '이메일 작업 필요'
+    if (pattern.patternId !== null) data.patternId = pattern.patternId
 
     if (!titleImage) return
 
     const formData = setReviewPostData(data, titleImage)
+    axAuth({
+      method: 'post',
+      url: '/review',
+      data: formData,
+    }).then((res) => {
+      const boardId = res.data.result.boardId
+      navigate(`/community/review/detail/${boardId}`)
+    })
   }
 
   const errorHandler: SubmitErrorHandler<ReviewPost> = (errors) => {

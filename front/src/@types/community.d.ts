@@ -4,7 +4,6 @@ type boardCategory = 'review' | 'question' | 'group'
 // 자랑글
 // request data
 interface ReviewPost {
-  memberEmail: string
   title: string
   content: string
   boardCategory: boardCategory
@@ -26,25 +25,22 @@ interface ReviewPut extends ReviewPost {
 interface ReviewDetail {
   boardId: number
   title: string
-  isLike: boolean
   content: string
   liked: number // 좋아요 수
   hit: number // 조회수
-  member: Member // 작성자
   boardCategory: boardCategory
-  material: {
-    yarnName: string
-    yarnWeight: number
-    yarnLength: number
-    needle: string
-    time: string // 소요기간
-  }
+  patternId: number
+  patternThumbnail: string
+  yarnName: string
+  yarnWeight: number
+  yarnLength: number
+  needle: string
+  time: string // 소요기간
+  nickname: string // 사용자 닉네임
+  thumbnail: string // 사용자 썸네일
   commentCnt: number // 댓글 총 개수
   comments: CommentProps[]
-  patternId: number
-  patternThumbImg: string
-  isfollowed: boolean // 로그인한 사용자의 팔로우 유무
-  isLiked: boolean // 로그인한 사용자의 좋아요 유무
+  followed: boolean // 로그인한 사용자의 팔로우 유무
 }
 
 interface ReviewList {

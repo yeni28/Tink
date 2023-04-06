@@ -2,7 +2,7 @@
 interface PatternDetail {
   needles: {
     prettyMetric: string // 2.75mm
-    us: number // US 2
+    us: string // US 2
     knitting: boolean | null
     crochet: boolean | null
   }[]

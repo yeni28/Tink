@@ -5,7 +5,7 @@ import Search from './Search'
 
 interface Pattern {
   patternId: number | null
-  patternName: string
+  name: string
 }
 
 function Material({
@@ -112,11 +112,13 @@ function Material({
               className="focus: outline-none cursor-pointer"
               id="pattern"
               type="text"
-              value={pattern.patternName}
+              value={pattern.name}
               onClick={() => setSearchState(true)}
             />
           </div>
-          {searchState && <Search setPattern={setPattern} />}
+          {searchState && (
+            <Search setPattern={setPattern} setSearchState={setSearchState} />
+          )}
         </div>
       </div>
     </div>

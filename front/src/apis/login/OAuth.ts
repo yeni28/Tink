@@ -6,5 +6,4 @@
 // 서버
 export const REDIRECT_URI = 'http://j8c201.p.ssafy.io/login'
 export const HOST = `http://j8c201.p.ssafy.io:8081/tink`
-
 export const GOOGLE_URL = `${HOST}/oauth2/authorization/google?redirect_uri=${REDIRECT_URI}`
