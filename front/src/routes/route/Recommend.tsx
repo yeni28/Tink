@@ -7,6 +7,7 @@ import SelectRecommend from '@/pages/recommend/select'
 import ColorSelectRecommend from '@/pages/recommend/select/color'
 import ResultColorSelectRecommend from '@/pages/recommend/select/color/result'
 import PatternSelectRecommend from '@/pages/recommend/select/pattern'
+import ListPatternSelectRecommend from '@/pages/recommend/select/pattern/list'
 import YarnSelectRecommend from '@/pages/recommend/select/yarn'
 
 const Recommend = [
@@ -18,7 +19,14 @@ const Recommend = [
     path: '/recommend/select',
     element: <SelectRecommend />,
     children: [
-      { path: 'pattern', element: <PatternSelectRecommend /> },
+      {
+        path: 'pattern',
+        element: <PatternSelectRecommend />,
+      },
+      {
+        path: 'pattern/result',
+        element: <ListPatternSelectRecommend />,
+      },
       { path: 'yarn', element: <YarnSelectRecommend /> },
       {
         path: 'color',
