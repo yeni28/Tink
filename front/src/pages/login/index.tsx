@@ -27,6 +27,7 @@ function Login() {
     axAuth({
       url: '/members/refresh',
     }).then((res) => {
+      setIsLogin(true)
       console.log(res)
     })
 

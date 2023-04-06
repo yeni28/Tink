@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, Suspense } from 'react'
+import React, { useRef, useLayoutEffect, Suspense, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Canvas } from '@react-three/fiber'
@@ -30,6 +30,10 @@ function StepTwo() {
   const imageScene = useRef(null)
   const explainBox = useRef(null)
   const comp = useRef()
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 })
+  }, [])
 
   useLayoutEffect(() => {
     gsap.set(imageViewer.current, { width: horizDiff, height: vertDiff })
@@ -101,6 +105,8 @@ function StepTwo() {
           {/* <div className="relative"> */}
           <p className="text-title3">스크롤 : 축소 / 확대</p>
           <p className="text-title3">드래그 : 카메라 회전</p>
+          <p className="text-title3"> Shift + 드래그 : 위치 이동</p>
+
           <div className="w-[7rem] absolute bottom-4 right-4">
             <img src={snailCat} />
           </div>

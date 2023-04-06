@@ -4,7 +4,7 @@ interface VideoProps {
 }
 function MainVideo({ video }: VideoProps) {
   return (
-    <div className="h-[100vh]">
+    <div className=" h-[100vh]">
       <video
         autoPlay
         loop
