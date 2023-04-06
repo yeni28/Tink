@@ -28,6 +28,7 @@ function MainPage() {
     })
       .then((res) => {
         setBestPatterns(res.data.result)
+        console.log('이 아래는 주간 베스트패턴')
         console.log(res)
       })
       .catch((err) => console.log(err))
@@ -43,6 +44,8 @@ function MainPage() {
     })
       .then((res) => {
         setLikePatterns(res.data.result)
+        console.log('이 아래는 선호 패턴')
+        console.log(res)
       })
       .catch((err) => console.log(err))
   }, [])
@@ -57,7 +60,7 @@ function MainPage() {
       <div className="mt-[6rem]">
         <div>
           {isLoggedIn ? (
-            <div>
+            <div className=" ml-[14vw] mx-auto mb-[3rem]">
               <div className="flex w-[100rem]">
                 <div>
                   <div className="flex mb-[.5rem]">
@@ -69,7 +72,7 @@ function MainPage() {
                   <span className="text-title1-bold">{member?.nickname} </span>
                   <span className="text-title1">님이 좋아하실 도안이에요!</span>
                 </div>
-                <div className="ml-[27.3vw]">
+                <div className="ml-[38vw]">
                   <atoms.ButtonSquareMd1
                     bgColor="red"
                     innerValue="더 많은 추천"
@@ -80,14 +83,14 @@ function MainPage() {
                   />
                 </div>
               </div>
-              <div className="mt-[2rem]">
+              <div className="mt-[2rem]  w-[85rem]">
                 <LikePatterns likePatterns={likePatterns} />
               </div>
             </div>
           ) : (
             <div>
               {/* <p className="text-largetitle-bold ">BEST 도안</p> */}
-              <div className=" w-[72rem] mx-auto mb-[3rem]">
+              <div className=" ml-[14vw] mx-auto mb-[3rem]">
                 <div className="flex w-[100rem]">
                   <div>
                     <div className="flex mb-[.5rem]">
@@ -101,7 +104,7 @@ function MainPage() {
                       꼭 맞는 도안을 추천드려요!
                     </span>
                   </div>
-                  <div className="ml-[27.3vw]">
+                  <div className="ml-[38vw]">
                     <atoms.ButtonSquareMd1
                       bgColor="red"
                       innerValue="나를 위한 추천"
@@ -112,7 +115,7 @@ function MainPage() {
                     />
                   </div>
                 </div>
-                <div className="mt-[2rem]">
+                <div className="mt-[2rem] w-[85rem]">
                   <BestPatterns bestPatterns={bestPatterns} />
                 </div>
               </div>
