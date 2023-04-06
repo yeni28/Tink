@@ -156,6 +156,8 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 			.leftJoin(patternThumbnail)
 				.on(pattern.patternId.eq(patternThumbnail.pattern.patternId))
 			.where(build)
+			.orderBy(pattern.createdDate.desc())
+			.limit(1000)
 			.transform(groupBy(pattern.patternId).as(new QPatternInfoDsl(
 				pattern.patternId,
 				pattern.name,
@@ -170,7 +172,8 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 			.collect(Collectors.toList());
 		// 도안을 섞어준다.!!
 		Collections.shuffle(list);
-		return list;
+		return list.stream().limit(30)
+			.collect(Collectors.toList());
 	}
 
 	private int getdifficulty(String difficulty) {
