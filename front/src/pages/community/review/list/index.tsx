@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react'
 
-import review_list_dummy from './dummydata'
 import { sortList } from './sortList'
 
+import { axAuth } from '@/apis/axiosInstance'
 import organisms from '@/components/organisms'
 
 function ListReviewCommunity() {
   const [selected, setSelected] = useState<string>(sortList[0].sortName)
   const [isSelectOpen, setSelectOpen] = useState<boolean>(false)
+  const [items, setItems] = useState([])
   const toggleRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -25,6 +26,18 @@ function ListReviewCommunity() {
 
     return () => document.removeEventListener('click', handleOutsideClose)
   }, [isSelectOpen])
+
+  useEffect(() => {
+    axAuth({
+      url: '/review/search',
+      params: {
+        filter: selected,
+      },
+    }).then((res) => {
+      setItems(res.data.result)
+      console.log(res.data)
+    })
+  }, [selected])
 
   return (
     <div className="mt-3">
@@ -61,7 +74,7 @@ function ListReviewCommunity() {
           </div>
         )}
       </div>
-      <organisms.reviewGrid items={review_list_dummy} />
+      <organisms.reviewGrid items={items} />
     </div>
   )
 }

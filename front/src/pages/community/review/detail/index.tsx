@@ -21,13 +21,14 @@ function DetailReviewCommunity() {
   const params = useParams()
 
   useEffect(() => {
-    console.log(params.id)
     axAuth({
       url: '/review',
       params: {
         boardId: params.id,
       },
-    }).then((res) => console.log(res.data))
+    }).then((res) => {
+      setReview(res.data.result)
+    })
   }, [])
 
   // 댓글 삭제
@@ -44,6 +45,11 @@ function DetailReviewCommunity() {
       <div
         className="w-screen h-[30rem] overflow-hidden absolute left-0 top-0 bg-[url('https://source.unsplash.com/random')] bg-no-repeat bg-cover bg-center"
         id="title-image"
+        style={{
+          backgroundImage: review?.reviewMainImg
+            ? review?.reviewMainImg
+            : 'https://source.unsplash.com/random',
+        }}
       />
       <div className="text-largetitle-bold mb-7" id="title">
         {review?.title}
