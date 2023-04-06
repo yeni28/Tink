@@ -40,7 +40,7 @@ function MainPage() {
       })
       .catch((err) => console.log(err))
     axAuth({
-      url: '/members/favorite/patterns',
+      url: '/members/favorite/pattern',
     })
       .then((res) => {
         setLikePatterns(res.data.result)
