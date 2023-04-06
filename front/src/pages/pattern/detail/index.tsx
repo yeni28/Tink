@@ -7,8 +7,6 @@ import { useParams } from 'react-router-dom'
 
 import Slider from 'react-slick'
 
-import RightArrow from './component/RightArrow'
-
 import { axAuth, axBase } from '@/apis/axiosInstance'
 
 import DrawingLine from '@/assets/drawings/drawingline.png'
