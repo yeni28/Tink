@@ -15,13 +15,14 @@ import BestPatterns from '@/pages/home/components/BestPatterns'
 import PatternSlide from '@/pages/home/components/PatternSlide'
 import Slide from '@/pages/home/components/Slide'
 function MainPage() {
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(LoginState)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const navigate = useNavigate()
   const [member, setMember] = useState<Member>()
   const [bestPatterns, setBestPatterns] = useState<BestPattern[]>([])
   const [likePatterns, setLikePatterns] = useState<LikePattern[]>([])
   useEffect(() => {
+    if (localStorage.getItem('accessToken')) setIsLoggedIn(true)
     axBase({
       url: '/patterns/best',
     })
