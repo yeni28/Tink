@@ -67,6 +67,7 @@ public class SecurityConfig {
 			.antMatchers("/review/**").hasRole("USER")
 			.antMatchers("/memberinfo").permitAll()
 			.antMatchers("/img/**").permitAll()
+			.antMatchers("/recommend/**").hasRole("USER")
 			.antMatchers("/patterns/search", "/patterns/best", "/patterns/{patternId}").permitAll()
 			.anyRequest().authenticated();
 

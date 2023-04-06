@@ -15,10 +15,10 @@ spring:
         format_sql: true # JPA의 구현체인 Hibernate가 동작하면서 발생한 SQL의 가독성을 높여준다.
     open-in-view: false
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://j8c201.p.ssafy.io:3306/tinkDB?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
-    username: root #임시
-    password: ssafytink
+    driver-class-name: com.mysql.cj.jdbc.Driver             # DB driver를 설정
+    url: jdbc:mysql://j8c201.p.ssafy.io/tinkDB?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root  # 유저ID
+    password: ssafytink # 유저PW
   data:
     redis:
       host: localhost
@@ -37,11 +37,11 @@ app:
       #      authorizedRedirectUri: http://localhost:8081/oauth2/redirect     # Token을 받을 Url를 지정
       authorizedRedirectUri: http://localhost:3000/login     # Token을 받을 Url를 지정
   upload:
-    folder: C:\S08P22C201\tink\image      # 파일이 저장될 경로 설정
-#        folder: /Users/junyoungpark/Downloads      # 파일이 저장될 경로 설정
+      folder: C:\S08P22C201\tink\image      # 파일이 저장될 경로 설정
+#      folder: /Users/junyoungpark/Downloads      # 파일이 저장될 경로 설정
 
 logging:
   level:
     web: INFO
     com: INFO
-    root: INFO
+    root: debug
