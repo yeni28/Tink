@@ -21,8 +21,8 @@ public interface PatternThumbnailRepository extends JpaRepository<PatternThumbna
 	@Query(nativeQuery = true, value = "select * from pattern_thumbnail as t where t.pattern_id=:patternId")
 	List<PatternThumbnail> findByPatternId(@Param("patternId") int patternId);
 
-	@Query(nativeQuery = true, value = "select * from pattern_thumbnail as t where t.pattern_id=:patternId")
-	Optional<PatternThumbnail> findByPatternIdNative(@Param("patternId") int patternId);
+	@Query(nativeQuery = true, value = "select thumb_img from pattern_thumbnail as t where t.pattern_id=:patternId limit 1")
+	String findByPatternIdNative(@Param("patternId") int patternId);
 
 
 }

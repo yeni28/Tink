@@ -178,21 +178,20 @@ public class ReviewService {
 			isFollowed = followRepository.existsByMemberAndToId(fromMember.get(), toId);
 		}
 
-		Optional<JarangLikes> likes = jarangLikesRepository.findByBoardAndMember(review, fromMember.get());
-		if(likes.isPresent()){
-			isLiked = true;
-		}
-
-		long cntLikes = jarangLikesRepository.countJarangLikesByBoard(review);
+		// Optional<JarangLikes> likes = jarangLikesRepository.findByBoardAndMember(review, fromMember.get());
+		// if(likes.isPresent()){
+		// 	isLiked = true;
+		// }
+		//
+		// long cntLikes = jarangLikesRepository.countJarangLikesByBoard(review);
 		Optional<Material> material = materialRepository.findByBoard(review);
 
-		Optional<PatternThumbnail> patternThumbnail = null;
+		String patternThumbnail = null;
 		String patternThumb = "";
 		int patternId = 0;
 
 		if(review.getPattern() != null){
 			patternThumbnail = patternThumbnailRepository.findByPatternIdNative(review.getPattern().getPatternId());
-			patternThumb = patternThumbnail.get().getThumbImg();
 			patternId = review.getPattern().getPatternId();
 		}
 
@@ -216,12 +215,12 @@ public class ReviewService {
 			.content(review.getContent())
 			.createdDate(String.valueOf(review.getCreatedDate()))
 			.updatedDate(String.valueOf(review.getUpdatedDate()))
-			.liked((int)cntLikes)
+			// .liked((int)cntLikes)
 			.hit(review.getHit())
 			.nickname(fromMember.get().getNickname())
 			.thumbnail(thumbnailRepository.findByIdNative(memberId).get().getThumbImg())
 			.patternId(patternId)
-			.patternThumbnail(patternThumb)
+			.patternThumbnail(patternThumbnail)
 			.boardCategory(review.getBoardCategory())
 			.yarnName(yarnName)
 			.yarnWeight(yarnWeight)
