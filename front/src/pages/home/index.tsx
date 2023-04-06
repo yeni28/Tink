@@ -40,7 +40,7 @@ function MainPage() {
       })
       .catch((err) => console.log(err))
     axAuth({
-      url: '/members/favorite/patterns',
+      url: '/members/favorite/pattern',
     })
       .then((res) => {
         setLikePatterns(res.data.result)
@@ -64,7 +64,7 @@ function MainPage() {
               <div className="flex w-[100rem]">
                 <div>
                   <div className="flex mb-[.5rem]">
-                    <p className="text-title3-bold text-red">취향을 분석한</p>
+                    <p className="text-title3-bold text-red">취향을 분석한 </p>
                     <p className="text-title3 text-red">
                       나만의 추천 도안을 확인해보세요.
                     </p>
@@ -72,7 +72,7 @@ function MainPage() {
                   <span className="text-title1-bold">{member?.nickname} </span>
                   <span className="text-title1">님이 좋아하실 도안이에요!</span>
                 </div>
-                <div className="ml-[38vw]">
+                <div className="ml-[35vw]">
                   <atoms.ButtonSquareMd1
                     bgColor="red"
                     innerValue="더 많은 추천"
@@ -89,7 +89,6 @@ function MainPage() {
             </div>
           ) : (
             <div>
-              {/* <p className="text-largetitle-bold ">BEST 도안</p> */}
               <div className=" ml-[14vw] mx-auto mb-[3rem]">
                 <div className="flex w-[100rem]">
                   <div>
@@ -119,7 +118,6 @@ function MainPage() {
                   <BestPatterns bestPatterns={bestPatterns} />
                 </div>
               </div>
-              {/* 도안 */}
             </div>
           )}
         </div>

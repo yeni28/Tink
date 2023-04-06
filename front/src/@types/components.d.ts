@@ -46,6 +46,7 @@ interface CardCampainProps {
   period: string
   organizer: stirng
   ImgUrl: string
+  Link: string
   onClick: () => void
 }
 
