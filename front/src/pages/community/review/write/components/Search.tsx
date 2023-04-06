@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 
-import { axBase } from '@/apis/axiosInstance'
+import { axAuth, axBase } from '@/apis/axiosInstance'
 
 interface Pattern {
   patternId: number | null
@@ -19,20 +19,20 @@ function Search({ setPattern }: Props) {
   const onSubmit = () => {
     const filter = input.current ? input.current.value.trim() : false
     if (filter) console.log(filter)
-    // if (filter) {
-    //   axBase({
-    //     url: '/review/patternList',
-    //     params: {
-    //       filter,
-    //     },
-    //   })
-    //     .then((res) => {
-    //       console.log
-    //       const result: Pattern[] = res.data
-    //       setResults(result)
-    //     })
-    //     .catch((err) => console.log)
-    // }
+    if (filter) {
+      axAuth({
+        url: '/review/patternList',
+        params: {
+          filter,
+        },
+      })
+        .then((res) => {
+          console.log(res.data)
+          const result: Pattern[] = res.data
+          setResults(result)
+        })
+        .catch((err) => console.log)
+    }
   }
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
