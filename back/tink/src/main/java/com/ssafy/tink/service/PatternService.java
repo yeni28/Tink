@@ -238,7 +238,6 @@ public class PatternService {
 
 		Pattern patternInfo = pattern.get();
 
-		System.out.println(patternInfo.getPatternLikes().size());
 
 		PatternInfoDto info = PatternInfoDto.builder()
 			.id(patternInfo.getPatternId())
@@ -255,6 +254,7 @@ public class PatternService {
 			.yardageDescription(patternInfo.getYardageDescription())
 			.gaugeDivisor(patternInfo.getGaugeDivisor())
 			.gauge(patternInfo.getGauge())
+			.name(patternInfo.getName())
 			.gaugePattern(patternInfo.getGaugePattern())
 			.needles(needleDtoList)
 			.category(categoryDto)
