@@ -35,7 +35,6 @@ function ListReviewCommunity() {
       },
     }).then((res) => {
       setItems(res.data.result)
-      console.log(res.data)
     })
   }, [selected])
 

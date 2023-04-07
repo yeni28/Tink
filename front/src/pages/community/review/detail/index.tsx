@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 import Parser from 'html-react-parser'
 
@@ -18,6 +18,7 @@ function DetailReviewCommunity() {
   const [review, setReview] = useState<ReviewDetail>()
   const [follow, setFollow] = useState<boolean>(false)
   const [comments, setComments] = useState<CommentProps[]>([])
+  const location = useLocation()
   const params = useParams()
 
   useEffect(() => {
@@ -61,7 +62,7 @@ function DetailReviewCommunity() {
             src={review?.thumbnail ? review.thumbnail : ''}
           />
           <span className="text-title3" id="nickname">
-            {review?.nickname}
+            {location.state.author}
           </span>
         </div>
         <atoms.ButtonSquareSm

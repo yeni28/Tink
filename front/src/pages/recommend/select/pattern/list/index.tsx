@@ -14,13 +14,14 @@ import {
 
 function ListPatternRecommend() {
   const location = useLocation()
-  const data = location.state.filter
+  const params = location.state.filter
   const [patternInfo, setPatternInfo] = useState([])
 
   useEffect(() => {
+    console.log(params)
     axAuth({
-      url: '/recommand/patterns/contents',
-      params: data,
+      url: '/recommend/patterns/contents',
+      params,
     })
       .then((res) => {
         setPatternInfo(res.data.result)

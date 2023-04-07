@@ -22,7 +22,11 @@ function ReviewGrid({ items }: { items: Props[] }) {
             nickname={item.nickname}
             patternThumnail={item.patternThumnail}
             title={item.title}
-            onClick={() => navigate(`/community/review/detail/${item.boardId}`)}
+            onClick={() =>
+              navigate(`/community/review/detail/${item.boardId}`, {
+                state: { author: item.nickname },
+              })
+            }
           />
         )
       })}
