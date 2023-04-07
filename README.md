@@ -7,6 +7,8 @@
 
 ## 1. 서비스 소개
 
+
+
 나이를 불문하고 넓은 연령대에게 사랑을 받은 뜨개질을 초심자도 쉽게 접근할 수 있도록 3D자료를 제공하고 다양한 뜨개질 도안을 추천하여 많은 사람들이 뜨개질에 접근성을 낮추기 위한 빅데이터 추천 서비스
 
 ### 타깃
@@ -81,21 +83,30 @@ application-key.yml
 | !HOTFIX | 급하게 치명적인 버그를 고쳐야 하는 경우 |
 
 ## 4. 외부 기술
-Spring: [security][securitylink]
+[BE]
+- Spring: [security][securitylink]
 
 [securitylink]: ./exec/tech/SPRING/Spring%20Security.md
 
-Spring: [jwt][jwtlink]
+- Spring: [jwt][jwtlink]
 
 [jwtlink]: ./exec/tech/JWT/spring_jwt.md
 
-container: [docker][dockerlink]
+- container: [docker][dockerlink]
 
 [dockerlink]: ./exec/tech/Docker/docker.md
 
-CI/CD: [jenkink][jenkinslink]
+- CI/CD: [jenkink][jenkinslink]
 
 [jenkinslink]: ./exec/tech/Jenkins/jenkins%2094b7ac670a1d47ae9201e58604d7ab1d.md
+
+[FE]
+- 3D tutorial : Three.js(https://threejs.org/)
+- Gsap(https://greensock.com/gsap/)
+- 색 조합 추천 : extract colors(https://extract-colors.namide.com/)
+- simpler color(https://github.com/arnelenero/simpler-color#readme)
+- 커뮤니티 : React Quill(https://github.com/zenoamaro/react-quill)
+- 상태관리 : Recoil (https://recoiljs.org/)
 ## 5. 사용자 인터페이스
 
 ![메인페이지](./exec/img/main_001.png)
