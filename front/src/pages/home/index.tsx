@@ -39,15 +39,6 @@ function MainPage() {
         setMember(res.data.result)
       })
       .catch((err) => console.log(err))
-    axAuth({
-      url: '/members/favorite/pattern',
-    })
-      .then((res) => {
-        setLikePatterns(res.data.result)
-        console.log('이 아래는 선호 패턴')
-        console.log(res)
-      })
-      .catch((err) => console.log(err))
   }, [])
 
   return (
@@ -84,7 +75,7 @@ function MainPage() {
                 </div>
               </div>
               <div className="mt-[2rem]  w-[85rem]">
-                <LikePatterns likePatterns={likePatterns} />
+                <BestPatterns bestPatterns={bestPatterns} />
               </div>
             </div>
           ) : (
