@@ -1,0 +1,7 @@
+.menuItem {
+  @apply whitespace-nowrap block;
+}
+
+/* .menuIcons {
+  display: none;
+} */

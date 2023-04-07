@@ -1,0 +1,101 @@
+:root {
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  @apply bg-beige;
+}
+
+.ql-container {
+  box-sizing: border-box;
+  border: none !important;
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-size: 1.1rem;
+  width: 100%;
+  margin: 0px;
+  position: relative;
+}
+
+.ql-toolbar {
+  border-bottom: none;
+  border: none !important;
+}
+
+/* Slick dots */
+.test-css {
+  top: 30rem;
+  width: 100vw;
+  list-style: none;
+  text-align: end;
+  position: absolute;
+  right: 1rem;
+  padding: 0;
+}
+
+.test-css li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  left: 116rem;
+  width: 20px;
+  height: 20px;
+  margin: 1px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.test-css li button {
+  font-size: 0;
+  line-height: 0;
+  display: block;
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+  cursor: pointer;
+  color: transparent;
+  border: 0;
+  outline: 0;
+  background: 0 0;
+}
+
+.test-css li button:before {
+  font-size: 2.7rem;
+  line-height: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  content: "•";
+  text-align: center;
+  opacity: 0.75;
+  color: #ffffff;
+}
+
+.test-css li.slick-active button:before {
+  opacity: 0.75;
+  color: #e78078;
+}
+
+.slick-prev:before {
+  opacity: 0;
+  color: black;
+}
+.slick-next:before {
+  opacity: 0;
+  color: black;
+}
