@@ -27,6 +27,7 @@ function MainPage() {
       url: '/patterns/best',
     })
       .then((res) => {
+        console.log(res)
         setBestPatterns(res.data.result)
         console.log('이 아래는 주간 베스트패턴')
         console.log(res)
@@ -75,7 +76,7 @@ function MainPage() {
                 </div>
               </div>
               <div className="mt-[2rem]  w-[85rem]">
-                <BestPatterns bestPatterns={bestPatterns} />
+                <LikePatterns likePatterns={likePatterns} />
               </div>
             </div>
           ) : (
