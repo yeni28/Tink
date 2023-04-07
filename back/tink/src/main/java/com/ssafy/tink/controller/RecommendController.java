@@ -95,8 +95,8 @@ public class RecommendController {
 	@GetMapping("/patterns/contents")
 	@ApiOperation(value = "컨텐츠 기반 도안 추천")
 	public BaseResponse<Object> getPatternJsonForYarn(
-		@RequestParam(name = "category") List<String> category,
-		@RequestParam(name = "keyword") List<String> keyword,
+		@RequestParam(name = "category[]") List<String> category,
+		@RequestParam(name = "keyword[]") List<String> keyword,
 		@RequestParam(name = "difficulty") String difficulty) {
 		log.info("패턴 API [getPatternJsonForYarn] 시작하기");
 		List<RecommendPatternDsl> list = recommendService.getPatternByContentsFilter(

@@ -31,10 +31,10 @@ function NextButton() {
       alert('난이도를 선택해주세요!')
     } else {
       const selectedCategory = categoryList.map((item: any) => {
-        return item.id
+        return encodeURI(item.id)
       })
       const selectedKeyword = keywordList.map((item: any) => {
-        return item.id
+        return encodeURI(item.id)
       })
 
       const filter = {

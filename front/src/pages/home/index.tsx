@@ -27,6 +27,7 @@ function MainPage() {
       url: '/patterns/best',
     })
       .then((res) => {
+        console.log(res)
         setBestPatterns(res.data.result)
         console.log('이 아래는 주간 베스트패턴')
         console.log(res)
@@ -37,15 +38,6 @@ function MainPage() {
     })
       .then((res) => {
         setMember(res.data.result)
-      })
-      .catch((err) => console.log(err))
-    axAuth({
-      url: '/members/favorite/pattern',
-    })
-      .then((res) => {
-        setLikePatterns(res.data.result)
-        console.log('이 아래는 선호 패턴')
-        console.log(res)
       })
       .catch((err) => console.log(err))
   }, [])

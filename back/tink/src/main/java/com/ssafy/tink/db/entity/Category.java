@@ -22,6 +22,7 @@ import com.sun.istack.NotNull;
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Category {
 
 	@Id
