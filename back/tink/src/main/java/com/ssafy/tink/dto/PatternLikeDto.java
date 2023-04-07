@@ -4,20 +4,19 @@ import com.ssafy.tink.db.entity.Pattern;
 import com.ssafy.tink.db.entity.PatternLikes;
 
 import io.swagger.annotations.ApiModel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 @Getter
-@ApiModel("PatternLikeDTO")
+@Setter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
+@ApiModel("PatternLikeDTO")
 public class PatternLikeDto {
 
-	Integer pattern;
+	private int pattern;
+	private int categoryId;
 
-	@Builder
-	public PatternLikeDto(int patternId) {
-		this.pattern = patternId;
-	}
 }

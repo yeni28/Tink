@@ -20,6 +20,8 @@ public class PatternInfoDsl {
 
 	private int patternId;
 	private String name;
+	private int categoryId;
+
 	@Builder.Default
 	private List<PatternThumbInfoDsl> patternThumbnails = new ArrayList<>();
 
@@ -27,10 +29,12 @@ public class PatternInfoDsl {
 	public PatternInfoDsl(
 		int patternId,
 		String name,
+		int categoryId,
 		List<PatternThumbInfoDsl> patternThumbnails
 		) {
 		this.patternId = patternId;
 		this.name = name;
+		this.categoryId = categoryId;
 		this.patternThumbnails = patternThumbnails;
 	}
 }

@@ -56,7 +56,7 @@ public interface BoardRepository extends JpaRepository<Board, Long>{
 
 	// 자랑글- 오랜된순
 	@Modifying
-	@Query("select b.boardId as boardId, b.title as title, b.member.memberId as memberId, b.hit as hit, b.liked as liked, "
+	@Query("select b.boardId as boardId, b.title as title, b.member.nickname as nickname, b.hit as hit, b.liked as liked, "
 		+ "p.thumbImg as patternThumbnail "
 		+ "from Board b "
 		+ "left join PatternThumbnail p "
@@ -67,7 +67,7 @@ public interface BoardRepository extends JpaRepository<Board, Long>{
 
 	// 자랑글- 인기순
 	@Modifying
-	@Query("select b.boardId as boardId, b.title as title, b.member.memberId as memberId, b.hit as hit, b.liked as liked, "
+	@Query("select b.boardId as boardId, b.title as title, b.member.nickname as nickname, b.hit as hit, b.liked as liked, "
 		+ "p.thumbImg as patternThumbnail "
 		+ "from Board b "
 		+ "left join PatternThumbnail p "

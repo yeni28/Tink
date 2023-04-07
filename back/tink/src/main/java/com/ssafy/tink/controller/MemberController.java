@@ -176,9 +176,9 @@ public class MemberController {
 
 	@PostMapping("/favorite/patterns")
 	@ApiOperation(value = "도안 선호도 대입하는 부분")
-	public BaseResponse<Object> enrolledFavorite(@RequestBody List<PatternLikeDto> patternLikeDto) {
+	public BaseResponse<Object> enrolledFavorite(@RequestBody List<PatternLikeDto> pattern) {
 		log.info("회원 API [enrolledFavorite] 시작하기");
-		String save = memberService.likedPatternToMember(patternLikeDto);
+		String save = memberService.likedPatternToMember(pattern);
 		return BaseResponse.builder()
 			.result(save)
 			.resultCode(HttpStatus.OK.value())
