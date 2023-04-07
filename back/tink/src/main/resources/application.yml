@@ -4,7 +4,7 @@ spring:
       "local": "local, key"
       "dev": "dev, key"
       "test": "test, key"
-    active: dev
+    active: local
   servlet:
     multipart:
       #file upload size

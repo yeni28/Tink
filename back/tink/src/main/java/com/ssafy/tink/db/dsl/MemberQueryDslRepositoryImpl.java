@@ -74,6 +74,7 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 				set(new QPatternInfoDsl(
 					pattern.patternId,
 					pattern.name,
+					pattern.category.categoryId,
 					list(new QPatternThumbInfoDsl(
 						patternThumbnail.patternThumbnailId,
 						patternThumbnail.mainImg,
@@ -161,6 +162,7 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 			.transform(groupBy(pattern.patternId).as(new QPatternInfoDsl(
 				pattern.patternId,
 				pattern.name,
+				pattern.category.categoryId,
 				list(new QPatternThumbInfoDsl(
 					patternThumbnail.patternThumbnailId,
 					patternThumbnail.mainImg,
@@ -197,6 +199,7 @@ public class MemberQueryDslRepositoryImpl implements MemberQueryDslRepository {
 			.transform(groupBy(pattern.patternId).as(new QPatternInfoDsl(
 				pattern.patternId,
 				pattern.name,
+				pattern.category.categoryId,
 				list(new QPatternThumbInfoDsl(
 					patternThumbnail.patternThumbnailId,
 					patternThumbnail.mainImg,

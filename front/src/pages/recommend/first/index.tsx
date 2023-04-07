@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 import spotlight from '@/assets/drawings/spotlight.gif'
 import yarn from '@/assets/drawings/yarn.png'
@@ -10,6 +10,7 @@ import newbieCat from '@/assets/drawings/하냥이 배경.png'
 import organisms from '@/components/organisms'
 
 function FirstRecommend() {
+  const navigate = useNavigate()
   return (
     <div className="relative">
       <figure className="absolute top-28 -right-44 w-[10%] h-[10%]">
@@ -27,7 +28,11 @@ function FirstRecommend() {
           mainValue: '하',
           subValue: '(뜨개를 처음 시작한다)',
           src: newbieCat,
-          onClick: () => console.log('하를 눌렀습니다.'),
+          onClick: () => {
+            navigate('/recommend/first/favorite', {
+              state: { difficulty: 'low' },
+            })
+          },
           bgColor: 'bg-[#5498f3]',
         }}
         second={{
@@ -35,7 +40,11 @@ function FirstRecommend() {
           mainValue: '중',
           subValue: '(기본적인 뜨개 방법을 알고 있다)',
           src: middleCat,
-          onClick: () => console.log('중을 눌렀습니다.'),
+          onClick: () => {
+            navigate('/recommend/first/favorite', {
+              state: { difficulty: 'middle' },
+            })
+          },
           bgColor: 'bg-[#7BACED]',
         }}
         third={{
@@ -43,7 +52,11 @@ function FirstRecommend() {
           mainValue: '상',
           subValue: '(어떤 도안이든 보고 만들 수 있다)',
           src: advancedhaCat,
-          onClick: () => console.log('상을 눌렀습니다.'),
+          onClick: () => {
+            navigate('/recommend/first/favorite', {
+              state: { difficulty: 'high' },
+            })
+          },
           bgColor: 'bg-mint',
         }}
       />
