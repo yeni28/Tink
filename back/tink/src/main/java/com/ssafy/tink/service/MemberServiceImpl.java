@@ -158,6 +158,7 @@ public class MemberServiceImpl implements MemberService{
 						.category(Category.builder()
 								.categoryId(patternLike.getCategoryId())
 								.build())
+						.member(member)
 						.build())
 				.build();
 
