@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 import javax.servlet.http.HttpSession;
 
+import com.ssafy.tink.db.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,11 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nimbusds.oauth2.sdk.util.StringUtils;
 import com.ssafy.tink.config.Util.SecurityUtil;
 import com.ssafy.tink.config.ect.BadRequestException;
-import com.ssafy.tink.db.entity.Follow;
-import com.ssafy.tink.db.entity.Member;
-import com.ssafy.tink.db.entity.Pattern;
-import com.ssafy.tink.db.entity.PatternLikeId;
-import com.ssafy.tink.db.entity.PatternLikes;
 import com.ssafy.tink.db.repository.MemberRepository;
 import com.ssafy.tink.db.repository.PatternLikesRepository;
 import com.ssafy.tink.dto.BaseResponse;
@@ -159,6 +155,9 @@ public class MemberServiceImpl implements MemberService{
 				.member(member)
 				.pattern(Pattern.builder()
 						.patternId(patternLike.getPattern())
+						.category(Category.builder()
+								.categoryId(patternLike.getCategoryId())
+								.build())
 						.build())
 				.build();
 

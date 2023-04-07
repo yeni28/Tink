@@ -4,6 +4,7 @@ import questionGrid from '@/components/organisms/grid/questionGrid'
 import reviewGrid from '@/components/organisms/grid/reviewGrid'
 import Header from '@/components/organisms/header/Header'
 import Navbar from '@/components/organisms/navbar/Navbar'
+import FavoritePatterns from '@/components/organisms/patterns/FavoritePatterns'
 import Patterns from '@/components/organisms/patterns/Patterns'
 
 const organisms = {
@@ -14,6 +15,7 @@ const organisms = {
   reviewGrid,
   groupGrid,
   questionGrid,
+  FavoritePatterns,
 }
 
 export default organisms
