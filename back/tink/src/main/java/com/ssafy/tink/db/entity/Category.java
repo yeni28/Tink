@@ -12,16 +12,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 
-import lombok.Getter;
-import lombok.ToString;
-
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 public class Category {
 
 	@Id
@@ -30,10 +30,10 @@ public class Category {
 	private int categoryId;
 
 	@Column(name = "category_name")
-	@NotNull
+//	@NotNull
 	private String categoryName;
 
-	@NotNull
+//	@NotNull
 	@ColumnDefault("0")
 	private int depth;
 
