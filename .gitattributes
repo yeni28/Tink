@@ -1,0 +1,2 @@
+db filter=lfs diff=lfs merge=lfs -text
+RavelryCrawling filter=lfs diff=lfs merge=lfs -text
