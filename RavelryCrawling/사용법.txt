@@ -1,0 +1,23 @@
+1. 가상환경 설정 법
+
+python -m venv venv
+source venv/Scripts/activate
+
+※ 가상환경 해제: deactivate 
+
+2. 라이브러리 설치
+pip install -r requirements.txt
+
+3. api 실행
+python Ravelry.py
+
+
+참고
+- 유료 도안 확인 방법
+16, 29, 30, 36, 37 주석 해제
+
+- 패턴 존재확인 방법
+34, 35 주석 해제
+
+- RawData 필요시
+24, 25 주석 해제
