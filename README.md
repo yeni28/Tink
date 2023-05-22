@@ -107,11 +107,62 @@ application-key.yml
 - simpler color(https://github.com/arnelenero/simpler-color#readme)
 - 커뮤니티 : React Quill(https://github.com/zenoamaro/react-quill)
 - 상태관리 : Recoil (https://recoiljs.org/)
-## 5. 사용자 인터페이스
+## &#128187; 5. 사용자 인터페이스
+---
+### 1) 메인페이지
+![image](https://github.com/yeni28/Tink/assets/79498424/e1417636-0d53-4b02-9687-84a22ae59c3c)
+![메인-min](https://github.com/yeni28/Tink/assets/79498424/bbbc9d49-0477-4a49-89e9-f51d5a125cf2)
 
-![메인페이지](./exec/img/main_001.png)
-![추천페이지](./exec/img/main_002.png)
-![메인페이지](./exec/img/main_003.png)
-![메인페이지](./exec/img/main_004.png)
-![메인페이지](./exec/img/main_005.png)
-![3D페이지](./exec/img/main_006.png)
+
+### 2) 추천페이지
+- 추천 페이지 메인
+![특화추천](https://github.com/yeni28/Tink/assets/79498424/b80b1fde-5c81-4c51-aaaf-ff3b26c68029)
+
+- 키워드 기반 패턴 추천
+![image](https://github.com/yeni28/Tink/assets/79498424/02a00633-1677-477f-a962-0b1ceaba410e)
+
+- 실 정보 기반 패턴 추천
+![image](https://github.com/yeni28/Tink/assets/79498424/5866faf9-cffd-43b2-afaf-5ee004afb0c1)
+
+- 이미지 기반 색상 조합 추천
+ ![image](https://github.com/yeni28/Tink/assets/79498424/b55a32e5-3b8d-46fa-a5d4-27c9056fece5)
+![image](https://github.com/yeni28/Tink/assets/79498424/129938ee-b8ad-439d-8633-32c1309cd15d)
+![image](https://github.com/yeni28/Tink/assets/79498424/f89d52b9-84b6-4d01-9185-305e67a4340a)
+
+- 추천 결과 페이지
+![image](https://github.com/yeni28/Tink/assets/79498424/eab12a0e-5fa3-42e7-b351-53f1508edb0d)
+
+
+### 3) 튜토리얼 페이지
+- 튜토리얼 페이지 메인
+-![튜토리얼-min](https://github.com/yeni28/Tink/assets/79498424/445224bf-b6c8-46a8-b164-a0451a7ad38d)
+
+- 스크롤 애니메이션을 이용한 뜨개질 설명
+![튜토1-min](https://github.com/yeni28/Tink/assets/79498424/c88ceb6b-b069-45d4-ac1e-9fadaca1f4c4)
+
+- three.js를 이용해 상호작용을 통한 뜨개질 단계 360도 확인
+![튜로2-min](https://github.com/yeni28/Tink/assets/79498424/1cab2a09-3cf0-4b8a-a67e-f788e4373457)
+
+### 4) 커뮤니티 페이지
+
+- 도안 자랑글 작성 페이지
+![image](https://github.com/yeni28/Tink/assets/79498424/be9cfcac-55fa-43a9-952f-f5e85cec8212)
+
+- 도안 자랑글 디테일 페이지
+![image](https://github.com/yeni28/Tink/assets/79498424/db41d4fc-d1c5-46ce-9898-05111a79ecda)
+![image](https://github.com/yeni28/Tink/assets/79498424/fd5a1a80-a5ec-404f-bbbc-bded99ca49a1)
+![image](https://github.com/yeni28/Tink/assets/79498424/787ac37b-940c-4157-b6c7-e6e307342bc0)
+
+- 도안 리스트 페이지
+![image](https://github.com/yeni28/Tink/assets/79498424/681ef69c-5afe-4c34-86c4-abc8066951c7)
+
+
+- 소모임/ 질문 작성 페이지
+ ![image](https://github.com/yeni28/Tink/assets/79498424/4dcc76e0-5b72-4c0f-a1af-2156f21eb3a2)
+
+- 소모임/질문 디테일 페이지
+![image](https://github.com/yeni28/Tink/assets/79498424/de727fe0-40a4-4a5d-a115-2f201924248a)
+
+- 리스트 페이지
+![image](https://github.com/yeni28/Tink/assets/79498424/64e0cf2b-d54e-403d-97e4-cb24b2aab5e4)
+
